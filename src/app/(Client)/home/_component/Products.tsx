@@ -11,7 +11,7 @@ const Products_Home = async () => {
     //   const isClient = typeof window !== 'undefined';
     // console.log(isClient);
     return (
-        <div className='max-w-[1440px] mx-auto md:w-[90vw] mb:w-[342px] flex flex-col mb:py-7 border-b'>
+        <div className='max-w-[1440px] mx-auto w-[95vw] flex flex-col mb:py-7 border-b'>
             {data?.status === 404 ? (<><div className='min-h-[70vh] grid place-items-center'>
                 <div className='flex flex-col gap-y-2'>
                     Ôi hỏng!

@@ -21,7 +21,7 @@ const page = async ({ params }: any) => {
   // fake data
   // const data = [1,1,1,1,1]
   return (
-    <main className="max-w-[1440px] mx-auto md:w-[90vw] mb:w-[342px] *:mx-auto *:h-full py-2">
+    <main className="max-w-[1440px] mx-auto w-[95vw] *:mx-auto *:h-full py-2">
       {data?.status === 404 ? (<><div className='min-h-[70vh] grid place-items-center'>
         <div className='flex flex-col gap-y-2 max-w-[1440px]'>
           Ôi hỏng!

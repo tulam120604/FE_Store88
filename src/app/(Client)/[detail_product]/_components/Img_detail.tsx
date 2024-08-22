@@ -21,7 +21,7 @@ const Img_Detail_Product = ({ dataProps }: any) => {
       >
         <CarouselContent>
           {dataProps?.gallery?.map((uri: any, i: number) => (
-            <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3 *:border *:rounded *:overflow-hidden">
+            <CarouselItem key={i} className="basis-1/3 *:border *:rounded *:overflow-hidden">
               <button key={uri} className={`hover:border-gray-800 ${image_item === i && 'border-gray-800'}`} onClick={() => setImage_item(i)}>
                 <Image width={100} height={100} className="w-16 h-16" src={uri} alt='Loading...' />
               </button>

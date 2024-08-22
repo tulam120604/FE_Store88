@@ -24,7 +24,7 @@ const Form_auth = ({ mode }: any) => {
                 heightAuto: false,
                 backdrop: '#20212466',
                 customClass: {
-                    popup: 'bg-transparent', // màu nền
+                    popup: 'bg-[#F3F4F6]', // màu nền
                     title: 'text-black' // màu chữ
                 },
             });
@@ -35,9 +35,9 @@ const Form_auth = ({ mode }: any) => {
         }
     }
     return (
-        <div className='h-screen grid place-items-center bg-[#F3F4F6]'>
-            <div className="lg:grid max-w-[1000px] lg:grid-cols-2 gap-x-20 justify-between bg-white p-6 rounded-lg">
-                <section className="relative w-[500px]">
+        <div className='lg:grid h-screen lg:place-items-center bg-[#F3F4F6]'>
+            <div className="lg:grid max-w-[1000px] lg:grid-cols-2 gap-x-20 justify-between bg-white lg:p-6 py-20 rounded-lg">
+                <section className="hidden lg:block relative w-[500px]">
                     <Image
                         alt="login..."
                         width={700}
@@ -51,7 +51,7 @@ const Form_auth = ({ mode }: any) => {
                     </div>
                 </section>
                 <main className="flex item-center">
-                    <form onSubmit={my_form.handleSubmit(onSubmit)} className="flex flex-col my-auto w-full px-6 gap-y-2 bg-white rounded-lg">
+                    <form onSubmit={my_form.handleSubmit(onSubmit)} className="flex flex-col w-full px-6 gap-y-2 bg-white rounded-lg">
                         <h3 className="mb-3 lg:text-2xl font-extrabold text-gray-900 text-center">
                             {mode === 'Register' ? 'Tạo tài khoản ' : "Đăng nhập"}
                         </h3>

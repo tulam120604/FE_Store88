@@ -43,7 +43,7 @@ const Header = () => {
         status_Storage();
         window.addEventListener('storage', status_Storage);
         return () => window.removeEventListener('storage', status_Storage);
-    }, [checkLocal])
+    }, [checkLocal, routing])
 
     // cart :
     function handleCart() {
@@ -82,7 +82,7 @@ const Header = () => {
                 <span className="opacity-80 lg:w-auto mb:w-[266px] mb:truncate">Xin chào đại vương, chúc đại vương có một trải nghiệm thoải mái.</span>
             </div>
             {/* logo, search and cart */}
-            <div className="mx-auto max-w-[1440px] md:w-[95vw] w-[342px] lg:h-[66px] mb:h-[56px] flex justify-between *:flex *:items-center gap-x-20 items-center">
+            <div className="mx-auto max-w-[1440px] w-[95vw] lg:h-[66px] mb:h-[56px] flex justify-between *:flex *:items-center gap-x-20 items-center">
                 <div className=''>
                     <Link className='lg:text-2xl text-lg font-extrabold' href={'/'}>
                         Store88
