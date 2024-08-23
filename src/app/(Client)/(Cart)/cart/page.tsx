@@ -2,22 +2,17 @@
 'use client';
 
 import Image from 'next/image'
-import React, { Suspense, use, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import LoadingCart from './loading';
 import { Get_Items_Cart } from '@/src/app/_lib/Tanstack_Query/Cart/query';
-import Link from 'next/link';
-import Btn_dow from './_options/btn_dow';
-import Btn_up from './_options/btn_up';
-import Remove_Item_Cart from './_options/remove';
 import { useRouter } from 'next/navigation';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/src/app/_Components/ui/Tables/table';
-import { Checkbox } from '@/src/app/_Components/ui/Shadcn/checkbox';
 import { Mutation_Cart } from '@/src/app/_lib/Tanstack_Query/Cart/mutation_Cart';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/app/_Components/ui/alert-dialog";
 import { io } from 'socket.io-client';
 import { useToast } from '@/src/app/_Components/ui/use-toast';
 import { ToastAction } from '@/src/app/_Components/ui/toast';
 import { useCheck_user } from '@/src/app/_lib/Custome_Hooks/User';
+import Table_Cart from './_components/table';
+import { Button } from '@/src/app/_Components/ui/Shadcn/button';
 
 
 const Cart = () => {
@@ -86,15 +81,14 @@ const Cart = () => {
     setContent_note_order(e.target.value)
   }
 
-  // total_price
-  // next order
   const data_item_next_order = data?.items?.filter((item: any) => (item?.status_checked && item));
+  // next order
   function handle_next_order() {
     sessionStorage.removeItem('item_order');
     const item_cart_order = {
       ...data,
       items: data_item_next_order,
-      notes_order: content_note_order,
+      notes_order: dataProps?.content_note_order,
       action: 'cart_item',
     }
     sessionStorage.setItem('item_order', JSON.stringify(item_cart_order));
@@ -102,6 +96,16 @@ const Cart = () => {
   }
 
   // console.count('re-render : ')
+
+  const dataProps = {
+    data: data,
+    content_note_order: content_note_order,
+    data_item_next_order: data_item_next_order,
+    user: user?.check_email,
+    data_checked_true: data_checked_true,
+    handle_Checkked: handle_Checkked,
+    remove_all_item_cart: remove_all_item_cart
+  }
   return (
     <Suspense fallback={<LoadingCart />}>
       <div className="max-w-[1440px] md:w-[90vw] mb:w-[342px] lg:pt-20 mb:pt-16 mx-auto grid lg:grid-cols-[67%_30%] mb:grid-cols-[100%] justify-between pb-10">
@@ -109,126 +113,7 @@ const Cart = () => {
         <div>
           <span className="text-xl flex mb-[1px] items-center justify-between pb-6">Giỏ hàng của bạn <p className="text-[#9D9EA2] lg:text-base mb:text-sm">(3)</p></span>
           {/* list items */}
-          <Table className="bg-[#F5F5FA] text-gray-900">
-            <TableHeader>
-              <TableRow className="*:font-medium border-gray-500 *:text-gray-800 !hover:none">
-                <TableHead>
-                  <Checkbox checked={(data_item_next_order?.length == data?.items?.length && data?.items?.length > 0) ? true : false} />
-                </TableHead>
-                <TableHead className='w-[100px]'>Ảnh</TableHead>
-                <TableHead />
-                <TableHead>Đơn giá</TableHead>
-                <TableHead className='text-center'>Số lượng</TableHead>
-                <TableHead>Số tiền</TableHead>
-                <TableHead className="px-2 w-[30px] !text-red-600">
-                  <AlertDialog>
-                    {data_checked_true.length > 0 ?
-                      <AlertDialogTrigger>
-                        Xóa
-                      </AlertDialogTrigger> :
-                      <span className='cursor-pointer opacity-50'>Xóa</span>
-                    }
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Xác nhận xóa {data_checked_true.length} sản phẩm trong giỏ?</AlertDialogTitle>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Hủy</AlertDialogCancel>
-                        <AlertDialogAction className="bg-red-500" onClick={remove_all_item_cart}>Xác nhận</AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            {
-              (typeof data == 'object') && (<>
-                {(data?.items?.length > 0) ? (<>
-                  {
-                    <TableBody>
-                      {
-                        data?.items?.map((item: any) => {
-                          return (
-                            item?.quantity_by_item > 0 ?
-                              <TableRow key={item._id} className="border-y border-gray-300">
-                                <TableCell>
-                                  <Checkbox checked={item?.status_checked && true} onClick={() => handle_Checkked(item?.product_id, item?.color_item, item?.size_attribute_item)} />
-                                </TableCell>
-                                <TableCell className="h-[120px]">
-                                  <Link href={`/${item?.product_id?._id}`}> <img width={50} height={50} className="relative bg-[#f2f2f2f2] p-2 z-[1] w-full h-full duration-300" 
-                                  src={item?.product_id?.gallery[0]} alt='loading...' /></Link>
-                                </TableCell>
-                                <TableCell>
-                                  <div className="flex flex-col gap-y-2 md:text-base mb:text-xs max-w-[200px]">
-                                    <Link href={`/${item?.product_id?._id}`}>
-                                      <span className='line-clamp-1'>{item?.product_id?.short_name}</span>
-                                    </Link>
-                                    <div className='flex flex-col'>
-                                      <span className='text-sm'>{item?.color_item}</span>
-                                      <span className='text-sm'>{item?.size_attribute_item}</span>
-                                    </div>
-                                  </div>
-                                </TableCell>
-                                <TableCell><span className="md:text-base mb:text-xs text-red-600">{item?.price_item?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span></TableCell>
-                                <TableCell>
-                                  <div className="w-[90%] mx-auto grid grid-cols-3 *:text-gray-900 gap-x-1 items-center justify-around *:md:text-base *:mb:text-xs px-1 rounded-lg *:font-medium">
-                                    <Btn_dow id_props={{ id_item: item?.product_id?._id, id_user: user?.check_email, quantity_item: item?.quantity, color: item?.color_item, size_attribute: item?.size_attribute_item }} />
-                                    <strong className="cursor-default border h-full grid place-items-center rounded">{item?.quantity}</strong>
-                                    <Btn_up id_props={{ id_item: item?.product_id?._id, id_user: user?.check_email, dataItems: item, color: item?.color_item, size_attribute: item?.size_attribute_item }} />
-                                  </div>
-                                </TableCell>
-                                <TableCell><span className="md:text-base mb:text-xs text-red-600">{(item?.total_price_item)?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span></TableCell>
-                                <TableCell>
-                                  <Remove_Item_Cart id_props={{ item: item?._id, id_user: user?.check_email }} />
-                                </TableCell>
-                              </TableRow>
-                              :
-                              <TableRow key={item._id} className="border-y relative after:absolute after:w-[95%] after:h-full after:bg-gradient-to-r after:from-[#33333333] to-[#33333388] after:rounded after:z-[2] after:left-0">
-                                <TableCell>
-                                  <Checkbox checked={item?.status_checked && true} onClick={() => handle_Checkked(item?.product_id, item?.color_item, item?.size_attribute_item)} />
-                                </TableCell>
-                                <TableCell>
-                                  <span className='absolute text-red-500 font-bold top-0 z-[3] py-6 whitespace-nowrap bg-[#ffffff22] px-4'>Hết hàng!</span>
-                                  <img width={50} height={50} className="relative bg-[#f2f2f2f2] p-2 z-[1] w-full h-full duration-300" src={item?.product_id?.feature_product} alt='loading...' />
-                                </TableCell>
-                                <TableCell>
-                                  <div className="flex flex-col gap-y-2 md:text-base mb:text-xs max-w-[200px]">
-                                    <Link href={`/products/${item?.product_id?._id}`}>
-                                      <span className='line-clamp-1'>{item?.product_id?.short_name}</span>
-                                    </Link>
-                                    <div className='flex flex-col'>
-                                      {
-                                        item?.color_item && <span className='text-sm'>{item?.color_item}</span>
-                                      }
-                                      {
-                                        item?.size_attribute_item && <span className='text-sm'>RAM : {item?.size_attribute_item} GB</span>
-                                      }
-                                    </div>
-                                  </div>
-                                </TableCell>
-                                <TableCell><span className="md:text-base mb:text-xs text-red-500">{item?.price_item?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span></TableCell>
-                                <TableCell>
-                                  <div className="w-[80%] flex gap-x-4 items-center justify-around md:py-2 mb:py-1 *:md:text-base *:mb:text-xs px-1 rounded-lg *:font-medium">
-                                    <Btn_dow id_props={{ item: item?.product_id?._id, id_user: user?.check_email }} />
-                                    <strong className="cursor-default">{item?.quantity}</strong>
-                                    <Btn_up id_props={{ item: item?.product_id?._id, id_user: user?.check_email, quantity_items_cart: item?.quantity }} />
-                                  </div>
-                                </TableCell>
-                                <TableCell ><span className="md:text-base mb:text-xs text-red-500">{(item?.total_price_item)?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span></TableCell>
-                                <TableCell>
-                                  <Remove_Item_Cart id_props={{ item: item?.product_id?._id, id_user: user?.check_email }} />
-                                </TableCell>
-                              </TableRow>
-                          )
-                        })
-                      }
-                    </TableBody>
-                  }
-                </>) :
-                  <tbody className='flex items-center whitespace-nowrap my-4'>Chưa có sản phẩm nào trong giỏ ! <Link className='underline' href={'/products'}>Mua ngay</Link></tbody>}
-              </>)
-            }
-          </Table>
+          <Table_Cart dataProps={dataProps} />
         </div>
 
         {/* right */}
@@ -256,14 +141,14 @@ const Cart = () => {
             </div>
             {/* *** */}
             <textarea onBlur={(e) => handle_notes_order(e)} name="" id="" className='border rounded p-2 outline-none text-light text-sm' placeholder='ghi chú của bạn (nếu có)'></textarea>
-            <button onClick={handle_next_order} type='button' className="bg-black hover:bg-white hover:text-black border border-black duration-300 px-10 h-14 rounded-[100px] text-white flex my-[13px] gap-x-4 place-items-center justify-center">
+            <Button onClick={handle_next_order} type='button' className="flex gap-x-4 my-4">
               <span>Thanh toán</span>
               |
               <span>{data?.total_price?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
-            </button>
+            </Button>
             {/* payment */}
             <div className="flex flex-col gap-y-4 border-t mt-[3px] pt-[22px]">
-              <span className="text-[#717378] text-sm">Thanh toán qua thẻ tín dụng (Chưa áp dụng)</span>
+              <span className="text-[#717378] text-sm">Thanh toán qua thẻ tín dụng</span>
               <div className="flex items-center gap-x-3 *:cursor-pointer *:w-[40px] *:h-[40px] *:border-none">
                 <Image width={50} height={50} src="/Images/mastercard_v1.png" alt='' />
                 <Image width={50} height={50} src="/Images/mastercard_v2.png" alt='' />
@@ -298,14 +183,14 @@ const Cart = () => {
             </div>
             {/* *** */}
             <textarea name="" id="" className='border rounded p-2 outline-none text-light text-sm' placeholder='ghi chú của bạn (nếu có)'></textarea>
-            <button onClick={handle_next_order} type='button' className="bg-black hover:bg-white hover:text-black border border-black duration-300 px-10 h-14 rounded-[100px] text-white flex my-[13px] gap-x-4 place-items-center justify-center">
+            <Button onClick={handle_next_order} type='button' className='flex gap-x-4 my-4'>
               <span>Thanh toán</span>
               |
               <span>{data?.total_price?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
-            </button>
+            </Button>
             {/* check out */}
             <div className="flex flex-col gap-y-4 border-t mt-[3px] pt-[22px]">
-              <span className="text-[#717378] text-sm">Thanh toán qua thẻ tín dụng (Chưa áp dụng)</span>
+              <span className="text-[#717378] text-sm">Thanh toán qua thẻ tín dụng</span>
               <div className="flex items-center gap-x-3 *:cursor-pointer *:w-[30px] *:h-[30px] *:border-none">
                 <Image width={50} height={50} src="/Images/mastercard_v1.png" alt='' />
                 <Image width={50} height={50} src="/Images/mastercard_v2.png" alt='' />
@@ -317,7 +202,6 @@ const Cart = () => {
         </div>
       </div>
     </Suspense >
-
   )
 }
 

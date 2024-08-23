@@ -24,12 +24,12 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
       });
       const timeOut = setTimeout(() => {
         routing.push('/')
-      }, 1000);
+      }, 2000);
       return () => {
         clearTimeout(timeOut)
       }
     })
-  }, [])
+  }, [routing])
 
   const { mutate } = Mutation_Cart('Add_Cart');
   const [color, setColor] = useState<any>();
@@ -157,7 +157,7 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
         size_attribute: sizePropsCart,
         item_in_stock: quantity_attributes
       };
-      if (quantity_attributes) {
+      if (quantity_attributes && quantity > 0) {
         mutate(items);
       }
       else validate_message()
@@ -214,31 +214,12 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
         user_id: check_email?._id,
         action: 'detail_item',
       };
-      if (varriants_attribute) {
-        for (let k of varriants_attribute) {
-          for (let x of k.size_item) {
-            if (k.color_item && (x.name_size !== '')) {
-              if (color && name_size) {
-                sessionStorage.setItem('item_order', JSON.stringify(items_detail))
-                routing.push('/order')
-                return;
-              }
-              else validate_message()
-            }
-            else if (k.color_item) {
-              if (color) {
-                sessionStorage.setItem('item_order', JSON.stringify(items_detail))
-                routing.push('/order')
-                return;
-              }
-              else validate_message()
-            }
-          }
-        }
-      }
-      else {
+      if (quantity_attributes && quantity > 0) {
         sessionStorage.setItem('item_order', JSON.stringify(items_detail))
         routing.push('/order')
+      }
+      else {
+        validate_message();
       }
     }
     else {
@@ -297,7 +278,8 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
             <button className="hover:*:bg-gray-100 *:rounded" onClick={() => change_options_quantity('dow')}>
               <Minus className="w-5" />
             </button>
-            <div className="bg-[#F4F4F4] rounded">{quantity}</div>
+            <input className="bg-[#F4F4F4] rounded text-center" value={quantity}
+              onChange={(e: any) => (quantity_attributes && ((+e?.target?.value <= quantity_attributes && quantity > 0) && set_quantity(+e?.target?.value)))} />
             <button className="hover:*:bg-gray-100 *:rounded" onClick={() => change_options_quantity('up')}>
               <Plus className="w-5" />
             </button>
