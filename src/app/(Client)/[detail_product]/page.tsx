@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { detail_Categories } from '../../_lib/Services/Services_Items/categories';
 import Infor_Detail_Product from './_components/Infor_detail';
 import Related_Product from './_components/Related_Product';
+import { get_feedBack_in_item } from '../../_lib/Services/Service_Feedback/Feedback';
 
 const page = async ({ params }: any) => {
   noStore();
@@ -17,9 +18,10 @@ const page = async ({ params }: any) => {
   const data = await getDetail(params?.detail_product);
   const data_category = await detail_Categories(data?.category_id)
   revalidatePath('/products/[detail_product]', 'page');
-  
-  // fake data
-  // const data = [1,1,1,1,1]
+
+  // get feedback
+  const data_feedback = await get_feedBack_in_item(data?._id);
+
   return (
     <main className="max-w-[1440px] mx-auto w-[95vw] *:mx-auto *:h-full py-2">
       {data?.status === 404 ? (<><div className='min-h-[70vh] grid place-items-center'>
@@ -28,12 +30,12 @@ const page = async ({ params }: any) => {
           <span>Có vẻ như đã có lỗi xảy ra :(( </span>
           <Link className='underline text-sky-500' href={'/'}>Trở về trang chủ!</Link>
         </div>
-        </div></>)
+      </div></>)
         : (<>
           <div className='flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-4'>
             <Breadcrum textProps={{
-              name_item : data?.short_name,
-              name_category : data_category
+              name_item: data?.short_name,
+              name_category: data_category
             }} />
           </div>
           <div className="lg:grid lg:grid-cols-[573px_auto] gap-x-10 bg-white pb-4">
@@ -41,15 +43,21 @@ const page = async ({ params }: any) => {
             <Img_Detail_Product dataProps={data} />
             {/*desktop: right, mobile : row 2 */}
             <div>
-            <Infor_Detail_Product dataProps={data} />
+              <Infor_Detail_Product dataProps={{
+                data,
+                data_feedback
+              }} />
             </div>
           </div>
-          <Infor_seller dataProps={data?.id_user_seller}/>
+          <Infor_seller dataProps={data?.id_user_seller} />
           {/* related products */}
-          <Description dataProps={data} />
+          <Description dataProps={{
+                data,
+                data_feedback
+              }} />
           <div className="pt-4">
             <span className="lg:text-2xl text-xl mb-2">Sản phẩm liên quan</span>
-            <Related_Product dataProps={data?.category_id}/>
+            <Related_Product dataProps={data?.category_id} />
           </div>
         </>)}
     </main>

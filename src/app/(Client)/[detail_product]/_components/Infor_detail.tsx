@@ -9,7 +9,7 @@ const Infor_Detail_Product = ({ dataProps }: any) => {
       <div className="flex flex-col gap-y-2 lg:gap-y-6">
         {/* row 1 */}
         <div className="flex flex-col lg:gap-y-4 gap-y-2 ">
-          <strong className="lg:text-2xl lg:mt-[1px] mb:mt-3.5 mb:text-xl lg:tracking-[-1.2px] font-medium lg:leading-[38.4px]">{dataProps?.short_name}</strong>
+          <strong className="lg:text-2xl lg:mt-[1px] mb:mt-3.5 mb:text-xl lg:tracking-[-1.2px] font-medium lg:leading-[38.4px]">{dataProps?.data?.short_name}</strong>
           <section className="lg:w-[163px] mb:w-[157px] mb:mt-[8px] lg:mt-0 h-[21px] *:lg:text-sm *:mb:text-xs flex justify-between items-start">
             <div className="flex items-start lg:gap-x-0 mb:gap-x-1">
               <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-star">
@@ -18,8 +18,8 @@ const Infor_Detail_Product = ({ dataProps }: any) => {
               <strong>4.6/5</strong>
             </div>
             <div className="flex gap-x-2">
-              <strong>135</strong>
-              <span className="text-[#C8C9CB]">Reviews</span>
+              <strong>( {dataProps?.data_feedback?.data_feedback ? dataProps?.data_feedback?.data_feedback?.totalDocs : 0} )</strong>
+              <span className="text-gray-700">Đánh giá</span>
             </div>
           </section>
           <div className="flex items-center gap-x-2">
@@ -28,7 +28,7 @@ const Infor_Detail_Product = ({ dataProps }: any) => {
           </div>
         </div>
         {/* quantity */}
-        <Quantity_Items_Detail data_Item_Detail={dataProps} />
+        <Quantity_Items_Detail data_Item_Detail={dataProps?.data} />
         {/* different */}
         <span className="flex items-center gap-x-10 text-[#717378]">Xuất xứ<p className="text-[#060709]">:&nbsp;&nbsp;&nbsp; Việt Nam</p></span>
       </div>
