@@ -39,7 +39,7 @@ const Layout_Profile = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='max-w-[1440px] mx-auto w-[95vw] grid lg:grid-cols-[250px_auto] grid-cols-[50px_auto] pt-4 *:rounded overflow-hidden'>
       <Side_bar />
-      <div className='pb-10'>
+      <div className='pb-10 lg:pb-0 lg:min-h-[70vh]'>
         {children}
       </div>
     </div>
