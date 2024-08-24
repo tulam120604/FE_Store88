@@ -119,7 +119,7 @@ const Page = () => {
           <span className="flex mb-[1px] items-center justify-between pb-6">Đơn hàng của bạn</span>
           {
             list_item_order?.items ? (<div className='*:text-gray-800'>
-              <Table_Cart dataProps={list_item_order?.items}/>
+              <Table_Cart dataProps={list_item_order?.items} />
               <div className='flex justify-between whitespace-nowrap text-lg my-4'>
               </div>
               {
@@ -138,6 +138,9 @@ const Page = () => {
       <div className="max-w-[1440px] mx-auto w-[95vw] grid lg:grid-cols-2 gap-x-20 gap-y-6 mx-auto mt-6 bg-white p-4 rounded">
         <div>
           <span className="flex mb-[1px] items-center justify-between pb-6">Thông tin nhận hàng</span>
+          {
+            isLoading && <Loading_Dots />
+          }
           <div className='flex flex-col gap-y-5'>
             <div>
               <label htmlFor="name">Tên của bạn :</label>
