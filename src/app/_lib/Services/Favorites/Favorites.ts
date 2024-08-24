@@ -15,6 +15,24 @@ export async function list_favorites(id_user: string | number) {
     }
 }
 
+export async function detail_item_in_favorite(id_user: string | number, id_item: string | number) {
+    try {
+        const res = await fetch(`${apiURi}/detail_item_favorite/${id_user}`, {
+            method: 'get',
+            headers: {
+                'id_item': `${id_item}`
+            }
+        });
+        if (!res.ok) {
+            return res
+        }
+        const data = await res.json();
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
 
 export async function add_favorites(dataClient: { id_user: string | number, id_item: string | number }) {
     try {
@@ -39,8 +57,8 @@ export async function add_favorites(dataClient: { id_user: string | number, id_i
 
 export async function remove_favorites(dataClient: { id_user: string | number, id_item: string | number }) {
     try {
-        const res = await fetch(`${apiURi}/add_item_favorite`, {
-            method: 'delete',
+        const res = await fetch(`${apiURi}/remove_item_favorite/${dataClient.id_user}`, {
+            method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },

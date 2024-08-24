@@ -32,16 +32,18 @@ const Page = () => {
           {
             isLoading ?
               <Loading_Dots /> :
-              data?.data?.docs < 1 ?
+              (data?.data?.docs < 1 || !data?.data?.docs) ?
                 (<div className='grid place-items-center translate-y-full'>
                   <div className='flex flex-col items-center gap-y-6 my-auto'>
                     <Image width={100} height={100} src='/Images/document_icon.png' alt=''></Image>
-                    <span className='flex items-center'>Chưa có sản phẩm yêu thích! <Link className='underline' href={'/shops'}>Tìm ngay</Link></span>
+                    <span className='flex items-center'>Chưa có sản phẩm yêu thích! <Link className='underline' href={'/products'}>Tìm ngay</Link></span>
                   </div>
                 </div>)
                 :
                 <div className='*:lg:grid-cols-5'>
-                  <strong className='text-lg'>Sản phẩm yêu thích</strong>
+                  <div className='mb-5'>
+                    <strong className='text-lg'>Sản phẩm yêu thích</strong>
+                  </div>
                   <List_Products data={data?.data?.docs} />
                 </div>
           }

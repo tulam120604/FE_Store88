@@ -1,5 +1,5 @@
-import { Heart } from "lucide-react";
 import Quantity_Items_Detail from "./quantity_Items";
+import Favorites_Detail_Item from "./Favorites";
 
 const Infor_Detail_Product = ({ dataProps }: any) => {
   // const isClient = typeof window !== 'undefined';
@@ -22,10 +22,7 @@ const Infor_Detail_Product = ({ dataProps }: any) => {
               <span className="text-gray-700">Đánh giá</span>
             </div>
           </section>
-          <div className="flex items-center gap-x-2">
-            <Heart className="text-red-500 cursor-pointer h-5" />
-            <span>Thêm vào yêu thích</span>
-          </div>
+          <Favorites_Detail_Item dataProps={dataProps?.data?._id}/>
         </div>
         {/* quantity */}
         <Quantity_Items_Detail data_Item_Detail={dataProps?.data} />

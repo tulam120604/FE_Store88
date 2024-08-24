@@ -7,11 +7,9 @@ import { Input } from '../../_Components/ui/Shadcn/input';
 import { useRouter } from 'next/navigation';
 import { Button } from '../../_Components/ui/Shadcn/button';
 import { useForm } from 'react-hook-form';
-import { columns } from './_components/colum';
 import { Mutation_Order } from '../../_lib/Tanstack_Query/Order/Mutation_order';
 import { schemaValidateOrder } from '../../(Auth)/validate';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { DataTable } from '../../_Components/ui/Tables/data_table';
 import Loading_Dots from '../../_Components/Loadings/Loading_Dots';
 import { useToast } from '../../_Components/ui/use-toast';
 import { ToastAction } from '../../_Components/ui/toast';
@@ -20,6 +18,8 @@ import { Label } from '@/src/app/_Components/ui/Shadcn/label'
 import { RadioGroup, RadioGroupItem } from '../../_Components/ui/radio-group';
 import Breadcrum from '../../_Components/breadcrum/breadcrum';
 import { Mutation_Payment } from '../../_lib/Tanstack_Query/Payment/Query_Payment';
+import { List_Address } from '../../_lib/Tanstack_Query/Auth/Query_Address';
+import Table_Cart from './_components/colum';
 
 const Page = () => {
   const [check_payment, setCheck_payment] = useState<boolean>(true)
@@ -31,7 +31,11 @@ const Page = () => {
     if (!user) {
       routing.push('/')
     }
-  }, [routing, user])
+  }, [routing, user]);
+  // address
+  const { data, isLoading } = List_Address(user?.check_email?._id);
+  console.log(data?.default_address?.about_address)
+  // **
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaValidateOrder)
   });
@@ -96,7 +100,7 @@ const Page = () => {
   }, []);
 
   return (<Suspense fallback={<Loading />}>
-    <div className='max-w-[1440px] mx-auto md:w-[90vw] mb:w-[342px] mx-auto mt-2'>
+    <div className='max-w-[1440px] mx-auto w-[95vw] mx-auto mt-2'>
       <Breadcrum textProps={{ name_item: 'Thanh toán' }} />
     </div>
 
@@ -109,13 +113,13 @@ const Page = () => {
         </div>
       }
       {/* item */}
-      <div className='max-w-[1440px] mx-auto md:w-[90vw] mb:w-[342px] mx-auto bg-white p-4 rounded'>
+      <div className='max-w-[1440px] mx-auto w-[95vw] mx-auto bg-white p-4 rounded'>
         {/* list items */}
         {list_item_order ? (<>
           <span className="flex mb-[1px] items-center justify-between pb-6">Đơn hàng của bạn</span>
           {
             list_item_order?.items ? (<div className='*:text-gray-800'>
-              <DataTable columns={columns} data={list_item_order?.items} />
+              <Table_Cart dataProps={list_item_order?.items}/>
               <div className='flex justify-between whitespace-nowrap text-lg my-4'>
               </div>
               {
@@ -131,28 +135,28 @@ const Page = () => {
         </>) : <span>Không có đơn hàng nào!</span>}
       </div>
       {/* infor */}
-      <div className="max-w-[1440px] mx-auto md:w-[90vw] mb:w-[342px] grid grid-cols-2 gap-x-20 mx-auto mt-6 bg-white p-4 rounded">
+      <div className="max-w-[1440px] mx-auto w-[95vw] grid lg:grid-cols-2 gap-x-20 gap-y-6 mx-auto mt-6 bg-white p-4 rounded">
         <div>
           <span className="flex mb-[1px] items-center justify-between pb-6">Thông tin nhận hàng</span>
           <div className='flex flex-col gap-y-5'>
             <div>
               <label htmlFor="name">Tên của bạn :</label>
-              <Input {...register('name_user')} id='name' placeholder="Name" />
+              <Input className='mt-2' {...register('name_user')} id='name' placeholder="Name" defaultValue={data?.default_address?.about_address?.user_name} />
               {errors.name_user && <p className="text-red-500 md:text-sm text-xs">{errors.name_user.message}</p>}
             </div>
             <div>
               <label htmlFor="name">Số điện thoại :</label>
-              <Input {...register('phone')} id='phone' placeholder="Phone" />
+              <Input className='mt-2' {...register('phone')} id='phone' placeholder="Phone" defaultValue={data?.default_address?.about_address?.phone} />
               {errors.phone && <p className="text-red-500 md:text-sm text-xs">{errors.phone.message}</p>}
             </div>
             <div>
               <label htmlFor="name">Email :</label>
-              <Input {...register('email_user')} id='email' placeholder="Email" />
+              <Input className='mt-2' {...register('email_user')} id='email' placeholder="Email" defaultValue={data?.default_address?.about_address?.email} />
               {errors.email_user && <p className="text-red-500 md:text-sm text-xs">{errors.email_user.message}</p>}
             </div>
             <div>
               <label htmlFor="name">Địa chỉ của bạn :</label>
-              <Input {...register('address')} id='address' placeholder="Address" />
+              <Input className='mt-2' {...register('address')} id='address' placeholder="Address" defaultValue={data?.default_address?.about_address?.address} />
               {errors.address && <p className="text-red-500 md:text-sm text-xs">{errors.address.message}</p>}
             </div>
           </div>
