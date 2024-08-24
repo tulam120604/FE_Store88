@@ -107,7 +107,7 @@ const Page = () => {
     <form onSubmit={handleSubmit(on_Order)} className={`relative py-6 ${mutate_order.isLoading &&
       'after:fixed after:top-0 after:left-0 after:w-screen after:h-screen after:bg-[#33333366]'}`}>
       {
-        mutate_order.isLoading &&
+        (mutate_order.isLoading || isLoading) &&
         <div className='fixed top-1/2 left-1/2'>
           <Loading_Dots />
         </div>
@@ -138,9 +138,6 @@ const Page = () => {
       <div className="max-w-[1440px] mx-auto w-[95vw] grid lg:grid-cols-2 gap-x-20 gap-y-6 mx-auto mt-6 bg-white p-4 rounded">
         <div>
           <span className="flex mb-[1px] items-center justify-between pb-6">Thông tin nhận hàng</span>
-          {
-            isLoading && <Loading_Dots />
-          }
           <div className='flex flex-col gap-y-5'>
             <div>
               <label htmlFor="name">Tên của bạn :</label>
