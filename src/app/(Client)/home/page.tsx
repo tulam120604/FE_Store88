@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Banner from "./_component/Banner";
-import Service from "./_component/Category";
+import Category from "./_component/Category";
 import Products_Home from "./_component/Products";
 import LoadingLandingPage from "./_component/loading";
 
@@ -11,8 +11,8 @@ const Layout_Home = async () => {
   return (<>
     <Suspense fallback={<LoadingLandingPage />}>
       <Banner />
-      <Service />
-      <Products_Home/>
+      <Category />
+      <Products_Home />
     </Suspense>
   </>)
 }

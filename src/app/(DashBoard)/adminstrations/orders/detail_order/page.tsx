@@ -30,7 +30,7 @@ export default function Page() {
   }
 
   // update status order
-  function change_status(id_item: { _id: string, code_order: string | number, user_id: string }, status: number) {
+  function change_status(id_item: { _id: string, code_order: string | number, user_id: string }, status: number, status_item_order?: string | number) {
     mutation_status_order.mutate({
       id_user: user?.check_email?._id,
       item: {
@@ -43,7 +43,8 @@ export default function Page() {
     const message_notification = (status === 6) ? `Rất tiếc, người bán đã từ chối đơn hàng ${id_item?.code_order}!.` :
       (status === 2) ? `Đơn hàng ${id_item?.code_order} của bạn đã được xác nhận!.` :
         (status === 3) ? `Đơn hàng ${id_item?.code_order} của bạn đang chuẩn bị giao đến đơn vị vận chuyển!.` :
-          (status === 4) && `Đơn hàng ${id_item?.code_order} đang trên đường vận chuyển tới bạn!.`
+          (status === 4) ? `Đơn hàng ${id_item?.code_order} đang trên đường vận chuyển tới bạn!.` :
+            (status_item_order === 6) && `người bán đã chấp nhận yêu cầu hủy đơn hàng ${id_item?.code_order}!.`
     const data_body = {
       sender_id: user?.check_email?._id,
       receiver_id: id_item?.user_id,
@@ -51,9 +52,9 @@ export default function Page() {
     }
     mutation_notification.mutate(data_body);
     socket.emit('send_status_item_order_to_user', (status === 2) ? `Đơn hàng ${id_item?.code_order} đã được xác nhận, người bán đang chuẩn bị hàng để giao đến bạn` :
-    (status === 3) ? `Người bán đang chuẩn bị đơn hàng ${id_item?.code_order} để giao đến bạn!` : 
-    (status === 4) ? `Đơn hàng ${id_item?.code_order} đang trên đường giao đến bạn!` :
-      (status === 6) && `Người bán đã từ chối đơn hàng ${id_item?.code_order}, vui lòng chọn sản phẩm khác!`)
+      (status === 3) ? `Người bán đang chuẩn bị đơn hàng ${id_item?.code_order} để giao đến bạn!` :
+        (status === 4) ? `Đơn hàng ${id_item?.code_order} đang trên đường giao đến bạn!` :
+          (status === 6) && `Người bán đã từ chối đơn hàng ${id_item?.code_order}, vui lòng chọn sản phẩm khác!`)
   }
 
   function status_order(item: any) {
@@ -105,24 +106,25 @@ export default function Page() {
   ]
 
   // update status 
-  function btn_change_status_item_order(item: any, status: number) {
+  function btn_change_status_item_order(item: any, status: number, status_item_order: string | number) {
     return (
       <AlertDialog>
         <AlertDialogTrigger>
-          <Button className={`${status === 2 ? 'bg-green-500 hover:!bg-green-700' : status === 6 ? 'bg-red-500 hover:!bg-red-700' :
-            status === 3 ? 'bg-green-500 hover:!bg-green-700' : status === 4 && 'bg-sky-500 hover:!bg-sky-700'
-            } rounded h-auto text-xs`}>{status === 2 ? 'Xác nhận' : status === 6 ? 'Từ chối' : status === 3 ? 'Chuẩn bị hàng'
-              : status === 4 && 'Đang vận chuyển'
+          <Button className={`${status_item_order === 2 ? 'bg-green-500 hover:!bg-green-700' : status_item_order === 6 ? 'bg-red-500 hover:!bg-red-700' :
+            status_item_order === 3 ? 'bg-green-500 hover:!bg-green-700' : status_item_order === 4 ? 'bg-sky-500 hover:!bg-sky-700' : status_item_order === 7 && 'bg-green-500 hover:!bg-green-700'
+            } rounded h-auto text-xs`}>{status_item_order === 2 ? 'Xác nhận' : status_item_order === 6 ? 'Từ chối' : status_item_order === 3 ? 'Chuẩn bị hàng'
+              : status_item_order === 4 ? 'Đang vận chuyển' : status_item_order === 7 && 'Chấp nhận yêu cầu hủy đơn'
             }</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
               {
-                status === 2 ? `Xác nhận đơn hàng ${item?.code_order}?` :
-                  status === 6 ? `Từ chối đơn hàng ${item?.code_order}?` :
-                    status === 3 ? `Xác nhận chuẩn bị đơn hàng ${item?.code_order}?` :
-                      status === 4 && `Xác nhận đơn hàng ${item?.code_order} đang trên đường vận chuyển?`
+                status_item_order === 2 ? `Xác nhận đơn hàng ${item?.code_order}?` :
+                  status_item_order === 6 ? `Từ chối đơn hàng ${item?.code_order}?` :
+                    status_item_order === 3 ? `Xác nhận chuẩn bị đơn hàng ${item?.code_order}?` :
+                      status_item_order === 4 ? `Xác nhận đơn hàng ${item?.code_order} đang trên đường vận chuyển?` :
+                        status_item_order === 7 && `Chấp nhận yêu cầu hủy đơn hàng ${item?.code_order}?`
               }
             </AlertDialogTitle>
           </AlertDialogHeader>
@@ -159,17 +161,20 @@ export default function Page() {
             (data?.data_order_by_id?.status_item_order === '1') ?
               <div className='flex gap-2'>
                 {/* Confirm don hang */}
-                {btn_change_status_item_order(data?.data_order_by_id, 2)}
+                {btn_change_status_item_order(data?.data_order_by_id, 2, 2)}
                 {/* Tu choi don hang */}
-                {btn_change_status_item_order(data?.data_order_by_id, 6)}
+                {btn_change_status_item_order(data?.data_order_by_id, 6, 6)}
               </div>
               :
               // chuan bi don hang
               (data?.data_order_by_id?.status_item_order === '2') ?
-                btn_change_status_item_order(data?.data_order_by_id, 3) :
+                btn_change_status_item_order(data?.data_order_by_id, 3, 3) :
                 // xac nhan dang van chuyen
-                (data?.data_order_by_id?.status_item_order === '3') &&
-                btn_change_status_item_order(data?.data_order_by_id, 4)
+                (data?.data_order_by_id?.status_item_order === '3') ?
+                  btn_change_status_item_order(data?.data_order_by_id, 4, 4) :
+                  // xac nhan yeu cau huy don
+                  (data?.data_order_by_id?.status_item_order === '7') &&
+                  btn_change_status_item_order(data?.data_order_by_id, 6, 7)
           }
         </div>
       </div>

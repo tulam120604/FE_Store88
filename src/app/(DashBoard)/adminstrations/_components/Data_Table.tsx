@@ -29,7 +29,7 @@ export default function Data_Table({ dataProps }: any) {
                             {/* category */}
                             <span className="line-clamp-2">{data?.category_id?.category_name}</span>
                             {/* sales */}
-                            <span className="line-clamp-2">{0}</span>
+                            <span className="line-clamp-2">{!data?.attributes && data?.sale_quantity}</span>
                             {/* price */}
                             <span className="line-clamp-2 text-red-500">{data?.price_product?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
                             {/* stock */}
@@ -104,7 +104,7 @@ export default function Data_Table({ dataProps }: any) {
                                                     {/* div giả */}
                                                     <div></div>
                                                     {/* sales */}
-                                                    <span>0</span>
+                                                    <span>{value?.sale_quantity_attr}</span>
                                                     {/* price */}
                                                     <span className="line-clamp-1 text-red-600">{value?.price_attribute?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
                                                     {/* quantity */}

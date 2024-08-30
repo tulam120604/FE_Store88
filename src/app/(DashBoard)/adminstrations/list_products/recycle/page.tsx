@@ -101,7 +101,6 @@ const Page = () => {
         <button className="hover:scale-110" onClick={() => handle_Restore_or_Destroy(row?.original?._id, 'restore')}>
           <Re_store />
         </button>
-
         <AlertDialog>
           <AlertDialogTrigger>
             <Trash2 className="text-red-600 w-5 h-5" />

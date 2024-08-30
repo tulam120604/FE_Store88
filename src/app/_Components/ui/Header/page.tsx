@@ -75,14 +75,14 @@ const Header = () => {
         )
     }
 
-    return (<>
+    return (
         <header ref={toggleFixedHeader} className="w-full bg-none z-[4] duration-300 top-0 lg:h-[103px] bg-gray-900 text-white">
             {/* top header */}
             <div className="w-full lg:h-[37px] mb:h-[34px] *:text-white flex justify-center items-center *:lg:text-sm *:mb:text-xs gap-x-4">
                 <span className="opacity-80 lg:w-auto mb:w-[266px] mb:truncate">Xin chào đại vương, chúc đại vương có một trải nghiệm thoải mái.</span>
             </div>
             {/* logo, search and cart */}
-            <div className="mx-auto max-w-[1440px] w-[95vw] lg:h-[66px] mb:h-[56px] flex justify-between *:flex *:items-center gap-x-20 items-center">
+            <div className="relative mx-auto max-w-[1440px] w-[95vw] lg:h-[66px] mb:h-[56px] flex justify-between *:flex *:items-center gap-x-20 items-center">
                 <div className=''>
                     <Link className='lg:text-2xl text-lg font-extrabold' href={'/'}>
                         Store88
@@ -116,7 +116,7 @@ const Header = () => {
                             <Count_Cart />
                         </button>
 
-                    
+
                     </div>
                     <Link href={'/login'} className={`${checkLocal ? 'hidden' : 'block'} text-xs lg:text-sm hover:text-gray-300 cursor-pointer duration-300 whitespace-nowrap`}>Đăng nhập</Link>
                     <Link href={'/profile/infor'} className={`${checkLocal ? 'block' : 'hidden'} relative border-none p-0.5 cursor-pointer whitespace-nowrap group`}>
@@ -126,7 +126,7 @@ const Header = () => {
                 </div>
             </div>
         </header>
-    </>)
+    )
 };
 
 export default Header;

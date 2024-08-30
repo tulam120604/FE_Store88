@@ -11,7 +11,7 @@ export function Mutation_Feedback(action: Actions) {
     const queryClient = useQueryClient();
     const form_feedback = useForm();
     const { mutate, ...rest } = useMutation({
-        mutationFn: async (dataBody: any) => {
+        mutationFn: async (dataBody: IFeedback) => {
             switch (action) {
                 case "ADD":
                     return await add_feedBack(dataBody);

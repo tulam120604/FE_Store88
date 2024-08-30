@@ -52,7 +52,7 @@ const Page = () => {
             user?.check_email?.role === 'user' ?
               <Link className='lg:text-sm text-xs underline' href={'/profile/create_saller'}>Kênh phân phối</Link> :
               user?.check_email?.role === 'seller' ?
-                <Link className='lg:text-sm text-xs underline' href={'/adminstrations/list_products'}>Đi đến kho phân phối</Link> :
+                <Link className='lg:text-sm text-xs underline' href={'/adminstrations/dashboard/overview'}>Đi đến kho phân phối</Link> :
                 <Link className='lg:text-sm text-xs underline' href={'/adminstrations/dashboard/overview'}>Bảng điều khiển</Link>
           }
         </div>

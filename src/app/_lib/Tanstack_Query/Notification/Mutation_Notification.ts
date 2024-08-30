@@ -13,7 +13,7 @@ export function Mutation_Notification(action: Actions) {
     });
     const { errors } = form_notification.formState
     const { mutate, ...rest } = useMutation({
-        mutationFn: async (data_body: any) => {
+        mutationFn: async (data_body: INotification) => {
             switch (action) {
                 case 'ADD':
                     return await create_message(data_body);

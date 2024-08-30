@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
 import Swal from "sweetalert2";
 import { useToast } from "@/src/app/_Components/ui/use-toast";
@@ -18,7 +18,6 @@ const Side_bar = () => {
         action : 'LOGOUT'
     })
     const pathName = usePathname();
-    const routing = useRouter();
     function log_out() {
         Swal.fire({
             title: "Xác nhận đăng xuất?",

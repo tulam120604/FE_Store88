@@ -19,7 +19,7 @@ import { RadioGroup, RadioGroupItem } from '../../_Components/ui/radio-group';
 import Breadcrum from '../../_Components/breadcrum/breadcrum';
 import { Mutation_Payment } from '../../_lib/Tanstack_Query/Payment/Query_Payment';
 import { List_Address } from '../../_lib/Tanstack_Query/Auth/Query_Address';
-import Table_Cart from './_components/colum';
+import Table_item from './_components/colum';
 
 const Page = () => {
   const [check_payment, setCheck_payment] = useState<boolean>(true)
@@ -107,7 +107,7 @@ const Page = () => {
     <form onSubmit={handleSubmit(on_Order)} className={`relative py-6 ${mutate_order.isLoading &&
       'after:fixed after:top-0 after:left-0 after:w-screen after:h-screen after:bg-[#33333366]'}`}>
       {
-        (mutate_order.isLoading || isLoading) &&
+        mutate_order.isLoading &&
         <div className='fixed top-1/2 left-1/2'>
           <Loading_Dots />
         </div>
@@ -119,7 +119,7 @@ const Page = () => {
           <span className="flex mb-[1px] items-center justify-between pb-6">Đơn hàng của bạn</span>
           {
             list_item_order?.items ? (<div className='*:text-gray-800'>
-              <Table_Cart dataProps={list_item_order?.items} />
+              <Table_item dataProps={list_item_order?.items}/>
               <div className='flex justify-between whitespace-nowrap text-lg my-4'>
               </div>
               {

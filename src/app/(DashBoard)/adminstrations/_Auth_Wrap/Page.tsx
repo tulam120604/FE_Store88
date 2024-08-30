@@ -30,7 +30,8 @@ export function Auth_Wrap_Admins({ children }: Readonly<{ children: React.ReactN
     </div>
   }
   if (!role_user.includes(data?.data?.role)) {
-    routing.push('/')
+    routing.push('/');
+    return null
   }
   return (<>{children}</>)
 }
@@ -51,7 +52,8 @@ export function Auth_Wrap_Seller({ children }: Readonly<{ children: React.ReactN
     </div>
   }
   if (!data?.data?.role || !role_user.includes(data?.data?.role)) {
-    routing.push('/')
+    routing.push('/');
+    return null
   }
   return (<>{children}</>)
 }

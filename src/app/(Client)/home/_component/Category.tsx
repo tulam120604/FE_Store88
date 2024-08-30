@@ -8,7 +8,7 @@ const Category = async () => {
     noStore();
     const { data } = await list_Categories();
     return (
-        <div className="max-w-[1440px] mx-auto w-[95vw] py-4">
+        <div className="max-w-[1440px] mx-auto w-[95vw] pt-4 bg-white rounded">
             <strong className="relative font-medium lg:text-xl px-4 mb:text-lg">Danh mục</strong>
             {data?.status === 404 ? (<><div className='min-h-[70vh] grid place-items-center'>
                 <div className='flex flex-col gap-y-2'>
@@ -18,13 +18,13 @@ const Category = async () => {
                 </div>
             </div></>) : (<>
                 <div className='lg:block hidden'>
-                    <Custome_Swiper spaceBetween={40} count_item={7}>
+                    <Custome_Swiper spaceBetween={20} count_item={6}>
                         {
                             data?.map((item: any) => (
-                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border border-gray-50 w-[200px] h-[200px] rounded-lg bg-gray-50 p-4 hover:shadow-lg duration-200'>
+                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white flex flex-col border w-[220px] rounded-lg bg-gray-50 p-2 pb-6 hover:border-gray-900 duration-200'>
                                     <div key={item?._id} className="flex flex-col items-center justify-center gap-y-4">
-                                        <Image width={100} height={100} src={item?.category_img} alt='Loading...'></Image>
-                                        <span className='whitespace-nowrap truncate w-[90%]'>{item?.category_name}</span>
+                                        <Image width={200} height={200} src={item?.category_img} className='rounded h-[200px]' alt='Loading...'></Image>
+                                        <span className='truncate w-[90%] mt-2 text-lg line-clamp-2'>{item?.category_name}</span>
                                     </div>
                                 </Link>
                             ))
@@ -35,7 +35,7 @@ const Category = async () => {
                     <Custome_Swiper spaceBetween={20} count_item={4}>
                         {
                             data?.map((item: any) => (
-                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border border-gray-50 w-[200px] h-[200px] rounded-lg bg-gray-50 p-4 hover:border-red-600'>
+                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border w-[200px] h-[200px] rounded-lg bg-gray-50 p-4 hover:border-gray-800'>
                                     <div key={item?._id} className="flex flex-col items-center justify-center gap-y-4">
                                         <Image width={100} height={100} src={item?.category_img} alt='Loading...'></Image>
                                         <span className='whitespace-nowrap truncate w-[90%]'>{item?.category_name}</span>
@@ -49,7 +49,7 @@ const Category = async () => {
                     <Custome_Swiper spaceBetween={5} count_item={3}>
                         {
                             data?.map((item: any) => (
-                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border border-gray-50 w-[120px] h-[170px] rounded-lg bg-gray-50 p-4 hover:border-red-600 overflow-hidden'>
+                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border w-[120px] h-[170px] rounded-lg bg-gray-50 p-4 hover:border-gray-800 overflow-hidden'>
                                     <div key={item?._id} className="flex flex-col items-center justify-center gap-y-4">
                                         <Image width={100} height={100} src={item?.category_img} alt='Loading...'></Image>
                                         <span className='whitespace-nowrap truncate w-[90%]'>{item?.category_name}</span>

@@ -32,13 +32,13 @@ const page = async ({ params }: any) => {
         </div>
       </div></>)
         : (<>
-          <div className='flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-4'>
+          <section className='flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-4'>
             <Breadcrum textProps={{
               name_item: data?.short_name,
               name_category: data_category
             }} />
-          </div>
-          <div className="lg:grid lg:grid-cols-[573px_auto] gap-x-10 bg-white pb-4">
+          </section>
+          <section className="lg:grid lg:grid-cols-[573px_auto] gap-x-10 bg-white pb-4">
             {/*  desktop : left  , mobile : row 1 */}
             <Img_Detail_Product dataProps={data} />
             {/*desktop: right, mobile : row 2 */}
@@ -48,7 +48,7 @@ const page = async ({ params }: any) => {
                 data_feedback
               }} />
             </div>
-          </div>
+          </section>
           <Infor_seller dataProps={data?.id_user_seller} />
           {/* related products */}
           <Description dataProps={{

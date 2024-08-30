@@ -1,4 +1,4 @@
-const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
+const apiURi = 'http://localhost:2000/v1';
 import { toast } from "react-toastify";
 
 
@@ -77,7 +77,7 @@ export async function get_all_order(accessToken: string, id_seller?: string | nu
 }
 
 
-export async function update_status_order(dataClient: any) {
+export async function update_status_order(dataClient: { id_user: string, item: any, action?: string }) {
     try {
         const res = await fetch(`${apiURi}/order/update_status/${dataClient.id_user}`, {
             method: 'PATCH',
@@ -101,7 +101,9 @@ export async function update_status_order(dataClient: any) {
                 toast.success('Cập nhật trạng thái đơn hàng thành công!', { autoClose: 500 });
             }
             else {
-                toast.success('Hủy đơn hàng thành công!', { autoClose: 500 });
+                if (+dataClient?.item?.status_item_order !== 7) {
+                    toast.success('Hủy đơn hàng thành công!', { autoClose: 500 });
+                }
             }
         }
         await res.json();

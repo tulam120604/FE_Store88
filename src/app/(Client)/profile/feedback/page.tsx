@@ -50,7 +50,7 @@ export default function Page() {
     // add feedback
     // user_id, item_id, content_feedback
     const mutation_feedback = Mutation_Feedback('ADD');
-    function submit_Feedback(data_Form: any) {
+    function submit_Feedback(data_Form: IFeedback) {
         const dataBody = {
             user_id: id_user?.check_email?._id,
             item_id: data?.data?.data_item[0],

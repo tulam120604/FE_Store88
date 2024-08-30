@@ -10,6 +10,7 @@ import { AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDia
 import { CircleCheck } from 'lucide-react';
 import React, { Suspense, useEffect } from 'react'
 import { useToken } from '@/src/app/_lib/Custome_Hooks/User';
+import Link from 'next/link';
 
 
 export default function Page() {
@@ -62,12 +63,12 @@ export default function Page() {
                         <Loading_Dots />
                     </div>
                 }
-                <ul className="mt-4 space-y-2">
+                <ul className="space-y-2">
                     {
                         data?.data?.data_notification ?
                             (
-                                data?.data?.data_notification?.map((item: any) => (
-                                    <AlertDialog key={item?._id}>
+                                data?.data?.data_notification?.map((item: any) => {
+                                    return <AlertDialog key={item?._id}>
                                         <AlertDialogTrigger asChild onClick={() => (!item?.notes) && sendMessage(item)}>
                                             <li className='block h-full rounded-lg border border-gray-300 p-4 hover:border-gray-400 cursor-pointer *:flex *:justify-between'>
                                                 <div>
@@ -87,26 +88,30 @@ export default function Page() {
                                                             </p>}
                                                     </div>
 
-                                                    <p className="mt-1 text-sm font-medium text-gray-800">
+                                                    <p className="mt-1 text-sm font-medium text-gray-800 whitespace-nowrap">
                                                         {item?.createdAt?.slice(0, 10)}
                                                     </p>
                                                 </div>
                                             </li>
                                         </AlertDialogTrigger>
-                                        <AlertDialogContent className='bg-[#1F2936] border-none text-gray-200'>
+                                        <AlertDialogContent className='border-none text-gray-900'>
                                             <AlertDialogHeader>
                                                 <AlertDialogTitle>Từ {item?.sender_id?.user_name}</AlertDialogTitle>
-                                                <AlertDialogDescription className='!text-gray-200'>
+                                                <AlertDialogDescription className='!text-gray-800'>
                                                     {item?.notification_message}
+                                                    {
+                                                        item?.link &&
+                                                        <Link href={`/adminstrations/orders/detail_order?id=${item?.link}`} className='underline ml-1 text-sky-500'>Chi tiết</Link>
+                                                    }
                                                 </AlertDialogDescription>
                                                 {item?.notes &&
-                                                    <AlertDialogDescription className='!text-gray-200'>
+                                                    <AlertDialogDescription className='!text-gray-800'>
                                                         Địa chỉ: {item?.notes}
                                                     </AlertDialogDescription>
                                                 }
                                             </AlertDialogHeader>
                                             <AlertDialogFooter className='flex !justify-between w-full items-end'>
-                                                <AlertDialogDescription className='!text-gray-200'>- {item?.createdAt?.slice(0, 10)} -</AlertDialogDescription>
+                                                <AlertDialogDescription className='!text-gray-800'>- {item?.createdAt?.slice(0, 10)} -</AlertDialogDescription>
                                                 <div className='flex gap-x-3'>
                                                     {
                                                         item?.notes &&
@@ -119,7 +124,7 @@ export default function Page() {
                                             </AlertDialogFooter>
                                         </AlertDialogContent>
                                     </AlertDialog>
-                                ))
+                                })
                             ) :
                             <span>Không có thông báo nào!</span>
                     }

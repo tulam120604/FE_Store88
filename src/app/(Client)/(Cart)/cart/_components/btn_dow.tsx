@@ -5,7 +5,7 @@ import { Mutation_Cart } from "@/src/app/_lib/Tanstack_Query/Cart/mutation_Cart"
 import Swal from "sweetalert2";
 
 const Btn_dow = ({ id_props }: any) => {
-  const { mutate } = Mutation_Cart('DOW')
+  const { mutate, isLoading } = Mutation_Cart('DOW')
   function dow_quantity(id: any) {
     if (id_props.quantity_item === 1) {
       Swal.fire({
@@ -43,7 +43,13 @@ const Btn_dow = ({ id_props }: any) => {
     }
   }
   return (
-    <Button type="button" onClick={() => dow_quantity(id_props.id_item)} className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#8722;</Button>
+    <>
+      {
+        isLoading ?
+          <Button type="button" className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#8722;</Button> :
+          <Button type="button" onClick={() => dow_quantity(id_props.id_item)} className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#8722;</Button>
+      }
+    </>
   )
 }
 

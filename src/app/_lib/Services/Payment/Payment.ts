@@ -1,7 +1,7 @@
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 import { toast } from 'react-toastify'
 
-export async function create_payment(total_price: any) {
+export async function create_payment(total_price: number | string) {
     try {
         const res = await fetch(`${apiURi}/create_payment`, {
             method: 'post',
