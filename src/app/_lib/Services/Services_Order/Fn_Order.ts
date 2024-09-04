@@ -18,7 +18,6 @@ export async function add_order(item: any) {
             return res
         } else {
             toast.success('Đặt hàng thành công!', { autoClose: 500 });
-            sessionStorage.removeItem('item_order');
         }
         await res.json();
         return res

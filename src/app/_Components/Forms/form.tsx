@@ -145,7 +145,7 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
             }
             <div className='flex items-center justify-between'>
                 <strong className="text-gray-900 lg:text-xl">{mode ? 'Cập nhật sản phẩm' : 'Thêm sản phẩm'}</strong>
-                <Link className='text-white hover:text-gray-200 hover:underline' href={'/adminstrations/list_products'}>Quay lại</Link>
+                <Link className='text-white hover:text-gray-200 hover:underline' href={'/adminstrations/products/list'}>Quay lại</Link>
             </div>
             <div className='relative'>
                 <button onClick={handle_category} type='button' className="border-none text-sm text-gray-100 h-full px-5 py-2.5 rounded bg-[#2563EB] hover:bg-indigo-800 duration-300">Thêm danh mục+</button>
@@ -205,7 +205,7 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
                 <div className='flex flex-col gap-4'>
                     <label htmlFor="des_product">Mô tả sản phẩm :</label>
                     <textarea id='des_product' {...my_Form.register('des_product')}
-                        className='outline-none py-2 px-4 border border-gray-300 rounded min-h-[200px]' placeholder='Mô tả sản phẩm ...' />
+                        className='outline-none py-2 px-4 border border-gray-300 rounded min-h-[300px]' placeholder='Mô tả sản phẩm ...' />
                 </div>
                 {
                     (attributes?.length < 1) && <div className='grid grid-cols-[auto_80%] text-gray-800 items-center'>

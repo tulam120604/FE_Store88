@@ -3,16 +3,16 @@
 
 import Link from "next/link"
 import { Suspense, useEffect } from "react";
-import Loading from "./_component/loading";
+import Loading from "../_component/loading";
 import { Query_List_Items_Dashboard } from "@/src/app/_lib/Tanstack_Query/Items/query";
 import { Mutation_Items } from "@/src/app/_lib/Tanstack_Query/Items/mutationFn";
-import Pagination_Component from "./_component/Pagination";
+import Pagination_Component from "../_component/Pagination";
 import { useSearchParams } from "next/navigation";
 import { useCheck_user, useToken } from "@/src/app/_lib/Custome_Hooks/User";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { io } from 'socket.io-client';
-import { Auth_Wrap_Seller } from "../_Auth_Wrap/Page";
-import Data_Table from "../_components/Data_Table";
+import { Auth_Wrap_Seller } from "../../_Auth_Wrap/Page";
+import Data_Table from "../../_components/Data_Table";
 
 
 const Page = () => {
@@ -51,18 +51,19 @@ const Page = () => {
       id_item: idItem?.id_item
     }
     on_Submit(item);
-    socket.emit('send_message', idItem);
+    socket.emit('send_message_delete_item', idItem);
   }
 
   // render items and attributes
   return (
     <Suspense fallback={<div className="w-screen h-screen fixed top-0 left-0 grid place-items-center"><Loading_Dots /></div>}>
       <Auth_Wrap_Seller>
-        <div className=" flex flex-col gap-y-6 py-4 rounded">
+        <div className="flex flex-col gap-y-6 py-4 rounded">
           <strong className='text-xl'>Danh sách sản phẩm</strong>
           {/* {(Array.isArray(data)) ? (<> */}
           <div className="sticky z-[2] top-20">
-            <Link className="border-none text-gray-100 text-sm h-full px-5 py-2.5 rounded bg-[#2563EB] hover:bg-[#2563EB88] duration-300" href={'/adminstrations/list_products/create_item'}>Thêm sản phẩm +</Link>
+            <Link className="border-none text-gray-100 text-sm h-full px-5 py-2.5 rounded bg-[#2563EB] hover:bg-[#2563EB88] duration-300" 
+            href={'/adminstrations/products/create_item'}>Thêm sản phẩm +</Link>
           </div>
           {
             data?.status === 401 ? <span className="text-gray-900 text-center">Xác minh danh tính không thành công! Vui lòng đăng nhập lại!!</span> :

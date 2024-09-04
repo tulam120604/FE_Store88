@@ -5,7 +5,6 @@ import Link from "next/link"
 import { Suspense, useEffect, useState } from "react";
 import { Query_Recycle_Items_Admin } from "@/src/app/_lib/Tanstack_Query/Items/query";
 import { Mutation_Items } from "@/src/app/_lib/Tanstack_Query/Items/mutationFn";
-import Loading from "../_component/loading";
 import Re_store from "@/src/app/_Components/Icons/re_store";
 import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image";
@@ -15,6 +14,7 @@ import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/app/_Components/ui/alert-dialog";
 import { Trash2 } from "lucide-react";
 import Data_Table from "../../_components/Data_Table";
+import Loading from "../_component/loading";
 
 const Page = () => {
   const token = useToken();
@@ -136,7 +136,7 @@ const Page = () => {
       <div className="flex flex-col gap-y-6 pb-6 rounded">
         <div className="flex items-center justify-between gap-x-20 sticky top-0 py-4">
           <strong className="text-gray-900 lg:text-xl">Danh sách sản phẩm đã xóa</strong>
-          <Link href={'/adminstrations/list_products/'} className="*:w-[25px] *:h-[30px] text-gray-900 hover:underline hover:text-sky-500 cursor-pointer">
+          <Link href={'/adminstrations/products/list'} className="*:w-[25px] *:h-[30px] text-gray-900 hover:underline hover:text-sky-500 cursor-pointer">
             Quay lại
           </Link>
         </div>

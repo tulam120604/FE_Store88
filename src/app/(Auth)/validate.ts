@@ -24,7 +24,10 @@ export const schemaValidateNotification = yup.object().shape({
 
 
 export const schemaValidateAddress = yup.object().shape({
-    user_name : yup.string().required('Đại vương vui lòng nhập tên!'),
-    phone : yup.string().min(10, 'Số điện thoại đại vương phải 10 số!').max(10, 'Số điện thoại đại vương chỉ được 10 số!').required('Đại vương vui lòng nhập tên!'),
-    address : yup.string().required('Đại vương vui lòng nhập địa chỉ!'),
+    user_name: yup.string().required('Đại vương vui lòng nhập tên!'),
+    phone: yup.string().min(10, 'Số điện thoại đại vương phải 10 số!').max(10, 'Số điện thoại đại vương chỉ được 10 số!').required('Đại vương vui lòng nhập tên!'),
+    address: yup.string().required('Đại vương vui lòng nhập địa chỉ cụ thể!'),
+    provinces: yup.string().required('Bắt buộc!'),
+    district: yup.string().required('Bắt buộc!'),
+    wards: yup.string().required('Bắt buộc!'),
 })

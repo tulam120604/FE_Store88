@@ -13,7 +13,7 @@ export default function Page() {
     const socket = io('http://localhost:8888')
     const user = data_user ?? '';
     const mutate_notification = Mutation_Notification('ADD');
-    function onSendMessage(dataForm: IForm_Notification) {
+    function onSendMessage(dataForm: any) {
         const data_body = {
             sender_id: user?.check_email?._id,
             receiver_id: 'admin@admin.com',

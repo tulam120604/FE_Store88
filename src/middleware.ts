@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
-    console.log(url.pathname);
     if(url.pathname === '/adminstrations'){
         url.pathname = '/adminstrations/dashboard/overview';
         return NextResponse.redirect(url);

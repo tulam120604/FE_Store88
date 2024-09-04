@@ -91,3 +91,16 @@ export async function update_default_address(dataClient: { id_user?: string | nu
         return error || 'Lỗi rồi đại vương ơi!'
     }
 }
+
+export async function get_provinces() {
+    try {
+        const res = await fetch('https://esgoo.net/api-tinhthanh/4/0.htm');
+        if (!res.ok) {
+            return res
+        }
+        const { data } = await res.json();
+        return data
+    } catch (error) {
+        return error || 'Lỗi rồi đại vương ơi!'
+    }
+}

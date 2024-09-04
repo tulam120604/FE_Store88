@@ -83,7 +83,7 @@ const Page = () => {
           <span className='lg:text-xl text-sm'>Địa chỉ</span>
           <Button className='lg:text-sm text-xs px-2 lg:py-2 py-1.5 h-auto' onClick={handle_Show_Form_Create_Address}>Thêm địa chỉ +</Button>
         </section>
-        <div ref={form_create_address} className='fixed -translate-x-1/2 scale-0 duration-200 top-1/4 left-3/4 z-[3]'>
+        <div ref={form_create_address} className='fixed -translate-x-1/2 -translate-y-1/2 scale-0 duration-200 top-1/2 left-3/4 z-[3]'>
           <Address_component id_user={user?.check_email?._id} />
         </div>
         <div onClick={handle_Close_Form_Create_Address} ref={bg_form_create_address}
@@ -96,7 +96,7 @@ const Page = () => {
                 <div className="text-sm flex flex-col gap-y-2 mb-2">
                   <span className="text-gray-700 sm:col-span-2">{item?.about_address?.user_name}</span>
                   <span className="text-gray-700 sm:col-span-2">{item?.about_address?.phone}</span>
-                  <span className="text-gray-700 sm:col-span-2">{item?.about_address?.address}</span>
+                  <span className="text-gray-700 sm:col-span-2">{item?.about_address?.address + ', ' + item?.about_address?.provinces}</span>
                 </div>
                 <div className='flex flex-col lg:items-end gap-y-1'>
                   <div>

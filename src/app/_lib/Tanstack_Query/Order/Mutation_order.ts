@@ -27,7 +27,6 @@ export function Mutation_Order(action: Actions) {
             });
             if (res?.status !== 404 || res?.status !== 400 || res?.status !== 500) {
                 setStatus_api('call_ok');
-                sessionStorage.removeItem('item_order');
             }
             else {
                 setStatus_api('call_error')

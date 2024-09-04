@@ -15,7 +15,7 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
   const { toast } = useToast();
   useEffect(() => {
     const socket = io('http://localhost:8888')
-    socket.on('res_message', (data: any) => {
+    socket.on('res_message_delete_item', (data: any) => {
       toast({
         title: "Thông báo!",
         description: `Rất tiếc, sản phẩm ${data?.name_item} không còn tồn tại!`,
@@ -29,9 +29,9 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
         clearTimeout(timeOut)
       }
     })
-  }, [routing])
+  }, [routing]);
 
-  const { mutate } = Mutation_Cart('Add_Cart');
+  const { mutate, isLoading } = Mutation_Cart('Add_Cart');
   const [color, setColor] = useState<any>();
   let [varriants_attribute, setVarriants_attribute] = useState<any>();
   const [size_attribute, setsize_attribute] = useState<any>();
@@ -129,36 +129,38 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
         set_quantity(1);
         ref_validate_attribute.current?.classList.remove('block');
         ref_validate_attribute.current?.classList.add('hidden');
-        for (let value of varriants_attribute) {
-          if (value.color_item == color) {
-            for (let i of value.size_item) {
-              if (i.name_size == item) {
-                setQuantity_attributes(i.stock_item);
-                setSizePropsCart(i.name_size);
-                set_price_attr(i.price_attribute)
-              }
-            }
-          }
-        }
+        const check_color = varriants_attribute?.find((value: any) => value?.color_item == color);
+        const check_size = check_color?.size_item?.find((value: any) => value?.name_size == item);
+        setQuantity_attributes(check_size?.stock_item);
+        setSizePropsCart(check_size?.name_size);
+        set_price_attr(check_size?.price_attribute)
         return setName_size(item);
       default: return
     }
   };
   // add cart 
-  function add_To_Cart() {
+  function add_To_Cart_or_Checkout_order(action: string) {
     if (localStorage.getItem('account')) {
       const { check_email } = JSON.parse(localStorage.getItem('account') || '');
-      const items = {
+      let items: any = {
         user_id: check_email._id,
         product_id: data_Item_Detail?._id,
         price_item_attr: price_attr,
         color: color,
         quantity: quantity,
         size_attribute: sizePropsCart,
-        item_in_stock: quantity_attributes
       };
+      if (action === 'check_out') {
+        items = {
+          ...items,
+          status_checked: true
+        }
+      }
       if (quantity_attributes && quantity > 0) {
         mutate(items);
+        if (!isLoading && action === 'check_out') {
+          routing.push('/cart')
+        }
       }
       else validate_message()
     } else {
@@ -195,37 +197,6 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
     }
   }
 
-  // next order
-  function next_order() {
-    sessionStorage.removeItem('item_order');
-    if (localStorage.getItem('account')) {
-      const { check_email } = JSON.parse(localStorage.getItem('account') || '');
-      const items_detail = {
-        items: Object.values({
-          key: {
-            product_id: data_Item_Detail,
-            color_item: color,
-            quantity: quantity,
-            size_attribute_item: name_size,
-            price_item: data_Item_Detail?.price_product ? data_Item_Detail?.price_product : price_attr,
-            total_price_item: price ? price : price_item_attr,
-          }
-        }),
-        user_id: check_email?._id,
-        action: 'detail_item',
-      };
-      if (quantity_attributes && quantity > 0) {
-        sessionStorage.setItem('item_order', JSON.stringify(items_detail))
-        routing.push('/order')
-      }
-      else {
-        validate_message();
-      }
-    }
-    else {
-      routing.push('/login');
-    }
-  }
   return (<div>
     <div className="flex items-center gap-x-2 items-end font-medium text-[#EB2606] lg:text-2xl lg:font-normal mb:text-base mb-4">
       {
@@ -296,12 +267,12 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
       </div>
       {/* add cart */}
       <div className="flex items-center gap-x-5 mt-4 font-medium lg:text-base mb:text-sm *:duration-300">
-        <button onClick={add_To_Cart} className="bg-gray-900 hover:bg-white hover:text-black border border-black duration-200 lg:w-[128px] lg:h-[40px] w-[100px] h-[30px] grid place-items-center rounded-md text-xs lg:text-sm text-white">
+        <button onClick={() => add_To_Cart_or_Checkout_order('add_cart')} className="bg-gray-900 hover:bg-white hover:text-black border border-black duration-200 lg:w-[128px] lg:h-[40px] w-[100px] h-[30px] grid place-items-center rounded-md text-xs lg:text-sm text-white">
           Thêm vào giỏ
         </button>
         {/* <Btn_Add_Cart data_Btn={{ id_item: data_Item_Detail?.id_item, color_item: color, size_attribute_item: sizePropsCart, quantity_item_add: quantity, data_attribute: varriants_attribute }} /> */}
         {/* add cart */}
-        <button onClick={next_order} className="bg-gray-900 hover:bg-white hover:text-black border border-black duration-200 lg:w-[128px] lg:h-[40px] w-[100px] h-[30px] grid place-items-center rounded-md text-xs lg:text-sm text-white">
+        <button onClick={() => add_To_Cart_or_Checkout_order('check_out')} className="bg-gray-900 hover:bg-white hover:text-black border border-black duration-200 lg:w-[128px] lg:h-[40px] w-[100px] h-[30px] grid place-items-center rounded-md text-xs lg:text-sm text-white">
           Thanh toán
         </button>
       </div>

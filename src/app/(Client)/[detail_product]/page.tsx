@@ -11,11 +11,11 @@ import Infor_Detail_Product from './_components/Infor_detail';
 import Related_Product from './_components/Related_Product';
 import { get_feedBack_in_item } from '../../_lib/Services/Service_Feedback/Feedback';
 
-const page = async ({ params }: any) => {
+const page = async ({ params, searchParams }: any) => {
   noStore();
   //  const isClient = typeof window !== 'undefined';
   // console.log(isClient);
-  const data = await getDetail(params?.detail_product);
+  const data = await getDetail(searchParams?.p);
   const data_category = await detail_Categories(data?.category_id)
   revalidatePath('/products/[detail_product]', 'page');
 
@@ -52,9 +52,9 @@ const page = async ({ params }: any) => {
           <Infor_seller dataProps={data?.id_user_seller} />
           {/* related products */}
           <Description dataProps={{
-                data,
-                data_feedback
-              }} />
+            data,
+            data_feedback
+          }} />
           <div className="pt-4">
             <span className="lg:text-2xl text-xl mb-2">Sản phẩm liên quan</span>
             <Related_Product dataProps={data?.category_id} />

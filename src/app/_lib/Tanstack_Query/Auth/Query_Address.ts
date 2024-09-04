@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { create_address, get_address, remove_address, update_default_address } from "../../Services/Services_Auth/Address";
+import { create_address, get_address, get_provinces, remove_address, update_default_address } from "../../Services/Services_Auth/Address";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { schemaValidateAddress } from "@/src/app/(Auth)/validate";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +10,6 @@ export function List_Address(id_user: string | number) {
         queryKey: ['Address_Key', id_user],
         queryFn: async () => {
             return await get_address(id_user);
-            return 'Không thể xác minh danh tính!!'
         },
         enabled: !!id_user
     })
@@ -55,4 +54,12 @@ export function Mutation_Address(action: Actions) {
     const errorForm = form_address?.formState?.errors
 
     return { form_address, mutate, errorForm, status_api, ...rest }
+}
+
+export function Query_Provinces() {
+    const { data, ...rest } = useQuery({
+        queryKey: ['Provinces_Key'],
+        queryFn: () => get_provinces()
+    })
+    return { data, ...rest }
 }

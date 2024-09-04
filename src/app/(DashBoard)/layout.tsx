@@ -36,7 +36,7 @@ const Layout_Admin = ({ children }: Readonly<{ children: React.ReactNode }>) => 
     total_bell = data?.data?.data_notification?.filter((item: any) => item?.status_message !== true) ?? ''
   }
   return (
-    <div className="w-full min-h-screen bg-[#F9FBFD]">
+    <div className="w-full bg-[#F9FBFD]">
       <div className="max-w-[3840px] md:w-[95vw] mx-auto">
         {/* header */}
         <div className="fixed w-screen top-0 left-0 bg-[#1F2936] z-[10]">
@@ -65,7 +65,7 @@ const Layout_Admin = ({ children }: Readonly<{ children: React.ReactNode }>) => 
           after:border-r after:border-gray-300 after:z-[-1] after:rounded">
             <SideBarDashboard />
           </div>
-          <div className="min-h-screen !text-gray-900 rounded *:w-full *:px-4">
+          <div className="min-h-[80vh] !text-gray-900 rounded *:w-full *:px-4">
             {children}
           </div>
         </main>

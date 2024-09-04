@@ -12,9 +12,10 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { DataTable } from '@/src/app/_Components/ui/Tables/data_table'
 import Paginate_order from './_component/paginate_order'
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots'
-import { CircleCheck, CircleEllipsis, PackageOpen, Truck } from 'lucide-react'
+import { CircleCheck, CircleEllipsis, PackageOpen, Truck, X } from 'lucide-react'
 import { useCheck_user } from '@/src/app/_lib/Custome_Hooks/User'
 import { Mutation_Notification } from '@/src/app/_lib/Tanstack_Query/Notification/Mutation_Notification'
+import { convert_Slug } from '@/src/app/util/Slug'
 
 const Page = () => {
   const [status_item_order, setStatus_item_order] = useState<number>(0);
@@ -42,7 +43,7 @@ const Page = () => {
       case 5:
         return <span className='text-green-500 flex items-center gap-x-2'><CircleCheck className='h-5' />Đơn hàng đã được giao thành công</span>;
       case 6:
-        return <span className='text-red-500'>ĐÃ HỦY</span>;
+        return <span className='text-red-500 flex items-center gap-x-1'><X className='h-5' />ĐÃ HỦY</span>;
       default: return;
     }
   }
@@ -80,11 +81,11 @@ const Page = () => {
     {
       cell: ({ row }) => (
         <div className="flex gap-x-4 lg:gap-x-8">
-          <Link href={'/' + row?.original?.product_id?._id}>
+          <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`}>
             <Image width={100} height={100} loading="lazy" className="w-[100px] h-[100px] border" src={row?.original?.product_id?.gallery[0]} alt="Loading..." />
           </Link>
           <div className="w-full flex flex-col gap-y-3">
-            <Link href={'/' + row?.original?.product_id?._id} className="line-clamp-2">{row?.original?.product_id?.short_name}</Link>
+            <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`} className="line-clamp-2">{row?.original?.product_id?.short_name}</Link>
             {
               (row?.original?.color_item || row?.original?.size_attribute_item) &&
               <span className="text-sm">Phân loại : {row?.original?.color_item} - {row?.original?.size_attribute_item}</span>

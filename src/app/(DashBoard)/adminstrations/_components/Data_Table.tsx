@@ -44,7 +44,7 @@ export default function Data_Table({ dataProps }: any) {
                                             <ArchiveRestore className='h-5' />
                                         </button>
                                         :
-                                        <Link href={`/adminstrations/list_products/${data?._id}`} className="*:hover:text-black ">
+                                        <Link href={`/adminstrations/products/${data?._id}`} className="*:hover:text-black ">
                                             <FilePenLine className='h-5 text-gray-700' />
                                         </Link>
                                 }
