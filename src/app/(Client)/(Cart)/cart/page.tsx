@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import Image from 'next/image'
 import React, { Suspense, useEffect, useState } from 'react'
 import LoadingCart from './loading';
 import { Get_Items_Cart } from '@/src/app/_lib/Tanstack_Query/Cart/query';
