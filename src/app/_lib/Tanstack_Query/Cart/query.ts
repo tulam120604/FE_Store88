@@ -2,11 +2,9 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { get_list_Cart } from "../../Services/Services_Cart/Cart";
-import useStoreZustand from "@/src/app/Zustand/Store";
 
 
 export function Get_Items_Cart(id_user: any) {
-    const { setData } = useStoreZustand();
     const { data, ...rest } = useQuery({
         queryKey: ['Cart_Key', id_user],
         queryFn: async () => {
