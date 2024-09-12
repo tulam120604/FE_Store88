@@ -14,7 +14,6 @@ export async function add_order(item: any) {
         })
         if (!res.ok) {
             toast.error('Đặt hàng không thành công!', { autoClose: 500 });
-            console.log('Lỗi rồi đại vương ơi!')
             return res
         } else {
             toast.success('Đặt hàng thành công!', { autoClose: 500 });

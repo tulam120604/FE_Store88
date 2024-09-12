@@ -5,6 +5,11 @@ import LoadingShops from './_component/loading';
 import List_Products from '../../_Components/Products/List_Products';
 import Loading_Dots from '../../_Components/Loadings/Loading_Dots';
 import Paginate_item from './_component/Paginate';
+import type { Metadata } from 'next';
+
+export const metadata : Metadata = {
+  title : 'Sản phẩm'
+}
 
 const Products = async ({ searchParams }: any) => {
   let page = searchParams._page ?? 1;

@@ -21,7 +21,7 @@ export default function Het_hang({ dataProps }: any) {
     <>
       {
         (quantity_item < 1) &&
-        <div className='absolute w-[92%] h-full bg-gradient-to-r from-[#262D3F] to-[#262D3F00] flex items-center text-gray-100 rounded z-[2]'>
+        <div className='absolute w-[92%] h-full bg-gradient-to-r from-[#262D3F] to-[#262D3F00] flex items-center text-gray-100 rounded-lg z-[2]'>
           <span className='translate-x-full'>Hết hàng!</span>
         </div>
       }

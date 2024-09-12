@@ -10,8 +10,10 @@ import { Search_Component_Client } from '../../Forms/search';
 import Bell_component from '../../Notification/Bell_component';
 import { ShoppingBag } from 'lucide-react';
 import { eventEmit } from './Event_emit';
+import useStoreZustand from '@/src/app/Zustand/Store';
 
 const Header = () => {
+    const { isVisible } = useStoreZustand();
     const routing = useRouter();
     const [checkLocal, setCheckLocal] = useState<boolean>(false)
     const toggleFixedHeader = useRef<HTMLHeadElement>(null);
@@ -76,7 +78,7 @@ const Header = () => {
     }
 
     return (
-        <header ref={toggleFixedHeader} className="w-full bg-none z-[4] duration-300 top-0 lg:h-[103px] bg-gray-900 text-white">
+        <header ref={toggleFixedHeader} className="w-full bg-none z-[20] duration-300 top-0 lg:h-[103px] bg-gray-900 text-white">
             {/* top header */}
             <div className="w-full lg:h-[37px] mb:h-[34px] *:text-white flex justify-center items-center *:lg:text-sm *:mb:text-xs gap-x-4">
                 <span className="opacity-80 lg:w-auto mb:w-[266px] mb:truncate">Xin chào đại vương, chúc đại vương có một trải nghiệm thoải mái.</span>
@@ -114,8 +116,15 @@ const Header = () => {
                         <button onClick={handleCart} className='z-[1] relative' >
                             <ShoppingBag />
                             <Count_Cart />
-                        </button>
+                            {/* animation add cart */}
+                            {
+                                isVisible &&
+                                <div className='animation_add_cart absolute w-4 h-4 lg:w-8 lg:h-8 rounded-full'>
+                                    <Image width={40} height={40} className='rounded-full' src={isVisible} alt='.' />
+                                </div>
+                            }
 
+                        </button>
 
                     </div>
                     <Link href={'/login'} className={`${checkLocal ? 'hidden' : 'block'} text-xs lg:text-sm hover:text-gray-300 cursor-pointer duration-300 whitespace-nowrap`}>Đăng nhập</Link>

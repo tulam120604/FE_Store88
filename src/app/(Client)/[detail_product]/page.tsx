@@ -10,8 +10,18 @@ import { detail_Categories } from '../../_lib/Services/Services_Items/categories
 import Infor_Detail_Product from './_components/Infor_detail';
 import Related_Product from './_components/Related_Product';
 import { get_feedBack_in_item } from '../../_lib/Services/Service_Feedback/Feedback';
+import type { Metadata, ResolvingMetadata } from 'next';
 
-const page = async ({ params, searchParams }: any) => {
+export async function generateMetadata(
+  { searchParams }: any,
+): Promise<Metadata> {
+  const data = await getDetail(searchParams?.p);
+  return {
+    title: data?.short_name
+  }
+}
+
+const page = async ({ searchParams }: any) => {
   noStore();
   //  const isClient = typeof window !== 'undefined';
   // console.log(isClient);

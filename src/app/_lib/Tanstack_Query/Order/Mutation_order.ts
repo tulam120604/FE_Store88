@@ -14,9 +14,7 @@ export function Mutation_Order(action: Actions) {
                     if (dataClient.action_mutate == 'restore_buy_item') {
                         return await restore_buy_order(dataClient)
                     }
-                    else {
-                        return await add_order(dataClient);
-                    }
+                    return await add_order(dataClient);
                 case "UPDATE_STATUS":
                     return await update_status_order(dataClient);
                 default: return
@@ -25,12 +23,7 @@ export function Mutation_Order(action: Actions) {
             queryClient.invalidateQueries({
                 queryKey: ['Key_Order']
             });
-            if (res?.status !== 404 || res?.status !== 400 || res?.status !== 500) {
-                setStatus_api('call_ok');
-            }
-            else {
-                setStatus_api('call_error')
-            }
+            setStatus_api(res?.status?.toString());
         }, onError: (error: any) => {
             return error
         }

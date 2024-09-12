@@ -7,12 +7,14 @@ import { Mutation_Cart } from "../../../_lib/Tanstack_Query/Cart/mutation_Cart";
 import { Minus, Plus } from "lucide-react";
 import { io } from 'socket.io-client';
 import { useToast } from "@/src/app/_Components/ui/use-toast";
+import useStoreZustand from "@/src/app/Zustand/Store";
 
 
 
 const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
   const routing = useRouter();
   const { toast } = useToast();
+  const { setVisible } = useStoreZustand();
   useEffect(() => {
     const socket = io('http://localhost:8888')
     socket.on('res_message_delete_item', (data: any) => {
@@ -157,6 +159,7 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
         }
       }
       if (quantity_attributes && quantity > 0) {
+        setVisible(data_Item_Detail?.gallery[0]);
         mutate(items);
         if (!isLoading && action === 'check_out') {
           routing.push('/cart')

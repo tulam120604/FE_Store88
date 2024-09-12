@@ -10,6 +10,7 @@ import Btn_up from './btn_up';
 import Remove_Item_Cart from './remove';
 import Het_hang from './het_hang';
 import { convert_Slug } from '@/src/app/util/Slug';
+import { Store } from 'lucide-react';
 
 export default function Table_Cart({ dataProps }: any) {
     return (
@@ -28,7 +29,7 @@ export default function Table_Cart({ dataProps }: any) {
                     {/* 88 */}
                     <span>Đơn giá</span>
                     {/* 88 */}
-                    <span className='text-center'>Số lượng</span>
+                    <span className='translate-x-[20%]'>Số lượng</span>
                     {/* 88 */}
                     <span>Tạm tính</span>
                     {/* 88 */}
@@ -67,11 +68,17 @@ export default function Table_Cart({ dataProps }: any) {
                                         <Checkbox checked={item?.status_checked && true} onClick={() => dataProps?.handle_Checkked(item?.product_id, item?.color_item, item?.size_attribute_item)} />
                                         {/* 88 */}
                                         <Link href={`/${convert_Slug(item?.product_id?.short_name)}.html?p=${item?.product_id?._id}`}>
-                                            <Image width={150} height={150} className="relative bg-[#f2f2f2f2] z-[1] rounded w-full h-full duration-300"
+                                            <Image width={150} height={150} className="relative bg-[#f2f2f2f2] z-[1] rounded w-20 h-20 lg:w-full lg:h-full duration-300"
                                                 src={item?.product_id?.gallery[0]} alt='loading...' />
                                         </Link>
                                         {/* 88 */}
-                                        <div className="flex flex-col gap-y-2 md:text-base mb:text-xs lg:w-[300px] w-[170px]">
+                                        <div className="flex flex-col gap-y-2 md:text-base mb:text-xs lg:w-[300px] w-[170px] h-full">
+                                            <section className='flex gap-x-4 items-center *:truncate'>
+                                                <span>{item?.product_id?.id_user_seller?.user_name}</span>
+                                                <Link className='text-sm p-1 underline text-gray-700 rounded flex items-center hover:text-black'
+                                                    href={`shops?id=${item?.product_id?.id_user_seller?._id}`}>
+                                                    <Store className='h-4 text-gray-700' />Xem shop</Link>
+                                            </section>
                                             <Link href={`/${convert_Slug(item?.product_id?.short_name)}.html?p=${item?.product_id?._id}`}>
                                                 <span className='line-clamp-2'>{item?.product_id?.short_name}</span>
                                             </Link>
@@ -82,7 +89,7 @@ export default function Table_Cart({ dataProps }: any) {
                                                 item?.color_item &&
                                                 <div className='flex flex-col text-gray-600'>
                                                     <span className='mb-1 lg:mb-3'>Phân loại :</span>
-                                                    <span className='text-xs'>{item?.color_item}</span>
+                                                    <span className='text-xs'>{item?.color_item} ,</span>
                                                     <span className='text-xs'>{item?.size_attribute_item}</span>
                                                 </div>
                                             }
@@ -99,7 +106,9 @@ export default function Table_Cart({ dataProps }: any) {
                                         {/* 88 */}
                                         <span className="md:text-base mb:text-xs text-red-600">{(item?.total_price_item)?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
                                         {/* 88 */}
-                                        <Remove_Item_Cart id_props={{ item: item?._id, id_user: dataProps?.user }} />
+                                        <div className='w-full flex justify-center'>
+                                            <Remove_Item_Cart id_props={{ item: item?._id, id_user: dataProps?.user }} />
+                                        </div>
                                     </div>
                                 )
                             })

@@ -3,8 +3,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import React from 'react'
-import Het_hang from "../../(Cart)/cart/_components/het_hang"
+import Het_hang from "../../cart/_components/het_hang"
 import { convert_Slug } from "@/src/app/util/Slug"
+import { Store } from "lucide-react"
 
 export default function Table_item({ dataProps }: any) {
   return (
@@ -39,11 +40,17 @@ export default function Table_item({ dataProps }: any) {
                     {/* 88 */}
                     {/* 88 */}
                     <Link href={`/${convert_Slug(item?.product_id?.short_name)}.html?p=${item?.product_id?._id}`}>
-                      <Image width={150} height={150} className="relative bg-[#f2f2f2f2] z-[1] rounded w-full h-full duration-300"
+                      <Image width={150} height={150} className="relative bg-[#f2f2f2f2] z-[1] rounded w-20 h-20 lg:w-full lg:h-full duration-300"
                         src={item?.product_id?.gallery[0]} alt='loading...' />
                     </Link>
                     {/* 88 */}
                     <div className="flex flex-col gap-y-2 md:text-base mb:text-xs lg:w-[300px] w-[170px]">
+                      <section className='flex gap-x-4 items-center *:truncate'>
+                        <span>{item?.product_id?.id_user_seller?.user_name}</span>
+                        <Link className='text-sm p-1 underline text-gray-700 rounded flex items-center hover:text-black'
+                          href={`shops?id=${item?.product_id?.id_user_seller?._id}`}>
+                          <Store className='h-4 text-gray-700' />Xem shop</Link>
+                      </section>
                       <Link href={`/${convert_Slug(item?.product_id?.short_name)}.html?p=${item?.product_id?._id}`}>
                         <span className='line-clamp-2'>{item?.product_id?.short_name}</span>
                       </Link>
@@ -54,7 +61,7 @@ export default function Table_item({ dataProps }: any) {
                         item?.color_item &&
                         <div className='flex flex-col text-gray-600'>
                           <span className='mb-1 lg:mb-3'>Phân loại :</span>
-                          <span className='text-xs lg:text-sm'>{item?.color_item}</span>
+                          <span className='text-xs lg:text-sm'>{item?.color_item} ,</span>
                           <span className='text-xs lg:text-sm'>{item?.size_attribute_item}</span>
                         </div>
                       }

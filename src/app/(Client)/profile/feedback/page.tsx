@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCheck_user } from "@/src/app/_lib/Custome_Hooks/User";
 
-export default function Page() {
+export default function Page_create_seller() {
     const parameters = useSearchParams();
     const data_user = useCheck_user();
     let params_rating: any = parameters.get('_rating') ?? '';
@@ -50,11 +50,11 @@ export default function Page() {
     // add feedback
     // user_id, item_id, content_feedback
     const mutation_feedback = Mutation_Feedback('ADD');
-    function submit_Feedback(data_Form: IFeedback) {
+    function submit_Feedback(data_Form: any) {
         const dataBody = {
             user_id: id_user?.check_email?._id,
             item_id: data?.data?.data_item[0],
-            item_order : data?.data?.data_item[0] ,
+            item_order: data?.data?.data_item[0],
             content_feedback: data_Form?.content_feedback
         };
         mutation_feedback.mutate(dataBody);
