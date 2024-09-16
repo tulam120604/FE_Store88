@@ -1,15 +1,15 @@
 import { Suspense } from 'react';
 import LoadingShops from './loading';
 import { unstable_noStore as noStore } from 'next/cache';
-import { get_item_by_category } from '@/src/app/_lib/Services/Services_Items/products';
 import { detail_Categories } from '@/src/app/_lib/Services/Services_Items/categories';
 import List_Products from '@/src/app/_Components/Products/List_Products';
 import Paginate_item from '../_component/Paginate';
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
+import { GET_item_by_category } from '@/src/app/_lib/Services/Services_Items/products';
 
 const Page = async ({ params }: any) => {
   noStore();
-  const data = await get_item_by_category('', params?.category_products);
+  const data = await GET_item_by_category('', params?.category_products);
   const detail_category = await detail_Categories(params?.category_products);
 
   //  const isClient = typeof window !== 'undefined';

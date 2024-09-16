@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { search_item } from "../../_lib/Services/Services_Items/products";
 import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
+import { SEARCH_item } from "../../_lib/Services/Services_Items/products";
 
 
 export const Search_Component_Dashboard = () => {
@@ -31,7 +31,7 @@ export function Search_Component_Client() {
   useEffect(() => {
     const time_search = setTimeout(() => {
       if (key_search) {
-        search_item(key_search).then((res) => setValue_search(res)).catch((error) => console.log(error))
+        SEARCH_item(key_search).then((res) => setValue_search(res)).catch((error) => console.log(error))
       }
       else {
         setValue_search([])
