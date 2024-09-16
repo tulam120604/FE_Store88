@@ -10,7 +10,7 @@ import { detail_Categories } from '../../_lib/Services/Services_Items/categories
 import Infor_Detail_Product from './_components/Infor_detail';
 import Related_Product from './_components/Related_Product';
 import { get_feedBack_in_item } from '../../_lib/Services/Service_Feedback/Feedback';
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 
 export async function generateMetadata(
   { searchParams }: any,

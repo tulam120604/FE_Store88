@@ -2,16 +2,16 @@ import Image from 'next/image';
 import React from 'react';
 import { infor_shop } from '../../_lib/Services/Services_Auth/Authen';
 import { Button } from '../../_Components/ui/Shadcn/button';
-import { list_item_by_seller } from '../../_lib/Services/Services_Items/products';
 import List_Products from '../../_Components/Products/List_Products';
 import Loading_Dots from '../../_Components/Loadings/Loading_Dots';
 import Paginate_item from '../products/_component/Paginate';
 import Link from 'next/link';
 import Breadcrum from '../../_Components/breadcrum/breadcrum';
+import { GET_item_by_seller } from '../../_lib/Services/Services_Items/products';
 
 export default async function Page({ searchParams }: any) {
   const data = await infor_shop(searchParams?.id);
-  const data_item = await list_item_by_seller(data?.data?._id);
+  const data_item = await GET_item_by_seller(data?.data?._id);
   return (
     <div className='max-w-[1440px] mx-auto mb:w-[342px] md:w-[90vw] py-2'>
       {data?.status === 404 ? (<><div className='min-h-[70vh] grid place-items-center'>

@@ -16,7 +16,7 @@ export async function get_feedBack_in_item(id_item: string | number) {
 }
 
 
-export async function add_feedBack(data_client: IFeedback) {
+export async function add_feedBack(data_client: any) {
     try {
         const res = await fetch(`${apiURi}/feedback`, {
             method: 'post',
