@@ -1,28 +1,40 @@
 import { Suspense } from 'react';
 import { unstable_noStore as noStore } from 'next/cache';
-import { getLimit_and_paginate } from '../../_lib/Services/Services_Items/products';
 import LoadingShops from './_component/loading';
 import List_Products from '../../_Components/Products/List_Products';
 import Loading_Dots from '../../_Components/Loadings/Loading_Dots';
 import Paginate_item from './_component/Paginate';
 import type { Metadata } from 'next';
+import Breadcrum from '../../_Components/breadcrum/breadcrum';
+import Menu_bar from './_component/Menubar';
+import { GET_items_client } from '../../_lib/Services/Services_Items/products';
 
-export const metadata : Metadata = {
-  title : 'Sản phẩm'
+export const metadata: Metadata = {
+  title: 'Sản phẩm'
 }
 
 const Products = async ({ searchParams }: any) => {
   let page = searchParams._page ?? 1;
+  const bestSeller = searchParams._bestseller ?? '';
   noStore();
-  const data = await getLimit_and_paginate(page, 30);
+  const data = await GET_items_client(page, 30, bestSeller);
   //  const isClient = typeof window !== 'undefined';
   //   console.log(isClient);
   return (
     <Suspense fallback={<LoadingShops />}>
-      <div className="py-10 mx-auto max-w-[1440px] md:w-[90vw] w-[342px]">
-        <div className="mx-auto relative text-center mb-3 lg:mb-6">
-          <strong className="relative z-[2] font-medium bg-[#F5F5FA] lg:text-xl px-4 mb:text-lg">Dành cho bạn</strong>
-          <div className="absolute w-full h-[1px] bg-gray-400 top-1/2 z-[1]"></div>
+      <div className="pt-6 pb-10 mx-auto max-w-[1440px] md:w-[90vw] w-[342px]">
+        <section className='flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-4'>
+          <Breadcrum textProps={{
+            name_item: 'Sản phẩm',
+          }} />
+        </section>
+        <div className="mx-auto max-w-[1440px] md:w-[90vw] w-[342px] relative text-center mb-4 lg:mb-8 bg-white py-4 
+        border-b-4 border-gray-700">
+          <strong className="relative z-[2] text-[gray-800 font-medium lg:text-lg px-4">Danh sách sản phẩm</strong>
+        </div>
+        {/* menu */}
+        <div className='!w-auto'>
+          <Menu_bar />
         </div>
         {/* product */}
         {/* <Render_Products data={data}/> */}

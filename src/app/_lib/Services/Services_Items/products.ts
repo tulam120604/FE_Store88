@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST
 
 // list item client
-export async function getLimit_and_paginate(page: number, count_item: number) {
+export async function GET_items_client(page: number, count_item: number, bestSeller?: any) {
     try {
-        const uri = `${apiURi}/products?_page=${page}&_limit=${count_item}`;
+        const uri = `${apiURi}/products?_page=${page}&_limit=${count_item}&_bestseller=${bestSeller}`;
         const res = await fetch(uri);
         if (!res.ok) {
             console.warn('Call data failer')
@@ -20,7 +20,7 @@ export async function getLimit_and_paginate(page: number, count_item: number) {
 }
 
 // limit item
-export async function getLimit(countItem: number) {
+export async function GET_limit_item(countItem: number) {
     try {
         const res = await fetch(`${apiURi}/products?&_limit=${countItem}`);
         if (!res.ok) {
@@ -35,7 +35,7 @@ export async function getLimit(countItem: number) {
 }
 
 // detail
-export async function getDetail(id: number | string) {
+export async function GET_detail_item(id: number | string) {
     try {
         const res = await fetch(`${apiURi}/products/${id}`);
         if (!res.ok) {
@@ -50,7 +50,7 @@ export async function getDetail(id: number | string) {
 }
 
 // detail dashboard
-export async function getDetailDashboard(id: number | string) {
+export async function GET_detail_item_dashboard(id: number | string) {
     try {
         const res = await fetch(`${apiURi}/products/dashboard/${id}`);
         if (!res.ok) {
@@ -65,7 +65,7 @@ export async function getDetailDashboard(id: number | string) {
 }
 
 // list items dashboard 
-export async function list_Items_Dashboard(accessToken: any, page: number, limit_item: number, id_user?: string | number) {
+export async function GET_item_dashboard(accessToken: any, page: number, limit_item: number, id_user?: string | number) {
     try {
         if (accessToken) {
             let uri = `${apiURi}/products/admin?_page=${page}&_limit=${limit_item}`;
@@ -94,7 +94,7 @@ export async function list_Items_Dashboard(accessToken: any, page: number, limit
 }
 
 // add
-export async function addItem(item: any) {
+export async function POST_item(item: any) {
     console.log(item);
     try {
         const res = await fetch(`${apiURi}/products`, {
@@ -121,7 +121,7 @@ export async function addItem(item: any) {
 }
 
 // remove
-export async function removeItem(item: any) {
+export async function REMOVE_item(item: any) {
     try {
         const res = await fetch(`${apiURi}/products/${item.id_item}`, {
             method: 'delete',
@@ -143,7 +143,7 @@ export async function removeItem(item: any) {
 }
 
 // recycle items adminstration 
-export async function list_Recycle_Items_Admin(token: any, page?: Number) {
+export async function GET_recycle_item(token: any, page?: Number) {
     try {
         if (token) {
             let uri = `${apiURi}/products/admin/trash`;
@@ -171,7 +171,7 @@ export async function list_Recycle_Items_Admin(token: any, page?: Number) {
 }
 
 // restore :
-export async function restore_items_admin(dataClient: any) {
+export async function RESTORE_item(dataClient: any) {
     try {
         let uri = `${apiURi}/products/admin/trash/${dataClient.id_item}`;
         // if (page) {
@@ -196,7 +196,7 @@ export async function restore_items_admin(dataClient: any) {
     }
 }
 // destroy item ( no restore )
-export async function destroy_items_admin(dataClient: any) {
+export async function DESTROY_item(dataClient: any) {
     console.log(dataClient?.id_item)
     try {
         let uri = `${apiURi}/products/destroy_item/${dataClient.id_item}`;
@@ -220,7 +220,7 @@ export async function destroy_items_admin(dataClient: any) {
 }
 
 // edit 
-export async function edit_items_admin(dataClient?: any) {
+export async function PUT_item_dashboard(dataClient?: any) {
     try {
         let uri = `${apiURi}/products/admin/${dataClient.id_item}`;
         const res = await fetch(uri, {
@@ -246,7 +246,7 @@ export async function edit_items_admin(dataClient?: any) {
 
 
 // get item by category :
-export async function get_item_by_category(page?: any, id_cateory?: any) {
+export async function GET_item_by_category(page?: any, id_cateory?: any) {
     try {
         let uri = `${apiURi}/products/category/${id_cateory}`
         if (page) {
@@ -265,7 +265,7 @@ export async function get_item_by_category(page?: any, id_cateory?: any) {
 }
 
 // search
-export async function search_item(item?: any) {
+export async function SEARCH_item(item?: any) {
     try {
         let uri = `${apiURi}/products/search`;
         if (item) {
@@ -284,7 +284,7 @@ export async function search_item(item?: any) {
 }
 
 // get item by seller
-export async function list_item_by_seller(id_seller?: string | number) {
+export async function GET_item_by_seller(id_seller?: string | number) {
     try {
         const res = await fetch(`${apiURi}/products/sellers/${id_seller}`);
         if (!res.ok) {

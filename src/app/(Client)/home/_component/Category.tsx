@@ -18,13 +18,14 @@ const Category = async () => {
                 </div>
             </div></>) : (<>
                 <div className='lg:block hidden'>
-                    <Custome_Swiper spaceBetween={20} count_item={6}>
+                    <Custome_Swiper spaceBetween={15} count_item={8}>
                         {
                             data?.map((item: any) => (
-                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white flex flex-col border w-[220px] rounded-lg bg-gray-50 p-2 pb-6 hover:border-gray-900 duration-200'>
+                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white flex border border-white flex-col w-[160px] rounded bg-gray-50 
+                                p-2 pb-6 hover:border-gray-900 duration-200'>
                                     <div key={item?._id} className="flex flex-col items-center justify-center gap-y-4">
-                                        <Image width={200} height={200} src={item?.category_img} className='rounded h-[200px]' alt='Loading...'></Image>
-                                        <span className='truncate w-[90%] mt-2 text-lg line-clamp-2'>{item?.category_name}</span>
+                                        <Image width={200} height={150} src={item?.category_img} className='rounded h-[150px]' alt='Loading...'></Image>
+                                        <span className='truncate w-[90%] text-gray-800 mt-2 line-clamp-2'>{item?.category_name}</span>
                                     </div>
                                 </Link>
                             ))
@@ -32,13 +33,13 @@ const Category = async () => {
                     </Custome_Swiper>
                 </div>
                 <div className='lg:hidden md:block hidden'>
-                    <Custome_Swiper spaceBetween={20} count_item={4}>
+                    <Custome_Swiper spaceBetween={15} count_item={5}>
                         {
                             data?.map((item: any) => (
-                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border w-[200px] h-[200px] rounded-lg bg-gray-50 p-4 hover:border-gray-800'>
+                                <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border w-[130px] h-[200px] rounded bg-gray-50 p-4 hover:border-gray-800'>
                                     <div key={item?._id} className="flex flex-col items-center justify-center gap-y-4">
                                         <Image width={100} height={100} src={item?.category_img} alt='Loading...'></Image>
-                                        <span className='whitespace-nowrap truncate w-[90%]'>{item?.category_name}</span>
+                                        <span className='whitespace-nowrap text-gray-800 truncate w-[90%]'>{item?.category_name}</span>
                                     </div>
                                 </Link>
                             ))
@@ -52,7 +53,7 @@ const Category = async () => {
                                 <Link key={item?._id} href={`/products/${item?._id}`} className='bg-white grid place-item-center border w-[120px] h-[170px] rounded-lg bg-gray-50 p-4 hover:border-gray-800 overflow-hidden'>
                                     <div key={item?._id} className="flex flex-col items-center justify-center gap-y-4">
                                         <Image width={100} height={100} src={item?.category_img} alt='Loading...'></Image>
-                                        <span className='whitespace-nowrap truncate w-[90%]'>{item?.category_name}</span>
+                                        <span className='whitespace-nowrap text-gray-800 text-sm truncate w-[90%]'>{item?.category_name}</span>
                                     </div>
                                 </Link>
                             ))

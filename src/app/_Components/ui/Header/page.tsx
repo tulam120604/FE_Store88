@@ -28,7 +28,7 @@ const Header = () => {
             }))
         }
         window.addEventListener('scroll', handle_scroll_header);
-        return () => window.addEventListener('scroll', handle_scroll_header);
+        return () => window.removeEventListener('scroll', handle_scroll_header);
     }, []);
     // login
     useEffect(() => {

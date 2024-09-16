@@ -2,17 +2,11 @@
 'use client';
 
 import Link from "next/link"
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { Query_Recycle_Items_Admin } from "@/src/app/_lib/Tanstack_Query/Items/query";
 import { Mutation_Items } from "@/src/app/_lib/Tanstack_Query/Items/mutationFn";
-import Re_store from "@/src/app/_Components/Icons/re_store";
-import { ColumnDef } from "@tanstack/react-table"
-import Image from "next/image";
-import { DataTable } from "@/src/app/_Components/ui/Tables/data_table";
 import { useToken } from "@/src/app/_lib/Custome_Hooks/User";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/app/_Components/ui/alert-dialog";
-import { Trash2 } from "lucide-react";
 import Data_Table from "../../_components/Data_Table";
 import Loading from "../_component/loading";
 
@@ -20,108 +14,12 @@ const Page = () => {
   const token = useToken();
   const [page, setPage] = useState<number>(1);
   const { data, isLoading } = Query_Recycle_Items_Admin(token.accessToken, page);
-  const { on_Submit } = Mutation_Items({
+  const { on_Submit, isLoading: loading_restore} = Mutation_Items({
     action: 'RESTORE_OR_DESTROY'
   });
-  if (isLoading) {
+  if (isLoading || loading_restore) {
     return <Loading />
   };
-  const columns: ColumnDef<any>[] = [
-    {
-      cell: ({ row }) => (
-        <div className="max-w-[200px] line-clamp-3">{row?.original?.short_name}</div>
-      ),
-      header: "Tên sản phẩm",
-    },
-    {
-      accessorKey: "category_id.category_name",
-      header: "Danh mục",
-    },
-    {
-      cell: ({ row }) => (
-        <Image width={100} height={100} className="w-[100px] h-[100px] rounded" src={row?.original?.feature_product} alt="Loading..." />
-      ),
-      header: "Ảnh",
-    },
-    {
-      cell: ({ row }) => {
-        return (
-          row?.original?.attributes?.varriants?.map((item: any) => {
-            return (<div key={row?.original?._id} className="max-w-[200px]">
-              <span>{item.color_item}</span>
-              {
-                item?.size_item.map((i: any) => {
-                  return (<>
-                    {
-                      i?.name_size && <span>&#160; &#10539; &#160;</span>
-                    }
-                    <span key={i._id}>{i?.name_size}</span> <br />
-                  </>)
-                })
-              }
-            </div>)
-          }))
-      },
-      header: "Phân loại",
-    },
-    {
-      cell: ({ row }) => {
-        return (row?.original?.price_product ?
-          <span className="text-red-600">{row?.original?.price_product?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span> :
-          row?.original?.attributes?.varriants?.map((item: any) => {
-            return (<div key={row?.original?._id} className="max-w-[200px]">
-              {
-                item?.size_item.map((i: any) => {
-                  if (i.name_size) {
-                    return (<>
-                      <span key={i._id} className="text-red-600">{i?.price_attribute?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span> <br />
-                    </>)
-                  }
-                  else {
-                    return <span key={i._id} className="text-red-600">{i?.price_attribute?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
-                  }
-                })
-              }
-            </div>)
-          }))
-
-      },
-      header: "Đơn giá",
-    },
-    {
-      accessorKey: "count_stock",
-      header: "Số lượng",
-    },
-    {
-      accessorKey: "made_in",
-      header: "Xuất xứ",
-    },
-    {
-      cell: ({ row }) => (<div className="flex items-center gap-x-2 *:duration-200">
-        <button className="hover:scale-110" onClick={() => handle_Restore_or_Destroy(row?.original?._id, 'restore')}>
-          <Re_store />
-        </button>
-        <AlertDialog>
-          <AlertDialogTrigger>
-            <Trash2 className="text-red-600 w-5 h-5" />
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Xác nhận xóa sản phẩm?</AlertDialogTitle>
-              <AlertDialogDescription>
-                Bạn chắc chắn xóa sản phẩm mã {row?.original?._id} ? Điều này sẽ không thể khôi phục lại sản phẩm!
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Hủy</AlertDialogCancel>
-              <AlertDialogAction className="hover:scale-110 bg-red-500" onClick={() => handle_Restore_or_Destroy(row?.original?._id, 'destroy')}>Xác nhận</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>),
-      header: "options",
-    },
-  ]
   function handle_Restore_or_Destroy(idItem?: string | number, action?: string,) {
     const item = {
       token: token.accessToken,

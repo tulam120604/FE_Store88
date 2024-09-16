@@ -3,7 +3,7 @@ import Breadcrum from '@/src/app/_Components/breadcrum/breadcrum';
 import { revalidatePath } from 'next/cache';
 import Description from './_components/Description';
 import Infor_seller from './_components/Infor_seller';
-import { getDetail } from '../../_lib/Services/Services_Items/products';
+import { GET_detail_item } from '../../_lib/Services/Services_Items/products';
 import { unstable_noStore as noStore } from 'next/cache';
 import Link from 'next/link';
 import { detail_Categories } from '../../_lib/Services/Services_Items/categories';
@@ -15,7 +15,7 @@ import type { Metadata, ResolvingMetadata } from 'next';
 export async function generateMetadata(
   { searchParams }: any,
 ): Promise<Metadata> {
-  const data = await getDetail(searchParams?.p);
+  const data = await GET_detail_item(searchParams?.p);
   return {
     title: data?.short_name
   }
@@ -25,7 +25,7 @@ const page = async ({ searchParams }: any) => {
   noStore();
   //  const isClient = typeof window !== 'undefined';
   // console.log(isClient);
-  const data = await getDetail(searchParams?.p);
+  const data = await GET_detail_item(searchParams?.p);
   const data_category = await detail_Categories(data?.category_id)
   revalidatePath('/products/[detail_product]', 'page');
 

@@ -29,7 +29,7 @@ const Page = () => {
     }
   }
   const { data, isLoading } = Query_List_Items_Dashboard(token.accessToken, page, 10, id_user);
-  const { on_Submit } = Mutation_Items({
+  const { on_Submit, isLoading : loading_remove } = Mutation_Items({
     action: "REMOVE"
   });
   // close socket 
@@ -40,7 +40,7 @@ const Page = () => {
     return () => { socket.disconnect() };
   }, [socket]);
 
-  if (isLoading) {
+  if (isLoading || loading_remove) {
     return <Loading />
   };
 

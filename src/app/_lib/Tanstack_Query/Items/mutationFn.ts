@@ -1,6 +1,6 @@
 'use client';
 
-import { addItem, destroy_items_admin, edit_items_admin, removeItem, restore_items_admin } from "../../Services/Services_Items/products";
+import { DESTROY_item, POST_item, PUT_item_dashboard, REMOVE_item, RESTORE_item } from "../../Services/Services_Items/products";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -16,20 +16,20 @@ export function Mutation_Items({ action, onSuccess, onError, onSettled }: { acti
     const query_client = useQueryClient();
     const { mutate, ...rest } = useMutation({
         // retry: 3,
-        mutationFn: async (dataClient : any) => {
+        mutationFn: async (dataClient: any) => {
             setLoading('dang_call');
             switch (action) {
                 case 'ADD':
-                    return await addItem(dataClient);
+                    return await POST_item(dataClient);
                 case 'EDIT':
-                    return await edit_items_admin(dataClient);
+                    return await PUT_item_dashboard(dataClient);
                 case 'REMOVE':
-                    return await removeItem(dataClient);
+                    return await REMOVE_item(dataClient);
                 case 'RESTORE_OR_DESTROY':
                     if (dataClient?.action_mutation === 'restore') {
-                        return await restore_items_admin(dataClient);
+                        return await RESTORE_item(dataClient);
                     }
-                    return await destroy_items_admin(dataClient)
+                    return await DESTROY_item(dataClient)
                 default: return
             }
         },
