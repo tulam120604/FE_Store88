@@ -30,7 +30,11 @@ export async function GET_limit_item(countItem: number) {
         const data = await res.json();
         return data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        const message = {
+            error,
+            status: 500
+        }
+        return message;
     }
 }
 
@@ -246,15 +250,14 @@ export async function PUT_item_dashboard(dataClient?: any) {
 
 
 // get item by category :
-export async function GET_item_by_category(page?: any, id_cateory?: any) {
+export async function GET_item_by_category(page?: any, id_category?: any) {
     try {
-        let uri = `${apiURi}/products/category/${id_cateory}`
+        let uri = `${apiURi}/products/category/${id_category}`
         if (page) {
             uri += `?_page=${page}`
         }
         const res = await fetch(uri);
         if (!res.ok) {
-            console.warn(res);
             return res
         }
         const data = await res.json();

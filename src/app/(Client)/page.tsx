@@ -1,4 +1,4 @@
-import Layout_Home from "./home/page";
+import Layout_Home from "./trang-chu/page";
 
 export default function RootLayout() {
   return (

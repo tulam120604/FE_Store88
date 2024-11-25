@@ -1,7 +1,7 @@
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 import { toast } from 'react-toastify'
 
-export async function create_message(data_body: INotification) {
+export async function create_message(data_body: any) {
     try {
         const res = await fetch(`${apiURi}/create_notification/${data_body?.sender_id}`, {
             method: 'post',
@@ -39,7 +39,7 @@ export async function get_notification(receiver_id: string | number) {
 }
 
 
-export async function send_message(data_body: INotification) {
+export async function send_message(data_body: any) {
     try {
         const res = await fetch(`${apiURi}/send_notification/${data_body?.sender_id}`, {
             method: 'PATCH',

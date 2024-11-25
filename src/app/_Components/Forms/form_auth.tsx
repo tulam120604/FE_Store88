@@ -93,7 +93,7 @@ const Form_auth = ({ mode }: any) => {
                                 <p className="mx-4 text-gray-600">or</p>
                                 <hr className="flex-grow border-gray-300" />
                             </div>
-                            <Link href={''} className="flex duration-300 items-center justify-center w-full py-2 mb-6 text-sm font-medium text-gray-900 transition duration-300 border border-gray-200 bg-gray-50 rounded-lg hover:bg-gray-200">
+                            <Link href={''} className="flex items-center justify-center w-full py-2 mb-6 text-sm font-medium text-gray-900 transition duration-300 border border-gray-200 bg-gray-50 rounded-lg hover:bg-gray-200">
                                 <img width={20} height={50}
                                     className="h-5 mr-2"
                                     src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png"
@@ -104,7 +104,7 @@ const Form_auth = ({ mode }: any) => {
                             <p className="text-sm text-gray-600 text-center">
                                 Đã có tài khoản?{" "}
                                 <Link
-                                    href="/login"
+                                    href="/dang-nhap"
                                     className="font-bold text-blue-600 hover:underline"
                                 >
                                     Đăng nhập
@@ -124,7 +124,7 @@ const Form_auth = ({ mode }: any) => {
                                     <p className="mx-4 text-gray-600">or</p>
                                     <hr className="flex-grow border-gray-300" />
                                 </div>
-                                <Link href={''} className="flex duration-300 items-center justify-center w-full py-2 mb-6 text-sm font-medium text-gray-900 transition duration-300 border border-gray-200 bg-gray-50 rounded-lg hover:bg-gray-200">
+                                <Link href={''} className="flex items-center justify-center w-full py-2 mb-6 text-sm font-medium text-gray-900 transition duration-300 border border-gray-200 bg-gray-50 rounded-lg hover:bg-gray-200">
                                     <img width={20} height={50}
                                         className="h-5 mr-2"
                                         src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png"
@@ -135,7 +135,7 @@ const Form_auth = ({ mode }: any) => {
                                 <p className="text-sm text-gray-600 text-center">
                                     Chưa có tài khoản?{" "}
                                     <Link
-                                        href="/register"
+                                        href="/dang-ki"
                                         className="font-bold text-blue-600 hover:underline"
                                     >
                                         Tạo tài khoản

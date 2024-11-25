@@ -5,6 +5,7 @@ import React, { ReactNode } from 'react'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Toaster } from '../_Components/ui/toaster';
+import ErrorBoundary from '../_Components/ErrorBoundary/page';
 
 
 const queryClient = new QueryClient(
@@ -23,7 +24,9 @@ const Provider = ({ children }: { children: ReactNode }) => {
     <QueryClientProvider client={queryClient}>
       <ToastContainer position='bottom-right' />
       <Toaster />
-      {children}
+      <ErrorBoundary>
+        {children}
+      </ErrorBoundary>
     </QueryClientProvider>
   )
 }

@@ -48,14 +48,14 @@ export function useCustome_Hooks_Form({ mode }: any) {
             arr_file_gallery?.forEach((file: File) => {
                 formData.append('gallery', file)
             })
-            const attributesString = JSON.stringify(data_form.attributes);
+            const variantString = JSON.stringify(data_form.variant);
             formData.append('short_name', data_form.short_name);
             (data_form.price_product && formData.append('price_product', data_form.price_product))
             formData.append('des_product', data_form.des_product);
             formData.append('id_user_seller', user?.check_email?._id)
             formData.append('category_id', data_form.category_id && data_form.category_id);
             formData.append('made_in', data_form.made_in);
-            (data_form.stock ? formData.append('stock', data_form.stock) : formData.append('attributes', attributesString))
+            (data_form.stock ? formData.append('stock', data_form.stock) : formData.append('variant', variantString))
             let dataAll: any = {
                 accessToken: token.accessToken,
                 data_item: formData,

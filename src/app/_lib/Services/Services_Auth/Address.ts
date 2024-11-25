@@ -95,6 +95,7 @@ export async function update_default_address(dataClient: { id_user?: string | nu
 export async function get_provinces() {
     try {
         const res = await fetch('https://esgoo.net/api-tinhthanh/4/0.htm');
+        console.log(res?.status)
         if (!res.ok) {
             return res
         }

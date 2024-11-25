@@ -113,15 +113,19 @@
 .dot_1 {
   animation-delay: 0.1s;
 }
+
 .dot_2 {
   animation-delay: 0.2s;
 }
+
 .dot_3 {
   animation-delay: 0.35s;
 }
+
 .dot_4 {
   animation-delay: 0.5s;
 }
+
 .dot_5 {
   animation-delay: 0.6s;
 }
@@ -131,25 +135,32 @@
     transform: translateY(0px);
     scale: 0.5;
   }
+
   15% {
     transform: translateY(-1px);
   }
+
   30% {
     transform: translateY(-2px);
   }
+
   45% {
     transform: translateY(-3px);
   }
+
   60% {
     transform: translateY(-4px);
     scale: 1;
   }
+
   75% {
     transform: translateY(-3px);
   }
+
   90% {
     transform: translateY(-1.5px);
   }
+
   100% {
     transform: translateY(0px);
     scale: 0.5;
@@ -162,15 +173,24 @@
 
 @keyframes animation_add_cart {
   0% {
-    transform : translate(-200%, 100%);
+    transform: translate(-200%, 100%);
     opacity: 0.4;
   }
+
   70% {
-    transform : translateY(-170%, 70%);
+    transform: translateY(-170%, 70%);
     opacity: 0.8;
   }
+
   100% {
-    transform : translate(-50%, 0%);
-    opacity : 0.4
+    transform: translate(-50%, 0%);
+    opacity: 0.4
   }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
 }

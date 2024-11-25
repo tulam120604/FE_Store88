@@ -166,7 +166,6 @@ export async function check_token_expired(user: { id: string, accessToken: strin
         if (!res.ok) {
             const { message } = await res.json();
             if (message === 'Token het han !') {
-                toast.error('Không thể xác minh danh tính, vui lòng đăng nhập lại!', { autoClose: 800 });
                 return res
             }
             return res;
