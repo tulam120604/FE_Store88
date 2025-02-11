@@ -3,17 +3,15 @@
 
 import Link from "next/link"
 import { Suspense, useState } from "react";
-import { Query_Recycle_Items_Admin } from "@/src/app/_lib/Tanstack_Query/Items/query";
-import { Mutation_Items } from "@/src/app/_lib/Tanstack_Query/Items/mutationFn";
-import { useToken } from "@/src/app/_lib/Custome_Hooks/User";
+import { Query_Recycle_Items_Admin } from "@/src/app/_lib/Query_APIs/Items/Query";
+import { Mutation_Items } from "@/src/app/_lib/Query_APIs/Items/Mutation_product";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import Data_Table from "../../_components/Data_Table";
 import Loading from "../_component/loading";
 
 const Page = () => {
-  const token = useToken();
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading } = Query_Recycle_Items_Admin(token.accessToken, page);
+  const { data, isLoading } = Query_Recycle_Items_Admin(page);
   const { on_Submit, isLoading: loading_restore} = Mutation_Items({
     action: 'RESTORE_OR_DESTROY'
   });
@@ -22,7 +20,6 @@ const Page = () => {
   };
   function handle_Restore_or_Destroy(idItem?: string | number, action?: string,) {
     const item = {
-      token: token.accessToken,
       id_item: idItem,
       action_mutation: action
     };

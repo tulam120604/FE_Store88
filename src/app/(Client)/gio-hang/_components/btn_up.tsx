@@ -1,7 +1,8 @@
 'use client';
 
+import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 import { Button } from "@/src/app/_Components/ui/Shadcn/button";
-import { Mutation_Cart } from "@/src/app/_lib/Tanstack_Query/Cart/mutation_Cart";
+import { Mutation_Cart } from "@/src/app/_lib/Query_APIs/Cart/mutation_Cart";
 import Swal from "sweetalert2";
 
 const Btn_up = ({ id_props }: any) => {
@@ -14,7 +15,6 @@ const Btn_up = ({ id_props }: any) => {
         if (product?.item?.product_id?.variant) {
             if (product?.item?.quantity < quantity_item) {
                 const items = {
-                    user_id: id_props?.id_user?._id,
                     product_id: product.item?.product_id?._id,
                     attribute: product?.item?.name_varriant,
                     name_variant: product?.item?.value_varriant
@@ -28,7 +28,6 @@ const Btn_up = ({ id_props }: any) => {
         else {
             if (product?.item?.quantity < product?.item?.product_id?.stock) {
                 const items = {
-                    user_id: id_props?.id_user?._id,
                     product_id: product?.item?.product_id?._id,
                 }
                 mutate(items)
@@ -42,7 +41,11 @@ const Btn_up = ({ id_props }: any) => {
     return (<>
         {
             isLoading ?
-                <Button type="button" className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#43;</Button > :
+                <>
+                    <Loading_Overlay />
+                    <Button type="button" className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#43;</Button>
+                </>
+                :
                 <Button type="button" onClick={() => up_quantity(id_props)} className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#43;</Button>
         }
     </>

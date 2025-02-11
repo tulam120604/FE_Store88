@@ -1,16 +1,16 @@
 import { Suspense } from 'react';
 import LoadingShops from './loading';
 import { unstable_noStore as noStore } from 'next/cache';
-import { detail_Categories } from '@/src/app/_lib/Services/Services_Items/categories';
 import List_Products from '@/src/app/_Components/Products/List_Products';
 import Paginate_item from '../_component/Paginate';
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
-import { GET_item_by_category } from '@/src/app/_lib/Services/Services_Items/products';
+import { GET_item_by_category } from '@/src/app/_lib/Services/Services_Items/Product';
+import { GET_one_category } from '@/src/app/_lib/Services/Services_Items/Category';
 
 const Page = async ({ params }: any) => {
   noStore();
   const data = await GET_item_by_category('', params?.the_loai_san_pham);
-  const detail_category = await detail_Categories(params?.category_products);
+  const detail_category = await GET_one_category(params?.category_products);
   //  const isClient = typeof window !== 'undefined';
   //   console.log(isClient);
   return (

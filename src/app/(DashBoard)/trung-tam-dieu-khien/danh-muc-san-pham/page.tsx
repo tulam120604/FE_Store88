@@ -3,11 +3,11 @@
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/src/app/_Components/ui/Tables/table";
 import { Suspense } from "react";
-import { Auth_Wrap_Admins } from "../_Auth_Wrapper/Page";
+import { Auth_Provider } from "../_Auth_Wrapper/Page";
 
 const page = () => {
-  return (<Suspense fallback={<div className="w-screen h-screen fixed top-0 left-0 grid place-items-center"><Loading_Dots/></div>}>
-    <Auth_Wrap_Admins>
+  return (<Suspense fallback={<div className="w-screen h-screen fixed top-0 left-0 grid place-items-center"><Loading_Dots /></div>}>
+    <Auth_Provider>
       <div className="py-6">
         <strong className="text-gray-200 lg:text-xl">Tất cả danh mục</strong>
       </div>
@@ -30,7 +30,7 @@ const page = () => {
           </TableRow>
         </TableBody>
       </Table>
-    </Auth_Wrap_Admins>
+    </Auth_Provider>
   </Suspense>)
 }
 

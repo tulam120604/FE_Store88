@@ -1,4 +1,4 @@
-import { infor_shop } from '@/src/app/_lib/Services/Services_Auth/Authen'
+import { infor_shop } from '@/src/app/_lib/Services/Services_Auth/Auth'
 import { Store } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ const Infor_seller = async ({ dataProps }: any) => {
       <div className='flex flex-col items-start gap-y-3'>
         <span className='text-base lg:text-lg'>{data?.data?.user_name}</span>
         <Link href={`/cua-hang-truc-tuyen?id=${dataProps}`} className='px-2 py-1 border border-[#0A68FF] text-[#0A68FF] rounded duration-200 hover:bg-gray-50 text-sm flex items-center gap-x-1'>
-          <Store className='h-4 text-gray-700' color='#0A68FF'/>
+          <Store className='h-4 text-gray-700' color='#0A68FF' />
           Xem cửa hàng
         </Link>
       </div>

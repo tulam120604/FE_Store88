@@ -1,7 +1,7 @@
 'use client'
 
-import { Mutation_Feedback } from "@/src/app/_lib/Tanstack_Query/Feedback/Mutation_Feedback";
-import { Get_Item_Order } from "@/src/app/_lib/Tanstack_Query/Order/Query_order";
+import { Mutation_Feedback } from "@/src/app/_lib/Query_APIs/Feedback/Mutation_Feedback";
+import { Get_Item_Order } from "@/src/app/_lib/Query_APIs/Order/Query_order";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { Button } from "@/src/app/_Components/ui/Shadcn/button";
 import { DataTable } from "@/src/app/_Components/ui/Tables/data_table";
@@ -10,11 +10,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useCheck_user } from "@/src/app/_lib/Custome_Hooks/User";
+import { Infor_user } from "@/src/app/_lib/Query_APIs/Auth/Query_Auth";
 
 export default function Page_create_seller() {
     const parameters = useSearchParams();
-    const data_user = useCheck_user();
+  const { data: data_user, isLoading: loading_user } = Infor_user();
     let params_rating: any = parameters.get('_rating') ?? '';
     const data = Get_Item_Order(params_rating);
     const id_user = data_user ?? '';
@@ -52,7 +52,7 @@ export default function Page_create_seller() {
     const mutation_feedback = Mutation_Feedback('ADD');
     function submit_Feedback(data_Form: any) {
         const dataBody = {
-            user_id: id_user?.check_email?._id,
+            user_id: id_user?.data?._id,
             item_id: data?.data?.data_item[0],
             item_order: data?.data?.data_item[0],
             content_feedback: data_Form?.content_feedback

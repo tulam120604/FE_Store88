@@ -16,18 +16,18 @@ export async function sign_In(item: any) {
         }
         else if (res.status === 200) {
             const data = await res.json();
-            // console.log(data.check_email)
-            localStorage.setItem('account', JSON.stringify(data));
+            // console.log(data)
+            document.cookie = `access_token=${data.accessToken}; Path=/; Secure; SameSite=None; max-age=604800000`;
+            document.cookie = `refesh_token=${data.refeshToken}; Path=/; SameSite=None; max-age=604800000`;
+            localStorage.setItem('account', JSON.stringify(data?.check_email?.user_name));
         }
         return res
-    } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!!'
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }
 
 // register
-
-
 export async function create_Account(item: any) {
     try {
         const res = await fetch(`${apiURi}/register`, {
@@ -45,60 +45,59 @@ export async function create_Account(item: any) {
             toast.success("Đăng kí tài khoản thành công!", { autoClose: 500 });
         }
         return res
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!'
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }
 
 // infor
-export async function infor_user(id: string | number, accessToken: string) {
+export async function infor_user() {
     try {
-        const res = await fetch(`${apiURi}/infor/${id}`, {
+        const res = await fetch(`${apiURi}/infor_account`, {
             method: 'get',
-            headers: {
-                'Authorization': `Bearer ${accessToken}`
-            }
+            credentials: 'include',
         });
         if (!res.ok) {
             return res
         }
-        const data = await res.json();
+        const response = await res.json();
+        const data = {
+            ...response,
+            status: res?.status
+        }
         return data
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!'
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }
 
 // get
-export async function list_Account(accessToken: string) {
+export async function list_Account() {
     try {
         const res = await fetch(`${apiURi}/account`, {
             method: 'get',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            }
+            credentials: 'include',
         })
         if (!res.ok) {
             return res
         };
         const data = await res.json();
         return data
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!'
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }
 
-// granting_premissions
-export async function granting_premissions(dataForm: { id_user: string | number, accessToken: string }) {
+// cap quyen cho user
+export async function set_role_user_to_seller(dataForm: { id_user: string | number }) {
     try {
-        const res = await fetch(`${apiURi}/granting_premissions`, {
+        const res = await fetch(`${apiURi}/set_role_user_to_seller`, {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${dataForm?.accessToken}`
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dataForm?.id_user)
+            body: JSON.stringify(dataForm?.id_user),
+            credentials: 'include',
         });
         if (!res.ok) {
             toast.error('Cấp quyền thất bại!', { autoClose: 500 });
@@ -108,39 +107,42 @@ export async function granting_premissions(dataForm: { id_user: string | number,
             toast.success('Cấp quyền thành công!', { autoClose: 500 })
         }
         return res
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!'
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }
 
 
-// log out
-export async function logout(token: string) {
+// dang xuat
+export async function logout() {
     try {
         const res = await fetch(`${apiURi}/logout`, {
             method: 'post',
             headers: {
-                'Authorization': `${token}`
-            }
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
         });
         if (!res.ok) {
             toast.error('Đăng xuất thất bại, vui lòng thử lại sau!', { autoClose: 500 });
             return res;
         };
+        localStorage.removeItem('account')
         return res
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!'
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }
 
 // refesh token 
-export async function refesh_token(token: { refeshToken: string }) {
+export async function refesh_token() {
     try {
         const res = await fetch(`${apiURi}/refesh_token`, {
             method: 'post',
             headers: {
-                'Authorization': token?.refeshToken
-            }
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
         })
         if (!res.ok) {
             toast.error('Không thể xác minh danh tính, vui lòng đăng nhập và thử lại sau!', { autoClose: 500 });
@@ -148,36 +150,13 @@ export async function refesh_token(token: { refeshToken: string }) {
         }
         const data = await res.json();
         return data
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!' || error
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }
 
 
-// check token expired 
-export async function check_token_expired(user: { id: string, accessToken: string }) {
-    try {
-        const res = await fetch(`${apiURi}/check_token_expired/${user?.id}`, {
-            method: 'get',
-            headers: {
-                "Authorization": `Bearer ${user?.accessToken}`
-            }
-        });
-        if (!res.ok) {
-            const { message } = await res.json();
-            if (message === 'Token het han !') {
-                return res
-            }
-            return res;
-        }
-        const data_user = await res.json()
-        return data_user
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!' || error
-    }
-}
-
-// infor
+// thong tin nha ban hang
 export async function infor_shop(id?: string | number) {
     try {
         const res = await fetch(`${apiURi}/inforshop/${id}`);
@@ -187,7 +166,7 @@ export async function infor_shop(id?: string | number) {
         }
         const data = await res.json();
         return data
-    } catch (error) {
-        return 'Lỗi rồi đại vương ơi!!'
+    } catch (error: any) {
+        return error || 'Đã có lỗi xảy ra!!'
     }
 }

@@ -1,9 +1,11 @@
+'use client'
+
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots'
 import { Button } from '@/src/app/_Components/ui/Shadcn/button'
 import { Input } from '@/src/app/_Components/ui/Shadcn/input'
 import { Label } from '@/src/app/_Components/ui/Shadcn/label'
 import { Textarea } from '@/src/app/_Components/ui/textarea'
-import { Mutation_Address, Query_Provinces } from '@/src/app/_lib/Tanstack_Query/Auth/Query_Address'
+import { Mutation_Address, Query_Provinces } from '@/src/app/_lib/Query_APIs/Auth/Query_Address'
 import React, { useState } from 'react';
 import { eventEmit } from '@/src/app/_Components/ui/Header/Event_emit'
 
@@ -50,7 +52,7 @@ export default function Address_component({ id_user }: { id_user?: string | numb
     return (
         <form onSubmit={mutate_address?.form_address?.handleSubmit(submit_Create_Address)}
             className="mx-auto w-[342px] lg:w-[40vw] p-4 bg-white rounded">
-            <strong className="text-xl">Thêm địa chỉ</strong>
+            <strong className="text-lg tracking-[0.5px]">Thêm địa chỉ</strong>
             <div className="grid gap-4 mt-4">
                 <div className="grid gap-2">
                     <Label htmlFor="name">Tên :</Label>
@@ -119,7 +121,7 @@ export default function Address_component({ id_user }: { id_user?: string | numb
                 </div>
                 <div className='flex justify-center gap-x-3'>
                     <Button onClick={close_form_create_address} className='bg-white hover:bg-[#F5F5FA] border border-gray-300 text-gray-800' type='button'>Hủy</Button>
-                    <Button>Thêm</Button>
+                    <Button className='bg-[#597BFE]  hover:bg-[#6f8bfc]'>Thêm</Button>
                 </div>
             </div>
         </form>

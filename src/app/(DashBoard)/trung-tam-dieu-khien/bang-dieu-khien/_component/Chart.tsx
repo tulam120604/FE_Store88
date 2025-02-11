@@ -31,7 +31,7 @@ const chartConfig = {
 
 export function ChartData() {
   return (
-    <Card className="border rounded-lg border-gray-300">
+    <Card className="rounded-lg bg-white shadow-lg">
       <CardHeader className="mb-4">
         <CardTitle className="text-base text-gray-900">Tổng quan</CardTitle>
       </CardHeader>
@@ -51,7 +51,7 @@ export function ChartData() {
               content={<ChartTooltipContent indicator="dashed" />}
             />
             <Bar dataKey="total" fill="#2563EB" radius={4} >
-            <LabelList dataKey='total' position='top' fontSize={9}/>
+              <LabelList dataKey='total' position='top' fontSize={9} />
             </Bar>
           </BarChart>
         </ChartContainer>

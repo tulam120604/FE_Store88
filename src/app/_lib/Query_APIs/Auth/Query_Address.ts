@@ -1,17 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { create_address, get_address, get_provinces, remove_address, update_default_address } from "../../Services/Services_Auth/Address";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { schemaValidateAddress } from "@/src/app/(Auth)/validate";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 
-export function List_Address(id_user: string | number) {
+export function List_Address() {
     const { data, ...rest } = useQuery({
-        queryKey: ['Address_Key', id_user],
+        queryKey: ['Address_User_Key'],
         queryFn: async () => {
-            return await get_address(id_user);
+            return await get_address();
         },
-        enabled: !!id_user
     })
     return { data, ...rest };
 }
@@ -43,7 +42,7 @@ export function Mutation_Address(action: Actions) {
                 form_address.reset();
             }
             queryClient.invalidateQueries({
-                queryKey: ['Address_Key']
+                queryKey: ['Address_User_Key']
             })
         },
         onError: (error) => {

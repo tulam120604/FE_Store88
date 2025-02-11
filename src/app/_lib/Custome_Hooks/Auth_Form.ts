@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import { Mutation_Auth } from "../Tanstack_Query/Auth/auth_mutation";
+import { Mutation_Auth } from "../Query_APIs/Auth/Auth_mutation";
 
 
 export function Custome_Hooks_Auth({ mode }: any) {

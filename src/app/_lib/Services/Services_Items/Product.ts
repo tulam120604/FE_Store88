@@ -6,7 +6,7 @@ const apiURi = process.env.NEXT_PUBLIC_DB_HOST
 // list item client
 export async function GET_items_client(page: number, count_item: number, bestSeller?: any) {
     try {
-        const uri = `${apiURi}/products?_page=${page}&_limit=${count_item}&_bestseller=${bestSeller}`;
+        const uri = `${apiURi}/list_products/client?_page=${page}&_limit=${count_item}&_bestseller=${bestSeller}`;
         const res = await fetch(uri);
         if (!res.ok) {
             console.warn('Call data failer')
@@ -20,9 +20,9 @@ export async function GET_items_client(page: number, count_item: number, bestSel
 }
 
 // limit item
-export async function GET_limit_item(countItem: number) {
+export async function GET_limit_items(countItem: number) {
     try {
-        const res = await fetch(`${apiURi}/products?&_limit=${countItem}`);
+        const res = await fetch(`${apiURi}/list_products/client?&_limit=${countItem}`);
         if (!res.ok) {
             console.warn('Call data failer')
             return res
@@ -69,29 +69,19 @@ export async function GET_detail_item_dashboard(id: number | string) {
 }
 
 // list items dashboard 
-export async function GET_item_dashboard(accessToken: any, page: number, limit_item: number, id_user?: string | number) {
+export async function GET_item_dashboard(page: number, limit_item: number) {
     try {
-        if (accessToken) {
-            let uri = `${apiURi}/products/admin?_page=${page}&_limit=${limit_item}`;
-            if (id_user) {
-                uri = `${apiURi}/products/sellers/${id_user}?_page=${page}&_limit=${limit_item}`
-            }
-            const res = await fetch(uri, {
-                method: 'get',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (!res.ok) {
-                console.warn('Call data failer');
-                return res
-            };
-            const data_All = await res.json();
-            return data_All
-        }
-        console.error('Không có quyền truy cập!');
-        return 'Không có quyền truy cập !';
+        let uri = `${apiURi}/list_products/admin?_page=${page}&_limit=${limit_item}`;
+        const res = await fetch(uri, {
+            method: 'get',
+            credentials: 'include'
+        });
+        if (!res.ok) {
+            console.warn('Call api failer');
+            return res
+        };
+        const data = await res.json();
+        return data
     } catch (error) {
         return (error || "Lỗi rồi đại vương ơi!");
     }
@@ -101,13 +91,13 @@ export async function GET_item_dashboard(accessToken: any, page: number, limit_i
 export async function POST_item(item: any) {
     console.log(item);
     try {
-        const res = await fetch(`${apiURi}/products`, {
+        const res = await fetch(`${apiURi}/create_product`, {
             method: 'post',
             headers: {
-                'authorization': `Bearer ${item.accessToken}`,
                 // 'Content-Type': 'multipart/form-data'
             },
-            body: item.data_item
+            body: item.data_item,
+            credentials: 'include'
         });
         // console.log(res);
         if (!res.ok) {
@@ -124,14 +114,12 @@ export async function POST_item(item: any) {
     }
 }
 
-// remove
+// xoa mem
 export async function REMOVE_item(item: any) {
     try {
         const res = await fetch(`${apiURi}/products/${item.id_item}`, {
             method: 'delete',
-            headers: {
-                'authorization': `Bearer ${item.accessToken}`
-            }
+            credentials: 'include'
         });
         if (!res.ok) {
             toast.error(`Có lỗi xảy ra khi xóa sản phẩm mã ${item.id_item} !`, { autoClose: 500 })
@@ -147,28 +135,24 @@ export async function REMOVE_item(item: any) {
 }
 
 // recycle items adminstration 
-export async function GET_recycle_item(token: any, page?: Number) {
+export async function GET_recycle_item(page?: Number) {
     try {
-        if (token) {
-            let uri = `${apiURi}/products/admin/trash`;
-            // if (page) {
-            //     uri += `?_page=${page}`
-            // }
-            const res = await fetch(uri, {
-                method: 'get',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (!res.ok) {
-                console.warn('Call data failer');
-            };
-            const { data } = await res.json();
-            return data;
-        }
-        console.error('Không có quyền truy cập!');
-        return 'Không có quyền truy cập !';
+        let uri = `${apiURi}/products/admin/trash`;
+        // if (page) {
+        //     uri += `?_page=${page}`
+        // }
+        const res = await fetch(uri, {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+        if (!res.ok) {
+            console.warn('Call data failer');
+        };
+        const { data } = await res.json();
+        return data;
     } catch (error) {
         return (error || "Lỗi rồi đại vương ơi!");
     }
@@ -183,9 +167,7 @@ export async function RESTORE_item(dataClient: any) {
         // }
         const res = await fetch(uri, {
             method: 'PATCH',
-            headers: {
-                'Authorization': `Bearer ${dataClient.token}`,
-            }
+            credentials: 'include'
         });
         if (!res.ok) {
             toast.error(`khôi phục sản phẩm mã ${dataClient.id_item} thất bại!`, { autoClose: 500 })
@@ -199,16 +181,14 @@ export async function RESTORE_item(dataClient: any) {
         return (error || "Lỗi rồi đại vương ơi!");
     }
 }
-// destroy item ( no restore )
+// xoa item vinh vien ( no restore )
 export async function DESTROY_item(dataClient: any) {
     console.log(dataClient?.id_item)
     try {
         let uri = `${apiURi}/products/destroy_item/${dataClient.id_item}`;
         const res = await fetch(uri, {
             method: 'delete',
-            headers: {
-                'Authorization': `Bearer ${dataClient.token}`,
-            }
+            credentials: 'include'
         });
         if (!res.ok) {
             toast.error(`Xóa sản phẩm mã ${dataClient.id_item} thất bại!`, { autoClose: 500 })
@@ -223,17 +203,17 @@ export async function DESTROY_item(dataClient: any) {
     }
 }
 
-// edit 
+// update 
 export async function PUT_item_dashboard(dataClient?: any) {
     try {
         let uri = `${apiURi}/products/admin/${dataClient.id_item}`;
         const res = await fetch(uri, {
             method: 'PUT',
             headers: {
-                "authorization": `Bearer ${dataClient.accessToken}`,
                 // "Content-Type" : "application/json"
             },
-            body: dataClient.data_item
+            body: dataClient.data_item,
+            credentials: 'include'
         });
         if (!res.ok) {
             toast.error(`Có lỗi xảy ra khi sửa sản phẩm mã ${dataClient.id_item} !`, { autoClose: 500 })

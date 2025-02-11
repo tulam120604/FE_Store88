@@ -2,9 +2,12 @@ const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 import { toast } from 'react-toastify';
 
 
-export async function list_favorites(id_user: string | number) {
+export async function list_favorites() {
     try {
-        const res = await fetch(`${apiURi}/list_item_favorite/${id_user}`);
+        const res = await fetch(`${apiURi}/list_item_favorite`, {
+            method: 'get',
+            credentials: 'include'
+        });
         if (!res.ok) {
             return res
         }
@@ -15,10 +18,11 @@ export async function list_favorites(id_user: string | number) {
     }
 }
 
-export async function detail_item_in_favorite(id_user: string | number, id_item: string | number) {
+export async function view_item_in_favorite(id_item: string | number) {
     try {
-        const res = await fetch(`${apiURi}/detail_item_favorite/${id_user}`, {
+        const res = await fetch(`${apiURi}/view_item_favorite`, {
             method: 'get',
+            credentials: 'include',
             headers: {
                 'id_item': `${id_item}`
             }
@@ -34,13 +38,14 @@ export async function detail_item_in_favorite(id_user: string | number, id_item:
 }
 
 
-export async function add_favorites(dataClient: { id_user: string | number, id_item: string | number }) {
+export async function add_favorites(dataClient: { id_item: string | number }) {
     try {
         const res = await fetch(`${apiURi}/add_item_favorite`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(dataClient)
         });
         if (!res.ok) {
@@ -55,13 +60,14 @@ export async function add_favorites(dataClient: { id_user: string | number, id_i
 }
 
 
-export async function remove_favorites(dataClient: { id_user: string | number, id_item: string | number }) {
+export async function remove_favorites(dataClient: { id_item: string | number }) {
     try {
-        const res = await fetch(`${apiURi}/remove_item_favorite/${dataClient.id_user}`, {
+        const res = await fetch(`${apiURi}/remove_item_favorite`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(dataClient)
         });
         if (!res.ok) {

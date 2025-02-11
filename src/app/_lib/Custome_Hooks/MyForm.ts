@@ -3,14 +3,11 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from 'react-toastify';
-import { Detail_Item_Dashboard, Query_Category } from "../Tanstack_Query/Items/query";
-import { Mutation_Items } from "../Tanstack_Query/Items/mutationFn";
-import { useCheck_user, useToken } from "./User";
+import { Detail_Item_Dashboard, Query_Category } from "../Query_APIs/Items/Query";
+import { Mutation_Items } from "../Query_APIs/Items/Mutation_product";
 
 
 export function useCustome_Hooks_Form({ mode }: any) {
-    const user = useCheck_user();
-    const token = useToken();
     const { update_item } = useParams();
     let data_one_item: any;
     if (mode === 'edit' && mode) {
@@ -28,11 +25,6 @@ export function useCustome_Hooks_Form({ mode }: any) {
             })
             const text_alert = update_item ? `Sản phẩm mã ${update_item} đã được sửa !` : "Đã thêm sản phẩm !";
             toast.success(text_alert, { autoClose: 500 })
-        },
-        onSettled: () => {
-            query_client.invalidateQueries({
-                queryKey: ['Product_Key']
-            });
         },
     });
     useEffect(() => {
@@ -52,17 +44,14 @@ export function useCustome_Hooks_Form({ mode }: any) {
             formData.append('short_name', data_form.short_name);
             (data_form.price_product && formData.append('price_product', data_form.price_product))
             formData.append('des_product', data_form.des_product);
-            formData.append('id_user_seller', user?.check_email?._id)
             formData.append('category_id', data_form.category_id && data_form.category_id);
             formData.append('made_in', data_form.made_in);
             (data_form.stock ? formData.append('stock', data_form.stock) : formData.append('variant', variantString))
             let dataAll: any = {
-                accessToken: token.accessToken,
                 data_item: formData,
             }
             if (mode && update_item) {
                 dataAll = {
-                    accessToken: token.accessToken,
                     data_item: formData,
                     id_item: update_item
                 }

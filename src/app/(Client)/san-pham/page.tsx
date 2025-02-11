@@ -6,7 +6,7 @@ import Paginate_item from './_component/Paginate';
 import type { Metadata } from 'next';
 import Breadcrum from '../../_Components/breadcrum/breadcrum';
 import Menu_bar from './_component/Menubar';
-import { GET_items_client } from '../../_lib/Services/Services_Items/products';
+import { GET_items_client } from '../../_lib/Services/Services_Items/Product';
 import List_Products from '../../_Components/Products/List_Products';
 
 export const metadata: Metadata = {

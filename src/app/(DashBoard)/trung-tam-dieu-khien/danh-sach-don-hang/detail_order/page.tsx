@@ -2,7 +2,7 @@
 
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
 import { DataTable } from '@/src/app/_Components/ui/Tables/data_table';
-import { Query_Detail_Order } from '@/src/app/_lib/Tanstack_Query/Order/Query_order';
+import { Query_Detail_Order } from '@/src/app/_lib/Query_APIs/Order/Query_order';
 import { ColumnDef } from '@tanstack/react-table';
 import { CircleCheck } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/src/app/_Components/ui/dialog/alert-dialog';
@@ -12,10 +12,10 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React from 'react'
 import { Button } from '@/src/app/_Components/ui/Shadcn/button';
-import { Mutation_Notification } from '@/src/app/_lib/Tanstack_Query/Notification/Mutation_Notification';
-import { Mutation_Order } from '@/src/app/_lib/Tanstack_Query/Order/Mutation_order';
+import { Mutation_Order } from '@/src/app/_lib/Query_APIs/Order/Mutation_order';
 import Loading from '../loading';
 import { useCheck_user } from '@/src/app/_lib/Custome_Hooks/User';
+import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation_Notification';
 
 export default function Page() {
   const id = useSearchParams();

@@ -1,9 +1,12 @@
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 import { toast } from 'react-toastify'
 
-export async function get_address(id_user: string | number) {
+export async function get_address() {
     try {
-        const res = await fetch(`${apiURi}/address/${id_user}`);
+        const res = await fetch(`${apiURi}/address/get`, {
+            method: 'get',
+            credentials: 'include',
+        });
         if (!res.ok) {
             return res
         }
@@ -17,12 +20,13 @@ export async function get_address(id_user: string | number) {
 
 export async function create_address(item: { user_id: string | number, about_address: any }) {
     try {
-        const res = await fetch(`${apiURi}/address/${item?.user_id}`, {
+        const res = await fetch(`${apiURi}/address/create`, {
             method: 'post',
             headers: {
                 'Content-Type': `application/json`
             },
-            body: JSON.stringify(item)
+            body: JSON.stringify(item),
+            credentials: 'include',
         });
         if (!res.ok) {
             toast.success('Lỗi, không thể thêm địa chỉ, vui lòng thử lại.', { autoClose: 500 })
@@ -38,14 +42,15 @@ export async function create_address(item: { user_id: string | number, about_add
     }
 }
 
-export async function edit_address(item: { id_user: string | number, address: string | number }, accessToken: string) {
+export async function edit_address(item: { id_user: string | number, address: string | number }) {
     try {
-        const res = await fetch(`${apiURi}/address/${item?.id_user}`, {
+        const res = await fetch(`${apiURi}/address/update`, {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${accessToken}`
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item?.address)
+            body: JSON.stringify(item?.address),
+            credentials: 'include'
         });
         if (!res.ok) {
             return res
@@ -73,14 +78,15 @@ export async function remove_address(dataClient: { id_address: string | number }
     }
 }
 
-export async function update_default_address(dataClient: { id_user?: string | number, id_address?: string | number }) {
+export async function update_default_address(dataClient: { id_address?: string | number }) {
     try {
-        const res = await fetch(`${apiURi}/address/update_default_address/${dataClient?.id_user}`, {
+        const res = await fetch(`${apiURi}/address/update_default_address/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dataClient)
+            body: JSON.stringify(dataClient),
+            credentials: 'include'
         });
         if (!res.ok) {
             toast.success('Lỗi, không thể cập nhật địa chỉ, vui lòng thử lại.', { autoClose: 500 })
@@ -92,6 +98,7 @@ export async function update_default_address(dataClient: { id_user?: string | nu
     }
 }
 
+// lay data cac tinh thanh
 export async function get_provinces() {
     try {
         const res = await fetch('https://esgoo.net/api-tinhthanh/4/0.htm');

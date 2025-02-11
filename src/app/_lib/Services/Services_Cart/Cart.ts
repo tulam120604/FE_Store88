@@ -2,32 +2,36 @@
 
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 
-export async function get_list_Cart (id_user : any){
-    try{
-        const res = await fetch (`${apiURi}/cart/${id_user}`);
+export async function get_list_Cart() {
+    try {
+        const res = await fetch(`${apiURi}/list_items_cart`, {
+            method: 'get',
+            credentials: 'include'
+        });
         if (!res.ok) {
             return res.status
         };
         const data = await res.json();
         return data.cart
-    }catch (error) {
+    } catch (error) {
         console.error(error);
         return (error || '<span>Lỗi rồi đại vương ơi!!</span>')
     }
 }
 
 // add cart
-export async function add_to_cart(item : any) {
+export async function add_to_cart(item: any) {
     try {
-        const res = await fetch (`${apiURi}/cart`, {
-            method : 'post',
-            headers : {
-                'Content-Type' : 'application/json'
+        const res = await fetch(`${apiURi}/add_to_cart`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify(item)
+            credentials: 'include',
+            body: JSON.stringify(item)
         });
         if (!res.ok) {
-            console.warn ('Kiem tra lai server !');
+            console.warn('Kiem tra lai server !');
         }
         await res.json();
         return res;
@@ -38,17 +42,18 @@ export async function add_to_cart(item : any) {
 }
 
 // up
-export async function up_quantity (item : any) {
+export async function up_quantity(item: any) {
     try {
-        const res = await fetch (`${apiURi}/cart/up`, {
-            method : 'post',
-            headers : {
-                "Content-Type" : 'application/json',
+        const res = await fetch(`${apiURi}/cart/up`, {
+            method: 'post',
+            headers: {
+                "Content-Type": 'application/json',
             },
-            body : JSON.stringify(item)
+            credentials: 'include',
+            body: JSON.stringify(item)
         });
         if (!res.ok) {
-            console.warn ('Kiem tra lai server !')
+            console.warn('Kiem tra lai server !')
         };
         await res.json();
         return res;
@@ -59,17 +64,18 @@ export async function up_quantity (item : any) {
 }
 
 // dow
-export async function dow_quantity (item: any) {
+export async function dow_quantity(item: any) {
     try {
-        const res = await fetch (`${apiURi}/cart/dow`, {
-            method : 'post',
-            headers : {
-                'Content-Type' : 'application/json'
+        const res = await fetch(`${apiURi}/cart/dow`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify(item)
+            credentials: 'include',
+            body: JSON.stringify(item)
         });
         if (!res.ok) {
-            console.warn ('Kiem tra lai server!');
+            console.warn('Kiem tra lai server!');
         };
         await res.json();
         return res
@@ -80,17 +86,18 @@ export async function dow_quantity (item: any) {
 }
 
 // count total price
-export async function checked_item_cart (item: any) {
+export async function checked_item_cart(item: any) {
     try {
-        const res = await fetch (`${apiURi}/cart/check_item_cart`, {
-            method : 'post',
-            headers : {
-                'Content-Type' : 'application/json'
+        const res = await fetch(`${apiURi}/cart/check_item_cart`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify(item)
+            credentials: 'include',
+            body: JSON.stringify(item)
         });
         if (!res.ok) {
-            console.warn ('Kiem tra lai server!');
+            console.warn('Kiem tra lai server!');
         };
         await res.json();
         return res
@@ -101,17 +108,18 @@ export async function checked_item_cart (item: any) {
 }
 
 // remove_item_cart
-export async function remove_item_cart (item: any) {
+export async function remove_item_cart(item: any) {
     try {
-        const res = await fetch (`${apiURi}/cart/remove_item_cart`, {
-            method : 'post',
-            headers : {
-                'Content-Type' : 'application/json'
+        const res = await fetch(`${apiURi}/cart/remove_item_cart`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify(item)
+            credentials: 'include',
+            body: JSON.stringify(item)
         });
         if (!res.ok) {
-            console.warn ('Kiem tra lai server!');
+            console.warn('Kiem tra lai server!');
         };
         return res
     } catch (error) {
@@ -121,17 +129,18 @@ export async function remove_item_cart (item: any) {
 }
 
 // remove_item_cart
-export async function remove_all_item_cart (item: any) {
+export async function remove_all_item_cart(item: any) {
     try {
-        const res = await fetch (`${apiURi}/cart/remove_all_item_cart`, {
-            method : 'post',
-            headers : {
-                'Content-Type' : 'application/json'
+        const res = await fetch(`${apiURi}/cart/remove_all_item_cart`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify(item)
+            credentials: 'include',
+            body: JSON.stringify(item)
         });
         if (!res.ok) {
-            console.warn ('Kiem tra lai server!');
+            console.warn('Kiem tra lai server!');
         };
         await res.json();
         return res

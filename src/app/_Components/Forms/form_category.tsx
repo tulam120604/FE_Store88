@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react'
-import { Mutation_Category } from '../../_lib/Tanstack_Query/Items/mutation_category';
+import { Mutation_Category } from '../../_lib/Query_APIs/Items/Mutation_category';
 import { Button } from '../ui/Shadcn/button';
 import Image from 'next/image';
 import Loading_Dots from '../Loadings/Loading_Dots';

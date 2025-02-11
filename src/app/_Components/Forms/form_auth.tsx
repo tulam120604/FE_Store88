@@ -4,7 +4,6 @@
 import Link from 'next/link';
 import React from 'react'
 import { Custome_Hooks_Auth } from '../../_lib/Custome_Hooks/Auth_Form';
-import Swal from 'sweetalert2';
 import Loading_Spin from '../Loadings/Loading_Spin';
 import Image from 'next/image';
 import { Input } from '../ui/Shadcn/input';
@@ -12,32 +11,28 @@ import { Button } from '../ui/Shadcn/button';
 
 const Form_auth = ({ mode }: any) => {
     // console.log(mode);
-    const { my_form, isLoading, status_Loading, onSubmit, errors, isValidating, routing } = Custome_Hooks_Auth({ mode });
+    const { my_form, isLoading, status_Loading, onSubmit, errors, routing } = Custome_Hooks_Auth({ mode });
     if (status_Loading === 'call_ok') {
         if (mode !== "Register") {
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Đăng nhập thành công!",
-                showConfirmButton: false,
-                timer: 1000,
-                heightAuto: false,
-                backdrop: '#20212466',
-                customClass: {
-                    popup: 'bg-[#F3F4F6]', // màu nền
-                    title: 'text-black' // màu chữ
-                },
-            });
             routing.push('/');
         }
         else {
-            routing.push('/login');
+            routing.push('/dang-nhap');
         }
     }
     return (
-        <div className='lg:grid h-screen lg:place-items-center bg-[#F3F4F6]'>
-            <div className="lg:grid max-w-[1000px] lg:grid-cols-2 gap-x-20 justify-between bg-white lg:p-6 py-20 rounded-lg">
-                <section className="hidden lg:block relative w-[500px]">
+        <div className='lg:grid h-screen lg:place-items-center bg-[#F3F4F6] relative z-[10] overflow-hidden 
+        before:w-[140vw] before:h-[130vh] before:absolute before:bg-[#0A68FF] before:rotate-[65deg] before:top-0 
+        before:-left-1/2 before:z-[-1] before:hidden lg:before:block'>
+            <div className="mx-auto max-w-[1440px] w-[95vw] flex gap-x-10 justify-center fixed top-0 mt-5">
+                <Link href={'/'}>
+                    <Image width={200} height={100} className='w-[150px] max-h-10'
+                        src={'https://res.cloudinary.com/tulam120604/image/upload/v1736088077/k3jhx9ywkmepcp9tz1b1.png'} alt='Store88' />
+                </Link>
+            </div>
+            <div className="lg:grid w-screen lg:w-[1000px] shadow-lg lg:grid-cols-2 gap-x-20 justify-between bg-white lg:p-6 py-20 rounded-lg h-screen lg:h-auto">
+                <section className="hidden lg:block relative w-[500px] ">
+                    <Link href={'/'} className='text-[#1770FF] text-sm underline'>Trang chủ</Link>
                     <Image
                         alt="login..."
                         width={700}
@@ -45,10 +40,6 @@ const Form_auth = ({ mode }: any) => {
                         src="/Images/login.jpg"
                         className="absolute h-3/4 w-3/4 object-cover opacity-80 bottom-0 left-1/2 -translate-x-1/2"
                     />
-                    <div className="hidden lg:relative lg:block lg:p-12 text-lg lg:text-xl">
-                        <strong>Store88</strong>
-                        <h2 className='mt-1'>Xin chào đại vương!</h2>
-                    </div>
                 </section>
                 <main className="flex item-center">
                     <form onSubmit={my_form.handleSubmit(onSubmit)} className="flex flex-col w-full px-6 gap-y-2 bg-white rounded-lg">

@@ -1,7 +1,7 @@
 'use client'
 
-import { Mutation_Notification } from '@/src/app/_lib/Tanstack_Query/Notification/Mutation_Notification'
-import { Query_Notification } from '@/src/app/_lib/Tanstack_Query/Notification/Query_Notification'
+import { Query_Notification } from '@/src/app/_lib/Query_APIs/Notification/Query_Notification'
+import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation_Notification'
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/src/app/_Components/ui/dialog/alert-dialog'
 import { CircleCheck } from 'lucide-react'
@@ -11,20 +11,16 @@ import React, { useEffect } from 'react'
 import { useToast } from '@/src/app/_Components/ui/use-toast'
 import { ToastAction } from '@/src/app/_Components/ui/toast'
 import Link from 'next/link'
-import { useCheck_user } from '@/src/app/_lib/Custome_Hooks/User'
 
 
 const Page_notification = () => {
-  const data_user = useCheck_user();
   const { toast } = useToast()
-  const user = data_user ?? '';
-  const data = Query_Notification(user?.check_email?._id);
+  const data = Query_Notification();
   const mutate_notification = Mutation_Notification('SEND');
   function sendMessage(item: any) {
     if (!item?.status_message) {
       const data_body = {
         id_item: item,
-        sender_id: user?.check_email?._id,
       }
       mutate_notification.mutate(data_body);
     }
@@ -47,8 +43,7 @@ const Page_notification = () => {
 
 
   return (
-    <div className='pl-4 lg:pl-10'>
-      <strong className='text-lg'>Thông báo của bạn </strong>
+    <div className='px-6 py-4 lg:py-8 bg-white rounded'>
       <div className='pb-10 pt-5'>
         {
           data?.isLoading &&
@@ -56,7 +51,7 @@ const Page_notification = () => {
         }
         <ul className="space-y-2">
           {
-            (data?.data?.data_notification.length || data?.data?.data_notification.length?.length > 0) ?
+            (data?.data?.data_notification?.length || data?.data?.data_notification.length?.length > 0) ?
               (
                 data?.data?.data_notification?.map((item: any) => (
                   <AlertDialog key={item?._id}>
@@ -112,10 +107,10 @@ const Page_notification = () => {
                   </AlertDialog>
                 ))
               ) :
-              <div className='grid place-items-center min-h-[50vh]'>
+              <div className='grid place-items-center min-h-[70vh]'>
                 <div className='flex flex-col items-center gap-y-6'>
                   <Image width={100} height={100} src='/Images/no_bell.png' alt=''></Image>
-                  <span>Bạn không có thông báo gì !</span>
+                  <span className='text-gray-700 font-light'>Bạn không có thông báo gì!</span>
                 </div>
               </div>
           }

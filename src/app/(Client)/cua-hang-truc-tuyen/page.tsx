@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import React from 'react';
-import { infor_shop } from '../../_lib/Services/Services_Auth/Authen';
+import { infor_shop } from '../../_lib/Services/Services_Auth/Auth';
 import { Button } from '../../_Components/ui/Shadcn/button';
 import List_Products from '../../_Components/Products/List_Products';
 import Loading_Dots from '../../_Components/Loadings/Loading_Dots';
 import Paginate_item from '../san-pham/_component/Paginate';
 import Link from 'next/link';
 import Breadcrum from '../../_Components/breadcrum/breadcrum';
-import { GET_item_by_seller } from '../../_lib/Services/Services_Items/products';
+import { GET_item_by_seller } from '../../_lib/Services/Services_Items/Product';
 
 export default async function Page({ searchParams }: any) {
   const data = await infor_shop(searchParams?.id);

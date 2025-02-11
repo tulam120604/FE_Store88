@@ -1,30 +1,28 @@
 'use client'
 
 import { Suspense } from "react";
-import { DollarSign, List, Package, UsersRound } from "lucide-react"
-import { Query_Category, Query_List_Items_Dashboard } from '@/src/app/_lib/Tanstack_Query/Items/query';
-import { List_Account } from '@/src/app/_lib/Tanstack_Query/Auth/Query_Auth';
-import { useToken } from '@/src/app/_lib/Custome_Hooks/User';
+import { DollarSign, List, SquareGanttChart, UserCheck, UsersRound } from "lucide-react"
+import { Query_Category, Query_List_Items_Dashboard } from '@/src/app/_lib/Query_APIs/Items/Query';
+import { List_Account } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
 import Box from "../_component/box"
 import { ChartData } from "../_component/Chart"
 import Top_seller from "../_component/top_seller"
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 
 export default function Page() {
-    const token = useToken();
-    const { data } = Query_List_Items_Dashboard(token.accessToken, 1, 1);
-    const { data: account } = List_Account(token.accessToken);
+    const { data } = Query_List_Items_Dashboard(1, 1);
+    const { data: account } = List_Account();
     const { data: category } = Query_Category();
     return (
         <Suspense fallback={<div className="w-screen h-screen fixed top-0 left-0 grid place-items-center"><Loading_Dots /></div>}>
-            <div className='grid lg:grid-cols-4 grid-cols-3 *:p-6 *:rounded-xl *:border *:border-gray-300 gap-4 my-6'>
-                <Box dataProps={{ text: 'Tổng doanh thu', number: '45.231,89 đ', icon: <DollarSign /> }} />
-                <Box dataProps={{ text: 'Tổng mặt hàng', number: data?.data?.totalDocs, icon: <Package /> }} />
-                <Box dataProps={{ text: 'Danh mục', number: category?.data?.length, icon: <List /> }} />
-                <Box dataProps={{ text: 'Tổng người dùng', number: account?.data?.totalDocs, icon: <UsersRound /> }} />
+            <div className='grid lg:grid-cols-4 grid-cols-3 *:p-6 *:rounded-xl *:shadow-lg gap-4 my-6 *:bg-white'>
+                <Box dataProps={{ text: 'Tổng doanh thu', number: '45.231,89 đ', icon: <DollarSign strokeWidth="4" stroke="#2563EB" /> }} />
+                <Box dataProps={{ text: 'Tổng mặt hàng', number: data?.data?.totalDocs, icon: <SquareGanttChart strokeWidth="3" stroke="#2563EB" /> }} />
+                <Box dataProps={{ text: 'Danh mục', number: category?.data?.length, icon: <List strokeWidth="3" stroke="#2563EB" /> }} />
+                <Box dataProps={{ text: 'Tổng người dùng', number: account?.data?.totalDocs, icon: <UsersRound strokeWidth="3" stroke="#2563EB" /> }} />
                 <Box dataProps={{
-                    text: 'Người bán', number: Array.isArray(account?.account_seller) &&
-                        account?.account_seller?.length, icon: <UsersRound />
+                    text: 'Đối tác bán hàng', number: Array.isArray(account?.account_seller) &&
+                        account?.account_seller?.length, icon: <UserCheck strokeWidth="3" stroke="#2563EB" />
                 }} />
             </div>
             {/* chart */}

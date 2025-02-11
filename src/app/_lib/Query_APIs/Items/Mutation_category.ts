@@ -3,7 +3,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { add_Categories } from "../../Services/Services_Items/categories";
+import { POST_category } from "../../Services/Services_Items/Category";
 import { useState } from "react";
 
 
@@ -18,7 +18,7 @@ export function Mutation_Category (action : Actions) {
             setStatus_Category('dang_call');
             switch (action) {
                 case "ADD" :
-                    return await add_Categories(data);
+                    return await POST_category(data);
                 default : return;
             }
         },

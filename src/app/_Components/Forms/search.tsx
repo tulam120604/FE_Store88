@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { SEARCH_item } from "../../_lib/Services/Services_Items/products";
+import { SEARCH_item } from "../../_lib/Services/Services_Items/Product";
 
 
 export const Search_Component_Dashboard = () => {
   return (
-    <div className="relative w-[400px]">
+    <div className="relative w-1/2">
       <input
         type="text"
         id="Search"
         placeholder="Tìm kiếm..."
-        className="w-full rounded-md text-white bg-transparent border border-gray-400 px-3 py-2 outline-none pe-10 shadow-sm sm:text-sm"
+        className="w-full rounded-md text-gray-900 bg-transparent border border-gray-400 px-3 py-2 outline-none pe-10 shadow-sm sm:text-sm"
       />
       <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
         <button type="button" className="text-gray-700 hover:text-gray-300">
@@ -41,11 +41,11 @@ export function Search_Component_Client() {
   }, [key_search]);
 
   return (<div className="relative">
-    <form className={`relative w-full *:h-[36px] gap-x-2 shadow-2xl duration-300`}>
-      <input type="text" className="border border-gray-500 rounded w-full px-3 text-sm font-normal outline-none text-gray-700" placeholder="Tìm kiếm sản phẩm..."
+    <form className={`relative w-full *:h-10 gap-x-2 duration-300`}>
+      <input type="text" className="border border-gray-300 rounded w-full px-3 text-sm font-normal outline-none text-gray-700" placeholder="Tìm kiếm sản phẩm..."
         onChange={(e) => setKey_search(e.target.value)} />
-      <button type='submit' className="absolute top-[12%] right-0 !h-3/4 duration-300 cursor-pointer text-gray-800 border-l border-gray-500 px-4">
-        <Search color="#0A68FF" />
+      <button type='submit' className="absolute top-[12%] right-0 !h-3/4 duration-300 cursor-pointer text-gray-800 border-l border-gray-300 px-4">
+        <Search color="#0A68FF"/>
       </button>
     </form>
     {

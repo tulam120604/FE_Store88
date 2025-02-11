@@ -18,7 +18,7 @@ export default function Alert_dialog({ dataProps }: any) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle className='text-sm'>
+                    <AlertDialogTitle className='text-base font-light text-gray-800'>
                         {
                             (dataProps?.action === 'remove') ?
                                 'Xác nhận xóa địa chỉ này?' :
@@ -27,10 +27,10 @@ export default function Alert_dialog({ dataProps }: any) {
                     </AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel className='text-sm'>Hủy</AlertDialogCancel>
+                    <AlertDialogCancel className='text-sm'>Quay lại</AlertDialogCancel>
                     {
                         (dataProps?.action === 'remove') ?
-                            <AlertDialogAction className='text-sm bg-green-500 hover:!bg-green-700'
+                            <AlertDialogAction className='text-sm bg-red-500 hover:!bg-red-700'
                                 onClick={() => dataProps?.remove_address({ id_address: dataProps?.id_address, action: 'remove' })}>
                                 Xác nhận
                             </AlertDialogAction> :

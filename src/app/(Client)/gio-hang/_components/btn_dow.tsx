@@ -1,7 +1,8 @@
 'use client';
 
+import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 import { Button } from "@/src/app/_Components/ui/Shadcn/button";
-import { Mutation_Cart } from "@/src/app/_lib/Tanstack_Query/Cart/mutation_Cart";
+import { Mutation_Cart } from "@/src/app/_lib/Query_APIs/Cart/mutation_Cart";
 import Swal from "sweetalert2";
 
 const Btn_dow = ({ id_props }: any) => {
@@ -19,7 +20,6 @@ const Btn_dow = ({ id_props }: any) => {
       }).then((result) => {
         if (result.isConfirmed) {
           const items = {
-            user_id: id_props?.id_user?._id,
             product_id: id,
             attribute: id_props?.attribute,
             name_variant: id_props?.value_variant
@@ -34,7 +34,6 @@ const Btn_dow = ({ id_props }: any) => {
     }
     if (id_props.quantity_item > 1) {
       const items = {
-        user_id: id_props?.id_user?._id,
         product_id: id,
         attribute: id_props?.attribute,
         name_variant: id_props?.value_variant
@@ -46,7 +45,11 @@ const Btn_dow = ({ id_props }: any) => {
     <>
       {
         isLoading ?
-          <Button type="button" className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#8722;</Button> :
+          <>
+            <Loading_Overlay />
+            <Button type="button" className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#8722;</Button>
+          </>
+          :
           <Button type="button" onClick={() => dow_quantity(id_props.id_item)} className='border-none bg-[#F5F5FA] px-2 hover:bg-gray-200 duration-200'>&#8722;</Button>
       }
     </>

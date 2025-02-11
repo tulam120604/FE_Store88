@@ -1,32 +1,35 @@
 'use client'
 
-import { Query_Order } from '@/src/app/_lib/Tanstack_Query/Order/Query_order'
+import { Query_Order } from '@/src/app/_lib/Query_APIs/Order/Query_order'
 import React, { useState } from 'react'
 import { Button } from "@/src/app/_Components/ui/Shadcn/button"
 import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image"
 import Link from "next/link"
-import { Mutation_Order } from '@/src/app/_lib/Tanstack_Query/Order/Mutation_order'
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from '@/src/app/_Components/ui/alert-dialog'
+import { Mutation_Order } from '@/src/app/_lib/Query_APIs/Order/Mutation_order'
+import {
+  AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
+  AlertDialogTitle, AlertDialogFooter, AlertDialogAction, AlertDialogCancel
+} from '@/src/app/_Components/ui/alert-dialog'
+import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation_Notification'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DataTable } from '@/src/app/_Components/ui/Tables/data_table'
 import Paginate_order from './paginate_order'
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots'
 import { CircleCheck, CircleEllipsis, PackageOpen, Truck, X } from 'lucide-react'
-import { useCheck_user } from '@/src/app/_lib/Custome_Hooks/User'
-import { Mutation_Notification } from '@/src/app/_lib/Tanstack_Query/Notification/Mutation_Notification'
 import { convert_Slug } from '@/src/app/util/Slug'
+import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth'
 
 const Page_order = () => {
   const [status_item_order, setStatus_item_order] = useState<number>(0);
   const searchParams = useSearchParams();
+  const { data: data_user, isLoading: loading_user } = Infor_user();
   let page = 1;
   if (searchParams.get('_page')) {
     page = Number(searchParams.get('_page'))
   }
   const routing = useRouter();
-  const data_user = useCheck_user();
-  const user_id = data_user?.check_email?._id ?? '';
+  const user_id = data_user?.data?._id ?? '';
   const mutation_order = Mutation_Order('UPDATE_STATUS');
   // send message
   const mutate_notification = Mutation_Notification('ADD');
@@ -57,7 +60,7 @@ const Page_order = () => {
     }
     if (status === 7 && number_order && seller_id) {
       const data_message = {
-        notification_message: `Khách hàng ${data_user?.check_email?.user_name} muốn hủy đơn hàng ${number_order}`,
+        notification_message: `Khách hàng ${data_user?.data?.user_name} muốn hủy đơn hàng ${number_order}`,
         link: id_order,
         sender_id: user_id,
         receiver_id: seller_id
@@ -122,10 +125,11 @@ const Page_order = () => {
   function handle_list_item_status(status: any) {
     setStatus_item_order(status);
   }
-  const data = Query_Order(user_id, page, 10, status_item_order);
+  const {data, isLoading} = Query_Order(page, 10, status_item_order);
   return (
-    <div className='w-full relative pb-4'>
-      <div className='flex hidden_scroll_x z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:px-2 items-center *:bg-none *:text-sm *:py-3 bg-white *:border-b-2 *:border-white *:whitespace-nowrap'>
+    <div className='w-full relative bg-white '>
+      <div className='flex hidden_scroll_x z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4
+      *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:border-white *:whitespace-nowrap top-0'>
         {
           Array.from({ length: 7 }, (_: any, i: number) =>
             <button key={i} onClick={() => handle_list_item_status(i)} className={status_item_order === i ? '!border-gray-900' : 'hover:border-gray-900'}>
@@ -137,18 +141,15 @@ const Page_order = () => {
           )
         }
       </div>
-
-      <div className='pt-16 pl-4'>
-        <div className='fixed z-[2] border top-1/2'>
-        </div>
+      <div className='bg-[#F5F5FA] w-full h-4 absolute top-[54px]'/>
         {
-          data.isLoading && <div className='mt-20'><Loading_Dots /></div>
+          isLoading || loading_user && <div className='mt-20'><Loading_Dots /></div>
         }
         {
-          data?.data?.data_order &&
-            data?.data?.data_order?.docs.length > 0 ?
-            data?.data?.data_order?.docs?.map((item: any) =>
-              <div className='shadow py-2 mb-6 px-4 lg:px-8 bg-white rounded' key={item?._id}>
+          data?.data_order &&
+            data?.data_order?.docs.length > 0 ?
+            data?.data_order?.docs?.map((item: any) =>
+              <div className='shadow py-2 mb-6 px-4 lg:px-8 rounded' key={item?._id}>
                 <span className='px-1 py-2 text-sm'>{status_order(item?.status_item_order)}</span>
                 <div className='*:!border-none *:text-gray-900 -translate-y-12'>
                   <DataTable data={item?.items_order} columns={columns} />
@@ -190,16 +191,15 @@ const Page_order = () => {
               </div>
             )
             :
-            <div className='grid place-items-center translate-y-full'>
+            <div className='grid place-items-center h-[70vh] rounded'>
               <div className='flex flex-col items-center gap-y-6'>
                 <Image width={100} height={100} src='/Images/document_icon.png' alt=''></Image>
-                <span className='flex items-center'>Chưa có đơn hàng nào! <Link className='underline' href={'/products'}>Đi mua ngay</Link></span>
+                <span className='flex items-center'>Chưa có đơn hàng nào!<Link className='underline mx-1' href={'/products'}> Đi mua ngay</Link></span>
               </div>
             </div>
         }
-      </div>
-      {data?.data?.data_order &&
-        <Paginate_order totalPages={data?.data?.data_order?.totalPages} page={data?.data?.data_order?.page} />
+      {data?.data_order &&
+        <Paginate_order totalPages={data?.data_order?.totalPages} page={data?.data_order?.page} />
       }
     </div>)
 }

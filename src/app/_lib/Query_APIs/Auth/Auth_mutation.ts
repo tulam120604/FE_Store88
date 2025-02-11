@@ -3,11 +3,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaValidateRegister } from "@/src/app/(Auth)/validate";
-import { create_Account, granting_premissions, logout, refesh_token, sign_In } from "../../Services/Services_Auth/Authen";
+import { create_Account, set_role_user_to_seller, logout, refesh_token, sign_In } from "../../Services/Services_Auth/Auth";
 import { useCheck_user } from "../../Custome_Hooks/User";
 
 
-type Actions = "LOGIN" | "REGISTER" | "GRANTING_PREMISSIONS" | "LOGOUT" | "REFESH_TOKEN";
+type Actions = "LOGIN" | "REGISTER" | "SET_ROLE_USER_TO_SELLER" | "LOGOUT" | "REFESH_TOKEN";
 
 export function Mutation_Auth({ action }: { action: Actions }) {
     const user = useCheck_user();
@@ -19,7 +19,7 @@ export function Mutation_Auth({ action }: { action: Actions }) {
     const my_form = useForm({
         resolver: yupResolver(schemaValidateRegister)
     });
-    const querry_Client = useQueryClient();
+    const query_Client = useQueryClient();
 
     const { mutate, ...rest } = useMutation({
         mutationFn: async (dataClient: any) => {
@@ -29,16 +29,16 @@ export function Mutation_Auth({ action }: { action: Actions }) {
                     return await sign_In(dataClient);
                 case "REGISTER":
                     return await create_Account(dataClient);
-                case "GRANTING_PREMISSIONS":
-                    return await granting_premissions(dataClient);
+                case "SET_ROLE_USER_TO_SELLER":
+                    return await set_role_user_to_seller(dataClient);
                 case "LOGOUT":
-                    return await logout(dataClient);
-                case "REFESH_TOKEN" :
-                    return await refesh_token(dataClient)
+                    return await logout();
+                case "REFESH_TOKEN":
+                    return await refesh_token()
                 default: return
             }
         }, onSuccess: (res: any) => {
-            querry_Client.invalidateQueries({
+            query_Client.invalidateQueries({
                 queryKey: ['Auth_Key']
             });
             if (res.status === 201 || res.status === 200) {
@@ -50,9 +50,9 @@ export function Mutation_Auth({ action }: { action: Actions }) {
             if (res?.new_token) {
                 const new_localStorage = {
                     ...user,
-                    accessToken : res?.new_token,
+                    accessToken: res?.new_token,
                 }
-                localStorage.setItem('account' , JSON.stringify(new_localStorage))
+                localStorage.setItem('account', JSON.stringify(new_localStorage))
             }
         }
     })

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { add_order, restore_buy_order, update_status_order } from "../../Services/Services_Order/Fn_Order";
+import { add_order, restore_buy_order, update_status_order } from "../../Services/Services_Order/Order";
 import { useState } from "react";
 
 type Actions = 'ADD_and_RESTORE_BUY_ITEM' | 'UPDATE_STATUS' | 'RESTORE_BUY_ITEM'

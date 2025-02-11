@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 
-// list
-export async function list_Categories() {
+// danh sach
+export async function GET_category() {
     try {
         const res = await fetch(`${apiURi}/category`);
         if (!res.ok) {
@@ -18,8 +18,8 @@ export async function list_Categories() {
     }
 }
 
-// detail
-export async function detail_Categories(id: any) {
+// chi tiet
+export async function GET_one_category(id: any) {
     try {
         const res = await fetch(`${apiURi}/category/${id}`);
         if (!res.ok) {
@@ -34,7 +34,7 @@ export async function detail_Categories(id: any) {
 }
 
 // add
-export async function add_Categories(item: any) {
+export async function POST_category(item: any) {
     try {
         const res = await fetch(`${apiURi}/category`, {
             method: 'post',
@@ -57,7 +57,7 @@ export async function add_Categories(item: any) {
 }
 
 // edit
-export async function edit_Categories(item: any) {
+export async function PUT_category(item: any) {
     try {
         const res = await fetch(`${apiURi}/category/${item.id}}`, {
             method: 'put',
@@ -78,7 +78,7 @@ export async function edit_Categories(item: any) {
 }
 
 // remove
-export async function remove_Categories(id: any) {
+export async function DELETE_category(id: any) {
     try {
         const res = await fetch(`${apiURi}/category/${id}}`, {
             method: 'delete',

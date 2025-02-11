@@ -1,27 +1,32 @@
 'use client';
 
-import { useCheck_user } from '@/src/app/_lib/Custome_Hooks/User';
-import { Mutation_Favorite, Query_detail_favorites } from '@/src/app/_lib/Tanstack_Query/Favorites/Query_Feedback';
+import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
+import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
+import { Mutation_Favorite, Query_view_item_favorites } from '@/src/app/_lib/Query_APIs/Favorites/Query_Feedback';
 import { Heart } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function Favorites_Detail_Item({ dataProps }: { dataProps: string | number }) {
     const routing = useRouter();
-    const user = useCheck_user();
-    const detail_item_favorite_by_user = Query_detail_favorites(user?.check_email?._id, dataProps);
+    const { data: data_user, isLoading: loading_user } = Infor_user();
+    const detail_item_favorite_by_user = Query_view_item_favorites(dataProps);
     const mutate_favorite = Mutation_Favorite('ADD_and_REMOVE');
 
     function handle_Favorite(action: string) {
-        if (user?.check_email?._id) {
-            mutate_favorite?.mutate({
-                id_user: user?.check_email?._id,
-                id_item: dataProps,
-                action: action
-            })
+        if (loading_user) {
+            <Loading_Dots />
         }
         else {
-            routing.push('/login')
+            if (data_user?.data?._id) {
+                mutate_favorite?.mutate({
+                    id_item: dataProps,
+                    action: action
+                })
+            }
+            else {
+                routing.push('/login')
+            }
         }
     }
 

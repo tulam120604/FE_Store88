@@ -25,9 +25,12 @@ export async function create_message(data_body: any) {
 };
 
 
-export async function get_notification(receiver_id: string | number) {
+export async function get_notification() {
     try {
-        const res = await fetch(`${apiURi}/get_message_notification/${receiver_id}`);
+        const res = await fetch(`${apiURi}/get_message_notification`, {
+            method: 'get',
+            credentials: 'include'
+        });
         if (!res.ok) {
             return res
         }
@@ -41,8 +44,9 @@ export async function get_notification(receiver_id: string | number) {
 
 export async function send_message(data_body: any) {
     try {
-        const res = await fetch(`${apiURi}/send_notification/${data_body?.sender_id}`, {
+        const res = await fetch(`${apiURi}/send_notification`, {
             method: 'PATCH',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

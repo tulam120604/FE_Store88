@@ -77,7 +77,7 @@ export default function Table_Cart({ dataProps }: any) {
                                                 <span>{item?.product_id?.id_user_seller?.user_name}</span>
                                                 <Link className='text-sm p-1 underline text-gray-700 rounded flex items-center hover:text-black'
                                                     href={`cua-hang-truc-tuyen?id=${item?.product_id?.id_user_seller?._id}`}>
-                                                    <Store className='h-4 text-gray-700'/>Ghé thăm</Link>
+                                                    <Store className='h-4 text-gray-700' />Ghé thăm</Link>
                                             </section>
                                             <Link href={`/${convert_Slug(item?.product_id?.short_name)}.html?p=${item?.product_id?._id}`}>
                                                 <span className='line-clamp-2'>{item?.product_id?.short_name}</span>
@@ -86,7 +86,7 @@ export default function Table_Cart({ dataProps }: any) {
                                         {/* 88 */}
                                         <div className="flex flex-col gap-y-2 md:text-base mb:text-xs lg:w-[150px] w-[70px]">
                                             {
-                                                item?.name_varriant&&
+                                                item?.name_varriant &&
                                                 <div className='flex flex-col text-gray-700'>
                                                     <span className='text-sm mb-1 lg:mb-3'>Phân loại :</span>
                                                     <span className='text-xs'>{item?.name_varriant}</span>
@@ -100,22 +100,27 @@ export default function Table_Cart({ dataProps }: any) {
                                         <span className="md:text-base mb:text-xs text-red-600">{item?.price_item?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
                                         {/* 88 */}
                                         <div className="w-[140px] grid grid-cols-3 *:text-gray-900 gap-x-1 items-center justify-around *:md:text-base *:mb:text-xs px-1 rounded-lg *:font-medium">
-                                            <Btn_dow id_props={{ id_item: item?.product_id?._id, id_user: dataProps?.user, quantity_item: item?.quantity, attribute: item?.name_varriant, value_variant: item?.value_varriant }} />
+                                            <Btn_dow id_props={{ id_item: item?.product_id?._id, quantity_item: item?.quantity, attribute: item?.name_varriant, value_variant: item?.value_varriant }} />
                                             <strong className="cursor-default border py-2 border-gray-300 grid place-items-center rounded">{item?.quantity}</strong>
-                                            <Btn_up id_props={{ item: item, id_user: dataProps?.user }} />
+                                            <Btn_up id_props={{ item: item, }} />
                                         </div>
                                         {/* 88 */}
                                         <span className="md:text-base mb:text-xs text-red-600">{(item?.total_price_item)?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
                                         {/* 88 */}
                                         <div className='w-full flex justify-center'>
-                                            <Remove_Item_Cart id_props={{ item: item?._id, id_user: dataProps?.user }} />
+                                            <Remove_Item_Cart id_props={{ item: item?._id }} />
                                         </div>
                                     </div>
                                 )
                             })
                         }
                     </>) :
-                        <div className='flex items-center whitespace-nowrap my-4'>Chưa có sản phẩm nào trong giỏ ! <Link className='underline' href={'/products'}>Mua ngay</Link></div>}
+                        <div className='grid place-items-center py-5'>
+                            <div className='flex flex-col items-center gap-y-6 my-auto'>
+                                <Image width={100} height={100} src='/Images/document_icon.png' alt='store88' />
+                                <span className='flex items-center'>Không có sản phẩm nào trong giỏ hàng ! <Link className='underline' href={'/san-pham'}>Tìm ngay</Link></span>
+                            </div>
+                        </div>}
                 </>)
             }
         </div>
