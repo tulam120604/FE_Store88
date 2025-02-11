@@ -16,8 +16,6 @@ const Header = () => {
     const routing = useRouter();
     const pathName = usePathname();
     const [account, setAccount] = useState<string | undefined>('Tài khoản');
-    const isActivePathUser = pathName?.startsWith('/thong-tin-tai-khoan');
-    const isActivePathCart = pathName?.startsWith('/gio-hang');
     const [data_localStorage] = useLocalStorage('account', undefined);
 
     useEffect(() => {
@@ -43,9 +41,9 @@ const Header = () => {
     }, [])
     console.count('re-render:');
     // catch event f5 or reload page
-    if (window.onload) {
-        setAccount(' ');
-    }
+    // if (window.onload) {
+    //     setAccount(' ');
+    // }
 
     function back_to_home() {
         if (pathName === '/') {
