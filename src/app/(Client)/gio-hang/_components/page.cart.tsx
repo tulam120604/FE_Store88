@@ -129,7 +129,7 @@ const Cart = () => {
 
   return (
     <Suspense fallback={<LoadingCart />}>
-      <div className="max-w-[1440px] w-[95vw] mx-auto pb-8">
+      <div className="max-w-[1440px] w-[95vw] mx-auto lg:pb-8 overflow-hidden">
         {
           isLoading || loading_user ?
             <div className='max-w-[1440px] mx-auto w-[95vw] h-full'>
@@ -146,7 +146,7 @@ const Cart = () => {
               <Table_Cart dataProps={dataProps} />
               {
                 dataProps?.data?.items?.length > 0 &&
-                <div className="w-full rounded-lg flex flex-col lg:flex-row items-center lg:justify-between justify-center bg-white py-2 px-4 lg:p-4 gap-x-4 sticky bottom-0 z-[10] shadow-[0_-5px_20px_-15px_rgba(0,0,0,0.3)] mt-8">
+                <div className="w-full rounded-lg flex flex-col lg:flex-row lg:items-center lg:justify-between justify-center bg-white py-2 px-4 lg:p-4 gap-x-4 gap-y-1 sticky bottom-0 z-[10] shadow-[0_-5px_20px_-15px_rgba(0,0,0,0.3)] mt-8">
                   <span className="text-gray-800 whitespace-nowrap text-sm lg:text-base">Số lượng ({data_item_checkked?.length} sản phẩm)</span>
                   <Button onClick={next_page_payment} type='button' className="flex gap-x-4 mt-2 lg:mt-0">
                     <span>Tiến hành thanh toán</span>

@@ -8,10 +8,10 @@ const Layout_Home = () => {
   // console.log(isClient);
   return (
     <div className="flex justify-between max-w-[1440px] mx-auto w-[95vw] py-4">
-      <section className="w-[16%]">
+      <section className="hidden lg:block w-[16%]">
         <Category />
       </section>
-      <div className="w-[82.5%]">
+      <div className="lg:w-[82.5%]">
         <Banner />
         <Products_Home />
       </div>

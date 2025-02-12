@@ -1,6 +1,6 @@
 import React from 'react';
-import Page_create_seller from '../danh-gia/page';
 import type { Metadata } from 'next';
+import Page_create_seller from './page.create_seller';
 
 export const metadata : Metadata = {
     title : 'Đăng kí nhà phân phối'

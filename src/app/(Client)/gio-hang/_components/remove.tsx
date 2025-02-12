@@ -16,14 +16,13 @@ const Remove_Item_Cart = ({ id_props }: any) => {
   }
 
   return (
-
     <AlertDialog>
       <AlertDialogTrigger>
         <Trash2 className='text-red-500 h-5 hover:scale-105 duration-200'/>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Xác nhận xóa sản phẩm trong giỏ?</AlertDialogTitle>
+          <AlertDialogTitle className="text-gray-700 font-normal">Xác nhận xóa sản phẩm trong giỏ?</AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Hủy</AlertDialogCancel>
@@ -31,8 +30,6 @@ const Remove_Item_Cart = ({ id_props }: any) => {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-
-
   )
 }
 
