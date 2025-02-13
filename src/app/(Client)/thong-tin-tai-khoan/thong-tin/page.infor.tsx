@@ -8,6 +8,7 @@ import Address_component from '../_components/address';
 import { eventEmit } from '@/src/app/_Components/ui/Header/Event_emit';
 import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
 import User_address from './list_address';
+import Page_infor_mobile from './page.infor.mobile';
 
 const Page_infor = () => {
   const form_create_address = useRef<HTMLDivElement>(null);
@@ -41,7 +42,8 @@ const Page_infor = () => {
           </div>
           :
           <>
-            <div className='flex justify-between'>
+            {/* desktop */}
+            <div className='hidden lg:flex justify-between'>
               <div className='flex flex-col gap-y-1 border-b pb-4 lg:pb-8 w-full'>
                 <span className='lg:text-xl'>Hồ sơ của tôi</span>
                 <span className='text-sm text-gray-700 font-sans'>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
@@ -54,7 +56,7 @@ const Page_infor = () => {
                     <Link className='lg:text-sm text-xs underline whitespace-nowrap' href={'/trung-tam-dieu-khien/bang-dieu-khien/tong-quan'}>Trung tâm điều khiển</Link>
               }
             </div>
-            <table className='lg:w-[80%] mx-auto'>
+            <table className='hidden lg:block lg:w-[80%] mx-auto'>
               <tbody>
                 <tr className='*:my-6'>
                   <td className='flex items-center justify-between lg:text-sm text-xs'>
@@ -79,6 +81,11 @@ const Page_infor = () => {
                 </tr>
               </tbody>
             </table>
+            {/* mobile */}
+            <div className='lg:hidden'>
+              <Page_infor_mobile data_user={data_user}/>
+            </div>
+            {/* --- */}
             <section className='flex items-center justify-between my-5 py-5 border-y'>
               <span className='lg:text-xl text-sm'>Địa chỉ</span>
               <Button className='lg:text-sm text-xs px-2 lg:py-2 py-1.5 h-auto bg-[#597BFE] hover:bg-[#6f8bfc]' onClick={handle_Show_Form_Create_Address}>Thêm địa chỉ +</Button>

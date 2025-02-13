@@ -19,9 +19,11 @@ import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots'
 import { CircleCheck, CircleEllipsis, PackageOpen, Truck, X } from 'lucide-react'
 import { convert_Slug } from '@/src/app/util/Slug'
 import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth'
+import { useStoreStatusItemOrder } from '@/src/app/Zustand/Store'
 
 const Page_order = () => {
-  const [status_item_order, setStatus_item_order] = useState<number>(0);
+  const { status } = useStoreStatusItemOrder();
+  const [status_item_order, setStatus_item_order] = useState<number>(status);
   const searchParams = useSearchParams();
   const { data: data_user, isLoading: loading_user } = Infor_user();
   let page = 1;
@@ -29,10 +31,10 @@ const Page_order = () => {
     page = Number(searchParams.get('_page'))
   }
   const routing = useRouter();
-  const user_id = data_user?.data?._id ?? '';
   const mutation_order = Mutation_Order('UPDATE_STATUS');
   // send message
   const mutate_notification = Mutation_Notification('ADD');
+  const { data, isLoading } = Query_Order(page, 10, status_item_order);
   function status_order(item: any) {
     switch (+item) {
       case 1:
@@ -52,7 +54,7 @@ const Page_order = () => {
   }
   function cancel_order(id_order: string | number, status: number, number_order?: string | number, seller_id?: string | number) {
     const dataClient = {
-      id_user: user_id,
+      id_user: data_user?.data?._id,
       item: {
         order_id: id_order,
         status_item_order: status
@@ -62,7 +64,7 @@ const Page_order = () => {
       const data_message = {
         notification_message: `Khách hàng ${data_user?.data?.user_name} muốn hủy đơn hàng ${number_order}`,
         link: id_order,
-        sender_id: user_id,
+        sender_id: data_user?.data?._id,
         receiver_id: seller_id
       }
       mutate_notification?.mutate(data_message);
@@ -73,7 +75,7 @@ const Page_order = () => {
     sessionStorage.removeItem('item_order')
     const restore_buy_item_order = {
       items: Object.values(item?.items_order),
-      user_id: user_id,
+      user_id: data_user?.data?._id,
       action: 'restore_buy_item',
       id_order: item?._id,
     };
@@ -125,7 +127,6 @@ const Page_order = () => {
   function handle_list_item_status(status: any) {
     setStatus_item_order(status);
   }
-  const {data, isLoading} = Query_Order(page, 10, status_item_order);
   return (
     <div className='w-full relative bg-white '>
       <div className='flex hidden_scroll_x z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4
@@ -141,63 +142,63 @@ const Page_order = () => {
           )
         }
       </div>
-      <div className='bg-[#F5F5FA] w-full h-4 absolute top-[54px]'/>
-        {
-          isLoading || loading_user && <div className='mt-20'><Loading_Dots /></div>
-        }
-        {
-          data?.data_order &&
-            data?.data_order?.docs.length > 0 ?
-            data?.data_order?.docs?.map((item: any) =>
-              <div className='shadow py-2 mb-6 px-4 lg:px-8 rounded' key={item?._id}>
-                <span className='px-1 py-2 text-sm'>{status_order(item?.status_item_order)}</span>
-                <div className='*:!border-none *:text-gray-900 -translate-y-12'>
-                  <DataTable data={item?.items_order} columns={columns} />
-                </div>
-                <div key={+item?._id + Math.random()} className='flex justify-between items-center -mt-4'>
-                  <span className='text-sm'>Hình thức: {(item?.payment_method === 'COD' ? 'Thanh toán khi nhận hàng' : 'Thanh toán trực tuyến')}</span>
-                  {
-                    (+item?.status_item_order === 6 || +item?.status_item_order === 5) ?
-                      <Button onClick={() => restore_by_order(item)}
-                        className="px-3 bg-green-600 hover:!bg-green-700 mt-2 py-2 text-sm rounded text-white">Mua lại</Button> :
-                      <AlertDialog>
-                        {
-                          (+item?.status_item_order === 1) || (+item?.status_item_order === 2) ? <AlertDialogTrigger className="px-3 mt-2 py-2 text-sm bg-red-500 hover:bg-red-700 duration-200 rounded text-white">
-                            {
-                              (+item?.status_item_order === 1) ? 'Hủy' : (+item?.status_item_order === 2) && 'Yêu cầu hủy'
-                            }
-                          </AlertDialogTrigger> :
-                            <Button className="bg-[#11182755] text-gray-900 hover:!bg-[#11182755] cursor-not-allowed">
-                              Hủy
-                            </Button>
-                        }
-
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle className='text-sm'>Xác nhận hủy đơn hàng {item?.code_order}</AlertDialogTitle>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Hủy</AlertDialogCancel>
-                            {
-                              (+item?.status_item_order === 1) ?
-                                <AlertDialogAction className="bg-red-500 hover:!bg-red-700" onClick={() => cancel_order(item?._id, 6)}>Xác nhận</AlertDialogAction> :
-                                (+item?.status_item_order === 2) &&
-                                <AlertDialogAction className="bg-red-500 hover:!bg-red-700" onClick={() => cancel_order(item?._id, 7, item?.code_order, item?.items_order[0]?.product_id?.id_user_seller)}>Xác nhận</AlertDialogAction>}
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                  }
-                </div>
+      <div className='bg-[#F5F5FA] w-full h-4 absolute top-[54px]' />
+      {
+        isLoading || loading_user && <div className='mt-20'><Loading_Dots /></div>
+      }
+      {
+        data?.data_order &&
+          data?.data_order?.docs.length > 0 ?
+          data?.data_order?.docs?.map((item: any) =>
+            <div className='shadow py-2 mb-6 px-4 lg:px-8 rounded' key={item?._id}>
+              <span className='px-1 py-2 text-sm'>{status_order(item?.status_item_order)}</span>
+              <div className='*:!border-none *:text-gray-900 -translate-y-12'>
+                <DataTable data={item?.items_order} columns={columns} />
               </div>
-            )
-            :
-            <div className='grid place-items-center h-[70vh] rounded'>
-              <div className='flex flex-col items-center gap-y-6'>
-                <Image width={100} height={100} src='/Images/document_icon.png' alt=''></Image>
-                <span className='flex items-center'>Chưa có đơn hàng nào!<Link className='underline mx-1' href={'/products'}> Đi mua ngay</Link></span>
+              <div key={+item?._id + Math.random()} className='flex justify-between items-center -mt-4'>
+                <span className='text-sm'>Hình thức: {(item?.payment_method === 'COD' ? 'Thanh toán khi nhận hàng' : 'Thanh toán trực tuyến')}</span>
+                {
+                  (+item?.status_item_order === 6 || +item?.status_item_order === 5) ?
+                    <Button onClick={() => restore_by_order(item)}
+                      className="px-3 bg-green-600 hover:!bg-green-700 mt-2 py-2 text-sm rounded text-white">Mua lại</Button> :
+                    <AlertDialog>
+                      {
+                        (+item?.status_item_order === 1) || (+item?.status_item_order === 2) ? <AlertDialogTrigger className="px-3 mt-2 py-2 text-sm bg-red-500 hover:bg-red-700 duration-200 rounded text-white">
+                          {
+                            (+item?.status_item_order === 1) ? 'Hủy' : (+item?.status_item_order === 2) && 'Yêu cầu hủy'
+                          }
+                        </AlertDialogTrigger> :
+                          <Button className="bg-[#11182755] text-gray-900 hover:!bg-[#11182755] cursor-not-allowed">
+                            Hủy
+                          </Button>
+                      }
+
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle className='text-sm'>Xác nhận hủy đơn hàng {item?.code_order}</AlertDialogTitle>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Hủy</AlertDialogCancel>
+                          {
+                            (+item?.status_item_order === 1) ?
+                              <AlertDialogAction className="bg-red-500 hover:!bg-red-700" onClick={() => cancel_order(item?._id, 6)}>Xác nhận</AlertDialogAction> :
+                              (+item?.status_item_order === 2) &&
+                              <AlertDialogAction className="bg-red-500 hover:!bg-red-700" onClick={() => cancel_order(item?._id, 7, item?.code_order, item?.items_order[0]?.product_id?.id_user_seller)}>Xác nhận</AlertDialogAction>}
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                }
               </div>
             </div>
-        }
+          )
+          :
+          <div className='grid place-items-center h-[70vh] rounded'>
+            <div className='flex flex-col items-center gap-y-6'>
+              <Image width={100} height={100} src='/Images/document_icon.png' alt=''></Image>
+              <span className='flex items-center'>Chưa có đơn hàng nào!<Link className='underline mx-1' href={'/products'}> Đi mua ngay</Link></span>
+            </div>
+          </div>
+      }
       {data?.data_order &&
         <Paginate_order totalPages={data?.data_order?.totalPages} page={data?.data_order?.page} />
       }

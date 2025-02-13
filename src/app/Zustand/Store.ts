@@ -45,3 +45,14 @@ export const useStoreAddToCart = create<IStoreAddToCart>((set) => ({
 //     setError: ((error: boolean) => set({ isError: error })),
 // }))
 // export const useStore
+
+// store and action status item order
+interface IStoreStatusItemOrder {
+    status: number;
+    setStatus: (value: any) => void,
+}
+
+export const useStoreStatusItemOrder = create<IStoreStatusItemOrder>((set) => ({
+    status: 0,
+    setStatus: ((value: any) => set({ status: value })),
+}))

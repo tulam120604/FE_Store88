@@ -73,14 +73,19 @@ const Header = () => {
     }
 
     return (<>
-        <header className="w-full z-[2000] duration-300 py-5 lg:bg-white bg-[#105EF3] sticky lg:top-0 -top-0.5 lg:relative">
+        <header className="w-full z-[2000] duration-300 py-5 lg:bg-white bg-[#105EF3] sticky top-0 lg:relative overflow-hidden">
             {/* logo, search and cart */}
             <div className="relative mx-auto max-w-[1440px] w-[95vw] flex justify-between *:flex *:items-center lg:gap-x-20 gap-x-5 items-center 
             bg-white rounded-md p-3">
+                {/* logo */}
                 <button onClick={back_to_home} className='!hidden lg:!block'>
                     <Image width={200} height={100} className='w-[150px] max-h-10'
                         src={'https://res.cloudinary.com/tulam120604/image/upload/v1736088077/k3jhx9ywkmepcp9tz1b1.png'} alt='Store88' />
                 </button>
+                {/* logo mobile */}
+                <div className='lg:hidden grid place-content-center z-[-1] -top-10 absolute overflow-hidden w-full'>
+                    <span className='font-sans font-extrabold text-yellow-300 text-[50px]'>STORE88</span>
+                </div>
                 {/* search form */}
                 <div className='lg:absolute lg:w-[60%] w-full lg:left-1/2 lg:-translate-x-1/2 z-[7]'>
                     <Search_Component_Client />

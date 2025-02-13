@@ -6,13 +6,10 @@ import Loading_Skeleton from '@/src/app/_Components/Loadings/Loading_Skeleton';
 const Banner = () => {
   return (
     <Suspense fallback={<Loading_Skeleton number_elements={2} />}>
-      <div className="grid md:grid-cols-[60%_39%] grid-cols-1 gap-y-2 justify-between p-4 bg-white rounded-lg">
+      <div className="grid md:grid-cols-[60%_39%] grid-cols-1 gap-y-2 justify-between lg:p-4 lg:bg-white rounded-lg">
         {/* slide */}
         <div className='*:cursor-pointer'>
           <Slide_show>
-            <div className="relative flex flex-col *:flex *:flex-col h-[150px] lg:h-[350px]">
-              <Image width={2000} height={1000} className='w-full h-full top-0 rounded-lg left-0' src="/Images/banner3.jpg" alt='Loading...' />
-            </div>
             {/* 888 */}
             <div className="relative flex flex-col *:flex *:flex-col h-[150px] lg:h-[350px]">
               <Image width={2000} height={1000} className='w-full h-full top-0 rounded-lg left-0' src="/Images/voucher_4.jpg" alt='Loading...' />
@@ -28,6 +25,10 @@ const Banner = () => {
             {/* 888 */}
             <div className="relative flex flex-col *:flex *:flex-col h-[150px] lg:h-[350px]">
               <Image width={2000} height={1000} className='w-full h-full top-0 rounded-lg left-0' src="/Images/voucher_3.jpg" alt='Loading...' />
+            </div>
+            {/* 888 */}
+            <div className="relative flex flex-col *:flex *:flex-col h-[150px] lg:h-[350px]">
+              <Image width={2000} height={1000} className='w-full h-full top-0 rounded-lg left-0' src="/Images/banner3.jpg" alt='Loading...' />
             </div>
           </Slide_show>
         </div>
