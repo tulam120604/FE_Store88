@@ -10,7 +10,7 @@ import Infor_Detail_Product from './_components/Infor_detail';
 import Related_Product from './_components/Related_Product';
 import { get_feedBack_in_item } from '../../_lib/Services/Service_Feedback/Feedback';
 import type { Metadata } from 'next';
-import { GET_one_category } from '../../_lib/Services/Services_Items/Category';
+import { GET_product_by_category } from '../../_lib/Services/Services_Items/Category';
 
 export async function generateMetadata(
   { searchParams }: any,
@@ -26,7 +26,7 @@ const page = async ({ searchParams }: any) => {
   //  const isClient = typeof window !== 'undefined';
   // console.log(isClient);
   const data = await GET_detail_item(searchParams?.p);
-  const data_category = await GET_one_category(data?.category_id)
+  const data_category = await GET_product_by_category(data?.category_id)
   revalidatePath('/products/[detail_product]', 'page');
 
   // get feedback

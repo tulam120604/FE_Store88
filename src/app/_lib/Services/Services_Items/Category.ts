@@ -19,7 +19,7 @@ export async function GET_category() {
 }
 
 // chi tiet
-export async function GET_one_category(id: any) {
+export async function GET_product_by_category(id: any) {
     try {
         const res = await fetch(`${apiURi}/category/${id}`);
         if (!res.ok) {

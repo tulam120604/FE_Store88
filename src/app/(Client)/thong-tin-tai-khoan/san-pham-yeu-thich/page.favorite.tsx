@@ -10,7 +10,7 @@ import React from 'react'
 const Page_favorite = () => {
   const { data, isLoading, isError } = List_favorites();
   return (
-    <div className='ml-10 bg-white px-6 py-4 lg:py-8 rounded'>
+    <div className='bg-white px-6 py-4 lg:py-8 rounded'>
       {isError ? (<><div className='grid place-items-center'>
         <div className='flex flex-col gap-y-2'>
           Ôi hỏng!

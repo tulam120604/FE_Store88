@@ -1,16 +1,16 @@
 'use client';
 
 import { GET_detail_item_dashboard, GET_item_dashboard, GET_recycle_item } from "../../Services/Services_Items/Product";
-import { GET_one_category, GET_category } from "../../Services/Services_Items/Category";
+import { GET_product_by_category, GET_category } from "../../Services/Services_Items/Category";
 import { useQuery } from "@tanstack/react-query";
 
 // danh muc
-export function Query_Category(id?: string | number | undefined) {
+export function Query_Category(id?: string | number) {
     const key = id ? ['Category_Key', id] : ['Category_Key'];
     const { data, ...rest } = useQuery({
         queryKey: key,
         queryFn: async () => {
-            return id ? await GET_one_category(id) : await GET_category();
+            return id ? await GET_product_by_category(id) : await GET_category();
         }
     })
     return { data, ...rest }

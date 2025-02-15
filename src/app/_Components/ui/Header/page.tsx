@@ -141,6 +141,7 @@ const Header = () => {
                     <Tag className='w-5 h-5' fill='#0A68FF' color='#fff' />
                     <span>Giá siêu rẻ</span>
                 </div>
+
                 {/* 5 */}
                 <div className='px-5'>
                     <Truck className='w-5 h-5' color='#0A68FF' />
@@ -148,8 +149,7 @@ const Header = () => {
                 </div>
             </section>
         </div>
-
-        <div className='fixed bg-white bottom-0 lg:!hidden w-screen z-[2000] border-t'>
+        <div className='fixed border-t bottom-0 lg:!hidden w-screen z-[2000]'>
             <Header_mobile dataProps={{ account }} />
         </div>
     </>
