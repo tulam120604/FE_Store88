@@ -20,7 +20,7 @@ export async function create_message(data_body: any) {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi server rồi đại vương ơi!'
+        return error
     }
 };
 
@@ -37,7 +37,7 @@ export async function get_notification() {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi server rồi đại vương ơi!'
+        return error
     }
 }
 
@@ -57,6 +57,6 @@ export async function send_message(data_body: any) {
         }
         return res
     } catch (error) {
-        return error || 'Lỗi server rồi đại vương ơi!'
+        return error
     }
 };

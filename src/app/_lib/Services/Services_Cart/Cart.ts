@@ -14,8 +14,7 @@ export async function get_list_Cart() {
         const data = await res.json();
         return data.cart
     } catch (error) {
-        console.error(error);
-        return (error || '<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }
 
@@ -36,8 +35,7 @@ export async function add_to_cart(item: any) {
         await res.json();
         return res;
     } catch (error) {
-        console.error(error);
-        return ('<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }
 
@@ -58,8 +56,7 @@ export async function up_quantity(item: any) {
         await res.json();
         return res;
     } catch (error) {
-        console.error(error);
-        return ('<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }
 
@@ -80,8 +77,7 @@ export async function dow_quantity(item: any) {
         await res.json();
         return res
     } catch (error) {
-        console.error(error);
-        return ('<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }
 
@@ -102,8 +98,7 @@ export async function checked_item_cart(item: any) {
         await res.json();
         return res
     } catch (error) {
-        console.error(error);
-        return ('<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }
 
@@ -123,8 +118,7 @@ export async function remove_item_cart(item: any) {
         };
         return res
     } catch (error) {
-        console.error(error);
-        return ('<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }
 
@@ -145,7 +139,6 @@ export async function remove_all_item_cart(item: any) {
         await res.json();
         return res
     } catch (error) {
-        console.error(error);
-        return ('<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }

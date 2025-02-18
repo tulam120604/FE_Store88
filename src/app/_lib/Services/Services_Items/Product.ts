@@ -15,7 +15,7 @@ export async function GET_items_client(page: number, count_item: number, bestSel
         const data = await res.json();
         return data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -49,7 +49,7 @@ export async function GET_detail_item(id: number | string) {
         const data = await res.json();
         return data.data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -64,7 +64,7 @@ export async function GET_detail_item_dashboard(id: number | string) {
         const data = await res.json();
         return data.data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -83,7 +83,7 @@ export async function GET_item_dashboard(page: number, limit_item: number) {
         const data = await res.json();
         return data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -110,7 +110,7 @@ export async function POST_item(item: any) {
         const data = await res.text();
         return data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -130,7 +130,7 @@ export async function REMOVE_item(item: any) {
         await res.json();
         console.log("success delete!")
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -154,7 +154,7 @@ export async function GET_recycle_item(page?: Number) {
         const { data } = await res.json();
         return data;
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -178,7 +178,7 @@ export async function RESTORE_item(dataClient: any) {
         }
         console.log("Restore Success !");
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 // xoa item vinh vien ( no restore )
@@ -199,7 +199,7 @@ export async function DESTROY_item(dataClient: any) {
         }
         console.log("Restore Success !");
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -224,7 +224,7 @@ export async function PUT_item_dashboard(dataClient?: any) {
         }
         return res
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 };
 
@@ -243,7 +243,7 @@ export async function GET_item_by_category(page?: any, id_category?: any) {
         const data = await res.json();
         return data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -262,7 +262,7 @@ export async function SEARCH_item(item?: any) {
         const { data } = await res.json();
         return data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }
 
@@ -277,6 +277,6 @@ export async function GET_item_by_seller(id_seller?: string | number) {
         const data = await res.json();
         return data
     } catch (error) {
-        return (error || "Lỗi rồi đại vương ơi!");
+        return error
     }
 }

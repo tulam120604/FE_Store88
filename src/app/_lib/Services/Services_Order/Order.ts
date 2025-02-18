@@ -21,7 +21,7 @@ export async function add_order(item: any) {
         await res.json();
         return res
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!';
+        return error
     }
 };
 
@@ -41,7 +41,7 @@ export async function get_order_user(page: number, limit: number, status_item_or
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!';
+        return error
     }
 }
 
@@ -61,7 +61,7 @@ export async function get_all_order() {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!';
+        return error
     }
 }
 
@@ -99,7 +99,7 @@ export async function update_status_order(dataClient: { item: any, action?: stri
         await res.json();
         return res
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!';
+        return error
     }
 }
 
@@ -124,7 +124,7 @@ export async function restore_buy_order(dataClient: any) {
         await res.json();
         return res
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!';
+        return error
     }
 }
 
@@ -139,7 +139,7 @@ export async function get_item_order(id_item: string | number) {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!';
+        return error
     }
 }
 
@@ -156,6 +156,6 @@ export async function detail_order(id: string) {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!';
+        return error
     }
 }

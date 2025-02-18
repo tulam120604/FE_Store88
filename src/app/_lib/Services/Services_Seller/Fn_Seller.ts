@@ -19,6 +19,6 @@ export async function create_seller(data_body : any) {
         }
         return res
     } catch (error){
-        return error || 'Lỗi server rồi đại vương ơi!'
+        return error
     }
 }

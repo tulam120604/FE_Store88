@@ -14,7 +14,7 @@ export async function GET_category() {
         const data = await res.json();
         return data
     } catch (error) {
-        return ('<span>Lỗi rồi đại vương ơi!!</span>')
+        return error
     }
 }
 
@@ -29,7 +29,7 @@ export async function GET_product_by_category(id: any) {
         const { data } = await res.json();
         return data
     } catch (error) {
-        return error || '<span>Lỗi rồi đại vương ơi!!</span>'
+        return error
     }
 }
 
@@ -52,7 +52,7 @@ export async function POST_category(item: any) {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || '<span>Lỗi rồi đại vương ơi!!</span>'
+        return error
     }
 }
 
@@ -73,7 +73,7 @@ export async function PUT_category(item: any) {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || '<span>Lỗi rồi đại vương ơi!!</span>'
+        return error
     }
 }
 
@@ -90,6 +90,6 @@ export async function DELETE_category(id: any) {
         const { data } = await res.json();
         return data
     } catch (error) {
-        return error || '<span>Lỗi rồi đại vương ơi!!</span>'
+        return error
     }
 }

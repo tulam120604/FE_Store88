@@ -6,46 +6,28 @@ import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { Get_Items_Cart } from '@/src/app/_lib/Query_APIs/Cart/query';
 import { Search_Component_Client } from '../../Forms/search';
-import { eventEmit } from './Event_emit';
 import { BadgeCheck, BadgeDollarSign, CircleUser, RefreshCcwDot, ShoppingBag, Tag, Truck } from 'lucide-react';
 import { useStoreAddToCart } from '@/src/app/Zustand/Store';
-import { useLocalStorage } from '@/src/app/_lib/Custome_Hooks/UseStorage';
 import Header_mobile from './header_mobile';
+import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
 
 const Header = () => {
     const { isVisible } = useStoreAddToCart();
     const routing = useRouter();
     const pathName = usePathname();
-    const [account, setAccount] = useState<string | undefined>('Tài khoản');
-    const [data_localStorage] = useLocalStorage('account', undefined);
-
-    useEffect(() => {
-        if (data_localStorage) {
-            setAccount(data_localStorage)
-        }
-    }, [data_localStorage]);
+    const { data, isLoading, isError } = Infor_user();
 
     // cart :
     function handleCart() {
-        if (account === 'Tài khoản') {
-            routing.push('/dang-nhap')
+        if (data?.data?.user_name) {
+            routing.push('/gio-hang');
         }
         else {
-            routing.push('/gio-hang');
+            routing.push('/dang-nhap')
         }
     };
 
-    useEffect(() => {
-        eventEmit.on('log_out', (status: boolean) => {
-            status && setAccount('Tài khoản')
-        })
-    }, [])
     console.count('re-render:');
-    // catch event f5 or reload page
-    // if (window.onload) {
-    //     setAccount(' ');
-    // }
-
     function back_to_home() {
         if (pathName === '/') {
             window.location.reload();
@@ -90,28 +72,31 @@ const Header = () => {
                 <div className='lg:absolute lg:w-[60%] w-full lg:left-1/2 lg:-translate-x-1/2 z-[7]'>
                     <Search_Component_Client />
                 </div>
-
-                <div className="gap-x-2 flex items-center *:h-full">
-                    <Link href={(account === 'Tài khoản') ? '/dang-nhap' : '/thong-tin-tai-khoan/thong-tin'} className='!hidden 
+                {
+                    (!isLoading && !isError) &&
+                    <div className="gap-x-2 flex items-center *:h-full">
+                        <Link href={data?.data?.user_name ? '/thong-tin-tai-khoan/thong-tin' : '/dang-nhap'} className='!hidden 
                     lg:!flex items-center gap-x-2 hover:bg-[#E2EDFF] rounded duration-200 py-2 px-3 cursor-pointer whitespace-nowrap'>
-                        <CircleUser color='#0A68FF' />
-                        <span className='text-[#0A68FF] text-sm mt-0.5'>{account}</span>
-                    </Link>
-                    {/* cart */}
-                    <div className={`relative group cursor-pointer`}>
-                        <button onClick={handleCart} className='z-[1] relative hover:bg-[#E2EDFF] rounded duration-200 p-2' >
-                            <ShoppingBag className='w-5 h-5 ' color='#0A68FF' />
-                            <Count_Cart />
-                            {/* animation add to cart */}
-                            {
-                                isVisible &&
-                                <div className='animation_add_cart absolute w-4 h-4 lg:w-8 lg:h-8 rounded-full'>
-                                    <Image width={40} height={40} className='rounded-full' src={isVisible} alt='.' />
-                                </div>
-                            }
-                        </button>
+                            <CircleUser color='#0A68FF' />
+                            <span className='text-[#0A68FF] text-sm mt-0.5'>{data?.data?.user_name ?
+                                data?.data?.user_name : 'Đăng nhập'}</span>
+                        </Link>
+                        {/* cart */}
+                        <div className={`relative group cursor-pointer`}>
+                            <button onClick={handleCart} className='z-[1] relative hover:bg-[#E2EDFF] rounded duration-200 p-2' >
+                                <ShoppingBag className='w-5 h-5 ' color='#0A68FF' />
+                                <Count_Cart />
+                                {/* animation add to cart */}
+                                {
+                                    isVisible &&
+                                    <div className='animation_add_cart absolute w-4 h-4 lg:w-8 lg:h-8 rounded-full'>
+                                        <Image width={40} height={40} className='rounded-full' src={isVisible} alt='.' />
+                                    </div>
+                                }
+                            </button>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </header>
 
@@ -150,7 +135,7 @@ const Header = () => {
             </section>
         </div>
         <div className='fixed border-t bottom-0 lg:!hidden w-screen z-[2000]'>
-            <Header_mobile dataProps={{ account }} />
+            <Header_mobile dataProps={{ account: data?.data?.user_name }} />
         </div>
     </>
     )
