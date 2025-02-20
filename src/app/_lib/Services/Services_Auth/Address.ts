@@ -13,7 +13,7 @@ export async function get_address() {
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!'
+        return error
     }
 }
 
@@ -38,7 +38,7 @@ export async function create_address(item: { user_id: string | number, about_add
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!'
+        return error
     }
 }
 
@@ -58,7 +58,7 @@ export async function edit_address(item: { id_user: string | number, address: st
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!'
+        return error
     }
 }
 
@@ -74,7 +74,7 @@ export async function remove_address(dataClient: { id_address: string | number }
         const data = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!'
+        return error
     }
 }
 
@@ -94,7 +94,7 @@ export async function update_default_address(dataClient: { id_address?: string |
         };
         return res;
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!'
+        return error
     }
 }
 
@@ -109,6 +109,6 @@ export async function get_provinces() {
         const { data } = await res.json();
         return data
     } catch (error) {
-        return error || 'Lỗi rồi đại vương ơi!'
+        return error
     }
 }

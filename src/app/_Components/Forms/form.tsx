@@ -4,17 +4,19 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '../ui/Tables/button';
-import Link from 'next/link';
-import Form_category from './form_category';
+import Form_add_category from './form_category';
 import { CircleMinus } from 'lucide-react';
 import { useCustome_Hooks_Form } from '../../_lib/Custome_Hooks/MyForm';
 import Loading_Dots from '../Loadings/Loading_Dots';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import Form_variant from './form_variant';
+import { useRouter } from 'next/navigation';
 
 
 const MyForm: React.FC<any> = ({ mode }: any) => {
-    const { my_Form, submitForm, isLoading, loading, data_Category, data_one_item } = useCustome_Hooks_Form({ mode });
+    const router = useRouter();
+    const { my_Form, submitForm, isLoading, loading, data_Category, data_detail_product, filed_form_data }
+        = useCustome_Hooks_Form({ mode });
     const [change_img, setChange_img] = useState([]);
     const [images, setImages] = useState<any[]>([]);
     const [category_form, setCategory_form] = useState<boolean>(false);
@@ -30,13 +32,13 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
     }]);
     useEffect(() => {
         if (mode) {
-            if (data_one_item?.data) {
-                if (data_one_item?.data?.gallery) {
-                    setChange_img(data_one_item?.data?.gallery)
-                    setImages(data_one_item?.data?.gallery);
+            if (data_detail_product?.data) {
+                if (data_detail_product?.data?.gallery) {
+                    setChange_img(data_detail_product?.data?.gallery)
+                    setImages(data_detail_product?.data?.gallery);
                 }
                 let data_attr_detail;
-                if (data_one_item?.data?.variant) {
+                if (data_detail_product?.data?.variant) {
                     data_attr_detail = my_Form.getValues()?.variant?.variants?.map((item: any) => ({
                         attribute: item?.attribute,
                         value_variant: item?.value_varriant
@@ -47,9 +49,9 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
                     setVariant([])
                 }
             }
+            setStatusOptionsCategory(data_detail_product?.data?.category_id?.category_name)
         }
-    }, [mode, data_one_item?.data]);
-
+    }, [mode, data_detail_product?.data, my_Form]);
     function handle_category() {
         setCategory_form(!category_form);
     }
@@ -106,7 +108,6 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
             }])
         }
     }, [mode, my_Form, loading]);
-
     return (<>
         <section className="flex flex-col gap-y-6 py-6 rounded pr-4">
             {
@@ -117,14 +118,14 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
             }
             <div className='flex items-center justify-between'>
                 <strong className="text-gray-900 lg:text-xl">{mode ? 'Cập nhật sản phẩm' : 'Tạo mới sản phẩm'}</strong>
-                <Link className='text-gray-700 hover:text-gray-900 hover:underline text-sm' href={'/adminstrations/products/list'}>Quay lại</Link>
+                <button className='text-gray-700 hover:text-gray-900 hover:underline text-sm' onClick={() => router.back()}>Quay lại</button>
             </div>
             <div className='relative'>
                 <button onClick={handle_category} type='button' className="border-none text-sm text-gray-100 h-full p-2 rounded 
                 bg-[#2563EB] hover:bg-indigo-800 duration-300">Thêm danh mục +</button>
                 {category_form && (<>
                     <div onClick={handle_category} className='fixed w-screen h-screen bg-[#00000066] top-0 z-[6] left-0'></div>
-                    <Form_category />
+                    <Form_add_category />
                 </>)
                 }
             </div>
@@ -133,6 +134,9 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
                     <label htmlFor="short_name">Tên sản phẩm</label>
                     <input type="text" id='short_name' {...my_Form.register('short_name')}
                         className='outline-none mt-2 py-2 px-4 border border-gray-300 rounded-sm w-full' />
+                    <span className='text-sm text-red-500 whitespace-nowrap'>
+                        {filed_form_data?.includes('short_name') && 'Vui lòng nhập tên sản phẩm!'}
+                    </span>
                 </div>
                 {isLoading ? <span className='text-gray-100'>
                     Loading...</span> :
@@ -160,7 +164,9 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
                                 </SelectContent>
                             </Select>
                         </div>
-                        <span className='absolute text-sm text-red-500 whitespace-nowrap top-14'>Vui lòng chọn danh mục sản phẩm!</span>
+                        <span className='absolute text-sm text-red-500 whitespace-nowrap top-14'>
+                            {filed_form_data?.includes('category_id') && 'Vui lòng chọn danh mục sản phẩm!'}
+                        </span>
                     </div>
                 }
                 <div className='flex flex-col text-gray-800 gap-y-3'>
@@ -192,6 +198,9 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
                     <label htmlFor="des_product">Mô tả sản phẩm</label>
                     <textarea id='des_product' {...my_Form.register('des_product')}
                         className='outline-none py-2 px-4 border border-gray-300 rounded min-h-[200px]' />
+                    <span className='text-sm text-red-500 whitespace-nowrap'>
+                        {filed_form_data?.includes('des_product') && 'Vui lòng nhập mô tả sản phẩm!'}
+                    </span>
                 </div>
                 <div className='w-full bg-white rounded *:p-4'>
                     <section className='w-full flex items-center gap-10'>
@@ -238,16 +247,22 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
                     }
                 </div>
 
-                <div className='grid grid-cols-[auto_85%] text-gray-800 items-center'>
+                <div className='grid grid-cols-[auto_85%] gap-y-4 text-gray-800 items-center'>
                     <label htmlFor="made_in">Xuất xứ sản phẩm</label>
                     <div>
                         <input id='made_in' {...my_Form.register('made_in')}
                             className='outline-none py-2 px-4 border border-gray-300 rounded' />
                     </div>
+                    <span className='text-sm text-red-500 whitespace-nowrap'>
+                        {filed_form_data?.includes('made_in') && 'Vui lòng nhập xuất xứ sản phẩm!'}
+                    </span>
                 </div>
-                {loading === 'call_error' && <span className='text-red-500'>Vui lòng kiểm tra lại!!</span>}
+                {loading === 'call_error' && <span className='text-red-500'>Lỗi! Vui lòng kiểm tra lại!!</span>}
                 <div className='w-full'>
-                    <Button type='submit' className={`text-sm font-medium text-white ${mode ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-indigo-600 hover:bg-indigo-800'}`}>{mode ? "Cập nhật sản phẩm" : "Tạo sản phẩm"}</Button>
+                    <Button type='submit' className={`text-sm font-medium text-white 
+                        ${mode ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-indigo-600 hover:bg-indigo-800'}`}>
+                        {mode ? "Cập nhật sản phẩm" : "Tạo sản phẩm"}
+                    </Button>
                 </div>
             </form>
         </section>

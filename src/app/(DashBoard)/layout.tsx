@@ -12,6 +12,10 @@ const Layout_Admin = ({ children }: Readonly<{ children: React.ReactNode }>) => 
   const data = Query_Notification();
 
   useEffect(() => {
+    document.title = 'Trung tâm điều khiển';
+  }, [])
+
+  useEffect(() => {
     if (!data?.isLoading && !data?.isError) {
       const message_not_send = data?.data?.data_notification?.filter((item: any) => !item?.status_message);
       let data_old = message_not_send ?? 0;
@@ -26,7 +30,7 @@ const Layout_Admin = ({ children }: Readonly<{ children: React.ReactNode }>) => 
     }
   }, [data, count_bell]);
 
-  
+
   return (
     <Auth_Provider>
       <div className="bg-[#F5F5FA] *:antialiased min-h-screen">

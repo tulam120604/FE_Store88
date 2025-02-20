@@ -14,6 +14,7 @@ export async function get_list_Cart() {
         const data = await res.json();
         return data.cart
     } catch (error) {
+        console.error(error);
         return error
     }
 }

@@ -45,32 +45,37 @@ const Side_bar = () => {
 
     return (
         <Suspense fallback={<Loading_Skeleton number_elements={1} />}>
-            <div className="flex h-full flex-col justify-between bg-white">
-                <div className="flex flex-col gap-y-2 overflow-hidden rounded *:after:absolute *:after:top-0 *:after:left-0 *:relative *:after:h-full *:after:bg-[#99c0ff]">
+            <div className="flex h-full flex-col justify-between">
+                <div className="flex flex-col gap-y-2 overflow-hidden *:after:absolute *:after:top-0 *:after:left-0 *:relative 
+                *:after:h-full *:after:bg-[#172850] *:rounded-lg *:px-4 *:py-3 *:text-gray-700">
                     <Link href={'/thong-tin-tai-khoan/thong-tin'}
                         className={`${(pathName === '/thong-tin-tai-khoan/thong-tin' || pathName === '/thong-tin-tai-khoan/dang-ki-ban-hang') ? 
-                        'after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-sky-600 flex items-center gap-x-4' : 'duration-200 hover:text-black hover:after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-gray-700 flex items-center gap-x-4'} `}>
+                        'after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]' 
+                        : 'duration-200 hover:bg-[#cdd4ef] hover:after:w-2 text-sm font-medium flex items-center gap-x-4'} `}>
                         <User className="!w-5" />
                         <span className="hidden lg:block">Thông tin tài khoản</span>
                     </Link>
                     <Link href={'/thong-tin-tai-khoan/thong-bao'}
-                        className={`${pathName === '/thong-tin-tai-khoan/thong-bao' ? 'after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-sky-600 flex items-center gap-x-4' : 'duration-200 hover:text-black hover:after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-gray-700 flex items-center gap-x-4'} `}>
+                        className={`${pathName === '/thong-tin-tai-khoan/thong-bao' ? 'after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]' 
+                        : 'duration-200 hover:bg-[#cdd4ef] hover:after:w-2 text-sm font-medium flex items-center gap-x-4'} `}>
                         <div className="relative *:!text-gray-800">
                             <Bell_component />
                         </div>
                         <span className="hidden lg:block">Thông báo</span>
                     </Link>
                     <Link href={'/thong-tin-tai-khoan/san-pham-yeu-thich'}
-                        className={`${pathName === "/thong-tin-tai-khoan/san-pham-yeu-thich" ? 'after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-sky-600 flex items-center gap-x-4' : 'duration-200 hover:text-black hover:after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-gray-700 flex items-center gap-x-4'} `}>
+                        className={`${pathName === "/thong-tin-tai-khoan/san-pham-yeu-thich" ? 'after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]' 
+                        : 'duration-200 hover:bg-[#cdd4ef] hover:text-black hover:after:w-2 text-sm font-medium flex items-center gap-x-4'} `}>
                         <Heart />
                         <span className="hidden lg:block">Yêu thích</span>
                     </Link>
                     <Link href={'/thong-tin-tai-khoan/don-hang'}
-                        className={`${pathName === '/thong-tin-tai-khoan/don-hang' ? 'after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-sky-600 flex items-center gap-x-4' : 'duration-200 hover:text-black hover:after:w-2 px-4 py-2 lg:py-4 text-sm font-medium text-gray-700 flex items-center gap-x-4'} `}>
+                        className={`${pathName === '/thong-tin-tai-khoan/don-hang' ? 'after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]' 
+                        : 'duration-200 hover:bg-[#cdd4ef] hover:text-black hover:after:w-2 text-sm font-medium flex items-center gap-x-4'} `}>
                         <Box />
                         <span className="hidden lg:block">Đơn hàng</span>
                     </Link>
-                    <button onClick={log_out} className="duration-200 relative after:absolute after:top-0 after:left-0 after:h-full hover:after:w-2 after:bg-[#1F2937] hover:border-[#1F2937] hover:text-black px-4 py-2 lg:py-4 text-sm font-medium text-gray-700 flex items-center gap-x-4">
+                    <button onClick={log_out} className="duration-200 relative after:absolute after:top-0 after:left-0 after:h-full hover:after:w-2 after:bg-[#1F2937] hover:border-[#1F2937] hover:bg-[#cdd4ef] px-4 py-3 text-sm font-medium text-gray-700 flex items-center gap-x-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-output"><path d="M14 2v4a2 2 0 0 0 2 2h4" /><path d="M4 7V4a2 2 0 0 1 2-2 2 2 0 0 0-2 2" /><path d="M4.063 20.999a2 2 0 0 0 2 1L18 22a2 2 0 0 0 2-2V7l-5-5H6" /><path d="m5 11-3 3" /><path d="m5 17-3-3h10" /></svg>
                         <span className="hidden lg:block">Đăng xuất</span>
                     </button>

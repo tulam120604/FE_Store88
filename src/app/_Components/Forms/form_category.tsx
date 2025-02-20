@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Mutation_Category } from '../../_lib/Query_APIs/Items/Mutation_category';
 import { Button } from '../ui/Shadcn/button';
 import Image from 'next/image';
 import Loading_Dots from '../Loadings/Loading_Dots';
 
-const Form_category = () => {
+const Form_add_category = () => {
     const mutate_category = Mutation_Category('ADD');
     let mode;
 
@@ -53,4 +53,4 @@ const Form_category = () => {
     </>)
 }
 
-export default Form_category
+export default Form_add_category

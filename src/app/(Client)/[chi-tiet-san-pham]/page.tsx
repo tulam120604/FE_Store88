@@ -1,13 +1,13 @@
-import Img_Detail_Product from './_components/Img_detail';
+import Anh_san_pham from './_components/anh_san_pham';
 import Breadcrum from '@/src/app/_Components/breadcrum/breadcrum';
 import { revalidatePath } from 'next/cache';
-import Description from './_components/Description';
-import Infor_seller from './_components/Infor_seller';
+import Mo_ta_san_pham from './_components/mo_ta_san_pham';
+import Thong_tin_cua_hang from './_components/thong_tin_cua_hang';
 import { GET_detail_item } from '../../_lib/Services/Services_Items/Product';
 import { unstable_noStore as noStore } from 'next/cache';
 import Link from 'next/link';
-import Infor_Detail_Product from './_components/Infor_detail';
-import Related_Product from './_components/Related_Product';
+import Thong_tin_san_pham from './_components/thong_tin_san_pham';
+import San_pham_lien_quan from './_components/san_pham_lien_quan';
 import { get_feedBack_in_item } from '../../_lib/Services/Service_Feedback/Feedback';
 import type { Metadata } from 'next';
 import { GET_product_by_category } from '../../_lib/Services/Services_Items/Category';
@@ -50,24 +50,24 @@ const page = async ({ searchParams }: any) => {
           </section>
           <section className="lg:grid lg:grid-cols-[573px_auto] gap-x-10 bg-white pb-4 rounded-lg">
             {/*  desktop : left  , mobile : row 1 */}
-            <Img_Detail_Product dataProps={data} />
+            <Anh_san_pham dataProps={data} />
             {/*desktop: right, mobile : row 2 */}
             <div>
-              <Infor_Detail_Product dataProps={{
+              <Thong_tin_san_pham dataProps={{
                 data,
                 data_feedback
               }} />
             </div>
           </section>
-          <Infor_seller dataProps={data?.id_user_seller} />
+          <Thong_tin_cua_hang dataProps={data?.id_user_seller} />
           {/* related products */}
-          <Description dataProps={{
+          <Mo_ta_san_pham dataProps={{
             data,
             data_feedback
           }} />
           <div className="mt-6 p-4 bg-white rounded-lg">
             <span className="font-medium !text-lg mb-2">Sản phẩm liên quan</span>
-            <Related_Product dataProps={data?.category_id} />
+            <San_pham_lien_quan dataProps={data?.category_id} />
           </div>
         </>)}
     </main>

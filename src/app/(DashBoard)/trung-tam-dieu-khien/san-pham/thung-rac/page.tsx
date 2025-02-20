@@ -8,16 +8,14 @@ import { Mutation_Items } from "@/src/app/_lib/Query_APIs/Items/Mutation_product
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import Data_Table from "../../_components/Data_Table";
 import Loading from "../_component/loading";
+import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 
 const Page = () => {
   const [page, setPage] = useState<number>(1);
   const { data, isLoading } = Query_Recycle_Items_Admin(page);
-  const { on_Submit, isLoading: loading_restore} = Mutation_Items({
+  const { on_Submit, isLoading: loading_restore } = Mutation_Items({
     action: 'RESTORE_OR_DESTROY'
   });
-  if (isLoading || loading_restore) {
-    return <Loading />
-  };
   function handle_Restore_or_Destroy(idItem?: string | number, action?: string,) {
     const item = {
       id_item: idItem,
@@ -35,19 +33,17 @@ const Page = () => {
             Quay lại
           </Link>
         </div>
-        {(Array.isArray(data)) ? (<>
-          {
-            data ? (<>
-              {isLoading ? <span>Loading ...</span> :
-                <div className="bg-white border rounded-lg px-4">
-                  <Data_Table dataProps={{ dataTable: data, handle_Restore_or_Destroy, action: 'recycle' }} />
-                </div>
-              }
-            </>)
-              : <span className="text-gray-100">Thùng rác trống!</span>
-          }
-        </>)
-          : <span className="text-white">Bạn không có quyền truy cập !</span>}
+        {(isLoading || loading_restore) ? <Loading_Overlay /> :
+          data.length > 0 ? (<>
+            <div className="bg-white border rounded-lg px-4">
+              <Data_Table dataProps={{ dataTable: data, handle_Restore_or_Destroy, action: 'recycle' }} />
+            </div>
+          </>)
+            : <div className="grid place-content-center h-[70vh]">
+              <span className="text-gray-900">Thùng rác trống!</span>
+            </div>
+        }
+
       </div>
     </Suspense>
   )

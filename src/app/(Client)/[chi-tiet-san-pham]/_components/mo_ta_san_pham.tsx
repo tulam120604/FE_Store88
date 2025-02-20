@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { Button } from '../../../_Components/ui/Shadcn/button'
 
-const Description = ({ dataProps }: any) => {
+const Mo_ta_san_pham = ({ dataProps }: any) => {
     const formattedDescription = dataProps?.data?.des_product.replace(/\n/g, '<br />');
     return (
         <>
@@ -65,4 +65,4 @@ const Description = ({ dataProps }: any) => {
     )
 }
 
-export default Description
+export default Mo_ta_san_pham

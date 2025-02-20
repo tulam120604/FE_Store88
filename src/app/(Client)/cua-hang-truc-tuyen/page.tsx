@@ -12,6 +12,7 @@ import { GET_item_by_seller } from '../../_lib/Services/Services_Items/Product';
 export default async function Page({ searchParams }: any) {
   const data = await infor_shop(searchParams?.id);
   const data_item = await GET_item_by_seller(data?.data?._id);
+  console.log(data_item)
   return (
     <div className='max-w-[1440px] mx-auto mb:w-[342px] md:w-[90vw] py-2'>
       {data?.status === 404 ? (<><div className='min-h-[70vh] grid place-items-center'>

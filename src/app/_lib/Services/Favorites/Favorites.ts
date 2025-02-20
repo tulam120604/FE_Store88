@@ -52,7 +52,6 @@ export async function add_favorites(dataClient: { id_item: string | number }) {
             toast.error('Đã có lỗi xảy ra, hãy thử lại!', { autoClose: 800 })
             return res
         }
-        toast.success('Đã thêm vào sản phẩm yêu thích.', { autoClose: 800 });
         return res
     } catch (error) {
         return error
@@ -74,7 +73,6 @@ export async function remove_favorites(dataClient: { id_item: string | number })
             toast.error('Đã có lỗi xảy ra, hãy thử lại!', { autoClose: 800 })
             return res
         }
-        toast.success('Đã xóa khỏi sản phẩm yêu thích.', { autoClose: 800 });
         return res
     } catch (error) {
         return error

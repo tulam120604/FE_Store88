@@ -168,23 +168,27 @@ const Page_checkout = () => {
                       <>
                         <div>
                           <label htmlFor="name">Tên của bạn :</label>
-                          <Input className='mt-2' {...register('name_user')} id='name' placeholder="Name" defaultValue={data?.default_address?.about_address?.user_name} />
+                          <Input className='mt-2' {...register('name_user')} id='name' placeholder="Name" 
+                          defaultValue={data?.default_address?.about_address?.user_name} />
                           {errors.name_user && <p className="text-red-500 md:text-sm text-xs">{errors.name_user.message}</p>}
                         </div>
                         <div>
                           <label htmlFor="name">Số điện thoại :</label>
-                          <Input className='mt-2' {...register('phone')} id='phone' placeholder="Phone" defaultValue={data?.default_address?.about_address?.phone} />
+                          <Input className='mt-2' {...register('phone')} id='phone' placeholder="Phone" 
+                          defaultValue={data?.default_address?.about_address?.phone} />
                           {errors.phone && <p className="text-red-500 md:text-sm text-xs">{errors.phone.message}</p>}
                         </div>
                         <div>
                           <label htmlFor="name">Email :</label>
-                          <Input className='mt-2' {...register('email_user')} id='email' placeholder="Email" defaultValue={data?.default_address?.about_address?.email} />
+                          <Input className='mt-2' {...register('email_user')} id='email' placeholder="Email" 
+                          defaultValue={data?.default_address?.about_address?.email} />
                           {errors.email_user && <p className="text-red-500 md:text-sm text-xs">{errors.email_user.message}</p>}
                         </div>
                         <div>
                           <label htmlFor="name">Địa chỉ của bạn :</label>
-                          <Textarea className='mt-2' {...register('address')} id='address' placeholder="Address"
-                            defaultValue={data?.default_address?.about_address?.address + ', ' + data?.default_address?.about_address?.provinces} />
+                          <Textarea className='mt-2' {...register('address')} id='address' placeholder="Địa chỉ"
+                            defaultValue={data?.data?.length > 0 ? data?.default_address?.about_address?.address
+                              + ', ' + data?.default_address?.about_address?.provinces : ''} />
                           {errors.address && <p className="text-red-500 md:text-sm text-xs">{errors.address.message}</p>}
                         </div>
                       </>

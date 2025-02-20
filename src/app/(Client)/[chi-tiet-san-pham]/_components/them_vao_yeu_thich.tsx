@@ -7,7 +7,7 @@ import { Heart } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
-export default function Favorites_Detail_Item({ dataProps }: { dataProps: string | number }) {
+export default function Them_vao_san_pham_yeu_thich({ dataProps }: { dataProps: string | number }) {
     const routing = useRouter();
     const { data: data_user, isLoading: loading_user } = Infor_user();
     const detail_item_favorite_by_user = Query_view_item_favorites(dataProps);

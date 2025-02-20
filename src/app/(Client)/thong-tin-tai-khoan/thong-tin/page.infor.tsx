@@ -56,34 +56,27 @@ const Page_infor = () => {
                     <Link className='lg:text-sm text-xs underline whitespace-nowrap' href={'/trung-tam-dieu-khien/bang-dieu-khien/tong-quan'}>Trung tâm điều khiển</Link>
               }
             </div>
-            <table className='hidden lg:block lg:w-[80%] mx-auto'>
-              <tbody>
-                <tr className='*:my-6'>
-                  <td className='flex items-center justify-between lg:text-sm text-xs'>
-                    <span className='text-gray-600'>Tên hiển thị</span>
-                    <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded text-gray-800'>{data_user?.data && data_user?.data?.user_name}</div>
-                  </td>
-                  <td className='flex items-center justify-between lg:text-sm text-xs'>
-                    <span className='text-gray-600'>Email</span>
-                    <div className='lg:w-[70%] w-[60%] border lg:py-2 py-1 px-4 rounded text-gray-800 overflow-hidden flex justify-between items-center tracking-[1px]'>
-                      {data_user?.data?.email?.slice(0, 2) + '*****' + data_user?.data?.email?.slice(7)}
-                    </div>
-                  </td>
-                  <td className='flex items-center justify-between lg:text-sm text-xs'>
-                    <span className='text-gray-600'>Số điện thoại</span>
-                    {
-                      data_user?.data && data_user?.data?.phone ?
-                        <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded text-gray-800 overflow-hidden'>{data_user?.data && data_user?.data?.phone}</div>
-                        :
-                        <Link href={''} className='lg:w-[70%] w-[40%] underline px-4 rounded text-sky-600'>thêm</Link>
-                    }
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className='hidden lg:grid grid-cols-2 gap-4 max-w-[70%] mx-auto my-14'>
+              <span className='text-gray-600'>Tên hiển thị</span>
+              <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded text-gray-800'>{data_user?.data && data_user?.data?.user_name}</div>
+              {/* email */}
+              <span className='text-gray-600'>Email</span>
+              <div className='lg:w-[70%] w-[60%] border lg:py-2 py-1 px-4 rounded text-gray-800 
+              overflow-hidden flex justify-between items-center tracking-[1px]'>
+                {data_user?.data?.email?.slice(0, 2) + '*****' + data_user?.data?.email?.slice(7)}
+              </div>
+              {/* sdt */}
+              <span className='text-gray-600'>Số điện thoại</span>
+              {
+                data_user?.data && data_user?.data?.phone ?
+                  <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded text-gray-800 overflow-hidden'>{data_user?.data && data_user?.data?.phone}</div>
+                  :
+                  <Link href={''} className='lg:w-[70%] w-[40%] underline px-4 rounded text-sky-600'>thêm</Link>
+              }
+            </div>
             {/* mobile */}
             <div className='lg:hidden'>
-              <Page_infor_mobile data_user={data_user}/>
+              <Page_infor_mobile data_user={data_user} />
             </div>
             {/* --- */}
             <section className='flex items-center justify-between my-5 py-5 border-y'>

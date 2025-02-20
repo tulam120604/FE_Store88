@@ -23,9 +23,11 @@ export default function Data_Table({ dataProps }: any) {
                     <div key={data?._id} className="flex flex-col w-full text-gray-800 border-t border-gray-300 text-sm">
                         <div className="grid grid-cols-[70px_180px_150px_100px_150px_100px_150px_auto] gap-x-4 items-center justify-between p-4">
                             {/* image */}
-                            <Image width={100} height={100} className="rounded border" src={data?.gallery[0]} alt="Loading..." />
+                            <Link href={`/trung-tam-dieu-khien/san-pham/${data?._id}`} className="line-clamp-3">
+                                <Image width={100} height={100} className="rounded border" src={data?.gallery[0]} alt="Loading..." />
+                            </Link>
                             {/* name */}
-                            <span className="line-clamp-3">{data?.short_name}</span>
+                            <Link href={`/trung-tam-dieu-khien/san-pham/${data?._id}`} className="line-clamp-3">{data?.short_name}</Link>
                             {/* category */}
                             <span className="line-clamp-2">{data?.category_id?.category_name}</span>
                             {/* sales */}
@@ -44,7 +46,7 @@ export default function Data_Table({ dataProps }: any) {
                                             <ArchiveRestore className='h-5' />
                                         </button>
                                         :
-                                        <Link href={`/adminstrations/products/${data?._id}`} className="*:hover:text-black ">
+                                        <Link href={`/trung-tam-dieu-khien/san-pham/${data?._id}`} className="*:hover:text-black ">
                                             <FilePenLine className='h-5 text-gray-700' />
                                         </Link>
                                 }

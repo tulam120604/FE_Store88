@@ -161,7 +161,6 @@ export async function refesh_token() {
 export async function infor_shop(id?: string | number) {
     try {
         const res = await fetch(`${apiURi}/inforshop/${id}`);
-        console.log(res)
         if (!res.ok) {
             return res
         }

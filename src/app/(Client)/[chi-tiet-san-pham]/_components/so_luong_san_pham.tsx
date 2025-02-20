@@ -9,11 +9,10 @@ import { io } from 'socket.io-client';
 import { useToast } from "@/src/app/_Components/ui/use-toast";
 import { useStoreAddToCart } from "@/src/app/Zustand/Store";
 import { Infor_user } from "@/src/app/_lib/Query_APIs/Auth/Query_Auth";
-import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 
 
 
-const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
+const So_luong_san_pham = ({ data_Item_Detail }: any) => {
   const routing = useRouter();
   const { data: data_user, isLoading: loading_user } = Infor_user()
   const { toast } = useToast();
@@ -203,8 +202,9 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
   return (<div>
     <div className="flex gap-x-2 items-end font-medium text-[#EB2606] lg:text-2xl lg:font-normal mb:text-base mb-4">
       {
-        data_Item_Detail?.price_variant ?
-          <span className="text-[#EB2606]">{(data_Item_Detail?.price_variant)?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span> :
+        data_Item_Detail?.price_product ?
+          <span className="text-[#EB2606]">{(data_Item_Detail?.price_product)?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</span>
+          :
           <div className="flex items-center gap-x-1 line-clamp-2">
             {
               price_attr ? (<>
@@ -224,7 +224,8 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
     {data_Item_Detail?.variant?.variants && (
       <div className="flex flex-col gap-y-4 mb-1">
         <>
-          <div className="flex items-center gap-x-4 *:relative *:border-[2px] *:bg-transparent *:border-gray-700 *:px-3 *:py-1 *:text-sm *:rounded-lg">
+          <div className="flex flex-wrap items-center gap-x-4 *:relative *:border *:bg-transparent *:border-gray-700 
+          *:px-3 *:py-1 *:text-sm *:rounded">
             {variants_attribute?.map((item: any) => (
               (item?.attribute !== '' || item?.attribute) && (<>
                 <button className={`text-gray-800 duration-200'}
@@ -237,7 +238,8 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
                 </button>
               </>)))}
           </div>
-          {Array.isArray(value_variant) && <div className="flex items-center *:text-gray-800 *:bg-transparent gap-x-4 *:relative *:border-[2px] *:px-3 *:py-1 *:text-sm *:rounded-lg *:border-gray-700">
+          {Array.isArray(value_variant) && <div className="flex flex-wrap items-center *:text-gray-800 *:bg-transparent 
+          gap-x-4 *:relative *:border *:px-3 *:py-1 *:text-sm *:rounded *:border-gray-700">
             {value_variant?.map((item: any) => (
               <button className={`${(name_variant == item?.name_variant) && '!border-[#0A68FF]'}`} key={Math.random()}
                 onClick={() => handle_attributes('size_attribute', item?.name_variant)}>{item?.name_variant}
@@ -251,25 +253,31 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
         </>
       </div>
     )}
-    <span ref={ref_validate_attribute} className="hidden text-xs md:text-sm text-red-500">Vui lòng chọn!</span>
+    <span ref={ref_validate_attribute} className="hidden mt-2 text-xs md:text-sm text-red-500">Vui lòng chọn phân loại hàng!</span>
     {/* *** */}
     <div className={data_Item_Detail?.variant?.variants && "relative top-3"}>
       <div className="my-5 flex lg:flex-row mb:flex-col lg:gap-y-0 gap-y-[17px] gap-x-8 lg:items-center mb:items-start">
         {/* up , dow quantity */}
-        <div className="border lg:py-2.5 mb:py-1 mb:px-2 *:text-xs flex items-center gap-x-3 rounded">
-          <div className="flex items-center *:w-9 *:h-9 gap-x-3 *:grid *:place-items-center">
-            <button className="hover:*:bg-gray-100 *:rounded" onClick={() => change_options_quantity('dow')}>
+        <div className="*:text-xs flex items-center gap-x-3">
+          <span>Số lượng</span>
+          <div className="flex items-center *:grid *:h-9 *:place-items-center text-gray-500">
+            <button onClick={() => change_options_quantity('dow')} className="border-y border-l rounded-l w-9">
               <Minus className="w-5" />
             </button>
-            <input className="bg-[#F4F4F4] rounded text-center" value={quantity}
-              onChange={(e: any) => (quantity_attributes && ((+e?.target?.value <= quantity_attributes && quantity > 0) && set_quantity(+e?.target?.value)))} />
-            <button className="hover:*:bg-gray-100 *:rounded" onClick={() => change_options_quantity('up')}>
+            {
+              quantity_attributes ?
+                <input className="text-center border w-12" value={quantity}
+                  onChange={(e: any) => (set_quantity((+e?.target?.value > quantity_attributes) ? quantity_attributes :
+                    (+e?.target?.value < 1) ? 1 : +e?.target?.value))} /> :
+                <input className="text-center border w-12" value={quantity}/>
+            }
+            <button onClick={() => change_options_quantity('up')} className="border-y border-r rounded-r w-9">
               <Plus className="w-5" />
             </button>
           </div>
           {
             quantity_attributes &&
-            <span className="lg:tracking-[0.5px] border-l pl-4 border-black">Còn lại {quantity_attributes} sản phẩm</span>
+            <span className="lg:tracking-[0.5px] text-gray-800 pl-4">Còn lại {quantity_attributes} sản phẩm</span>
           }
         </div>
       </div>
@@ -292,4 +300,4 @@ const Quantity_Items_Detail = ({ data_Item_Detail }: any) => {
   </div>)
 }
 
-export default Quantity_Items_Detail
+export default So_luong_san_pham

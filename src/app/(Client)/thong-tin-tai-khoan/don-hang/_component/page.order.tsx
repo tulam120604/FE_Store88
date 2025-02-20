@@ -195,7 +195,7 @@ const Page_order = () => {
           <div className='grid place-items-center h-[70vh] rounded'>
             <div className='flex flex-col items-center gap-y-6'>
               <Image width={100} height={100} src='/Images/document_icon.png' alt=''></Image>
-              <span className='flex items-center'>Chưa có đơn hàng nào!<Link className='underline mx-1' href={'/products'}> Đi mua ngay</Link></span>
+              <span className='flex items-center'>Chưa có đơn hàng nào!<Link className='underline mx-1' href={'/san-pham'}> Đi mua ngay</Link></span>
             </div>
           </div>
       }

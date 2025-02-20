@@ -48,7 +48,7 @@ export default function Table_item({ dataProps }: any) {
                       <section className='flex gap-x-4 items-center *:truncate'>
                         <span>{item?.product_id?.id_user_seller?.user_name}</span>
                         <Link className='text-sm p-1 underline text-gray-700 rounded flex items-center hover:text-black'
-                          href={`shops?id=${item?.product_id?.id_user_seller?._id}`}>
+                          href={`cua-hang-truc-tuyen?id=${item?.product_id?.id_user_seller?._id}`}>
                           <Store className='h-4 text-gray-700' />Xem shop</Link>
                       </section>
                       <Link href={`/${convert_Slug(item?.product_id?.short_name)}.html?p=${item?.product_id?._id}`}>

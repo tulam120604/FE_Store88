@@ -36,21 +36,15 @@ const Header = () => {
         }
     }
     function Count_Cart() {
-        const [data_storage, set_data_storage] = useState();
-        useEffect(() => {
-            if (localStorage.getItem('account')) {
-                const storage_acc = JSON.parse(localStorage.getItem('account') || '{}');
-                set_data_storage(storage_acc?.check_email?._id);
-            }
-        }, [data_storage])
         const { data, isLoading } = Get_Items_Cart();
-        let new_arr;
+        let quantity_item_in_cart;
         if (data?.items) {
-            new_arr = data?.items?.filter((item: any) => (item?.product_id !== null) && item);
+            quantity_item_in_cart = data?.items?.filter((item: any) => (item?.product_id !== null) && item);
         }
         return (<>
-            {isLoading && data?.items && (<span className="z-[1] absolute bg-red-500 -top-[40%] -right-1/2 grid place-items-center rounded-[50%] lg:w-5 lg:h-5 w-4 h-4 text-xs text-white">
-                {new_arr?.length < 99 ? new_arr?.length : '99+'}</span>)}
+            {!isLoading && (quantity_item_in_cart?.length > 0) &&
+                (<span className="z-[1] absolute bg-red-500 -top-[10%] -right-1/4 grid place-items-center rounded-[50%] w-5 h-5 text-xs text-white">
+                    {quantity_item_in_cart?.length < 99 ? quantity_item_in_cart?.length : '99+'}</span>)}
         </>)
     }
 
