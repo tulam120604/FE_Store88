@@ -21,11 +21,12 @@ const Product_Item = ({ dataProps }: any) => {
         }
     }
     return (
-        <Link href={`/${convert_Slug(dataProps?.short_name)}.html?p=${dataProps?._id}`} className="flex flex-col border w-full 
-        snap-center rounded-lg hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] bg-white relative duration-150 cursor-pointer h-full overflow-hidden">
+        <Link href={`/${convert_Slug(dataProps?.short_name)}.html?p=${dataProps?._id}`} className="flex flex-col w-full 
+        rounded-lg hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] bg-white relative duration-150 cursor-pointer h-full overflow-hidden">
             {/* Image */}
-            <div className="relative group w-full h-[200px] sm:h-[160px] overflow-hidden rounded grid place-items-center">
-                <Image loading='lazy' width={300} height={300} className="w-full h-full cursor-pointer object-contain" src={dataProps?.gallery[0]} alt='store88' />
+            <div className="relative group w-full h-[200px] sm:h-[250px] overflow-hidden rounded grid place-content-center">
+                <Image loading='lazy' width={300} height={300} className="w-full max-h-[180px] sm:max-h-[220px] cursor-pointer object-contain" 
+                src={dataProps?.gallery[0]} alt='store88' />
                 {/* <section className="absolute top-0 lg:text-base sm:text-sm text-xs cursor-default left-0 bg-[#F2BC1B] px-3 lg:py-1 rounded py-0.5 text-white">- 20%
                 </section> */}
             </div>

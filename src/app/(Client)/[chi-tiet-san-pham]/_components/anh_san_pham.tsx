@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/src/app/_Components/ui/carousel"
 import Image from "next/image"
 import { useState } from "react"
 import { Swiper, SwiperSlide } from 'swiper/react';

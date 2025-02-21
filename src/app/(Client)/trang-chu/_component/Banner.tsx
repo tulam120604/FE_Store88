@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import Slide_show from '@/src/app/_Components/Slide/slide_show';
 import { Suspense } from 'react';
+import Slide_show from '@/src/app/_Components/Slide/Slide_show';
 import Loading_Skeleton from '@/src/app/_Components/Loadings/Loading_Skeleton';
 
 const Banner = () => {
   return (
     <Suspense fallback={<Loading_Skeleton number_elements={2} />}>
-      <div className="grid md:grid-cols-[60%_39%] grid-cols-1 gap-y-2 justify-between lg:p-4 lg:bg-white rounded-lg">
+      <div className="grid md:grid-cols-[70%_29%] grid-cols-1 gap-y-2 justify-between lg:p-4 lg:bg-white rounded-lg">
         {/* slide */}
         <div className='*:cursor-pointer'>
           <Slide_show>

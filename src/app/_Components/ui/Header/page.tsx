@@ -1,12 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { Get_Items_Cart } from '@/src/app/_lib/Query_APIs/Cart/query';
 import { Search_Component_Client } from '../../Forms/search';
-import { BadgeCheck, BadgeDollarSign, CircleUser, RefreshCcwDot, ShoppingBag, Tag, Truck } from 'lucide-react';
+import { BadgeCheck, BadgeDollarSign, RefreshCcwDot, ShoppingBag, Tag, Truck, User } from 'lucide-react';
 import { useStoreAddToCart } from '@/src/app/Zustand/Store';
 import Header_mobile from './header_mobile';
 import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
@@ -43,13 +42,13 @@ const Header = () => {
         }
         return (<>
             {!isLoading && (quantity_item_in_cart?.length > 0) &&
-                (<span className="z-[1] absolute bg-red-500 -top-[10%] -right-1/4 grid place-items-center rounded-[50%] w-5 h-5 text-xs text-white">
+                (<span className="z-[1] absolute bg-[#5B7FFB] -top-1/2 -right-[60%] grid place-items-center rounded-[50%] w-5 h-5 text-xs text-white">
                     {quantity_item_in_cart?.length < 99 ? quantity_item_in_cart?.length : '99+'}</span>)}
         </>)
     }
 
     return (<>
-        <header className="w-full z-[2000] duration-300 py-5 lg:bg-white bg-[#105EF3] sticky top-0 lg:relative overflow-hidden">
+        <header className="w-full z-[2000] duration-300 pt-5 pb-2 lg:bg-white bg-[#105EF3] sticky top-0 lg:relative overflow-hidden">
             {/* logo, search and cart */}
             <div className="relative mx-auto max-w-[1440px] w-[95vw] flex justify-between *:flex *:items-center lg:gap-x-20 gap-x-5 items-center 
             bg-white rounded-md p-3">
@@ -69,16 +68,11 @@ const Header = () => {
                 {
                     (!isLoading && !isError) &&
                     <div className="gap-x-2 flex items-center *:h-full">
-                        <Link href={data?.data?.user_name ? '/thong-tin-tai-khoan/thong-tin' : '/dang-nhap'} className='!hidden 
-                    lg:!flex items-center gap-x-2 hover:bg-[#E2EDFF] rounded duration-200 py-2 px-3 cursor-pointer whitespace-nowrap'>
-                            <CircleUser color='#0A68FF' />
-                            <span className='text-[#0A68FF] text-sm mt-0.5'>{data?.data?.user_name ?
-                                data?.data?.user_name : 'Đăng nhập'}</span>
-                        </Link>
                         {/* cart */}
-                        <div className={`relative group cursor-pointer`}>
-                            <button onClick={handleCart} className='z-[1] relative hover:bg-[#E2EDFF] rounded duration-200 p-2' >
-                                <ShoppingBag className='w-5 h-5 ' color='#0A68FF' />
+                        <button onClick={handleCart} className={`flex gap-x-2 items-end relative group cursor-pointer p-2 py-2.5  
+                            hover:bg-gray-100 rounded text-gray-600 hover:text-gray-950`}>
+                            <div className='flex z-[1] relative rounded duration-200' >
+                                <ShoppingBag className='w-5 h-5 ' />
                                 <Count_Cart />
                                 {/* animation add to cart */}
                                 {
@@ -87,8 +81,16 @@ const Header = () => {
                                         <Image width={40} height={40} className='rounded-full' src={isVisible} alt='.' />
                                     </div>
                                 }
-                            </button>
-                        </div>
+                            </div>
+                            <span className='hidden lg:block text-sm translate-y-1'>Giỏ hàng</span>
+                        </button>
+                        <Link href={data?.data?.user_name ? '/thong-tin-tai-khoan/thong-tin' : '/dang-nhap'} className='!hidden 
+                    lg:!flex items-end hover:bg-gray-100 rounded duration-200 py-2 px-3 cursor-pointer whitespace-nowrap text-gray-600 
+                    hover:text-gray-950'>
+                            <User />
+                            <span className='text-sm translate-y-1'>{data?.data?.user_name ?
+                                data?.data?.user_name : 'Đăng nhập'}</span>
+                        </Link>
                     </div>
                 }
             </div>

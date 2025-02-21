@@ -7,17 +7,18 @@ import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
 import { GET_item_by_category } from '@/src/app/_lib/Services/Services_Items/Product';
 import { GET_product_by_category } from '@/src/app/_lib/Services/Services_Items/Category';
 
-const Page = async ({ params }: any) => {
+const Page = async ({ searchParams }: any) => {
   noStore();
-  const data = await GET_item_by_category(undefined, params?.the_loai_san_pham);
-  const detail_category = await GET_product_by_category(params?.the_loai_san_pham);
+  const data = await GET_item_by_category(undefined, searchParams?.p);
+  const detail_category = await GET_product_by_category(searchParams?.p);
   //  const isClient = typeof window !== 'undefined';
   //   console.log(isClient);
   return (
     <Suspense fallback={<LoadingShops />}>
       <div className="py-5 mx-auto max-w-[1440px] w-[95vw]">
         <div className="mx-auto relative text-center mb-6">
-          <strong className="relative z-[2] font-medium bg-[#F5F5FA] lg:text-xl px-4 mb:text-lg">{detail_category ? detail_category?.category_name : ''}</strong>
+          <strong className="relative z-[2] font-medium bg-[#F5F5FA] lg:text-xl px-4 mb:text-lg">
+            {detail_category ? detail_category?.category_name : ''}</strong>
           <div className="absolute w-full h-[1px] bg-gray-400 top-1/2 z-[1]"></div>
         </div>
         {/* product */}

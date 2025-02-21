@@ -31,7 +31,7 @@ export default function Header_mobile({ dataProps }: any) {
                     <span>Danh mục</span>
                 </button>
 
-                <Link href={(dataProps?.account === 'Tài khoản') ? '/dang-nhap' : '/thong-tin-tai-khoan/san-pham-yeu-thich'}
+                <Link href={(dataProps?.account) ? '/thong-tin-tai-khoan/san-pham-yeu-thich' : '/dang-nhap'}
                     className={(pathName === '/thong-tin-tai-khoan/san-pham-yeu-thich' && !popup_catalog_product) ?
                         'text-sky-500' : 'text-gray-700'}
                     onClick={() => handle_popup_catalog_product(false)}>
@@ -39,7 +39,7 @@ export default function Header_mobile({ dataProps }: any) {
                     <span>Yêu thích</span>
                 </Link>
 
-                <Link href={(dataProps?.account === 'Tài khoản') ? '/dang-nhap' : '/thong-tin-tai-khoan/thong-bao'}
+                <Link href={(dataProps?.account) ?'/thong-tin-tai-khoan/thong-bao' : '/dang-nhap'}
                     className={(pathName === '/thong-tin-tai-khoan/thong-bao' && !popup_catalog_product) ?
                         'text-sky-500' : 'text-gray-700'}
                     onClick={() => handle_popup_catalog_product(false)}>
@@ -47,7 +47,7 @@ export default function Header_mobile({ dataProps }: any) {
                     <span>Thông báo</span>
                 </Link>
 
-                <Link href={(dataProps?.account === 'Tài khoản') ? '/dang-nhap' : '/thong-tin-tai-khoan/thong-tin'}
+                <Link href={(dataProps?.account) ?'/thong-tin-tai-khoan/thong-tin' : '/dang-nhap' }
                     className={(pathName === '/thong-tin-tai-khoan/thong-tin' && !popup_catalog_product) ?
                         'text-sky-500' : 'text-gray-700'}
                     onClick={() => handle_popup_catalog_product(false)}>

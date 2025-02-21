@@ -148,9 +148,9 @@ const Page_checkout = () => {
             {/* item */}
             <div className='max-w-[1440px] mx-auto w-[95vw] rounded'>
               {/* list items */}
-              {positive_Stock_Item ? (<>
+              {positive_Stock_Item?.length > 0 ? (<>
                 {
-                  positive_Stock_Item ? (<div className='*:text-gray-800'>
+                  positive_Stock_Item?.length > 0 ? (<div className='*:text-gray-800'>
                     <Table_item dataProps={positive_Stock_Item} />
                     <div className='flex justify-between whitespace-nowrap text-lg my-4'>
                     </div>

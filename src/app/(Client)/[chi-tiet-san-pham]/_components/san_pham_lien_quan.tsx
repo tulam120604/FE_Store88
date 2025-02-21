@@ -2,12 +2,14 @@ import List_Products from "@/src/app/_Components/Products/List_Products";
 import { GET_item_by_category } from "@/src/app/_lib/Services/Services_Items/Product";
 import { unstable_noStore as noStore } from "next/cache";
 
-const San_pham_lien_quan =  async ({dataProps} : any) => {
+const San_pham_lien_quan = async ({ dataProps }: any) => {
   noStore();
-  const data = await GET_item_by_category('',dataProps)
-  return (
-    <List_Products data={data?.data?.docs}/>
-  )
-}
+  const data = await GET_item_by_category(
+    "",
+    dataProps?.id_category,
+    dataProps?.id_current_product
+  );
+  return <List_Products data={data?.data?.docs} />;
+};
 
-export default San_pham_lien_quan
+export default San_pham_lien_quan;

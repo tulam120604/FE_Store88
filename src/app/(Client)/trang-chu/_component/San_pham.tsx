@@ -14,18 +14,14 @@ const Products_Home = async () => {
     //   console.log(isClient);
     return (
         <Suspense fallback={<Loading_Skeleton number_elements={12} />}>
-            <div className='flex flex-col lg:py-4'>
+            <div className='flex flex-col lg:pb-4 lg:pt-10'>
                 {(data?.status === 404 || data?.status === 500) ? (<>
                     <div className='min-h-[70vh] grid place-items-center'>
                         <ReloadPage />
                     </div></>) :
                     (<>
-                    <div className='sticky top-0 z-[1000] bg-[#F5F5FA]'>
-                    <div className='px-6 py-2 lg:py-6 bg-gradient-to-r from-[#DEECFE] to-[#E1E8FD] rounded mt-4'>
-                            <span className="relative z-[2] text-gray-800 antialiased tracking-[0.3px] uppercase font-semibold">Gợi ý hôm nay</span>
-                        </div>
-                    </div>
-                        
+                        <span className="text-gray-600 antialiased tracking-[0.3px] text-xl 
+                        font-semibold mt-6 lg:mt-0">Sản phẩm gợi ý</span>
                         {
                             data?.data?.docs ?
                                 ((data?.data?.docs?.length < 1) ? <span className='text-center'>Trống!</span> :

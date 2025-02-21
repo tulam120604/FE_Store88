@@ -11,6 +11,7 @@ const Page_favorite = () => {
   const { data, isLoading, isError } = List_favorites();
   return (
     <div className='bg-white px-6 py-4 lg:py-8 rounded'>
+      <span className='lg:hidden'>Sản phẩm yêu thích</span>
       {isError ? (<><div className='grid place-items-center'>
         <div className='flex flex-col gap-y-2'>
           Ôi hỏng!
