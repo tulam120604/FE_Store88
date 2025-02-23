@@ -87,10 +87,12 @@ const Page_order = () => {
       cell: ({ row }) => (
         <div className="flex gap-x-4 lg:gap-x-8">
           <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`}>
-            <Image width={100} height={100} loading="lazy" className="w-[100px] h-[100px] border" src={row?.original?.product_id?.gallery[0]} alt="Loading..." />
+            <Image width={100} height={100} loading="lazy" className="lg:w-[100px] lg:h-[100px] h-20 border" 
+            src={row?.original?.product_id?.gallery[0]} alt="Loading..." />
           </Link>
           <div className="w-full flex flex-col gap-y-3">
-            <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`} className="line-clamp-2">{row?.original?.product_id?.short_name}</Link>
+            <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`} 
+            className="line-clamp-2">{row?.original?.product_id?.short_name}</Link>
             {
               (row?.original?.color_item || row?.original?.size_attribute_item) &&
               <span className="text-sm">Phân loại : {row?.original?.color_item} - {row?.original?.size_attribute_item}</span>
@@ -104,7 +106,8 @@ const Page_order = () => {
                     <span className="text-sm">Đã đánh giá</span>
                   </div> :
                   <div>
-                    <Button onClick={() => routing.push(`/profile/feedback?_rating=${row?.original?._id}`)} className="px-3 py-1.5 hover:bg-green-700 duration-200 bg-green-600 text-sm rounded text-white">Đánh giá</Button>
+                    <Button onClick={() => routing.push(`/profile/feedback?_rating=${row?.original?._id}`)} 
+                    className="px-3 py-1.5 hover:bg-green-700 duration-200 bg-green-600 text-sm rounded text-white">Đánh giá</Button>
                   </div>
               )
             }
@@ -130,10 +133,11 @@ const Page_order = () => {
   return (
     <div className='w-full relative bg-white '>
       <div className='flex hidden_scroll_x z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4
-      *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:border-white *:whitespace-nowrap top-0'>
+      *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:border-white *:whitespace-nowrap top-0 bg-white border'>
         {
           Array.from({ length: 7 }, (_: any, i: number) =>
-            <button key={i} onClick={() => handle_list_item_status(i)} className={status_item_order === i ? '!border-gray-900' : 'hover:border-gray-900'}>
+            <button key={i} onClick={() => handle_list_item_status(i)} className={status_item_order === i ? '!border-gray-900' 
+            : 'hover:border-gray-900'}>
               {
                 i === 0 ? 'Tất cả' : i === 1 ? 'Chưa xác nhận' : i === 2 ? 'Đã xác nhận' : i === 3 ? 'Đang chuẩn bị hàng' : i === 4 ? 'Đang vận chuyển' : i === 5 ?
                   'Giao thành công' : 'Đã hủy'
@@ -142,7 +146,7 @@ const Page_order = () => {
           )
         }
       </div>
-      <div className='bg-[#F5F5FA] w-full h-4 absolute top-[54px]' />
+      <div className='bg-[#F5F5FA] w-full h-4 pt-16' />
       {
         isLoading || loading_user && <div className='mt-20'><Loading_Dots /></div>
       }
@@ -150,12 +154,12 @@ const Page_order = () => {
         data?.data_order &&
           data?.data_order?.docs.length > 0 ?
           data?.data_order?.docs?.map((item: any) =>
-            <div className='shadow py-2 mb-6 px-4 lg:px-8 rounded' key={item?._id}>
+            <div className='mb-6 px-4 lg:px-8 rounded bg-white' key={item?._id}>
               <span className='px-1 py-2 text-sm'>{status_order(item?.status_item_order)}</span>
-              <div className='*:!border-none *:text-gray-900 -translate-y-12'>
+              <div className='*:!border-none *:text-gray-700 -mt-14'>
                 <DataTable data={item?.items_order} columns={columns} />
               </div>
-              <div key={+item?._id + Math.random()} className='flex justify-between items-center -mt-4'>
+              <div key={+item?._id + Math.random()} className='flex justify-between items-center text-gray-700'>
                 <span className='text-sm'>Hình thức: {(item?.payment_method === 'COD' ? 'Thanh toán khi nhận hàng' : 'Thanh toán trực tuyến')}</span>
                 {
                   (+item?.status_item_order === 6 || +item?.status_item_order === 5) ?
@@ -193,7 +197,7 @@ const Page_order = () => {
           )
           :
           <div className='grid place-items-center h-[70vh] rounded'>
-            <div className='flex flex-col items-center gap-y-6'>
+            <div className='flex flex-col items-center gap-y-6 text-gray-700'>
               <Image width={100} height={100} src='/Images/document_icon.png' alt=''></Image>
               <span className='flex items-center'>Chưa có đơn hàng nào!<Link className='underline mx-1' href={'/san-pham'}> Đi mua ngay</Link></span>
             </div>

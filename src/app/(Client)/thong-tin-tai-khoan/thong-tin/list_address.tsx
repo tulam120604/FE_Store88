@@ -13,8 +13,11 @@ export default function User_address() {
     return (
         <>
             {
-                isLoading ? <Loading_Dots /> :
-                    <div>
+                isLoading ? 
+                <div className='py-10'>
+                    <Loading_Dots />
+                </div> :
+                    <div className='text-gray-700'>
                         {data?.data && data?.data.length > 0 ?
                             data?.data?.map((item: any) => (
                                 <div key={item?._id} className="py-4 lg:flex justify-between px-4 gap-x-6 border-b">

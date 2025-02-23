@@ -3,6 +3,7 @@ import { GET_category } from "@/src/app/_lib/Services/Services_Items/Category";
 import { Suspense } from "react";
 import Loading_Skeleton from "@/src/app/_Components/Loadings/Loading_Skeleton";
 import Custome_swiper_slide_category_product from "./Swiper_slide_category";
+import ReloadPage from "@/src/app/_Components/Pages/ReloadPage";
 
 const Category = async () => {
   noStore();
@@ -13,9 +14,7 @@ const Category = async () => {
         {data?.status === 404 ? (
           <>
             <div className="min-h-[100px] grid place-items-center">
-              <div className="flex flex-col gap-y-2">
-                Lỗi, vui lòng tải lại trang!
-              </div>
+              <ReloadPage/>
             </div>
           </>
         ) : (
@@ -25,7 +24,7 @@ const Category = async () => {
                 propsData={{ data: data }}
               />
             ) : (
-              <div className="py-10 text-center text-sm font-normal h-[310px]">
+              <div className="py-4 text-center text-sm font-normal">
                 Trống!
               </div>
             )}

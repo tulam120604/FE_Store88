@@ -50,16 +50,14 @@ const Side_bar = () => {
       {mutation_auth?.isLoading && <Loading_Overlay />}
       <div className="flex h-full flex-col justify-between">
         <div
-          className="flex flex-col gap-y-2 overflow-hidden *:after:absolute *:after:top-0 *:after:left-0 *:relative 
-                *:after:h-full *:after:bg-[#172850] *:rounded-lg *:px-4 *:py-3 *:text-gray-700"
-        >
+          className="flex flex-col gap-y-2 overflow-hidden *:rounded *:px-4 *:py-3 *:duration-200 *:text-sm p-2">
           <Link
             href={"/thong-tin-tai-khoan/thong-tin"}
             className={`${
               pathName === "/thong-tin-tai-khoan/thong-tin" ||
               pathName === "/thong-tin-tai-khoan/dang-ki-ban-hang"
-                ? "after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]"
-                : "duration-200 hover:bg-[#cdd4ef] hover:after:w-2 text-sm font-medium flex items-center gap-x-4"
+                ? "font-medium flex items-center gap-x-4 bg-[#6F8BFC] text-gray-100"
+                : "hover:bg-[#6F8BFC] hover:text-gray-100 text-sm font-medium flex items-center gap-x-4 text-gray-700"
             } `}
           >
             <User className="!w-5" />
@@ -69,8 +67,8 @@ const Side_bar = () => {
             href={"/thong-tin-tai-khoan/thong-bao"}
             className={`${
               pathName === "/thong-tin-tai-khoan/thong-bao"
-                ? "after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]"
-                : "duration-200 hover:bg-[#cdd4ef] hover:after:w-2 text-sm font-medium flex items-center gap-x-4"
+                ? "font-medium flex items-center gap-x-4 bg-[#6F8BFC] text-gray-100"
+                : "hover:bg-[#6F8BFC] hover:text-gray-100 font-medium flex items-center gap-x-4 text-gray-700"
             } `}
           >
             <div className="relative *:!text-gray-800">
@@ -82,8 +80,8 @@ const Side_bar = () => {
             href={"/thong-tin-tai-khoan/san-pham-yeu-thich"}
             className={`${
               pathName === "/thong-tin-tai-khoan/san-pham-yeu-thich"
-                ? "after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]"
-                : "duration-200 hover:bg-[#cdd4ef] hover:text-black hover:after:w-2 text-sm font-medium flex items-center gap-x-4"
+                ? "font-medium flex items-center gap-x-4 bg-[#6F8BFC] text-gray-100"
+                : "hover:bg-[#6F8BFC] hover:text-gray-100 font-medium flex items-center gap-x-4 text-gray-700"
             } `}
           >
             <Heart />
@@ -93,8 +91,8 @@ const Side_bar = () => {
             href={"/thong-tin-tai-khoan/don-hang"}
             className={`${
               pathName === "/thong-tin-tai-khoan/don-hang"
-                ? "after:w-2 text-sm font-medium flex items-center gap-x-4 bg-[#cdd4ef]"
-                : "duration-200 hover:bg-[#cdd4ef] hover:text-black hover:after:w-2 text-sm font-medium flex items-center gap-x-4"
+                ? "font-medium flex items-center gap-x-4 bg-[#6F8BFC] text-gray-100"
+                : "hover:bg-[#6F8BFC] hover:text-gray-100 font-medium flex items-center gap-x-4 text-gray-700"
             } `}
           >
             <Box />
@@ -102,7 +100,8 @@ const Side_bar = () => {
           </Link>
           <button
             onClick={log_out}
-            className="duration-200 relative after:absolute after:top-0 after:left-0 after:h-full hover:after:w-2 after:bg-[#1F2937] hover:border-[#1F2937] hover:bg-[#cdd4ef] px-4 py-3 text-sm font-medium text-gray-700 flex items-center gap-x-4"
+            className="hover:bg-[#6F8BFC] px-4 py-3 text-sm font-medium text-gray-700 
+            hover:text-gray-100 flex items-center gap-x-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

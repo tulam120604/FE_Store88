@@ -32,7 +32,7 @@ export default async function Page({ searchParams }: any) {
           <div className="flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-4">
             <Breadcrum
               textProps={{
-                name_item: `shop > ${data?.data?.user_name}`,
+                bread_1: `shop > ${data?.data?.user_name}`,
               }}
             />
           </div>

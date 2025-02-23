@@ -9,7 +9,11 @@ const San_pham_lien_quan = async ({ dataProps }: any) => {
     dataProps?.id_category,
     dataProps?.id_current_product
   );
-  return <List_Products data={data?.data?.docs} />;
+  return (
+    <div className="mt-4">
+      <List_Products data={data?.data?.docs} />
+    </div>
+  );
 };
 
 export default San_pham_lien_quan;

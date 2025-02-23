@@ -25,7 +25,7 @@ const Products = async ({ searchParams }: any) => {
       <div className="lg:pt-2 max-w-[1440px] mx-auto w-[95vw]">
         <section className='flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-2'>
           <Breadcrum textProps={{
-            name_item: 'Sản phẩm',
+            bread_1: 'Sản phẩm',
           }} />
         </section>
         <div className="relative text-center mb-4 lg:mb-8 bg-white py-4 border-b-4 border-gray-700">

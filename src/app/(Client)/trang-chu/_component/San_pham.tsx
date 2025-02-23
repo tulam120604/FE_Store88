@@ -25,7 +25,9 @@ const Products_Home = async () => {
                         {
                             data?.data?.docs ?
                                 ((data?.data?.docs?.length < 1) ? <span className='text-center'>Trống!</span> :
-                                    <List_Products data={data?.data?.docs} />) :
+                                    <div className='mt-4'>
+                                        <List_Products data={data?.data?.docs} />
+                                    </div> ) :
                                 <Loading_Dots />
                         }
                         {

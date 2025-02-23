@@ -135,7 +135,7 @@ const Page_checkout = () => {
         :
         <>
           <div className='max-w-[1440px] mx-auto w-[95vw] pt-2'>
-            <Breadcrum textProps={{ name_item: 'Thanh toán' }} />
+            <Breadcrum textProps={{ bread_1: 'Thanh toán' }} />
           </div>
           <form onSubmit={handleSubmit(on_Checkout)} className={`relative py-6 ${mutate_order.isLoading &&
             'after:fixed after:top-0 after:left-0 after:w-screen after:h-screen after:bg-[#33333366]'}`}>
@@ -233,8 +233,8 @@ const Page_checkout = () => {
                     total_price > 0 ?
                       (
                         check_payment ?
-                          <Button className='bg-[#04BE04] hover:bg-green-600 mt-4' type='submit'>Thanh toán</Button> :
-                          <Button className='bg-[#04BE04] hover:bg-green-600 mt-4'>
+                          <Button className='bg-[#5B7FFB] hover:bg-[#5B7FFB] mt-4' type='submit'>Thanh toán</Button> :
+                          <Button className='bg-[#5B7FFB] hover:bg-[#5B7FFB] mt-4'>
                             {mutate_order.isLoading ? <Loading_Dots /> : 'Đến cổng thanh toán'}
                           </Button>
                       ) :

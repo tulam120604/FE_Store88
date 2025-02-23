@@ -43,7 +43,7 @@ const Page_infor = () => {
           :
           <>
             {/* desktop */}
-            <div className='hidden lg:flex justify-between'>
+            <div className='hidden lg:flex justify-between text-gray-700'>
               <div className='flex flex-col gap-y-1 border-b pb-4 lg:pb-8 w-full'>
                 <span className='lg:text-xl'>Hồ sơ của tôi</span>
                 <span className='text-sm text-gray-700 font-sans'>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
@@ -57,19 +57,21 @@ const Page_infor = () => {
               }
             </div>
             <div className='hidden lg:grid grid-cols-2 gap-4 max-w-[70%] mx-auto my-14'>
-              <span className='text-gray-600'>Tên hiển thị</span>
-              <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded text-gray-800'>{data_user?.data && data_user?.data?.user_name}</div>
+              <span className='text-gray-600 font-light'>Tên hiển thị</span>
+              <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded text-gray-700'>{data_user?.data && data_user?.data?.user_name}</div>
               {/* email */}
-              <span className='text-gray-600'>Email</span>
-              <div className='lg:w-[70%] w-[60%] border lg:py-2 py-1 px-4 rounded text-gray-800 
-              overflow-hidden flex justify-between items-center tracking-[1px]'>
+              <span className='text-gray-600 font-light'>Email</span>
+              <div className='lg:w-[70%] w-[60%] border lg:py-2 py-1 px-4 rounded 
+              overflow-hidden flex justify-between items-center tracking-[1px] text-gray-700'>
                 {data_user?.data?.email?.slice(0, 2) + '*****' + data_user?.data?.email?.slice(7)}
               </div>
               {/* sdt */}
-              <span className='text-gray-600'>Số điện thoại</span>
+              <span className='text-gray-600 font-light'>Số điện thoại</span>
               {
                 data_user?.data && data_user?.data?.phone ?
-                  <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded text-gray-800 overflow-hidden'>{data_user?.data && data_user?.data?.phone}</div>
+                  <div className='lg:w-[70%] w-[60%] border py-1 lg:py-2 px-4 rounded overflow-hidden text-gray-700'>
+                    {data_user?.data && data_user?.data?.phone}
+                    </div>
                   :
                   <Link href={''} className='lg:w-[70%] w-[40%] underline px-4 rounded text-sky-600'>thêm</Link>
               }
@@ -79,7 +81,7 @@ const Page_infor = () => {
               <Page_infor_mobile data_user={data_user} />
             </div>
             {/* --- */}
-            <section className='flex items-center justify-between my-5 py-5 border-y'>
+            <section className='flex items-center justify-between my-5 py-5 border-y text-gray-700'>
               <span className='lg:text-xl text-sm'>Địa chỉ</span>
               <Button className='lg:text-sm text-xs px-2 lg:py-2 py-1.5 h-auto bg-[#597BFE] hover:bg-[#6f8bfc]' onClick={handle_Show_Form_Create_Address}>Thêm địa chỉ +</Button>
             </section>
@@ -87,7 +89,7 @@ const Page_infor = () => {
               <Address_component id_user={data_user?.data?._id} />
             </div>
             <div onClick={handle_Close_Form_Create_Address} ref={bg_form_create_address}
-              className='fixed hidden w-screen h-screen top-0 left-0 z-[10] bg-[#33333355]'></div>
+              className='fixed hidden w-screen h-screen top-0 left-0 z-[10] bg-[#33333355]'/>
             <User_address />
           </>
       }

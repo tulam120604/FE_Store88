@@ -140,7 +140,7 @@ const Cart = () => {
                 loading_mutation && <Loading_Overlay />
               }
               <div className='max-w-[1440px] mx-auto w-[95vw] mb-4 pt-2'>
-                <Breadcrum textProps={{ name_item: 'Giỏ hàng' }} />
+                <Breadcrum textProps={{ bread_1: 'Giỏ hàng' }} />
               </div>
               {/* list items */}
               <Table_Cart dataProps={dataProps} />

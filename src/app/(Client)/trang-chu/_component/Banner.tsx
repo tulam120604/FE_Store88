@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Suspense } from 'react';
-import Slide_show from '@/src/app/_Components/Slide/Slide_show';
 import Loading_Skeleton from '@/src/app/_Components/Loadings/Loading_Skeleton';
+import Slide_show from '@/src/app/_Components/Slide/Slide_show';
 
 const Banner = () => {
   return (

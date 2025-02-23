@@ -1,6 +1,6 @@
 import Anh_san_pham from "./_components/anh_san_pham";
 import Breadcrum from "@/src/app/_Components/breadcrum/breadcrum";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 import Mo_ta_san_pham from "./_components/mo_ta_san_pham";
 import Thong_tin_cua_hang from "./_components/thong_tin_cua_hang";
 import { GET_detail_item } from "../../_lib/Services/Services_Items/Product";
@@ -27,7 +27,7 @@ const page = async ({ searchParams }: any) => {
   // console.log(isClient);
   const data = await GET_detail_item(searchParams?.p);
   const data_category = await GET_product_by_category(data?.category_id);
-  revalidatePath("/products/[detail_product]", "page");
+  // revalidatePath("/products/[detail_product]", "page");
 
   // get feedback
   const data_feedback = await get_feedBack_in_item(data?._id);
@@ -48,11 +48,11 @@ const page = async ({ searchParams }: any) => {
         </>
       ) : (
         <>
-          <section className="flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-4">
+          <section className="font-medium capitalize text-gray-700 mb-4">
             <Breadcrum
               textProps={{
-                name_item: data?.short_name,
-                name_category: data_category,
+                bread_1: data_category,
+                bread_2: data?.short_name,
               }}
             />
           </section>
@@ -77,10 +77,9 @@ const page = async ({ searchParams }: any) => {
               data_feedback,
             }}
           />
-          <div className="mt-6 p-4 bg-white rounded-lg">
-            <span className="font-medium !text-lg mb-2">
-              Sản phẩm liên quan
-            </span>
+          <div className="mt-6 !bg-[#F5F5FA] rounded-lg">
+          <span className="text-gray-600 antialiased tracking-[0.3px] text-xl 
+          font-semibold mt-6 lg:mt-0">Sản phẩm liên quan</span>
             <San_pham_lien_quan
               dataProps={{
                 id_category: data?.category_id,

@@ -4,7 +4,7 @@ const List_Products = ({ data }: any) => {
     // const isClient = typeof window !== 'undefined';
     // console.log(isClient);
     return (
-        <div className="grid py-4 lg:grid-cols-6 md:grid-cols-3 gap-x-3 grid-cols-2 justify-between gap-y-4">
+        <div className="grid lg:grid-cols-6 md:grid-cols-3 gap-x-3 grid-cols-2 justify-between gap-y-4">
             {Array.isArray(data) &&
                 data?.map((item: any) => {
                     return (
