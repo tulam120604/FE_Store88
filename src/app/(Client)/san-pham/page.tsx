@@ -6,7 +6,7 @@ import Paginate_item from './_component/Paginate';
 import type { Metadata } from 'next';
 import Breadcrum from '../../_Components/breadcrum/breadcrum';
 import Menu_bar from './_component/Menubar';
-import { GET_items_client } from '../../_lib/Services/Services_Items/Product';
+import { list_product_client } from '../../_lib/Services/Services_Items/Product';
 import List_Products from '../../_Components/Products/List_Products';
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ const Products = async ({ searchParams }: any) => {
   let page = searchParams._page ?? 1;
   const bestSeller = searchParams._bestseller ?? '';
   noStore();
-  const data = await GET_items_client(page, 30, bestSeller);
+  const data = await list_product_client(page, 30, bestSeller);
   //  const isClient = typeof window !== 'undefined';
   //   console.log(isClient);
   return (

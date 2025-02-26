@@ -13,7 +13,8 @@ const Form_add_category = () => {
     function onAdd_category(data_form: any) {
         const formData = new FormData();
         formData.append('category_name', data_form.category_name);
-        formData.append('category_img', (typeof data_form.category_img == 'string') ? data_form.category_img : data_form.category_img[0]);
+        formData.append('category_img', (typeof data_form.category_img == 'string') ? 
+        data_form.category_img : data_form.category_img[0]);
         mutate_category.on_Submit_category(formData);
     }
 

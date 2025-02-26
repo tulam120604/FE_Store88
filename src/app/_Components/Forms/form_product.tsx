@@ -6,17 +6,17 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '../ui/Tables/button';
 import Form_add_category from './form_category';
 import { CircleMinus } from 'lucide-react';
-import { useCustome_Hooks_Form } from '../../_lib/Custome_Hooks/MyForm';
 import Loading_Dots from '../Loadings/Loading_Dots';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import Form_variant from './form_variant';
 import { useRouter } from 'next/navigation';
+import { useCustome_Hook_Product } from '../../_lib/Custome_Hooks/Hook_product';
 
 
-const MyForm: React.FC<any> = ({ mode }: any) => {
+const Form_product: React.FC<any> = ({ mode }: any) => {
     const router = useRouter();
     const { my_Form, submitForm, isLoading, loading, data_Category, data_detail_product, filed_form_data }
-        = useCustome_Hooks_Form({ mode });
+        = useCustome_Hook_Product({ mode });
     const [change_img, setChange_img] = useState([]);
     const [images, setImages] = useState<any[]>([]);
     const [category_form, setCategory_form] = useState<boolean>(false);
@@ -176,7 +176,8 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
                             (change_img.length > 0) ?
                                 change_img?.map((uri: any, i: number) => (
                                     <div key={uri} className='relative border border-gray-300 rounded'>
-                                        <img className='w-[100px] h-[100px] rounded' src={uri} alt='' />
+                                        <img className='w-[100px] h-[100px] rounded' src={uri} 
+                                        alt='loading' />
                                         <button className='absolute top-0 right-0 *:w-4 *:h-4 text-xs text-red-500 bg-white rounded-full hover:scale-110 duration-200'
                                             onClick={() => handle_minus_image(uri, i)} type='button'>
                                             <CircleMinus />
@@ -268,4 +269,4 @@ const MyForm: React.FC<any> = ({ mode }: any) => {
         </section>
     </>)
 }
-export default MyForm
+export default Form_product

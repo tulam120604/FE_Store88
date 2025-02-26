@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import React from 'react'
 import { Button } from '../../../_Components/ui/Shadcn/button'
@@ -28,7 +29,7 @@ const Mo_ta_san_pham = ({ dataProps }: any) => {
                                 <div key={item?._id} className="border-t lg:p-6 mb:p-5">
                                     {/* user and time comment */}
                                     <div className="flex items-center *:flex *:items-center gap-x-4 border-b border-[#F4F4F4] pb-4 mb-4">
-                                        <Image width={36} height={36} src="/Images/vikki_user_icon.png" alt='' />
+                                        <img width={36} height={36} src={item?.user_id?.avatar} alt='' />
                                         <div className='w-full flex items-center justify-between'>
                                             <div>
                                                 <div className="flex items-center text-base text-[#1A1E26] gap-x-4 whitespace-nowrap">

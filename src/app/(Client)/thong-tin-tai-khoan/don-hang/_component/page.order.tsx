@@ -38,17 +38,17 @@ const Page_order = () => {
   function status_order(item: any) {
     switch (+item) {
       case 1:
-        return <span className='flex items-center gap-x-2'><CircleEllipsis className='h-5' />Chờ xác nhận</span>;
+        return <span className='text-yellow-600 flex items-center gap-x-2 '><CircleEllipsis className='h-5'/>Chờ xác nhận</span>;
       case 2:
-        return <span className='text-green-500 flex items-center gap-x-2'><CircleCheck className='h-5' />Đã xác nhận</span>;
+        return <span className='text-green-500 flex items-center gap-x-2'><CircleCheck className='h-5'/>Đã xác nhận</span>;
       case 3:
-        return <span className='text-sky-500 flex items-center gap-x-2'><PackageOpen className='h-5' />Đang chuẩn bị</span>;
+        return <span className='text-sky-500 flex items-center gap-x-2'><PackageOpen className='h-5'/>Đang chuẩn bị</span>;
       case 4:
-        return <span className='text-sky-500 flex items-center gap-x-2'><Truck className='h-5' />Đang vận chuyển</span>;
+        return <span className='text-sky-500 flex items-center gap-x-2'><Truck className='h-5'/>Đang vận chuyển</span>;
       case 5:
-        return <span className='text-green-500 flex items-center gap-x-2'><CircleCheck className='h-5' />Đơn hàng đã được giao thành công</span>;
+        return <span className='text-green-500 flex items-center gap-x-2'><CircleCheck className='h-5'/>Đơn hàng đã được giao thành công</span>;
       case 6:
-        return <span className='text-red-500 flex items-center gap-x-1'><X className='h-5' />ĐÃ HỦY</span>;
+        return <span className='text-red-500 flex items-center gap-x-1'><X className='h-5'/>ĐÃ HỦY</span>;
       default: return;
     }
   }

@@ -4,14 +4,14 @@ import { unstable_noStore as noStore } from "next/cache";
 import List_Products from "@/src/app/_Components/Products/List_Products";
 import Paginate_item from "../_component/Paginate";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
-import { GET_item_by_category } from "@/src/app/_lib/Services/Services_Items/Product";
-import { GET_product_by_category } from "@/src/app/_lib/Services/Services_Items/Category";
+import { list_product_by_category } from "@/src/app/_lib/Services/Services_Items/Product";
+import { view_detail_category } from "@/src/app/_lib/Services/Services_Items/Category";
 import Breadcrum from "@/src/app/_Components/breadcrum/breadcrum";
 
 const Page = async ({ searchParams }: any) => {
   noStore();
-  const data = await GET_item_by_category(undefined, searchParams?.p);
-  const detail_category = await GET_product_by_category(searchParams?.p);
+  const data = await list_product_by_category(undefined, searchParams?.p);
+  const detail_category = await view_detail_category(searchParams?.p);
   //  const isClient = typeof window !== 'undefined';
   //   console.log(isClient);
   return (

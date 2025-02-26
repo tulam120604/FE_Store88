@@ -17,14 +17,13 @@ export default function Table_Cart({ dataProps }: any) {
         <div>
             {/* header table*/}
             <div className='hidden lg:block '>
-                <div className='grid lg:grid-cols-[20px_100px_300px_150px_150px_160px_200px_50px] justify-between 
-                bg-white p-4 rounded-lg items-center text-gray-800'>
+                <div className='grid lg:grid-cols-[40px_100px_400px_150px_160px_200px_100px] justify-between 
+                bg-white p-4 rounded-lg items-center text-gray-700 overflow-x-auto hidden_scroll_y'>
                     {/* 88 */}
                     <Checkbox checked={(dataProps?.data_item_checkked?.length == dataProps?.data?.items?.length && dataProps?.data?.items?.length > 0) ? true : false} />
                     {/* 88 */}
                     <span>Sản phẩm</span>
                     {/* 88 */}
-                    <span></span>
                     {/* 88 */}
                     <span></span>
                     {/* 88 */}
@@ -34,13 +33,16 @@ export default function Table_Cart({ dataProps }: any) {
                     {/* 88 */}
                     <span>Tạm tính</span>
                     {/* 88 */}
-                    <div className="px-2 !text-red-600">
+                    <div className="px-2">
+                        <span>Thao tác</span>
+                    </div>
+                    {/* <div className="px-2 !text-red-600">
                         <AlertDialog>
                             {dataProps?.data_checked_true.length > 0 ?
                                 <AlertDialogTrigger>
                                     Xóa
                                 </AlertDialogTrigger> :
-                                <span className='cursor-pointer opacity-50'>Xóa</span>
+                                <span className='opacity-50'>Xóa</span>
                             }
                             <AlertDialogContent>
                                 <AlertDialogHeader>
@@ -52,7 +54,7 @@ export default function Table_Cart({ dataProps }: any) {
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             {/* body table */}
@@ -62,8 +64,9 @@ export default function Table_Cart({ dataProps }: any) {
                         {
                             dataProps?.data?.items?.map((item: any) => {
                                 return (
-                                    <div className="grid lg:grid-cols-[20px_100px_500px_150px_160px_200px_50px] grid-cols-[20px_auto_auto]
-                                    p-4 rounded-lg bg-white my-4 justify-between items-center py-4 relative gap-4" key={item._id}>
+                                    <div className="grid lg:grid-cols-[20px_100px_400px_150px_160px_200px_100px] grid-cols-[20px_auto_auto]
+                                    p-4 rounded-lg bg-white my-4 justify-between items-center py-4 relative overflow-x-auto hidden_scroll_y" 
+                                    key={item._id}>
                                         <Het_hang dataProps={item} />
                                         {/* 88 */}
                                         <Checkbox checked={item?.status_checked && true} onClick={() => dataProps?.handle_Checkked(item?.product_id, item?.name_varriant, item?.value_varriant)} />

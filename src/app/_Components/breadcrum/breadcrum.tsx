@@ -6,7 +6,7 @@ import React from 'react'
 const Breadcrum = ({ textProps }: any) => {
     return (
         <nav aria-label="Breadcrumb" className="flex whitespace-nowrap truncate">
-            <ol className="flex gap-x-2 overflow-hidden rounded-lg border-none text-gray-900">
+            <ol className="flex gap-x-1 overflow-hidden rounded-lg border-none text-gray-900">
                 <li className="flex items-center">
                     <Link
                         href="/"
@@ -17,13 +17,13 @@ const Breadcrum = ({ textProps }: any) => {
 
                 <li className="relative flex items-center">
                     {textProps && <div
-                        className="flex gap-x-1 h-10 items-center cursor-default bg-none text-xs font-medium transition text-gray-800 hover:text-gray-900"
-                    >
+                        className="flex gap-x-1 h-10 items-center cursor-default bg-none text-xs font-medium transition 
+                        text-gray-800 hover:text-gray-900">
                         {
                             textProps?.bread_1 &&
-                            <Link href={`/products/${textProps?.bread_1?._id}`} >/ {textProps.bread_1?.category_name || textProps.bread_1}</Link>
+                            <Link href={`/products/${textProps?.bread_1?._id}`} >{'/ ' + textProps.bread_1}</Link>
                         }
-                        <span>{textProps.bread_2 && ('/' + textProps?.bread_2)}</span>
+                        <span>{textProps.bread_2 && ('/ ' + textProps?.bread_2)}</span>
                     </div>}
                 </li>
             </ol>

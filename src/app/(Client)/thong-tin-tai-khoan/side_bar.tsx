@@ -6,7 +6,7 @@ import React, { Suspense } from "react";
 import Swal from "sweetalert2";
 import { useToast } from "@/src/app/_Components/ui/use-toast";
 import Bell_component from "../../_Components/Notification/Bell_component";
-import { Box, Heart, User } from "lucide-react";
+import { Box, Heart, LogOut, User } from "lucide-react";
 import { Mutation_Auth } from "../../_lib/Query_APIs/Auth/Auth_mutation";
 import { eventEmit } from "../../_Components/ui/Header/Event_emit";
 import Loading_Skeleton from "../../_Components/Loadings/Loading_Skeleton";
@@ -49,8 +49,7 @@ const Side_bar = () => {
     <Suspense fallback={<Loading_Skeleton number_elements={1} />}>
       {mutation_auth?.isLoading && <Loading_Overlay />}
       <div className="flex h-full flex-col justify-between">
-        <div
-          className="flex flex-col gap-y-2 overflow-hidden *:rounded *:px-4 *:py-3 *:duration-200 *:text-sm p-2">
+        <div className="flex flex-col gap-y-2 overflow-hidden *:rounded *:px-4 *:py-3 *:duration-200 *:text-sm p-2">
           <Link
             href={"/thong-tin-tai-khoan/thong-tin"}
             className={`${
@@ -103,24 +102,7 @@ const Side_bar = () => {
             className="hover:bg-[#6F8BFC] px-4 py-3 text-sm font-medium text-gray-700 
             hover:text-gray-100 flex items-center gap-x-4"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-file-output"
-            >
-              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-              <path d="M4 7V4a2 2 0 0 1 2-2 2 2 0 0 0-2 2" />
-              <path d="M4.063 20.999a2 2 0 0 0 2 1L18 22a2 2 0 0 0 2-2V7l-5-5H6" />
-              <path d="m5 11-3 3" />
-              <path d="m5 17-3-3h10" />
-            </svg>
+            <LogOut strokeWidth={1.8} className="h-5 rotate-180" />
             <span className="hidden lg:block">Đăng xuất</span>
           </button>
         </div>

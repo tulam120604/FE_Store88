@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 
 // danh sach
-export async function GET_category() {
+export async function list_category() {
     try {
         const res = await fetch(`${apiURi}/category`);
         if (!res.ok) {
@@ -19,7 +19,7 @@ export async function GET_category() {
 }
 
 // chi tiet
-export async function GET_product_by_category(id: any) {
+export async function view_detail_category(id: any) {
     try {
         const res = await fetch(`${apiURi}/category/${id}`);
         if (!res.ok) {
@@ -34,7 +34,7 @@ export async function GET_product_by_category(id: any) {
 }
 
 // add
-export async function POST_category(item: any) {
+export async function create_category(item: any) {
     try {
         const res = await fetch(`${apiURi}/category`, {
             method: 'post',

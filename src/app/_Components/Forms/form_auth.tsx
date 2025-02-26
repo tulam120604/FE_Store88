@@ -3,15 +3,16 @@
 
 import Link from 'next/link';
 import React from 'react'
-import { Custome_Hooks_Auth } from '../../_lib/Custome_Hooks/Auth_Form';
 import Loading_Spin from '../Loadings/Loading_Spin';
 import Image from 'next/image';
 import { Input } from '../ui/Shadcn/input';
 import { Button } from '../ui/Shadcn/button';
+import { useCustome_Hook_Auth } from '../../_lib/Custome_Hooks/Hook_auth';
 
 const Form_auth = ({ mode }: any) => {
     // console.log(mode);
-    const { my_form, isLoading, status_Loading, onSubmit, errors, routing } = Custome_Hooks_Auth({ mode });
+    const { my_form, isLoading, status_Loading, onSubmit, errors, routing } = 
+    useCustome_Hook_Auth({ mode });
     if (status_Loading === 'call_ok') {
         if (mode !== "Register") {
             routing.push('/');

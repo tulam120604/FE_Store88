@@ -129,7 +129,7 @@ const Cart = () => {
 
   return (
     <Suspense fallback={<LoadingCart />}>
-      <div className="max-w-[1440px] w-[95vw] mx-auto lg:pb-8 overflow-hidden">
+      <div className="max-w-[1440px] w-[95vw] mx-auto lg:pb-8">
         {
           isLoading || loading_user ?
             <div className='max-w-[1440px] mx-auto w-[95vw] h-full'>

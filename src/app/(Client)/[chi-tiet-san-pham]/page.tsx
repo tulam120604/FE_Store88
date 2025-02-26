@@ -3,19 +3,19 @@ import Breadcrum from "@/src/app/_Components/breadcrum/breadcrum";
 // import { revalidatePath } from "next/cache";
 import Mo_ta_san_pham from "./_components/mo_ta_san_pham";
 import Thong_tin_cua_hang from "./_components/thong_tin_cua_hang";
-import { GET_detail_item } from "../../_lib/Services/Services_Items/Product";
+import { view_detail_product } from "../../_lib/Services/Services_Items/Product";
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import Thong_tin_san_pham from "./_components/thong_tin_san_pham";
 import San_pham_lien_quan from "./_components/san_pham_lien_quan";
 import { get_feedBack_in_item } from "../../_lib/Services/Service_Feedback/Feedback";
 import type { Metadata } from "next";
-import { GET_product_by_category } from "../../_lib/Services/Services_Items/Category";
+import { view_detail_category } from "../../_lib/Services/Services_Items/Category";
 
 export async function generateMetadata({
   searchParams,
 }: any): Promise<Metadata> {
-  const data = await GET_detail_item(searchParams?.p);
+  const data = await view_detail_product(searchParams?.p);
   return {
     title: data?.short_name,
   };
@@ -25,8 +25,8 @@ const page = async ({ searchParams }: any) => {
   noStore();
   //  const isClient = typeof window !== 'undefined';
   // console.log(isClient);
-  const data = await GET_detail_item(searchParams?.p);
-  const data_category = await GET_product_by_category(data?.category_id);
+  const data = await view_detail_product(searchParams?.p);
+  const data_category = await view_detail_category(data?.category_id);
   // revalidatePath("/products/[detail_product]", "page");
 
   // get feedback

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 
 // list item client
-export async function GET_items_client(
+export async function list_product_client(
   page: number,
   count_item: number,
   bestSeller?: any,
@@ -33,7 +33,7 @@ export async function GET_items_client(
 }
 
 // limit item
-export async function GET_limit_items(countItem: number) {
+export async function list_product_with_limit(countItem: number) {
   try {
     const res = await fetch(
       `${apiURi}/list_products/client?&_limit=${countItem}`
@@ -54,7 +54,7 @@ export async function GET_limit_items(countItem: number) {
 }
 
 // detail
-export async function GET_detail_item(id: number | string) {
+export async function view_detail_product(id: number | string) {
   try {
     const res = await fetch(`${apiURi}/products/${id}`);
     if (!res.ok) {
@@ -69,7 +69,7 @@ export async function GET_detail_item(id: number | string) {
 }
 
 // detail dashboard
-export async function GET_detail_item_dashboard(id: number | string) {
+export async function view_detail_product_dashboard(id: number | string) {
   try {
     const res = await fetch(`${apiURi}/products/dashboard/${id}`);
     if (!res.ok) {
@@ -84,7 +84,7 @@ export async function GET_detail_item_dashboard(id: number | string) {
 }
 
 // list items dashboard
-export async function GET_item_dashboard(page: number, limit_item: number) {
+export async function list_product_dashboard(page: number, limit_item: number) {
   try {
     let uri = `${apiURi}/list_products/admin?_page=${page}&_limit=${limit_item}`;
     const res = await fetch(uri, {
@@ -103,7 +103,7 @@ export async function GET_item_dashboard(page: number, limit_item: number) {
 }
 
 // add
-export async function POST_item(item: any) {
+export async function create_product(item: any) {
   console.log(item);
   try {
     const res = await fetch(`${apiURi}/create_product`, {
@@ -129,7 +129,7 @@ export async function POST_item(item: any) {
 }
 
 // xoa mem
-export async function REMOVE_item(item: any) {
+export async function delete_product(item: any) {
   try {
     const res = await fetch(`${apiURi}/products/${item.id_item}`, {
       method: "delete",
@@ -151,7 +151,7 @@ export async function REMOVE_item(item: any) {
 }
 
 // recycle items adminstration
-export async function GET_recycle_item(page?: Number) {
+export async function list_product_in_recycle(page?: Number) {
   try {
     let uri = `${apiURi}/products/admin/trash`;
     // if (page) {
@@ -175,7 +175,7 @@ export async function GET_recycle_item(page?: Number) {
 }
 
 // restore :
-export async function RESTORE_item(dataClient: any) {
+export async function restore_product(dataClient: any) {
   try {
     let uri = `${apiURi}/products/admin/trash/${dataClient.id_item}`;
     // if (page) {
@@ -201,7 +201,7 @@ export async function RESTORE_item(dataClient: any) {
   }
 }
 // xoa item vinh vien ( no restore )
-export async function DESTROY_item(dataClient: any) {
+export async function delete_product_permanent(dataClient: any) {
   console.log(dataClient?.id_item);
   try {
     let uri = `${apiURi}/products/destroy_item/${dataClient.id_item}`;
@@ -226,7 +226,7 @@ export async function DESTROY_item(dataClient: any) {
 }
 
 // update
-export async function PUT_item_dashboard(dataClient?: any) {
+export async function update_product_dashboard(dataClient?: any) {
   try {
     let uri = `${apiURi}/products/admin/${dataClient.id_item}`;
     const res = await fetch(uri, {
@@ -251,7 +251,7 @@ export async function PUT_item_dashboard(dataClient?: any) {
 }
 
 // get item by category :
-export async function GET_item_by_category(
+export async function list_product_by_category(
   page?: any,
   id_category?: any,
   id_current_product?: any

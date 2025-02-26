@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Mutation_Auth } from "../Query_APIs/Auth/Auth_mutation";
 
 
-export function Custome_Hooks_Auth({ mode }: any) {
+export function useCustome_Hook_Auth({ mode }: any) {
     const routing = useRouter();
     const { my_form, isLoading, status_Loading, onSubmit } = Mutation_Auth({
         action: mode === 'Register' ? 'REGISTER' : "LOGIN"
