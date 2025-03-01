@@ -83,7 +83,9 @@ export default function Page() {
             <Image width={100} height={100} loading="lazy" className="w-[100px] h-[100px] border" src={row?.original?.product_id?.gallery[0]} alt="Loading..." />
           </Link>
           <div className="w-full flex flex-col gap-y-3">
-            <Link href={'/' + row?.original?.product_id?._id} className="line-clamp-2">{row?.original?.product_id?.short_name}</Link>
+            <span className="line-clamp-2">
+            {row?.original?.product_id?.short_name}
+            </span>
             {
               (row?.original?.color_item || row?.original?.size_attribute_item) &&
               <span className="text-sm">Phân loại : {row?.original?.color_item} , {row?.original?.size_attribute_item}</span>
@@ -140,9 +142,9 @@ export default function Page() {
     return <Loading_Dots />
   }
   return (
-    <div className='rounded bg-white border border-gray-300 py-10 -translate-y-7'>
-      <strong className='text-xl'>Chi tiết đơn hàng</strong>
-      <div className='mt-6'>
+    <div className='rounded py-4 text-gray-700'>
+      <span className='text-xl'>Chi tiết đơn hàng</span>
+      <div className='mt-6 bg-white p-6 rounded'>
         <span className='text-sm flex gap-x-3'>Trạng thái: {status_order(data?.data_order_by_id?.status_item_order)}</span>
         <div className='-translate-y-8'>
           <DataTable data={data?.data_order_by_id?.items_order} columns={columns} />

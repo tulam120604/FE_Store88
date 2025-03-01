@@ -4,11 +4,11 @@
 import { Suspense, useEffect } from "react";
 import { Query_List_Items_Dashboard } from "@/src/app/_lib/Query_APIs/Items/Query";
 import { Mutation_Items } from "@/src/app/_lib/Query_APIs/Items/Mutation_product";
-import Pagination_Component from "../_component/Pagination";
+import Pagination_Component from "../_components/Pagination";
 import { useSearchParams } from "next/navigation";
 import { useCheck_user } from "@/src/app/_lib/Custome_Hooks/User";
 import { io } from 'socket.io-client';
-import Data_Table from "../../_components/Data_Table";
+import Data_Table from "../_components/Data_Table";
 import { Auth_Provider } from "../../_Auth_Wrapper/Page";
 import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 

@@ -13,7 +13,6 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Loading_Dots from "../_Components/Loadings/Loading_Dots";
-import Image from "next/image";
 import { Infor_user } from "../_lib/Query_APIs/Auth/Query_Auth";
 
 const SideBarDashboard = () => {
@@ -87,12 +86,12 @@ const SideBarDashboard = () => {
               open={isActive ? true : false}
               className="group [&_summary::-webkit-details-marker]:hidden"
             >
-              <summary className="flex cursor-pointer *:duration-300 *:flex *:items-center *:gap-x-2 justify-between *:w-full">
+              <summary className="flex cursor-pointer *:duration-150 *:flex *:items-center *:gap-x-2 justify-between *:w-full">
                 {item?.child_uri ? (
                   <div
                     className={`${
-                      isActive && "bg-[#172850] text-gray-200"
-                    } lg:px-4 lg:py-2 p-1.5 hover:bg-[#172850] hover:text-gray-200 rounded justify-between`}
+                      isActive && "bg-[#6F8BFC] text-gray-200"
+                    } lg:px-4 lg:py-2 p-1.5 hover:bg-[#6F8BFC] hover:text-gray-200 rounded justify-between`}
                   >
                     <section className="flex items-center gap-x-2">
                       {item?.icon}
@@ -107,8 +106,8 @@ const SideBarDashboard = () => {
                     href={item?.pathName}
                     className={`${
                       isActive
-                        ? "bg-[#172850] text-gray-200"
-                        : "hover:bg-[#172850] hover:text-gray-200"
+                        ? "bg-[#6F8BFC] text-gray-200"
+                        : "hover:bg-[#6F8BFC] hover:text-gray-200"
                     } lg:px-4 lg:py-2.5 p-1.5 rounded`}
                   >
                     {item?.icon}
@@ -129,11 +128,11 @@ const SideBarDashboard = () => {
                     >
                       <div
                         className={`${
-                          isChildActive && "bg-[#172850] border-[#172850]"
+                          isChildActive && "bg-[#172850] border-black"
                         } 
-                                                    w-3 h-3 border border-[#172850] rounded-full`}
+                                                    w-3 h-3 border border-black rounded-full`}
                       />
-                      <span className="hidden lg:block text-sm">
+                      <span className="hidden lg:block text-sm hover:text-gray-900">
                         {uri?.name}
                       </span>
                     </Link>
@@ -146,7 +145,7 @@ const SideBarDashboard = () => {
         <Link
           href={"/"}
           className="flex gap-x-2 lg:px-4 lg:py-2.5 p-1.5 rounded 
-          hover:bg-[#172850] hover:text-gray-200"
+          hover:bg-[#6F8BFC] hover:text-gray-200"
         >
           <LogOut strokeWidth={1.8} className="h-5 rotate-180" />
           <span className="hidden lg:block text-sm">Thoát</span>

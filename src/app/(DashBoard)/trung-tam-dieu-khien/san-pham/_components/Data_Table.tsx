@@ -95,7 +95,7 @@ export default function Data_Table({ dataProps }: any) {
                                     (
                                         data?.variant?.variants?.map((item: any) => (
                                             item?.value_variants?.map((value: any) => (
-                                                <div key={item?._id} className="grid border-t duration-200 border-gray-300 gap-x-4 grid-cols-[100px_180px_150px_100px_150px_100px_150px_80px] 
+                                                <div key={item?._id} className="grid border-t duration-200 border-gray-300 gap-x-4 grid-cols-[100px_180px_145px_100px_150px_100px_150px_80px] 
                                                 items-center text-start justify-between py-4">
                                                     <div></div>
                                                     {/* attributes */}

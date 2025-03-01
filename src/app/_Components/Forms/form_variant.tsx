@@ -45,23 +45,17 @@ export default function Form_variant({ propsData }: any) {
     }
 
     // remove value variant
-    function remove_value_variants(index: number, action: string) {
-        if (action === 'tao_bien_the') {
-            const remove_value_variant = [...variant];
-            remove_value_variant[index].value_variants.splice(index, 1);
-            setVariant(remove_value_variant);
-        } else {
-            // const remove_value_variant = [...value_variant];
-            // remove_value_variant.splice(index, 1);
-            // setValue_variant(remove_value_variant);
-        }
+    function remove_value_variants(index: number) {
+        const remove_value_variant = [...variant];
+        remove_value_variant[index].value_variants.splice(index, 1);
+        setVariant(remove_value_variant);
     }
 
     return (
         <>
-            <div className='flex flex-col text-gray-800 gap-y-2'>
+            <div className='flex flex-col text-gray-700 gap-y-2'>
                 {variant?.map((item: any, i: any) => (<>
-                    <label htmlFor="HeadlineAct" className="block text-sm font-medium text-gray-900">Tên biến thể</label>
+                    <label htmlFor="HeadlineAct" className="block text-sm font-medium">Tên biến thể</label>
                     <div key={i} className='flex item-center gap-4 w-full text-sm flex-wrap'>
                         <input
                             type="text"
@@ -74,7 +68,7 @@ export default function Form_variant({ propsData }: any) {
                                 p-0.5 translate-y-0.5 text-sky-600 hover:bg-sky-500 hover:text-gray-50 duration-200'/>
                     </div>
                     {item?.value_variants?.map((e: any, j: any) => (<>
-                        <div key={i} className='flex item-center gap-x-4 text-sm *:flex *:flex-col *:gap-y-1 mt-4'>
+                        <div key={i} className='flex item-center gap-x-14 text-sm *:flex *:flex-col *:gap-y-1 mt-4'>
                             <div>
                                 <label htmlFor='value_variant'>Kích thước (nếu có)</label>
                                 <input
@@ -107,7 +101,7 @@ export default function Form_variant({ propsData }: any) {
                             </div>
                             {
                                 item?.value_variants?.length > 1 &&
-                                <X width={30} height={30} onClick={() => remove_value_variants(i, 'tao_bien_the')} className={`${j < 1 && 'invisible'} text-red-500 
+                                <X width={30} height={30} onClick={() => remove_value_variants(i)} className={`${j < 1 && 'invisible'} text-red-500 
                                         rounded-full cursor-pointer translate-y-7 hover:bg-red-500 hover:text-gray-50 duration-200 p-0.5`} />
                             }
                         </div>

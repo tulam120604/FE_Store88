@@ -29,7 +29,7 @@ export default function Custome_swiper_slide_category_product({ propsData }: any
             className="flex flex-col items-center rounded-lg group 
             hover:text-gray-800 text-gray-500 duration-200 gap-2 my-2"
           >
-            <section className="rounded-full w-20 h-20 grid place-content-center bg-gray-100">
+            <section className="rounded-full w-20 h-20 grid place-content-center bg-gray-100 overflow-hidden">
               {/* <Removal_background link_img={item?.category_img}/> */}
               <Image
                 width={100}

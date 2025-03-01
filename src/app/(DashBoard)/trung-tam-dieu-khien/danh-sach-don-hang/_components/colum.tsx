@@ -58,7 +58,7 @@ export const columns: ColumnDef<any>[] = [
     },
     {
         cell: ({ row }) =>
-            <Link href={`orders/detail_order?id=${row?.original?._id}`} className='hover:text-sky-600 text-sky-500 underline duration-100'>Chi tiết</Link>
+            <Link href={`/trung-tam-dieu-khien/danh-sach-don-hang/chi-tiet-don-hang?id=${row?.original?._id}`} className='hover:text-sky-600 text-sky-500 underline duration-100'>Chi tiết</Link>
         ,
         'header': "Thao tác"
     }

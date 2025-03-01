@@ -6,8 +6,8 @@ import { Suspense, useState } from "react";
 import { Query_Recycle_Items_Admin } from "@/src/app/_lib/Query_APIs/Items/Query";
 import { Mutation_Items } from "@/src/app/_lib/Query_APIs/Items/Mutation_product";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
-import Data_Table from "../../_components/Data_Table";
-import Loading from "../_component/loading";
+import Data_Table from "../_components/Data_Table";
+import Loading from "../_components/loading";
 import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 
 const Page = () => {
