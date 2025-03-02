@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { add_favorites, view_item_in_favorite, list_favorites, remove_favorites } from "../../Services/Favorites/Favorites";
+import { add_favorites, view_item_in_favorite, list_favorites, remove_favorites } from "../../Services/Service_Favorites/Favorites";
 
 export function List_favorites() {
     const { data, ...rest } = useQuery({

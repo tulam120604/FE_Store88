@@ -1,17 +1,17 @@
 'use client'
 
-import { Query_Order } from '@/src/app/_lib/Query_APIs/Order/Query_order'
+import { Query_Order } from '@/src/app/_lib/Query_APIs/Order/Query'
 import React, { useState } from 'react'
 import { Button } from "@/src/app/_Components/ui/Shadcn/button"
 import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image"
 import Link from "next/link"
-import { Mutation_Order } from '@/src/app/_lib/Query_APIs/Order/Mutation_order'
+import { Mutation_Order } from '@/src/app/_lib/Query_APIs/Order/Mutation'
 import {
   AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
   AlertDialogTitle, AlertDialogFooter, AlertDialogAction, AlertDialogCancel
 } from '@/src/app/_Components/ui/alert-dialog'
-import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation_Notification'
+import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DataTable } from '@/src/app/_Components/ui/Tables/data_table'
 import Paginate_order from './paginate_order'
@@ -20,6 +20,7 @@ import { CircleCheck, CircleEllipsis, PackageOpen, Truck, X } from 'lucide-react
 import { convert_Slug } from '@/src/app/util/Slug'
 import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth'
 import { useStoreStatusItemOrder } from '@/src/app/Zustand/Store'
+import Table_item from './table'
 
 const Page_order = () => {
   const { status } = useStoreStatusItemOrder();
@@ -87,15 +88,18 @@ const Page_order = () => {
       cell: ({ row }) => (
         <div className="flex gap-x-4 lg:gap-x-8">
           <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`}>
-            <Image width={100} height={100} loading="lazy" className="lg:w-[100px] lg:h-[100px] h-20 border" 
+            <Image width={100} height={100} loading="lazy" className="lg:w-[100px] lg:h-[100px] h-16 border rounded" 
             src={row?.original?.product_id?.gallery[0]} alt="Loading..." />
           </Link>
           <div className="w-full flex flex-col gap-y-3">
             <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`} 
             className="line-clamp-2">{row?.original?.product_id?.short_name}</Link>
             {
-              (row?.original?.color_item || row?.original?.size_attribute_item) &&
-              <span className="text-sm">Phân loại : {row?.original?.color_item} - {row?.original?.size_attribute_item}</span>
+              (row?.original?.name_varriant) &&
+              <span className="text-sm">Phân loại:  
+              {' ' + row?.original?.name_varriant}
+               {row?.original?.value_varriant && ' - ' + row?.original?.value_varriant}
+               </span>
             }
             {
               status_item_order === 5 &&
@@ -131,9 +135,9 @@ const Page_order = () => {
     setStatus_item_order(status);
   }
   return (
-    <div className='w-full relative bg-white '>
-      <div className='flex hidden_scroll_x z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4
-      *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:border-white *:whitespace-nowrap top-0 bg-white border'>
+    <div className='w-full relative'>
+      <div className='flex hidden_scroll_x z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4 rounded-t
+      *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:border-white *:whitespace-nowrap top-0 bg-white'>
         {
           Array.from({ length: 7 }, (_: any, i: number) =>
             <button key={i} onClick={() => handle_list_item_status(i)} className={status_item_order === i ? '!border-gray-900' 
@@ -154,17 +158,31 @@ const Page_order = () => {
         data?.data_order &&
           data?.data_order?.docs.length > 0 ?
           data?.data_order?.docs?.map((item: any) =>
-            <div className='mb-6 px-4 lg:px-8 rounded bg-white' key={item?._id}>
+            <div className='mb-4 px-2 lg:px-8 rounded bg-white pb-4' key={item?._id}>
               <span className='px-1 py-2 text-sm'>{status_order(item?.status_item_order)}</span>
-              <div className='*:!border-none *:text-gray-700 -mt-14'>
-                <DataTable data={item?.items_order} columns={columns} />
+              <div className='*:text-gray-700 -mt-4'>
+                <Table_item dataProps={item?.items_order} />
               </div>
               <div key={+item?._id + Math.random()} className='flex justify-between items-center text-gray-700'>
+                <div className='flex flex-col gap-y-1'>
+                <div className='text-sm text-gray-700'>Tổng tiền: 
+                <span className='text-red-500'>
+                 {' ' + item?.total_price_order_amount?.toLocaleString("vi", {
+                   style: "currency",
+                   currency: "VND",
+                 })}
+                </span>
+                </div>
                 <span className='text-sm'>Hình thức: {(item?.payment_method === 'COD' ? 'Thanh toán khi nhận hàng' : 'Thanh toán trực tuyến')}</span>
+                </div>
+              
                 {
                   (+item?.status_item_order === 6 || +item?.status_item_order === 5) ?
                     <Button onClick={() => restore_by_order(item)}
-                      className="px-3 bg-green-600 hover:!bg-green-700 mt-2 py-2 text-sm rounded text-white">Mua lại</Button> :
+                      className="px-3 bg-green-600 hover:!bg-green-700 mt-2 py-2 text-sm rounded text-white">
+                        Mua lại
+                    </Button> 
+                    :
                     <AlertDialog>
                       {
                         (+item?.status_item_order === 1) || (+item?.status_item_order === 2) ? <AlertDialogTrigger className="px-3 mt-2 py-2 text-sm bg-red-500 hover:bg-red-700 duration-200 rounded text-white">
@@ -196,7 +214,7 @@ const Page_order = () => {
             </div>
           )
           :
-          <div className='grid place-items-center h-[70vh] rounded'>
+          <div className='grid place-items-center h-[70vh] rounded bg-white '>
             <div className='flex flex-col items-center gap-y-6 text-gray-700'>
               <Image width={100} height={100} src='/Images/document_icon.png' alt=''></Image>
               <span className='flex items-center'>Chưa có đơn hàng nào!<Link className='underline mx-1' href={'/san-pham'}> Đi mua ngay</Link></span>

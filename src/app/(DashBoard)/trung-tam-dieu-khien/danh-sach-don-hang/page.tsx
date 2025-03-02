@@ -1,6 +1,6 @@
 "use client";
 
-import { List_Order_Dashboard } from "@/src/app/_lib/Query_APIs/Order/Query_order";
+import { List_Order_Dashboard } from "@/src/app/_lib/Query_APIs/Order/Query";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { DataTable } from "@/src/app/_Components/ui/Tables/data_table";
 import React, { Suspense } from "react";

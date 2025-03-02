@@ -33,7 +33,7 @@ export function ChartData() {
   return (
     <Card className="rounded-lg bg-white shadow-lg">
       <CardHeader className="mb-4">
-        <CardTitle className="text-base text-gray-900">Tổng quan</CardTitle>
+        <CardTitle className="text-base text-gray-700">Tổng quan</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>

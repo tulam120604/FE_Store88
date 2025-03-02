@@ -1,6 +1,6 @@
 'use client'
 
-import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation_Notification'
+import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation'
 import { Button } from '@/src/app/_Components/ui/Shadcn/button'
 import { Checkbox } from '@/src/app/_Components/ui/Shadcn/checkbox'
 import { io } from 'socket.io-client'

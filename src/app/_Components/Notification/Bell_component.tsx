@@ -1,6 +1,6 @@
 import React from 'react'
 import Notification_Component from './Notification';
-import { Query_Notification } from '@/src/app/_lib/Query_APIs/Notification/Query_Notification';
+import { Query_Notification } from '@/src/app/_lib/Query_APIs/Notification/Query';
 
 export default function Bell_component() {
     const data = Query_Notification();

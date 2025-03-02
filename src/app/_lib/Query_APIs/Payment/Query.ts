@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { create_payment } from "../../Services/Payment/Payment";
+import { create_payment } from "../../Services/Service_Payment/Payment";
 import { useRouter } from "next/navigation";
 
 

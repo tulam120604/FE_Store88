@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { get_notification } from "../../Services/Service_Notification/Fn_Notification";
+import { get_notification } from "../../Services/Service_Notification/Notification";
 
 export function Query_Notification() {
     const { data, ...rest } = useQuery({

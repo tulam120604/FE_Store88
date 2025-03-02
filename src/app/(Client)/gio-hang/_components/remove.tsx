@@ -1,6 +1,6 @@
 'use client'
 
-import { Mutation_Cart } from '@/src/app/_lib/Query_APIs/Cart/mutation_Cart';
+import { Mutation_Cart } from '@/src/app/_lib/Query_APIs/Cart/Mutation';
 import React from 'react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/src/app/_Components/ui/alert-dialog";
 import { Trash2 } from 'lucide-react';

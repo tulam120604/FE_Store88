@@ -44,11 +44,11 @@ export function Detail_Item_Dashboard(id: string | number) {
 }
 
 // lay danh sach san pham trong thung rac
-export function Query_Recycle_Items_Admin(page?: number) {
+export function Query_Recycle_Items_Admin(page: number, limit_item?: number) {
   const { data, ...rest } = useQuery({
     queryKey: ["Product_Key"],
     queryFn: async () => {
-      return await list_product_in_recycle(page);
+      return await list_product_in_recycle(page, limit_item);
     },
   });
   return { data, ...rest };

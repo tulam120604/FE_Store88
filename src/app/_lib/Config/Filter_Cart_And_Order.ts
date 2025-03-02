@@ -1,4 +1,4 @@
-export function filter_positive_Stock_Item(data_checked_true: any) {
+export function loc_san_pham_trong_kho_lon_hon_0(data_checked_true: any) {
     const positive_Stock_Item: any = [];
     data_checked_true?.map((value: any) => {
         if (value?.product_id?.variant?.variants) {

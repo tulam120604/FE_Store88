@@ -2,7 +2,7 @@
 
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
 import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
-import { Mutation_Favorite, Query_view_item_favorites } from '@/src/app/_lib/Query_APIs/Favorites/Query_Feedback';
+import { Mutation_Favorite, Query_view_item_favorites } from '@/src/app/_lib/Query_APIs/Favorites/Query';
 import { Heart } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 import React from 'react'

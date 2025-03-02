@@ -151,12 +151,9 @@ export async function delete_product(item: any) {
 }
 
 // recycle items adminstration
-export async function list_product_in_recycle(page?: Number) {
+export async function list_product_in_recycle(page: Number, limit_item?: Number) {
   try {
-    let uri = `${apiURi}/products/admin/trash`;
-    // if (page) {
-    //     uri += `?_page=${page}`
-    // }
+    let uri = `${apiURi}/products/admin/trash?_page=${page}&_limit=${limit_item}`;
     const res = await fetch(uri, {
       method: "get",
       headers: {
@@ -167,8 +164,8 @@ export async function list_product_in_recycle(page?: Number) {
     if (!res.ok) {
       console.warn("Call data failer");
     }
-    const { data } = await res.json();
-    return data;
+    const result = await res.json();
+    return result;
   } catch (error) {
     return error;
   }

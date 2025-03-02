@@ -3,7 +3,7 @@
 import Breadcrum from "@/src/app/_Components/breadcrum/breadcrum";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import List_Products from "@/src/app/_Components/Products/List_Products";
-import { List_favorites } from "@/src/app/_lib/Query_APIs/Favorites/Query_Feedback";
+import { List_favorites } from "@/src/app/_lib/Query_APIs/Favorites/Query";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

@@ -21,7 +21,7 @@ const Breadcrum = ({ textProps }: any) => {
                         text-gray-800 hover:text-gray-900">
                         {
                             textProps?.bread_1 &&
-                            <Link href={`/products/${textProps?.bread_1?._id}`} >{'/ ' + textProps.bread_1}</Link>
+                            <span>{'/ ' + textProps.bread_1}</span>
                         }
                         <span>{textProps.bread_2 && ('/ ' + textProps?.bread_2)}</span>
                     </div>}

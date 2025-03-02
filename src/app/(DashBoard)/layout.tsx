@@ -1,7 +1,7 @@
 'use client';
 
 import SideBarDashboard from "./SideBar";
-import { Query_Notification } from "../_lib/Query_APIs/Notification/Query_Notification";
+import { Query_Notification } from "../_lib/Query_APIs/Notification/Query";
 import React, { useEffect, useState } from "react";
 import { useToast } from "../_Components/ui/use-toast";
 import { Auth_Provider } from "./trung-tam-dieu-khien/_Auth_Wrapper/Page";

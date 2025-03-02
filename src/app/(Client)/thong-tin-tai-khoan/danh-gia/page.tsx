@@ -1,7 +1,7 @@
 'use client'
 
-import { Mutation_Feedback } from "@/src/app/_lib/Query_APIs/Feedback/Mutation_Feedback";
-import { Get_Item_Order } from "@/src/app/_lib/Query_APIs/Order/Query_order";
+import { Mutation_Feedback } from "@/src/app/_lib/Query_APIs/Feedback/Mutation";
+import { Get_Item_Order } from "@/src/app/_lib/Query_APIs/Order/Query";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { Button } from "@/src/app/_Components/ui/Shadcn/button";
 import { DataTable } from "@/src/app/_Components/ui/Tables/data_table";

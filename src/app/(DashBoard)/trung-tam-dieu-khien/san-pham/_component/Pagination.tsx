@@ -6,18 +6,18 @@ import { useRouter } from 'next/navigation';
 export default function Pagination_Component({ totalPages, currentPage }: any) {
     const routing = useRouter();
     function handle_page(i: number) {
-        routing.push(`/adminstrations/products/list?_page=${i}`);
+        routing.push(`/trung-tam-dieu-khien/san-pham/danh-sach?_page=${i}`);
     }
     function changePage(action: string) {
         switch (action) {
             case 'pre':
                 if (currentPage > 1) {
-                    routing.push(`/adminstrations/products/list?_page=${currentPage - 1}`);
+                    routing.push(`/trung-tam-dieu-khien/san-pham/danh-sach?_page=${currentPage - 1}`);
                 }
                 return;
             case 'next':
                 if (currentPage <= totalPages) {
-                    routing.push(`/adminstrations/products/list?_page=${currentPage + 1}`);
+                    routing.push(`/trung-tam-dieu-khien/san-pham/danh-sach?_page=${currentPage + 1}`);
                 }
                 return;
             default: return

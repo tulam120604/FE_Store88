@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
-import { Get_Items_Cart } from '@/src/app/_lib/Query_APIs/Cart/query';
+import { Get_Items_Cart } from '@/src/app/_lib/Query_APIs/Cart/Query';
 import { Search_Component_Client } from '../../Forms/search';
 import { BadgeCheck, BadgeDollarSign, RefreshCcwDot, ShoppingBag, Tag, Truck, User } from 'lucide-react';
 import { useStoreAddToCart } from '@/src/app/Zustand/Store';
