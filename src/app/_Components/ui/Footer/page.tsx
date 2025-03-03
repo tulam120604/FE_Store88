@@ -7,15 +7,15 @@ import React from 'react'
 const Footer = () => {
     return (
         <footer className="w-full bg-white">
-            <div className="relative pt-10 max-w-[1440px] md:w-[90vw] mb:w-[342px] mx-auto">
+            <div className="relative pt-5 max-w-[1440px] w-[95vw] mx-auto text-gray-700">
                 {/* ***** */}
-                <div className="flex lg:flex-row mb:flex-col lg:gap-x-16 lg:gap-y-0 gap-y-8 justify-between">
+                <div className="flex flex-col lg:flex-row lg:gap-x-16 lg:gap-y-0 gap-y-8 justify-between">
                     <div className="lg:w-[385px]">
                         <Link href={'/'}>
                             <Image width={150} height={100} className='w-[130px] max-h-8'
                                 src={'https://res.cloudinary.com/tulam120604/image/upload/v1736088077/k3jhx9ywkmepcp9tz1b1.png'} alt='Store88' />
                         </Link>
-                        <p className="text-gray-800 mt-1 font-normal lg:w-full w-[276px]">
+                        <p className="text-gray-800 mt-4 font-normal lg:w-full w-[276px]">
                             Store88 - ứng dụng mua sắm trực tuyến thú vị, tin cậy, an toàn và miễn phí! Store88 là nền tảng giao dịch trực tuyến hàng đầu ở Đông Nam Á,
                             có trụ sở chính ở Việt Nam, đã có mặt ở khắp các khu vực Singapore, Malaysia, Indonesia, Thái Lan, Philippines, Đài Loan, Brazil, México,
                             Colombia, & Chile. Với sự đảm bảo của Store88, bạn sẽ mua hàng trực tuyến an tâm và nhanh chóng hơn bao giờ hết!
@@ -26,16 +26,16 @@ const Footer = () => {
                             <h2 className="text-lg tracking-[0.2px] uppercase translate-y-[2px] mb-[24px]">Về chúng tôi</h2>
                             <ul className="*:lg:mb-[13px] *:mb-[13.5px] gap-x-8">
                                 <li>
-                                    <Link href="" className="text-gray-800 text-sm">Track Your Order</Link>
+                                    <Link href="" className="text-sm">Track Your Order</Link>
                                 </li>
                                 <li>
-                                    <Link href="" className="text-gray-800 text-sm">Shop All</Link>
+                                    <Link href="" className="text-sm">Shop All</Link>
                                 </li>
                                 <li>
-                                    <Link href="" className="text-gray-800 text-sm">Flower</Link>
+                                    <Link href="" className="text-sm">Flower</Link>
                                 </li>
                                 <li>
-                                    <Link href="" className="text-gray-800 text-sm">Edibles</Link>
+                                    <Link href="" className="text-sm">Edibles</Link>
                                 </li>
                             </ul>
                         </div>
@@ -61,7 +61,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col lg:flex-row items-center text-gray-800 lg:justify-between border-[#46494F] border-t pt-5 pb-8 mt-16">
+                <div className="flex gap-y-4 flex-col lg:flex-row items-center lg:justify-between border-[#46494F] border-t pt-5 pb-8 mt-16">
                     <p className="order-2 lg:order-1 text-base">
                         © 2024 Store88 BC. All Rights Reserved.
                     </p>

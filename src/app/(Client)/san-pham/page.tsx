@@ -32,7 +32,7 @@ const Products = async ({ searchParams }: any) => {
           <strong className="relative z-[2] text-[gray-800 font-medium lg:text-lg px-4">Danh sách sản phẩm</strong>
         </div>
         {/* menu */}
-        <div className='!w-auto'>
+        <div className='!w-auto mb-4'>
           <Menu_bar />
         </div>
         {/* product */}

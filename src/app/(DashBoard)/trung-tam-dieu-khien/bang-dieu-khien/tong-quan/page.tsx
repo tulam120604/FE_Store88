@@ -20,11 +20,17 @@ import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { Query_caculate_revenue } from "@/src/app/_lib/Query_APIs/Analytics/Query";
 
 export default function Page() {
-  const { data } = Query_List_Items_Dashboard(1, 1);
-  const {data : data_caculate_revenue} = Query_caculate_revenue();
-  console.log(data_caculate_revenue)
-  const { data: account } = List_Account();
-  const { data: category } = Query_Category();
+  const { data, isLoading } = Query_List_Items_Dashboard(1, 1);
+  const { data: data_caculate_revenue, isLoading: loading_caculate_revenue } =
+    Query_caculate_revenue();
+  console.log(data_caculate_revenue?.data);
+  const { data: account, isLoading: loading_data_account } = List_Account();
+  const { data: category, isLoading: loading_data_category } = Query_Category();
+  const total_revenue =
+    data_caculate_revenue?.data?.reduce(
+      (total: any, current: any) => total + current?.totalAmount,
+      0
+    ) ?? 0;
   return (
     <Suspense
       fallback={
@@ -37,49 +43,51 @@ export default function Page() {
         <Box
           dataProps={{
             text: "Tổng doanh thu",
-            number: "45.231,89 đ",
+            number: loading_caculate_revenue
+              ? 0
+              : `${total_revenue?.toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}`,
             icon: <DollarSign strokeWidth="4" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
             text: "Tổng mặt hàng",
-            number: data?.data?.totalDocs,
+            number: isLoading ? 0 : data?.data?.totalDocs,
             icon: <SquareGanttChart strokeWidth="3" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
             text: "Danh mục",
-            number: category?.data?.length,
+            number: loading_data_category ? 0 : category?.data?.length,
             icon: <List strokeWidth="3" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
             text: "Tổng người dùng",
-            number: account?.data?.totalDocs,
+            number: loading_data_account ? 0 : account?.data?.totalDocs,
             icon: <UsersRound strokeWidth="3" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
             text: "Đối tác bán hàng",
-            number:
-              Array.isArray(account?.account_seller) &&
-              account?.account_seller?.length,
+            number: loading_data_account
+              ? 0
+              : Array.isArray(account?.account_seller) &&
+                account?.account_seller?.length,
             icon: <UserCheck strokeWidth="3" stroke="#2563EB" />,
           }}
         />
       </div>
       {/* chart */}
-      <div className="grid grid-cols-[60%_39%] justify-between">
-        <div>
-          <ChartData />
-        </div>
-        <div>
-          <Top_seller dataProps={account?.account_seller} />
-        </div>
+      <div className="grid grid-cols-[60%_39%] justify-between *:border">
+        <ChartData />
+        <Top_seller dataProps={data_caculate_revenue?.data} />
       </div>
     </Suspense>
   );

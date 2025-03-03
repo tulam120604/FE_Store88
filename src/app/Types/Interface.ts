@@ -2,7 +2,7 @@ export interface IProduct {
     _id?: string | number,
     short_name?: string | number,
     gallery: string[],
-    id_user_seller?: string | number,
+    seller?: string | number,
     trending?: boolean | string,
     des_product?: string | number,
     category_id?: string | number,

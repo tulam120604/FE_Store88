@@ -136,7 +136,7 @@ const Page_order = () => {
   }
   return (
     <div className='w-full relative'>
-      <div className='flex hidden_scroll_x z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4 rounded-t
+      <div className='flex hidden_scroll z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4 rounded-t
       *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:border-white *:whitespace-nowrap top-0 bg-white'>
         {
           Array.from({ length: 7 }, (_: any, i: number) =>
@@ -205,7 +205,8 @@ const Page_order = () => {
                             (+item?.status_item_order === 1) ?
                               <AlertDialogAction className="bg-red-500 hover:!bg-red-700" onClick={() => cancel_order(item?._id, 6)}>Xác nhận</AlertDialogAction> :
                               (+item?.status_item_order === 2) &&
-                              <AlertDialogAction className="bg-red-500 hover:!bg-red-700" onClick={() => cancel_order(item?._id, 7, item?.code_order, item?.items_order[0]?.product_id?.id_user_seller)}>Xác nhận</AlertDialogAction>}
+                              <AlertDialogAction className="bg-red-500 hover:!bg-red-700" onClick={() => cancel_order(item?._id, 7, item?.code_order, 
+                              item?.items_order[0]?.product_id?.seller)}>Xác nhận</AlertDialogAction>}
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>

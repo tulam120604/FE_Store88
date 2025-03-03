@@ -8,16 +8,19 @@ export async function list_product_client(
   page: number,
   count_item: number,
   bestSeller?: any,
-  id_user_seller?: any
+  seller?: any
 ) {
   try {
-    const uri = `${apiURi}/list_products/client?_page=${page}&_limit=${count_item}&_bestseller=${bestSeller}`;
+    let uri = `${apiURi}/list_products/client?_page=${page}&_limit=${count_item}`;
+    if (bestSeller) {
+      uri += `&_bestseller=${bestSeller}`
+    }
     let res = await fetch(uri);
-    if (id_user_seller) {
+    if (seller) {
       res = await fetch(uri, {
         method: "get",
         headers: {
-          id_user_seller: id_user_seller,
+          id_user_seller: seller,
         },
       });
     }

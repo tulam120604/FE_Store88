@@ -76,7 +76,7 @@
   }
 }
 
-.hidden_scroll_x::-webkit-scrollbar {
+.hidden_scroll::-webkit-scrollbar {
   display: none;
 }
 

@@ -13,7 +13,8 @@ import ReloadPage from "../../_Components/Pages/ReloadPage";
 export default async function Page({ searchParams }: any) {
   let page = searchParams._page ?? 1;
   const data = await infor_shop(searchParams?.id);
-  const data_item = await list_product_client(page, 30, "", data?.data?._id);
+  const data_item = await list_product_client(page, 30,"", data?.data?._id);
+  console.log(data_item)
   return (
     <div className="max-w-[1440px] mx-auto mb:w-[342px] md:w-[90vw] py-2">
       {data?.status === 404 ? (

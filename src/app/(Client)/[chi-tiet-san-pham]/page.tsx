@@ -69,7 +69,7 @@ const page = async ({ searchParams }: any) => {
               />
             </div>
           </section>
-          <Thong_tin_cua_hang dataProps={data?.id_user_seller} />
+          <Thong_tin_cua_hang dataProps={data?.seller} />
           {/* related products */}
           <Mo_ta_san_pham
             dataProps={{
