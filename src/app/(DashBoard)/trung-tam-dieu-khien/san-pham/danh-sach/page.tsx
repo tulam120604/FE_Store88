@@ -11,6 +11,7 @@ import { io } from "socket.io-client";
 import Data_Table from "../_component/Data_Table";
 import { Auth_Provider } from "../../_Auth_Wrapper/Page";
 import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
+import ReloadPage from "@/src/app/_Components/Pages/ReloadPage";
 
 const Page = () => {
   const socket = io("http://localhost:8888");
@@ -47,7 +48,6 @@ const Page = () => {
     socket.emit("send_message_delete_item", idItem);
   }
   const isLoadingOverlayVisible = isLoading || isFetching || loading_remove;
-
   // render items and attributes
   return (
     <Suspense
@@ -58,31 +58,27 @@ const Page = () => {
       }
     >
       <Auth_Provider>
-        <div className="flex flex-col gap-y-6 py-4">
+        <div className="flex flex-col gap-y-6 py-4 text-gray-700">
           <div className="flex flex-col gap-y-1">
-            <span className="text-lg text-gray-700">Danh sách sản phẩm</span>
+            <span className="text-lg">Danh sách sản phẩm</span>
             <span className="text-gray-600 text-sm">
               Quản lý sản phẩm của bạn
             </span>
           </div>
-          {data?.status === 401 ? (
-            <span className="text-gray-900 text-center">
-              Xác minh danh tính không thành công! Vui lòng đăng nhập lại!!
-            </span>
-          ) : data?.data ? (
-            <>
-              {isLoadingOverlayVisible ? (
-                <Loading_Overlay />
-              ) : (
-                <div className="bg-white rounded-lg border px-4">
-                  <Data_Table
-                    dataProps={{ dataTable: data?.data?.docs, handle_Remove }}
-                  />
-                </div>
-              )}
-            </>
+          {isLoadingOverlayVisible ? (
+            <Loading_Overlay />
+          ) : (data?.data?.totalDocs > 0) ? (
+            <div className="bg-white rounded-lg border px-4">
+              <Data_Table
+                dataProps={{
+                  dataTable: data?.data?.docs,
+                  handle_Remove,
+                  operation: true,
+                }}
+              />
+            </div>
           ) : (
-            <section className="h-[70vh] grid place-content-center text-gray-800 text-center text-sm">
+            <section className="h-[70vh] grid place-content-center text-center text-sm">
               Không có dữ liệu!
             </section>
           )}

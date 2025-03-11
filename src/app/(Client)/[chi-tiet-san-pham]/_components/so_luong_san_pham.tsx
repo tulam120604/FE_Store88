@@ -159,7 +159,7 @@ const So_luong_san_pham = ({ data_Item_Detail }: any) => {
         setVisible(data_Item_Detail?.gallery[0]);
         mutate(items);
         if (!isLoading && action === 'check_out') {
-          routing.push('/cart')
+          routing.push('/gio-hang')
         }
       }
       else validate_message()

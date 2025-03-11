@@ -36,7 +36,7 @@ export function ChartData() {
         <CardTitle className="text-base text-gray-700">Tổng quan</CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="max-h-[50vh] w-full">
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
