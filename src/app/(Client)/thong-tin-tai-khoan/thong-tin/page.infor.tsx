@@ -6,16 +6,16 @@ import React, { useEffect, useRef } from 'react'
 import { Button } from '@/src/app/_Components/ui/Shadcn/button';
 import Address_component from '../_components/address';
 import { eventEmit } from '@/src/app/_Components/ui/Header/Event_emit';
-import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
 import List_address_user from './list_address';
 import Page_infor_mobile from './page.infor.mobile';
 import Avatar_account from './avatar';
 import Phone_account from './phone';
+import { useAuthStore } from '@/src/app/_lib/Zustand/Store';
 
 const Page_infor = () => {
   const form_create_address = useRef<HTMLDivElement>(null);
   const bg_form_create_address = useRef<HTMLDivElement>(null);
-  const { data: data_user, isLoading: loading_user } = Infor_user();
+  const { data: data_user, isLoading: loading_user } = useAuthStore();
   // console.log(data_user)
   // address 
   function handle_Show_Form_Create_Address() {
@@ -51,9 +51,9 @@ const Page_infor = () => {
                 <span className='text-sm text-gray-700 font-sans'>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
               </div>
               {
-                data_user?.data?.role === 'user' ?
+                data_user?.role === 'user' ?
                   <Link className='lg:text-sm text-xs underline whitespace-nowrap' href={'/thong-tin-tai-khoan/dang-ki-ban-hang'}>Kênh phân phối</Link> :
-                  data_user?.data?.role === 'seller' ?
+                  data_user?.role === 'seller' ?
                     <Link className='lg:text-sm text-xs underline whitespace-nowrap' href={'/trung-tam-dieu-khien/bang-dieu-khien/tong-quan'}>Đi đến kho phân phối</Link> :
                     <Link className='lg:text-sm text-xs underline whitespace-nowrap' href={'/trung-tam-dieu-khien/bang-dieu-khien/tong-quan'}>Trung tâm điều khiển</Link>
               }
@@ -62,11 +62,11 @@ const Page_infor = () => {
               {/* thong tin */}
             <div className='w-full grid grid-cols-[40%_55%] gap-4 mx-auto'>
               <span className='text-gray-600 font-light'>Tên hiển thị</span>
-              <div className='w-full border py-1 lg:py-2 px-4 rounded text-gray-700'>{data_user?.data && data_user?.data?.user_name}</div>
+              <div className='w-full border py-1 lg:py-2 px-4 rounded text-gray-700'>{data_user && data_user?.user_name}</div>
               {/* email */}
               <span className='text-gray-600 font-light'>Email</span>
               <div className='w-full lg:py-2 py-1 tracking-[1px] text-gray-700 underline'>
-                {data_user?.data?.email?.slice(0, 2) + '*****' + data_user?.data?.email?.slice(7)}
+                {data_user?.email?.slice(0, 2) + '*****' + data_user?.email?.slice(7)}
               </div>
               {/* sdt */}
               <span className='text-gray-600 font-light'>Số điện thoại</span>
@@ -87,7 +87,7 @@ const Page_infor = () => {
               onClick={handle_Show_Form_Create_Address}>Thêm địa chỉ +</Button>
             </section>
             <div ref={form_create_address} className='fixed -translate-x-1/2 -translate-y-1/2 scale-0 duration-200 top-1/2 left-3/4 z-[11]'>
-              <Address_component id_user={data_user?.data?._id} />
+              <Address_component id_user={data_user?._id} />
             </div>
             <div onClick={handle_Close_Form_Create_Address} ref={bg_form_create_address}
               className='fixed hidden w-screen h-screen top-0 left-0 z-[10] bg-[#33333355]'/>

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useStoreStatusItemOrder } from "@/src/app/Zustand/Store";
 import {
   Ambulance,
   FileCog,
@@ -17,6 +16,7 @@ import { eventEmit } from "@/src/app/_Components/ui/Header/Event_emit";
 import { Mutation_Auth } from "@/src/app/_lib/Query_APIs/Auth/Auth_mutation";
 import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 import Image from "next/image";
+import { useStoreStatusItemOrder } from "@/src/app/_lib/Zustand/Store";
 
 export default function Page_infor_mobile({ data_user }: any) {
   const { setStatus } = useStoreStatusItemOrder();
@@ -61,7 +61,7 @@ export default function Page_infor_mobile({ data_user }: any) {
       {mutation_auth?.isLoading && <Loading_Overlay />}
       <div className="flex gap-4 text-gray-800 items-center relative">
         <div className="rounded-full *:rounded-full bg-slate-200 w-12 h-12 grid place-content-center">
-          <Image src={data_user?.data?.avatar} width={48} height={48} alt=""/>
+          <Image src={data_user?.data?.avatar} width={48} height={48} alt="" />
         </div>
         <div className="flex flex-col gap-2">
           <span>{data_user?.data?.user_name}</span>

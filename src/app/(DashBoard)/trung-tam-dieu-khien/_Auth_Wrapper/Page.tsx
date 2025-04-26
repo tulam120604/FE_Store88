@@ -1,16 +1,16 @@
 'use client'
 
-import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useAuthStore } from '@/src/app/_lib/Zustand/Store';
 
 
 export function Auth_Provider({ children }: Readonly<{ children: React.ReactNode }>) {
   const role_user = ['admin_global', 'admin_local', 'seller'];
   const routing = useRouter();
-  const { data: data_user, isLoading: loading_user } = Infor_user();
-  if (!loading_user && data_user && !role_user.includes(data_user?.data?.role)) {
+  const { data: data_user, isLoading: loading_user } = useAuthStore();
+  if (!loading_user && data_user && !role_user.includes(data_user?.role)) {
     routing.push('/');
     return;
   }

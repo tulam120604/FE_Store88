@@ -13,7 +13,6 @@ import {
   Query_List_Items_Dashboard,
 } from "@/src/app/_lib/Query_APIs/Items/Query";
 import {
-  Infor_user,
   List_Account,
 } from "@/src/app/_lib/Query_APIs/Auth/Query_Auth";
 import Box from "../_component/box";
@@ -22,12 +21,13 @@ import Top_seller from "../_component/top_seller";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { Query_caculate_revenue } from "@/src/app/_lib/Query_APIs/Analytics/Query";
 import Best_selling_products from "./best_selling_products";
+import { useAuthStore } from "@/src/app/_lib/Zustand/Store";
 
 export default function Page() {
   const { data, isLoading } = Query_List_Items_Dashboard(1, 1);
   const { data: data_caculate_revenue, isLoading: loading_caculate_revenue } =
     Query_caculate_revenue();
-  const { data: infor_user, isLoading: loading_infor_user } = Infor_user();
+  const { data: infor_user, isLoading: loading_infor_user } = useAuthStore();
   const { data: account, isLoading: loading_data_account } = List_Account();
   const { data: category, isLoading: loading_data_category } = Query_Category();
   const total_revenue =
@@ -77,7 +77,7 @@ export default function Page() {
             icon: <UsersRound strokeWidth="2" stroke="#2563EB" />,
           }}
         />
-        {["admin_global", "admin_local"].includes(infor_user?.data?.role) && (
+        {["admin_global", "admin_local"].includes(infor_user?.role) && (
           <Box
             dataProps={{
               text: "Đối tác bán hàng",
@@ -95,7 +95,7 @@ export default function Page() {
         <div className="grid place-items-center">
           <Loading_Dots />
         </div>
-      ) : ["admin_global", "admin_local"].includes(infor_user?.data?.role) ? (
+      ) : ["admin_global", "admin_local"].includes(infor_user?.role) ? (
         <div className="grid lg:grid-cols-[60%_39%] justify-between *:border">
           <ChartData />
           <Top_seller dataProps={data_caculate_revenue?.data} />

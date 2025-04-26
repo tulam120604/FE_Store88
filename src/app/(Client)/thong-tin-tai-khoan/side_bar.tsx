@@ -36,11 +36,11 @@ const Side_bar = () => {
             "w-[200px] bg-gray-100 fixed right-0 bottom-0 text-gray-900 h-10",
           duration: 800,
         });
+        routing.push("/");
         localStorage.removeItem("account");
         eventEmit.emit("log_out", true);
         mutation_auth.onSubmit("");
         eventEmit.emit("logout");
-        routing.push("/");
       }
     });
   }
@@ -70,9 +70,7 @@ const Side_bar = () => {
                 : "hover:bg-[#6F8BFC] hover:text-gray-100 font-medium flex items-center gap-x-4 text-gray-700"
             } `}
           >
-            <div className="relative *:!text-gray-800">
-              <Bell_component />
-            </div>
+            <Bell_component />
             <span className="hidden lg:block">Thông báo</span>
           </Link>
           <Link
@@ -99,8 +97,8 @@ const Side_bar = () => {
           </Link>
           <button
             onClick={log_out}
-            className="hover:bg-[#6F8BFC] px-4 py-3 text-sm font-medium text-gray-700 
-            hover:text-gray-100 flex items-center gap-x-4"
+            className="border border-transparent hover:border-gray-300 px-4 py-3 text-sm font-medium 
+            text-red-500 flex items-center gap-x-4"
           >
             <LogOut strokeWidth={1.8} className="h-5 rotate-180" />
             <span className="hidden lg:block">Đăng xuất</span>

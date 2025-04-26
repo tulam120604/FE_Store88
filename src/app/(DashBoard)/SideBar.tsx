@@ -13,10 +13,10 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Loading_Dots from "../_Components/Loadings/Loading_Dots";
-import { Infor_user } from "../_lib/Query_APIs/Auth/Query_Auth";
+import { useAuthStore } from "../_lib/Zustand/Store";
 
 const SideBarDashboard = () => {
-  const { data: data_user, isLoading: loading_user } = Infor_user();
+  const { data: data_user, isLoading: loading_user } = useAuthStore();
   if (loading_user) {
     <Loading_Dots />;
   }
@@ -63,7 +63,7 @@ const SideBarDashboard = () => {
       pathName: "/trung-tam-dieu-khien/cai-dat",
     },
   ];
-  if (data_user?.data?.role === "seller") {
+  if (data_user?.role === "seller") {
     arr = arr.filter((_: any, index: number) => ![2, 5].includes(index));
   }
   return (
@@ -73,7 +73,7 @@ const SideBarDashboard = () => {
           className="rounded-[50%] border-2 border-gray-400 p-1"
           width={100}
           height={100}
-          src={data_user?.data?.avatar}
+          src={data_user?.avatar}
           alt="avatar"
         />
       </div>

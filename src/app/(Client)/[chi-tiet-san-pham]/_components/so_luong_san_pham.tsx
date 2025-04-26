@@ -7,14 +7,12 @@ import { Mutation_Cart } from "../../../_lib/Query_APIs/Cart/Mutation";
 import { CircleCheck, Minus, Plus } from "lucide-react";
 import { io } from 'socket.io-client';
 import { useToast } from "@/src/app/_Components/ui/use-toast";
-import { useStoreAddToCart } from "@/src/app/Zustand/Store";
-import { Infor_user } from "@/src/app/_lib/Query_APIs/Auth/Query_Auth";
-
+import { useAuthStore, useStoreAddToCart } from "@/src/app/_lib/Zustand/Store";
 
 
 const So_luong_san_pham = ({ data_Item_Detail }: any) => {
   const routing = useRouter();
-  const { data: data_user, isLoading: loading_user } = Infor_user()
+  const { data: data_user } = useAuthStore()
   const { toast } = useToast();
   const { setVisible } = useStoreAddToCart();
   useEffect(() => {
@@ -141,7 +139,7 @@ const So_luong_san_pham = ({ data_Item_Detail }: any) => {
   };
   // add cart 
   function add_To_Cart_or_Checkout_order(action: string) {
-    if (data_user?.data) {
+    if (data_user) {
       let items: any = {
         product_id: data_Item_Detail?._id,
         price_item_attr: price_attr,

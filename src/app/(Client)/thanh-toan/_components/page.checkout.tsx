@@ -24,8 +24,8 @@ import { loc_san_pham_trong_kho_lon_hon_0 } from "../../../_lib/Config/Filter_Ca
 import { useToast } from "../../../_Components/ui/use-toast";
 import { ToastAction } from "../../../_Components/ui/toast";
 import Loading_Skeleton from "@/src/app/_Components/Loadings/Loading_Skeleton";
-import { Infor_user } from "@/src/app/_lib/Query_APIs/Auth/Query_Auth";
 import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
+import { useAuthStore } from "@/src/app/_lib/Zustand/Store";
 
 const Page_checkout = () => {
   const { toast } = useToast();
@@ -35,7 +35,7 @@ const Page_checkout = () => {
   const [checkStock, setCheckStock] = useState(true);
   // address
   const { data, isLoading } = List_Address();
-  const { data: data_user, isLoading: loading_data_user } = Infor_user();
+  const { data: data_user, isLoading: loading_data_user } = useAuthStore();
   const { data: dataCart, isLoading: loadingCart } = Get_Items_Cart();
   const data_checked_true = dataCart?.items?.filter(
     (item: any) => item?.status_checked && item
@@ -253,7 +253,7 @@ const Page_checkout = () => {
                           {...register("email_user")}
                           id="email"
                           placeholder="Email"
-                          defaultValue={data_user?.data?.email}
+                          defaultValue={data_user?.email}
                         />
                         {errors.email_user && (
                           <p className="text-red-500 md:text-sm text-xs">

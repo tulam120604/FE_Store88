@@ -26,7 +26,7 @@ export async function sign_In(item: any) {
     }
     return res;
   } catch (error: any) {
-    return error
+    return error;
   }
 }
 
@@ -49,7 +49,24 @@ export async function create_Account(item: any) {
     }
     return res;
   } catch (error: any) {
-    return error
+    return error;
+  }
+}
+
+// authentication with google
+export async function authenticate_with_google(data: any) {
+  try {
+    const res = await fetch(`${apiURi}/authenticate_with_google`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    });
+    return res;
+  } catch (error: any) {
+    return error;
   }
 }
 
@@ -70,11 +87,11 @@ export async function infor_user() {
     };
     return data;
   } catch (error: any) {
-    return error
+    return error;
   }
 }
 
-// get
+// list account
 export async function list_Account() {
   try {
     const res = await fetch(`${apiURi}/account`, {
@@ -87,7 +104,7 @@ export async function list_Account() {
     const data = await res.json();
     return data;
   } catch (error: any) {
-    return error
+    return error;
   }
 }
 
@@ -112,7 +129,7 @@ export async function set_role_user_to_seller(dataForm: {
     }
     return res;
   } catch (error: any) {
-    return error
+    return error;
   }
 }
 
@@ -135,7 +152,7 @@ export async function logout() {
     localStorage.removeItem("account");
     return res;
   } catch (error: any) {
-    return error
+    return error;
   }
 }
 
@@ -159,7 +176,7 @@ export async function refesh_token() {
     const data = await res.json();
     return data;
   } catch (error: any) {
-    return error
+    return error;
   }
 }
 
@@ -173,7 +190,7 @@ export async function infor_shop(id?: string | number) {
     const data = await res.json();
     return data;
   } catch (error: any) {
-    return error
+    return error;
   }
 }
 

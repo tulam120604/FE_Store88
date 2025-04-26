@@ -13,9 +13,9 @@ import Table_Cart from './table';
 import { Button } from '@/src/app/_Components/ui/Shadcn/button';
 import Breadcrum from '@/src/app/_Components/breadcrum/breadcrum';
 import { loc_san_pham_trong_kho_lon_hon_0 } from '@/src/app/_lib/Config/Filter_Cart_And_Order';
-import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
 import Loading_Overlay from '@/src/app/_Components/Loadings/Loading_Overlay';
 import Loading_Skeleton from '@/src/app/_Components/Loadings/Loading_Skeleton';
+import { useAuthStore } from '@/src/app/_lib/Zustand/Store';
 
 const Cart = () => {
   const { toast } = useToast();
@@ -36,11 +36,11 @@ const Cart = () => {
 
   const router = useRouter();
   const { mutate, isLoading: loading_mutation, isIdle } = Mutation_Cart("CHECKED_AND_REMOVE_ALL");
-  const { data: data_user, isLoading: loading_user } = Infor_user();
+  const { data: data_user, isLoading: loading_user } = useAuthStore();
   const { data, isLoading } = Get_Items_Cart();
   // Kiểm tra trạng thái idle của mutation trước khi xử lý logic liên quan đến người dùng
   useEffect(() => {
-    if (!loading_user && !isIdle && !data_user?.data) {
+    if (!loading_user && !isIdle && !data_user) {
       router.push('/');
     }
   }, [loading_user, isIdle, data_user]);

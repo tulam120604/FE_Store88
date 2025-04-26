@@ -10,11 +10,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Infor_user } from "@/src/app/_lib/Query_APIs/Auth/Query_Auth";
+import { useAuthStore } from "@/src/app/_lib/Zustand/Store";
 
 export default function Page_create_seller() {
     const parameters = useSearchParams();
-    const { data: data_user, isLoading: loading_user } = Infor_user();
+    const { data: data_user, isLoading: loading_user } = useAuthStore();
     let params_rating: any = parameters.get('_rating') ?? '';
     const data = Get_Item_Order(params_rating);
     const columns: ColumnDef<any>[] = [
@@ -51,7 +51,7 @@ export default function Page_create_seller() {
     const mutation_feedback = Mutation_Feedback('ADD');
     function submit_Feedback(data_Form: any) {
         const dataBody = {
-            user_id: data_user?.data?._id,
+            user_id: data_user?._id,
             item_id: data?.data?.data_item[0],
             item_order: data?.data?.data_item[0],
             content_feedback: data_Form?.content_feedback

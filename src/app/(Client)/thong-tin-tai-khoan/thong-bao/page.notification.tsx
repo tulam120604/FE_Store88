@@ -43,7 +43,7 @@ const Page_notification = () => {
 
 
   return (
-    <div className='px-6 py-4 lg:py-8 bg-white rounded'>
+    <div className='px-6 py-4 lg:py-2 bg-white rounded'>
       <span className='lg:hidden'>Thông báo</span>
       <div className='pb-10 pt-5'>
         {

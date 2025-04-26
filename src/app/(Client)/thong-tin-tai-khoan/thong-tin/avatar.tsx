@@ -8,17 +8,17 @@ import React, { useEffect, useState } from "react";
 
 export default function Avatar_account({ data_user }: any) {
   const { submitForm, form_data, isLoading } = Mutation_update_auth();
-  const [status_button, setStatus_button] = useState(false)
+  const [status_button, setStatus_button] = useState(false);
   const [uriImg, setUri_Img] = useState<any>("");
   useEffect(() => {
-    setUri_Img(data_user?.data?.avatar);
-  }, [data_user?.data?.avatar]);
+    setUri_Img(data_user?.avatar.trim());
+  }, [data_user?.avatar]);
   function pushImage(e: any) {
     const file = e?.target?.files[0];
     if (file && file?.type.startsWith("image")) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setStatus_button(true)
+        setStatus_button(true);
         setUri_Img(reader.result);
       };
       reader.readAsDataURL(file);
@@ -26,16 +26,13 @@ export default function Avatar_account({ data_user }: any) {
       window.alert("Vui lòng chọn đúng định dạng ảnh!");
     }
   }
-
   return (
     <div className="border-l grid place-content-center">
       <form
         onSubmit={form_data.handleSubmit(submitForm)}
         className="text-gray-500"
       >
-        {
-          isLoading && <Loading_Overlay/>
-        }
+        {isLoading && <Loading_Overlay />}
         <div className="rounded-full bg-[#EFEFEF] grid place-content-center w-20 h-20">
           <>
             {uriImg ? (
@@ -64,7 +61,9 @@ export default function Avatar_account({ data_user }: any) {
           />
           <button
             type="submit"
-            className={`${status_button ? 'block' : 'hidden'} bg-[#6F8BFC] hover:scale-105 text-gray-50`}
+            className={`${
+              status_button ? "block" : "hidden"
+            } bg-[#6F8BFC] hover:scale-105 text-gray-50`}
           >
             Lưu
           </button>

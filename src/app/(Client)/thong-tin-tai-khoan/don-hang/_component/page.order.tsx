@@ -13,20 +13,18 @@ import {
 } from '@/src/app/_Components/ui/alert-dialog'
 import { Mutation_Notification } from '@/src/app/_lib/Query_APIs/Notification/Mutation'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { DataTable } from '@/src/app/_Components/ui/Tables/data_table'
 import Paginate_order from './paginate_order'
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots'
 import { CircleCheck, CircleEllipsis, PackageOpen, Truck, X } from 'lucide-react'
 import { convert_Slug } from '@/src/app/util/Slug'
-import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth'
-import { useStoreStatusItemOrder } from '@/src/app/Zustand/Store'
 import Table_item from './table'
+import { useAuthStore, useStoreStatusItemOrder } from '@/src/app/_lib/Zustand/Store'
 
 const Page_order = () => {
   const { status } = useStoreStatusItemOrder();
   const [status_item_order, setStatus_item_order] = useState<number>(status);
   const searchParams = useSearchParams();
-  const { data: data_user, isLoading: loading_user } = Infor_user();
+  const { data: data_user, isLoading: loading_user } = useAuthStore();
   let page = 1;
   if (searchParams.get('_page')) {
     page = Number(searchParams.get('_page'))
@@ -55,7 +53,7 @@ const Page_order = () => {
   }
   function cancel_order(id_order: string | number, status: number, number_order?: string | number, seller_id?: string | number) {
     const dataClient = {
-      id_user: data_user?.data?._id,
+      id_user: data_user?._id,
       item: {
         order_id: id_order,
         status_item_order: status
@@ -63,9 +61,9 @@ const Page_order = () => {
     }
     if (status === 7 && number_order && seller_id) {
       const data_message = {
-        notification_message: `Khách hàng ${data_user?.data?.user_name} muốn hủy đơn hàng ${number_order}`,
+        notification_message: `Khách hàng ${data_user?.user_name} muốn hủy đơn hàng ${number_order}`,
         link: id_order,
-        sender_id: data_user?.data?._id,
+        sender_id: data_user?._id,
         receiver_id: seller_id
       }
       mutate_notification?.mutate(data_message);
@@ -76,7 +74,7 @@ const Page_order = () => {
     sessionStorage.removeItem('item_order')
     const restore_buy_item_order = {
       items: Object.values(item?.items_order),
-      user_id: data_user?.data?._id,
+      user_id: data_user?._id,
       action: 'restore_buy_item',
       id_order: item?._id,
     };

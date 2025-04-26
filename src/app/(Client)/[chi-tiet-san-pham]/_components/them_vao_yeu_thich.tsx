@@ -1,15 +1,15 @@
 'use client';
 
 import Loading_Dots from '@/src/app/_Components/Loadings/Loading_Dots';
-import { Infor_user } from '@/src/app/_lib/Query_APIs/Auth/Query_Auth';
 import { Mutation_Favorite, Query_view_item_favorites } from '@/src/app/_lib/Query_APIs/Favorites/Query';
+import { useAuthStore } from '@/src/app/_lib/Zustand/Store';
 import { Heart } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function Them_vao_san_pham_yeu_thich({ dataProps }: { dataProps: string | number }) {
     const routing = useRouter();
-    const { data: data_user, isLoading: loading_user } = Infor_user();
+    const { data: data_user, isLoading: loading_user } = useAuthStore();
     const detail_item_favorite_by_user = Query_view_item_favorites(dataProps);
     const mutate_favorite = Mutation_Favorite('ADD_and_REMOVE');
 
@@ -18,7 +18,7 @@ export default function Them_vao_san_pham_yeu_thich({ dataProps }: { dataProps: 
             <Loading_Dots />
         }
         else {
-            if (data_user?.data?._id) {
+            if (data_user?._id) {
                 mutate_favorite?.mutate({
                     id_item: dataProps,
                     action: action

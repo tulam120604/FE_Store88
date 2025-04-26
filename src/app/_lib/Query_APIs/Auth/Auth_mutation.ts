@@ -14,12 +14,14 @@ import {
   refesh_token,
   sign_In,
   update_profile_account,
+  authenticate_with_google,
 } from "../../Services/Services_Auth/Auth";
 import { useCheck_user } from "../../Custome_Hooks/User";
 
 type Actions =
   | "LOGIN"
   | "REGISTER"
+  | "AUTHENTICATE_WITH_GOOGLE"
   | "SET_ROLE_USER_TO_SELLER"
   | "LOGOUT"
   | "REFESH_TOKEN";
@@ -43,6 +45,8 @@ export function Mutation_Auth({ action }: { action: Actions }) {
           return await sign_In(dataClient);
         case "REGISTER":
           return await create_Account(dataClient);
+        case "AUTHENTICATE_WITH_GOOGLE":
+          return await authenticate_with_google(dataClient);
         case "SET_ROLE_USER_TO_SELLER":
           return await set_role_user_to_seller(dataClient);
         case "LOGOUT":
