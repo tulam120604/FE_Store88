@@ -1,37 +1,81 @@
-'use client';
+"use client";
 
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/src/app/_Components/ui/Tables/table";
-import { Suspense } from "react";
-import { Auth_Provider } from "../_Auth_Wrapper/Page";
+import { Suspense, useState } from "react";
+import CategoryTable from "./_components/table_category";
+import { Query_Category } from "@/src/app/_lib/Query_APIs/Items/Query";
+import Form_add_category from "@/src/app/_Components/Forms/form_category";
+import { CirclePlus } from "lucide-react";
+import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 
-const page = () => {
-  return (<Suspense fallback={<div className="w-screen h-screen fixed top-0 left-0 grid place-items-center"><Loading_Dots /></div>}>
-    <Auth_Provider>
+const Page = () => {
+  const { data, isLoading } = Query_Category();
+  const [category_form, setCategory_form] = useState<boolean>(false);
+  function handle_category() {
+    setCategory_form(!category_form);
+  }
+  return (
+    <Suspense
+      fallback={
+        <div className="w-screen h-screen fixed top-0 left-0 grid place-items-center">
+          <Loading_Dots />
+        </div>
+      }
+    >
       <div className="py-6">
-        <strong className="text-gray-200 lg:text-xl">Tất cả danh mục</strong>
-      </div>
-      <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Mã</TableHead>
-            <TableHead>Tên danh mục</TableHead>
-            <TableHead>Số lượng sản phẩm</TableHead>
-            <TableHead className="text-right">Options</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </Auth_Provider>
-  </Suspense>)
-}
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-y-1">
+            <span className="text-lg font-extrabold opacity-90">Danh mục</span>
+            <span className="text-gray-600 text-sm">
+              Quản lý danh mục của sản phẩm trong cửa hàng
+            </span>
+          </div>
 
-export default page
+          {/* add category */}
+          <div className="relative">
+            <button
+              onClick={handle_category}
+              type="button"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 
+                transition-colors flex items-center"
+            >
+              <CirclePlus
+                className="inline-block mr-1"
+                strokeWidth={1.5}
+                size={18}
+              />
+              Thêm danh mục
+            </button>
+            {category_form && (
+              <div>
+                <div
+                  onClick={handle_category}
+                  className="fixed w-[200%] h-[200%] bg-[#00000066] top-0 z-[6] left-0"
+                />
+                <Form_add_category setCategory_form={setCategory_form} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {isLoading ? (
+        <div className="*:bg-[#ECF1F2] *:dark:bg-[#020517] min-h-[50vh] grid place-content-center">
+          <Loading_Dots />
+        </div>
+      ) : (
+        <>
+          {data?.data ? (
+            <CategoryTable data={data?.data} />
+          ) : (
+            <section className="h-[70vh] grid place-content-center text-center text-sm">
+              Không có dữ liệu!
+            </section>
+          )}
+        </>
+      )}
+    </Suspense>
+  );
+};
+
+export default Page;

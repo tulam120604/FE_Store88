@@ -1,6 +1,4 @@
 // PRODUCTS
-import { toast } from "react-toastify";
-
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 
 // list item client
@@ -13,7 +11,7 @@ export async function list_product_client(
   try {
     let uri = `${apiURi}/list_products/client?_page=${page}&_limit=${count_item}`;
     if (bestSeller) {
-      uri += `&_bestseller=${bestSeller}`
+      uri += `&_bestseller=${bestSeller}`;
     }
     let res = await fetch(uri);
     if (seller) {
@@ -61,7 +59,7 @@ export async function view_detail_product(id: number | string) {
   try {
     const res = await fetch(`${apiURi}/products/${id}`);
     if (!res.ok) {
-      console.warn("Call data failer");
+      console.warn("Call data failer!");
       return res;
     }
     const data = await res.json();
@@ -107,24 +105,19 @@ export async function list_product_dashboard(page: number, limit_item: number) {
 
 // add
 export async function create_product(item: any) {
-  console.log(item);
   try {
     const res = await fetch(`${apiURi}/create_product`, {
       method: "post",
       headers: {
-        // 'Content-Type': 'multipart/form-data'
+        "Content-Type": "application/json",
       },
-      body: item.data_item,
+      body: JSON.stringify(item),
       credentials: "include",
     });
-    // console.log(res);
     if (!res.ok) {
-      toast.error(`Có lỗi xảy ra khi thêm sản phẩm !`, { autoClose: 500 });
       return res;
-    } else {
-      toast.success(`Tạo sản phẩm thành công!`, { autoClose: 500 });
     }
-    const data = await res.text();
+    const data = await res.json();
     return data;
   } catch (error) {
     return error;
@@ -132,29 +125,30 @@ export async function create_product(item: any) {
 }
 
 // xoa mem
-export async function delete_product(item: any) {
+export async function hidden_or_restore_product(item: any) {
   try {
-    const res = await fetch(`${apiURi}/products/${item.id_item}`, {
-      method: "delete",
-      credentials: "include",
-    });
+    const res = await fetch(
+      `${apiURi}/products/admin/${item.path}/${item.id_item}`,
+      {
+        method: item.method,
+        credentials: "include",
+      }
+    );
     if (!res.ok) {
-      toast.error(`Có lỗi xảy ra khi xóa sản phẩm mã ${item.id_item} !`, {
-        autoClose: 500,
-      });
       return res;
-    } else {
-      toast.success(`Đã xóa sản phẩm mã ${item.id_item} !`, { autoClose: 500 });
     }
-    await res.json();
-    console.log("success delete!");
+    const result = await res.json();
+    return result;
   } catch (error) {
     return error;
   }
 }
 
 // recycle items adminstration
-export async function list_product_in_recycle(page: Number, limit_item?: Number) {
+export async function list_product_in_recycle(
+  page: Number,
+  limit_item?: Number
+) {
   try {
     let uri = `${apiURi}/products/admin/trash?_page=${page}&_limit=${limit_item}`;
     const res = await fetch(uri, {
@@ -174,77 +168,48 @@ export async function list_product_in_recycle(page: Number, limit_item?: Number)
   }
 }
 
-// restore :
-export async function restore_product(dataClient: any) {
-  try {
-    let uri = `${apiURi}/products/admin/trash/${dataClient.id_item}`;
-    // if (page) {
-    //     uri += `?_page=${page}`
-    // }
-    const res = await fetch(uri, {
-      method: "PATCH",
-      credentials: "include",
-    });
-    if (!res.ok) {
-      toast.error(`khôi phục sản phẩm mã ${dataClient.id_item} thất bại!`, {
-        autoClose: 500,
-      });
-      console.warn("Call data failer");
-    } else {
-      toast.success(`khôi phục sản phẩm mã ${dataClient.id_item} thành công!`, {
-        autoClose: 500,
-      });
-    }
-    console.log("Restore Success !");
-  } catch (error) {
-    return error;
-  }
-}
 // xoa item vinh vien ( no restore )
-export async function delete_product_permanent(dataClient: any) {
-  console.log(dataClient?.id_item);
-  try {
-    let uri = `${apiURi}/products/destroy_item/${dataClient.id_item}`;
-    const res = await fetch(uri, {
-      method: "delete",
-      credentials: "include",
-    });
-    if (!res.ok) {
-      toast.error(`Xóa sản phẩm mã ${dataClient.id_item} thất bại!`, {
-        autoClose: 500,
-      });
-      console.warn("Call data failer");
-    } else {
-      toast.success(`Xóa sản phẩm mã ${dataClient.id_item} thành công!`, {
-        autoClose: 500,
-      });
-    }
-    console.log("Restore Success !");
-  } catch (error) {
-    return error;
-  }
-}
+// export async function delete_product_permanent(dataClient: any) {
+//   console.log(dataClient?.id_item);
+//   try {
+//     let uri = `${apiURi}/products/destroy_item/${dataClient.id_item}`;
+//     const res = await fetch(uri, {
+//       method: "delete",
+//       credentials: "include",
+//     });
+//     if (!res.ok) {
+//       toast.error(`Xóa sản phẩm mã ${dataClient.id_item} thất bại!`, {
+//         autoClose: 500,
+//       });
+//       console.warn("Call data failer");
+//     } else {
+//       toast.success(`Xóa sản phẩm mã ${dataClient.id_item} thành công!`, {
+//         autoClose: 500,
+//       });
+//     }
+//     console.log("Restore Success !");
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
 // update
 export async function update_product_dashboard(dataClient?: any) {
   try {
-    let uri = `${apiURi}/products/admin/${dataClient.id_item}`;
+    let uri = `${apiURi}/products/admin/${dataClient?._id}`;
     const res = await fetch(uri, {
       method: "PUT",
-      body: dataClient.data_item,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataClient),
       credentials: "include",
     });
     if (!res.ok) {
-      toast.error(`Có lỗi xảy ra khi sửa sản phẩm mã ${dataClient.id_item} !`, {
-        autoClose: 500,
-      });
       console.warn("Kiem tra lai server hoac internet!");
-    } else {
-      toast.success(`Đã sửa sản phẩm mã ${dataClient.id_item} !`, {
-        autoClose: 500,
-      });
     }
-    return res;
+    const data = await res.json();
+    return data;
   } catch (error) {
     return error;
   }
@@ -281,7 +246,7 @@ export async function list_product_by_category(
 }
 
 // search
-export async function SEARCH_item(item?: any) {
+export async function search_item(item?: any) {
   try {
     let uri = `${apiURi}/products/search`;
     if (item) {
@@ -298,3 +263,22 @@ export async function SEARCH_item(item?: any) {
     return error;
   }
 }
+
+export async function list_product_search(item?: any) {
+  try {
+    let uri = `${apiURi}/products/list_product_search`;
+    if (item) {
+      uri += `?&_search=${item}`;
+    }
+    const res = await fetch(uri);
+    if (!res.ok) {
+      console.warn(res);
+      return res;
+    }
+    const { data } = await res.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+

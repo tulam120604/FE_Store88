@@ -6,13 +6,13 @@ import Link from "next/link";
 function status_order(item: any) {
     switch (+item) {
         case 1:
-            return <span>Chờ xác nhận</span>;
+            return <span className="!text-yellow-500">Chờ xác nhận</span>;
         case 2:
             return <span className='flex items-center text-green-500'><CircleCheck className='h-4' />Đã xác nhận</span>;
         case 3:
-            return <span>Đang chuẩn bị hàng</span>;
+            return <span className="!text-sky-500">Đang chuẩn bị hàng</span>;
         case 4:
-            return <span>Đang vận chuyển</span>;
+            return <span className="!text-sky-500">Đang vận chuyển</span>;
         case 5:
             return <span className='flex items-center text-sky-500'><CircleCheck className='h-4' />Giao thành công</span>;
         case 6:

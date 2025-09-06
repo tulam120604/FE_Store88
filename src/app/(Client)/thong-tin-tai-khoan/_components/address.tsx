@@ -7,8 +7,8 @@ import { Label } from '@/src/app/_Components/ui/Shadcn/label'
 import { Textarea } from '@/src/app/_Components/ui/textarea'
 import { Mutation_Address, Query_Provinces } from '@/src/app/_lib/Query_APIs/Auth/Query_Address'
 import React, { useState } from 'react';
-import { eventEmit } from '@/src/app/_Components/ui/Header/Event_emit'
 import { X } from 'lucide-react'
+import { eventEmit } from '@/src/app/_Components/ui/header/Event_emit'
 
 export default function Address_component({ id_user }: { id_user?: string | number }) {
     const [district, setDistrict] = useState<any>([]);
@@ -52,10 +52,10 @@ export default function Address_component({ id_user }: { id_user?: string | numb
 
     return (
         <form onSubmit={mutate_address?.form_address?.handleSubmit(submit_Create_Address)}
-            className="mx-auto w-[342px] lg:w-[40vw] p-4 bg-white rounded text-gray-700">
+            className="mx-auto w-[342px] lg:w-[40vw] p-4 bg-gray-100 dark:bg-[#0F1629] rounded border shadow">
             <div className='flex justify-between'>
             <span className="lg:text-lg tracking-[0.5px]">Thêm địa chỉ</span>
-            <button type='button' onClick={close_form_create_address} className='text-gray-700'>
+            <button type='button' onClick={close_form_create_address} className='opacity-85'>
                 <X/>
             </button>
             </div>
@@ -81,7 +81,7 @@ export default function Address_component({ id_user }: { id_user?: string | numb
                     <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 *:text-xs *:lg:text-sm">
                     <div className=' *:text-xs *:lg:text-sm'>
                         <Label htmlFor="provinces">Tỉnh/thành :</Label>
-                        <select id="provinces" className="border w-full rounded border-gray-300 text-gray-700 sm:text-sm py-1.5 px-2"
+                        <select id="provinces" className="border w-full rounded border-gray-300 opacity-85 sm:text-sm py-1.5 px-2"
                             {...mutate_address?.form_address?.register('provinces', { required: true })} onChange={get_District}>
                             <option value="">-- Chọn --</option>
                             {
@@ -95,7 +95,7 @@ export default function Address_component({ id_user }: { id_user?: string | numb
                     </div>
                     <div className=' *:text-xs *:lg:text-sm'>
                         <Label htmlFor="provinces">Quận/huyện :</Label>
-                        <select id="provinces" className="border w-full rounded border-gray-300 text-gray-700 sm:text-sm py-1.5 px-2"
+                        <select id="provinces" className="border w-full rounded border-gray-300 opacity-85 sm:text-sm py-1.5 px-2"
                             {...mutate_address?.form_address?.register('district', { required: true })} onChange={get_Wards}>
                             <option value="">-- Chọn --</option>
                             {
@@ -109,7 +109,7 @@ export default function Address_component({ id_user }: { id_user?: string | numb
                     </div>
                     <div className=' *:text-xs *:lg:text-sm'>
                         <Label htmlFor="provinces">Phường/xã :</Label>
-                        <select id="provinces" className="border w-full rounded border-gray-300 text-gray-700 sm:text-sm py-1.5 px-2"
+                        <select id="provinces" className="border w-full rounded border-gray-300 opacity-85 sm:text-sm py-1.5 px-2"
                             {...mutate_address?.form_address?.register('wards', { required: true })}>
                             <option value="">-- Chọn --</option>
                             {
@@ -136,12 +136,12 @@ export default function Address_component({ id_user }: { id_user?: string | numb
                         isError ?
                         <>
                         <Button onClick={close_form_create_address} typeof='button' 
-                        className='bg-white hover:bg-[#F5F5FA] border border-gray-300 text-gray-800'>Hủy</Button>
+                        className='bg-white hover:bg-[#F5F5FA] border border-gray-300 opacity-85'>Hủy</Button>
                         <div onClick={close_form_create_address} typeof='button' 
-                        className='bg-[#597BFE] hover:bg-[#6f8bfc] px-2 rounded grid place-content-center text-gray-100'>Thêm</div>
+                        className='bg-[#597BFE] hover:bg-[#6f8bfc] px-2 rounded grid place-content-center'>Thêm</div>
                         </> :
                          <>
-                         <Button onClick={close_form_create_address} className='bg-white hover:bg-[#F5F5FA] border border-gray-300 text-gray-800' type='button'>Hủy</Button>
+                         <Button onClick={close_form_create_address} className='bg-white hover:bg-[#F5F5FA] border border-gray-300 opacity-85' type='button'>Hủy</Button>
                          <Button className='bg-[#597BFE]  hover:bg-[#6f8bfc]'>Thêm</Button>
                          </>
                     }

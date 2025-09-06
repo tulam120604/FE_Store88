@@ -1,5 +1,3 @@
-'use client';
-
 import { useQuery } from "@tanstack/react-query";
 import { get_list_Cart } from "../../Services/Services_Cart/Cart";
 

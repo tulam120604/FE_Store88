@@ -6,13 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Loading_Dots from "../../Loadings/Loading_Dots";
-import { usePathname } from "next/navigation";
 import { convert_Slug } from "@/src/app/util/Slug";
 
 export default function Catalog_product_mobile({ propsData }: any) {
   const { popup_catalog_product, handle_popup_catalog_product } = propsData;
   const { data, isLoading, isError } = Query_Category();
-  const pathName = usePathname();
   function reload_page() {
     window.location.reload();
   }

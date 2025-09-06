@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form";
 import { create_message, send_message } from "../../Services/Service_Notification/Notification";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaValidateNotification } from "@/src/app/(Auth)/validate";
+import { schemaValidateNotification } from "@/src/app/util/validate";
 
 type Actions = 'ADD' | 'SEND' | 'REMOVE'
 

@@ -30,7 +30,7 @@ export default function Page_create_seller() {
     );
   }
   return (
-    <div className="pl-4 bg-white rounded py-4">
+    <div className="pl-4 bg-gray-100 dark:bg-[#0F1629] rounded py-4">
       {loading_user ? (
         <div className="w-full min-h-[40vh] lg:min-h-[70vh] grid place-content-center">
           <Loading_Dots />
@@ -49,7 +49,7 @@ export default function Page_create_seller() {
             <div className="flex flex-col gap-y-2 my-4">
               <label htmlFor="name_shop">Tên cửa hàng</label>
               <input
-                className="px-3 py-2 rounded outline-1 text-sm bg-gray-50 border"
+                className="px-3 py-2 rounded outline-1 text-sm border"
                 id="name_shop"
                 type="text"
                 placeholder="Nhập"
@@ -68,7 +68,7 @@ export default function Page_create_seller() {
             <div className="flex flex-col gap-y-2 my-4">
               <label htmlFor="phone_shop">Số điện thoại</label>
               <input
-                className="px-3 py-2 rounded outline-1 text-sm bg-gray-50 border"
+                className="px-3 py-2 rounded outline-1 text-sm border"
                 id="phone_shop"
                 type="text"
                 placeholder="Nhập"
@@ -87,7 +87,7 @@ export default function Page_create_seller() {
             <div className="flex flex-col gap-y-2 my-4">
               <label htmlFor="email_shop">Email</label>
               <input
-                className="px-3 py-2 rounded outline-1 text-sm bg-gray-50 border"
+                className="px-3 py-2 rounded outline-1 text-sm border"
                 id="email_shop"
                 type="text"
                 placeholder="abc@gmail.com"
@@ -106,7 +106,7 @@ export default function Page_create_seller() {
             <div className="flex flex-col gap-y-2 my-4">
               <label htmlFor="address_shop">Địa chỉ lấy hàng</label>
               <textarea
-                className="px-3 py-2 rounded outline-1 text-sm bg-gray-50 border"
+                className="px-3 py-2 rounded outline-1 text-sm border"
                 id="address_shop"
                 placeholder="Nhập"
                 cols={6}
@@ -124,7 +124,7 @@ export default function Page_create_seller() {
             <div className="flex flex-col gap-y-2 my-4">
               <label htmlFor="note_shop">Ghi chú</label>
               <textarea
-                className="px-3 py-2 rounded outline-1 text-sm bg-gray-50 border"
+                className="px-3 py-2 rounded outline-1 text-sm border"
                 id="note_shop"
                 placeholder="Nhập"
                 cols={6}

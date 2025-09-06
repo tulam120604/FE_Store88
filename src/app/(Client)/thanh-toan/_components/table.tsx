@@ -7,112 +7,149 @@ import Het_hang from "../../gio-hang/_components/het_hang";
 import { convert_Slug } from "@/src/app/util/Slug";
 
 export default function Table_item({ dataProps }: any) {
+  // Định nghĩa cột desktop
+  const COLS = "minmax(320px,1fr) 160px 120px 160px" as const;
+
+  if (!Array.isArray(dataProps) || dataProps.length === 0) {
+    return null;
+  }
+
   return (
-    <div>
-      {/* header table*/}
-      <div className="hidden lg:block ">
-        <div className="flex justify-between bg-white p-4 rounded-lg ">
-          {/* image and name product */}
-          <div className="lg:w-[700px]">
-            <span>Sản phẩm</span>
-            {/* 88 */}
-            <span></span>
-          </div>
-          {/* price and quantity */}
-          <div className="lg:w-[calc(100%-710px)] grid grid-cols-3 text-center">
-            {/* 88 */}
-            <span>Đơn giá</span>
-            {/* 88 */}
-            <span>Số lượng</span>
-            {/* 88 */}
-            <span>Thành tiền</span>
-          </div>
+    <div className="w-full">
+      {/* ===== Header desktop ===== */}
+      <div className="hidden lg:block overflow-x-auto">
+        <div
+          className="grid bg-gray-100 dark:bg-[#0F1629] p-4 rounded-lg font-semibold opacity-80 min-w-[760px]"
+          style={{ gridTemplateColumns: COLS }}
+        >
+          <span>Sản phẩm</span>
+          <span className="text-center">Đơn giá</span>
+          <span className="text-center">Số lượng</span>
+          <span className="text-center">Thành tiền</span>
         </div>
-      </div>
-      {/* body table */}
-      {typeof dataProps == "object" && (
-        <>
-          {dataProps.length > 0 && (
-            <>
-              {dataProps?.map((item: any) => {
-                return (
-                  <div
-                    className="flex flex-col lg:flex-row p-4 rounded-lg gap-y-4 bg-white lg:my-4 justify-between items-center relative"
-                    key={item._id}
+
+        {/* ===== Body desktop ===== */}
+        {dataProps.map((item: any) => {
+          const product = item?.product_id;
+          const productUrl = `/${convert_Slug(product?.short_name)}.html?p=${product?._id}`;
+
+          return (
+            <div
+              key={item._id}
+              className="relative grid items-center bg-gray-100 dark:bg-[#0F1629] mt-3 p-4 rounded-lg min-w-[760px]"
+              style={{ gridTemplateColumns: COLS }}
+            >
+              <Het_hang dataProps={item} />
+
+              {/* Col 1: Sản phẩm */}
+              <div className="flex gap-4">
+                <Link href={productUrl}>
+                  <Image
+                    width={120}
+                    height={120}
+                    className="bg-[#f2f2f2] rounded w-[100px] h-[100px] object-cover"
+                    src={product?.gallery?.[0]}
+                    alt={product?.short_name || "product"}
+                  />
+                </Link>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    href={productUrl}
+                    className="line-clamp-2 font-medium"
                   >
-                    <Het_hang dataProps={item} />
-                    {/* 88 */}
-                    {/* image and name product */}
-                    <div className="flex lg:w-[700px] gap-x-4 *:max-h-[150px]">
-                      <Link
-                        href={`/${convert_Slug(
-                          item?.product_id?.short_name
-                        )}.html?p=${item?.product_id?._id}`}>
-                        <Image
-                          width={150}
-                          height={150}
-                          className="bg-[#f2f2f2f2] max-w-[140px] max-h-[140px]"
-                          src={item?.product_id?.gallery[0]}
-                          alt="loading..."
-                        />
-                      </Link>
-                      {/* 88 */}
-                      <div className="flex flex-col gap-y-2 py-4">
-                        <div className="flex flex-col gap-y-2 md:text-base mb:text-xs">
-                          <Link
-                            href={`/${convert_Slug(
-                              item?.product_id?.short_name
-                            )}.html?p=${item?.product_id?._id}`}
-                            className="line-clamp-2">
-                            {item?.product_id?.short_name}
-                          </Link>
-                        </div>
-                        {/* 88 */}
-                        <div className="flex flex-col gap-y-2 md:text-base mb:text-xs w-full">
-                          {item?.name_varriant && (
-                            <>
-                              <span className="text-sm mb-1">Phân loại :</span>
-                              <div className="flex text-gray-700">
-                                <span className="text-xs">
-                                  {item?.name_varriant}
-                                </span>
-                                {item?.value_varriant && " - "}
-                                <span className="text-xs">
-                                  {item?.value_varriant}
-                                </span>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
+                    {product?.short_name}
+                  </Link>
+                  {item?.name_varriant && (
+                    <div className="text-xs text-gray-600">
+                      Phân loại: {item?.name_varriant}
+                      {item?.value_varriant && ` - ${item?.value_varriant}`}
                     </div>
-                    {/* price and quantity */}
-                    <div className="grid grid-cols-3 lg:w-[calc(100%-710px)] w-full items-center text-center">
-                      <span className="md:text-base mb:text-xs text-red-600">
-                        {item?.price_item?.toLocaleString("vi", {
-                          style: "currency",
-                          currency: "VND",
-                        })}
-                      </span>
-                      {/* 88 */}
-                      <div className="*:text-gray-900 gap-x-1 *:md:text-base *:mb:text-xs">
-                        <span className="ml-8">x{item?.quantity}</span>
-                      </div>
-                      {/* 88 */}
-                      <span className="md:text-base mb:text-xs text-red-600">
-                        {item?.total_price_item?.toLocaleString("vi", {
-                          style: "currency",
-                          currency: "VND",
-                        })}
-                      </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Col 2: Đơn giá */}
+              <div className="text-center text-red-600 font-medium">
+                {item?.price_item?.toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </div>
+
+              {/* Col 3: Số lượng */}
+              <div className="text-center">
+                x{item?.quantity}
+              </div>
+
+              {/* Col 4: Thành tiền */}
+              <div className="text-center text-red-600 font-semibold">
+                {item?.total_price_item?.toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ===== Mobile card layout ===== */}
+      <div className="lg:hidden space-y-3">
+        {dataProps.map((item: any) => {
+          const product = item?.product_id;
+          const productUrl = `/${convert_Slug(product?.short_name)}.html?p=${product?._id}`;
+
+          return (
+            <div
+              key={item._id}
+              className="relative bg-gray-100 dark:bg-[#0F1629] rounded-lg p-3 flex flex-col gap-3"
+            >
+              <Het_hang dataProps={item} />
+
+              <div className="flex gap-3">
+                <Link href={productUrl}>
+                  <Image
+                    width={84}
+                    height={84}
+                    className="bg-gray-100 dark:bg-[#0F1629] rounded w-20 h-20 object-cover"
+                    src={product?.gallery?.[0]}
+                    alt={product?.short_name || "product"}
+                  />
+                </Link>
+                <div className="flex-1 flex flex-col gap-2">
+                  <Link
+                    href={productUrl}
+                    className="font-medium line-clamp-2"
+                  >
+                    {product?.short_name}
+                  </Link>
+                  {item?.name_varriant && (
+                    <div className="text-xs text-gray-600">
+                      Phân loại: {item?.name_varriant}
+                      {item?.value_varriant && ` - ${item?.value_varriant}`}
                     </div>
+                  )}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-red-600 font-medium">
+                      {item?.price_item?.toLocaleString("vi", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
+                    </span>
+                    <span>x{item?.quantity}</span>
                   </div>
-                );
-              })}
-            </>
-          )}
-        </>
-      )}
+                  <div className="text-right text-red-600 font-semibold">
+                    {item?.total_price_item?.toLocaleString("vi", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

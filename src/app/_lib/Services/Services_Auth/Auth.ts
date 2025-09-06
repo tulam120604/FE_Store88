@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 
@@ -16,9 +17,6 @@ export async function sign_In(item: any) {
       return res;
     } else if (res.status === 200) {
       const data = await res.json();
-      // console.log(data)
-      // document.cookie = `access_token=${data.accessToken}; Path=/; Secure; SameSite=None; max-age=604800000`;
-      // document.cookie = `refesh_token=${data.refeshToken}; Path=/; SameSite=None; max-age=604800000`;
       localStorage.setItem(
         "account",
         JSON.stringify(data?.check_email?.user_name)
@@ -40,6 +38,7 @@ export async function create_Account(item: any) {
       },
       body: JSON.stringify(item),
     });
+    console.log(res)
     if (!res.ok) {
       toast.error("Tạo tài khoản thất bại!", { autoClose: 500 });
       return res;

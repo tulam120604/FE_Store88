@@ -37,7 +37,7 @@ const Paginate_order = ({ totalPages, page }: dataProps) => {
             {
                 totalPages > 1 &&
                 <PaginationContent>
-                    <Button className={`${page === 1 && 'cursor-not-allowed'} bg-white hover:bg-[#F1F5F9] text-gray-800`} onClick={() => changePage('back')}>&#10094;</Button>
+                    <Button className={`${page === 1 && 'cursor-not-allowed'} bg-gray-100 dark:bg-[#0F1629] text-gray-800 dark:text-gray-200`} onClick={() => changePage('back')}>&#10094;</Button>
                     {
                         Array.from({ length: totalPages }, (_: any, i: any) =>
                             <PaginationItem className='cursor-pointer' key={i}>
@@ -50,7 +50,7 @@ const Paginate_order = ({ totalPages, page }: dataProps) => {
                     {/* <PaginationItem>
                     <PaginationEllipsis />
                 </PaginationItem> */}
-                    <Button className={`${page === totalPages && 'cursor-not-allowed'} bg-white hover:bg-[#F1F5F9] text-gray-800`} onClick={() => changePage('next')}>&#10095;</Button>
+                    <Button className={`${page === totalPages && 'cursor-not-allowed'} bg-gray-100 dark:bg-[#0F1629] text-gray-800 dark:text-gray-200`} onClick={() => changePage('next')}>&#10095;</Button>
                 </PaginationContent>
             }
 

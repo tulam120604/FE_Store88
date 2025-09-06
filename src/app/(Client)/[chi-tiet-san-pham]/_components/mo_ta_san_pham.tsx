@@ -10,18 +10,18 @@ const Mo_ta_san_pham = ({ dataProps }: any) => {
             {/* description */}
             <div className="flex flex-col max-w-[1440px] *:rounded-lg">
                 {/* menu description */}
-                <div className='p-4 bg-white'>
+                <div className='p-4 bg-gray-100 dark:bg-[#0F1629]'>
                     <span className="text-lg">Mô tả :</span>
                     {/* text description */}
                     <div dangerouslySetInnerHTML={{ __html: formattedDescription }} className="show_description my-4 text-sm">
                     </div>
                 </div>
                 {/* detail comment */}
-                <section className="show_review mt-8 rounded p-4 bg-white">
+                <section className="show_review mt-8 p-4 bg-gray-100 dark:bg-[#0F1629]">
                     <span className="text-lg flex gap-x-2">Đánh giá
                         <p>({dataProps?.data_feedback?.data_feedback ? dataProps?.data_feedback?.data_feedback?.totalDocs : 0})</p>
                     </span>
-                    <div className="flex flex-col text-sm text-[#46494F] leading-[21px] gap-y-4 py-4">
+                    <div className="flex flex-col text-sm opacity-80 leading-[21px] gap-y-4 py-4">
                         {/* content comment 1 */}
                         {
                             dataProps?.data_feedback?.data_feedback &&

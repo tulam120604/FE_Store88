@@ -39,7 +39,7 @@ const page = async ({ searchParams }: any) => {
           <div className="min-h-[70vh] grid place-items-center">
             <div className="flex flex-col gap-y-2 max-w-[1440px]">
               Ôi hỏng!
-              <span>Có vẻ như đã có lỗi xảy ra :(( </span>
+              <span>Đã có lỗi xảy ra!</span>
               <Link className="underline text-sky-500" href={"/"}>
                 Trở về trang chủ!
               </Link>
@@ -48,7 +48,7 @@ const page = async ({ searchParams }: any) => {
         </>
       ) : (
         <>
-          <section className="font-medium capitalize text-gray-700 mb-4">
+          <section className="font-medium capitalize mb-4">
             <Breadcrum
               textProps={{
                 bread_1: data_category,
@@ -56,7 +56,7 @@ const page = async ({ searchParams }: any) => {
               }}
             />
           </section>
-          <section className="lg:grid lg:grid-cols-[573px_auto] gap-x-10 bg-white pb-4 rounded-lg">
+          <section className="lg:grid lg:grid-cols-[573px_auto] gap-x-10 bg-gray-100 dark:bg-[#0F1629] pb-4 rounded-lg">
             {/*  desktop : left  , mobile : row 1 */}
             <Anh_san_pham dataProps={data} />
             {/*desktop: right, mobile : row 2 */}
@@ -77,8 +77,8 @@ const page = async ({ searchParams }: any) => {
               data_feedback,
             }}
           />
-          <div className="mt-6 !bg-[#F5F5FA] rounded-lg">
-          <span className="text-gray-600 antialiased tracking-[0.3px] text-xl 
+          <div className="mt-6 rounded-lg">
+          <span className="opacity-80 antialiased tracking-[0.3px] text-xl 
           font-semibold mt-6 lg:mt-0">Sản phẩm liên quan</span>
             <San_pham_lien_quan
               dataProps={{

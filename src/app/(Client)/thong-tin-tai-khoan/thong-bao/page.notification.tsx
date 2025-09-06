@@ -43,7 +43,7 @@ const Page_notification = () => {
 
 
   return (
-    <div className='px-6 py-4 lg:py-2 bg-white rounded'>
+    <div className='px-6 py-4 lg:py-2 bg-gray-100 dark:bg-[#0F1629] rounded'>
       <span className='lg:hidden'>Thông báo</span>
       <div className='pb-10 pt-5'>
         {
@@ -101,7 +101,7 @@ const Page_notification = () => {
                               <Link href={'/login'}>Đăng nhập lại</Link>
                             </AlertDialogCancel>
                           }
-                          <AlertDialogCancel className='text-gray-800'>Đóng</AlertDialogCancel>
+                          <AlertDialogCancel className='opacity-80'>Đóng</AlertDialogCancel>
                         </div>
                       </AlertDialogFooter>
                     </AlertDialogContent>

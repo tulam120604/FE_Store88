@@ -1,5 +1,3 @@
-'use client'
-
 export function generateRandomString(length: any) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';

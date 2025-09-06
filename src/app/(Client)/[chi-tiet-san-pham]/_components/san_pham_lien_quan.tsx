@@ -11,7 +11,7 @@ const San_pham_lien_quan = async ({ dataProps }: any) => {
   );
   return (
     <div className="mt-4">
-      <List_Products data={data?.data?.docs} />
+      <List_Products data={data?.data?.docs} cols={6}/>
     </div>
   );
 };

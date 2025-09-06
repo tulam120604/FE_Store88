@@ -8,6 +8,8 @@ import { Toaster } from "../_Components/ui/toaster";
 import ErrorBoundary from "../_Components/ErrorBoundary/page";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import AuthSync from "./AuthSync";
+import { ThemeProvider } from "./Theme";
+import { MessageContainer } from "../_Components/ui/message";
 
 const queryClient = new QueryClient();
 //   {
@@ -24,10 +26,11 @@ const Provider = ({ children }: { children: ReactNode }) => {
     <QueryClientProvider client={queryClient}>
       <ToastContainer position="bottom-right" />
       <Toaster />
+      <MessageContainer />
       <ErrorBoundary>
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_CLIENT_ID || ""}>
-          <AuthSync/>
-          {children}
+          <AuthSync />
+          <ThemeProvider>{children}</ThemeProvider>
         </GoogleOAuthProvider>
       </ErrorBoundary>
     </QueryClientProvider>

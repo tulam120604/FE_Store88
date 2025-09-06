@@ -3,12 +3,11 @@
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { Query_List_Items_Dashboard } from "@/src/app/_lib/Query_APIs/Items/Query";
 import React, { useState } from "react";
-import Data_Table from "../../san-pham/_component/Data_Table";
+import ProductTable from "../../san-pham/_components/product_table";
 
 export default function Best_selling_products() {
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading, isFetching } = Query_List_Items_Dashboard(page, 20);
-  const is_Loading = isLoading || isFetching;
+  const { data, isLoading } = Query_List_Items_Dashboard(page, 20);
 
   //   sắp xếp giảm dần theo doanh thu
   const data_products = data?.data?.docs ?? [];
@@ -25,14 +24,14 @@ export default function Best_selling_products() {
   }
 
   return (
-    <div className="p-4 bg-white border rounded-lg my-4">
-      {is_Loading ? (
+    <div className="p-4 bg-white dark:bg-[#0F1629] border rounded-lg my-4">
+      {isLoading ? (
         <Loading_Dots />
       ) : (
         <div>
           <span>Top sản phẩm bán chạy</span>
-          <div className="bg-white rounded-lg border px-4">
-            <Data_Table
+          <div className="bg-white dark:bg-[#0F1629]">
+            <ProductTable
               dataProps={{ dataTable: data_products, operation: false }}
             />
           </div>

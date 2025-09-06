@@ -5,12 +5,12 @@ import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
 import { Button } from '@/src/app/_Components/ui/Shadcn/button';
 import Address_component from '../_components/address';
-import { eventEmit } from '@/src/app/_Components/ui/Header/Event_emit';
 import List_address_user from './list_address';
 import Page_infor_mobile from './page.infor.mobile';
 import Avatar_account from './avatar';
 import Phone_account from './phone';
 import { useAuthStore } from '@/src/app/_lib/Zustand/Store';
+import { eventEmit } from '@/src/app/_Components/ui/header/Event_emit';
 
 const Page_infor = () => {
   const form_create_address = useRef<HTMLDivElement>(null);
@@ -36,7 +36,7 @@ const Page_infor = () => {
   }, [])
 
   return (
-    <div className="w-full px-6 py-4 lg:py-8 bg-white">
+    <div className="w-full px-6 py-4 lg:py-8 bg-gray-100 dark:bg-[#0F1629]">
       {
         loading_user ?
           <div className='w-full min-h-[40vh] lg:min-h-[70vh] grid place-content-center'>
@@ -45,10 +45,10 @@ const Page_infor = () => {
           :
           <>
             {/* desktop */}
-            <div className='hidden lg:flex justify-between text-gray-700'>
+            <div className='hidden lg:flex justify-between'>
               <div className='flex flex-col gap-y-1 pb-4 w-full'>
                 <span className='lg:text-xl'>Hồ sơ của tôi</span>
-                <span className='text-sm text-gray-700 font-sans'>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+                <span className='text-sm'>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
               </div>
               {
                 data_user?.role === 'user' ?
@@ -61,15 +61,15 @@ const Page_infor = () => {
             <div className='hidden lg:grid grid-cols-[65%_30%] justify-between py-10 border-y'>
               {/* thong tin */}
             <div className='w-full grid grid-cols-[40%_55%] gap-4 mx-auto'>
-              <span className='text-gray-600 font-light'>Tên hiển thị</span>
-              <div className='w-full border py-1 lg:py-2 px-4 rounded text-gray-700'>{data_user && data_user?.user_name}</div>
+              <span className='font-light'>Tên hiển thị</span>
+              <div className='w-full border py-1 lg:py-2 px-4 rounded'>{data_user && data_user?.user_name}</div>
               {/* email */}
-              <span className='text-gray-600 font-light'>Email</span>
-              <div className='w-full lg:py-2 py-1 tracking-[1px] text-gray-700 underline'>
+              <span className='font-light'>Email</span>
+              <div className='w-full lg:py-2 py-1 tracking-[1px] underline'>
                 {data_user?.email?.slice(0, 2) + '*****' + data_user?.email?.slice(7)}
               </div>
               {/* sdt */}
-              <span className='text-gray-600 font-light'>Số điện thoại</span>
+              <span className='font-light'>Số điện thoại</span>
               <Phone_account data_user={data_user}/>
             </div>
             {/* avatar */}
@@ -81,7 +81,7 @@ const Page_infor = () => {
               <Page_infor_mobile data_user={data_user} />
             </div>
             {/* --- */}
-            <section className='flex items-center justify-between my-5 py-5 text-gray-700'>
+            <section className='flex items-center justify-between my-5 py-5'>
               <span className='lg:text-xl text-sm'>Địa chỉ</span>
               <Button className='lg:text-sm text-xs px-2 lg:py-2 py-1.5 h-auto bg-[#597BFE] hover:bg-[#6f8bfc]' 
               onClick={handle_Show_Form_Create_Address}>Thêm địa chỉ +</Button>
@@ -90,7 +90,7 @@ const Page_infor = () => {
               <Address_component id_user={data_user?._id} />
             </div>
             <div onClick={handle_Close_Form_Create_Address} ref={bg_form_create_address}
-              className='fixed hidden w-screen h-screen top-0 left-0 z-[10] bg-[#33333355]'/>
+              className='fixed hidden w-screen h-screen top-0 left-0 z-[10] bg-[#33333388]'/>
             <List_address_user />
           </>
       }

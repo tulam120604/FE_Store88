@@ -22,7 +22,7 @@ const Product_Item = ({ dataProps }: any) => {
     }
     return (
         <Link href={`/${convert_Slug(dataProps?.short_name)}.html?p=${dataProps?._id}`} className="flex flex-col w-full 
-        rounded-lg hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.3)] bg-white relative duration-150 cursor-pointer h-full overflow-hidden">
+        relative duration-150 cursor-pointer h-full overflow-hidden border-[0.5px] rounded hover:border-red-500">
             {/* Image */}
             <div className="relative group w-full h-[200px] sm:h-[250px] overflow-hidden rounded grid place-content-center">
                 <Image loading='lazy' width={300} height={300} className="w-full max-h-[180px] sm:max-h-[220px] cursor-pointer object-contain" 
@@ -32,7 +32,7 @@ const Product_Item = ({ dataProps }: any) => {
             </div>
             {/* about */}
             <div className="w-full py-4 px-2 flex flex-col gap-y-1.5 items-start h-[120px] justify-between">
-                <strong className="text-start w-full text-sm line-clamp-2 font-normal text-[#1A1E26]">{dataProps.short_name}</strong>
+                <strong className="text-start w-full text-sm line-clamp-2 font-normal opacity-80">{dataProps.short_name}</strong>
                 <div className="flex items-center gap-x-2 w-full">
                     {
                         dataProps?.price_product ?

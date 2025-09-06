@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 };
 
 const poppins = Inter({
-  subsets: ['vietnamese'],
-  weight: ['500']
-})
+  subsets: ["vietnamese"],
+  weight: ["400"],
+});
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,10 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className ={poppins.className}>
-        <Provider>
-          {children}
-        </Provider>
+      <link rel="icon" type="image" href="https://res.cloudinary.com/tulam120604/image/upload/v1745568585/by1qzllthq4ypulyfrey.png" />
+      <body className={poppins.className}>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

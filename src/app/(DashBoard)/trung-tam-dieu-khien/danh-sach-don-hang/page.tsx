@@ -21,12 +21,19 @@ const Page = () => {
         </div>
       }
     >
-      <div className="flex flex-col gap-y-6 py-4 rounded text-gray-700">
-        <span className="lg:text-xl">Đơn hàng</span>
+      <div className="flex flex-col gap-y-6 py-4 rounded">
+         <div className="flex flex-col gap-y-1">
+              <span className="text-lg font-extrabold opacity-90">
+                Danh sách đơn hàng
+              </span>
+              <span className="opacity-70 text-sm">
+                Quản lý đơn hàng của bạn
+              </span>
+            </div>
         <div>
           {data?.data_order ? (
             <>
-              <div className="bg-white rounded px-4 mb-4">
+              <div className="bg-white dark:bg-[#0F1629] rounded px-4 mb-4  *:dark:text-gray-300">
                 <DataTable data={data?.data_order?.docs} columns={columns} />
               </div>
               <Paginate_item

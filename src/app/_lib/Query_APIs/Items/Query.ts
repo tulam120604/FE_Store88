@@ -1,5 +1,3 @@
-"use client";
-
 import {
   view_detail_product_dashboard,
   list_product_dashboard,
@@ -23,7 +21,7 @@ export function Query_Category(id?: string | number) {
   return { data, ...rest };
 }
 
-// get list item admin
+// danh sach san pham ben admin
 export function Query_List_Items_Dashboard(page: number, limit_item: number) {
   const { data, ...rest } = useQuery({
     queryKey: ["Product_Key", page],

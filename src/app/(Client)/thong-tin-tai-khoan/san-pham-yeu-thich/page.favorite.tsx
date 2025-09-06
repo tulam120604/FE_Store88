@@ -36,7 +36,7 @@ const Page_favorite = () => {
           {isLoading ? (
             <Loading_Dots />
           ) : data?.data?.docs < 1 || !data?.data?.docs ? (
-            <div className="grid place-items-center h-[60vh] px-6 py-4 lg:py-8 rounded bg-white">
+            <div className="grid place-items-center h-[60vh] px-6 py-4 lg:py-8 rounded bg-gray-100 dark:bg-[#0F1629]">
               <div className="flex flex-col items-center gap-y-6 my-auto">
                 <Image
                   width={100}
@@ -54,7 +54,7 @@ const Page_favorite = () => {
             </div>
           ) : (
             <div className="*:lg:grid-cols-5">
-              <List_Products data={data?.data?.docs} />
+              <List_Products data={data?.data?.docs} cols={6}/>
             </div>
           )}
         </>

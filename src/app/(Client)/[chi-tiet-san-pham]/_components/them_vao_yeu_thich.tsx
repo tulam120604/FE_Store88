@@ -25,7 +25,7 @@ export default function Them_vao_san_pham_yeu_thich({ dataProps }: { dataProps: 
                 })
             }
             else {
-                routing.push('/login')
+                routing.push('/tai-khoan')
             }
         }
     }

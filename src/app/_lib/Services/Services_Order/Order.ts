@@ -1,5 +1,4 @@
 const apiURi = "http://localhost:2000/v1";
-import { toast } from "react-toastify";
 
 export async function add_order(item: any) {
   try {
@@ -11,14 +10,8 @@ export async function add_order(item: any) {
       credentials: "include",
       body: JSON.stringify(item),
     });
-    if (!res.ok) {
-      toast.error("Đặt hàng không thành công!", { autoClose: 500 });
-      return res;
-    } else {
-      toast.success("Đặt hàng thành công!", { autoClose: 500 });
-    }
-    await res.json();
-    return res;
+    const result = await res.json();
+    return result;
   } catch (error) {
     return error;
   }
@@ -38,9 +31,6 @@ export async function get_order_user(
       method: "get",
       credentials: "include",
     });
-    if (!res.ok) {
-      return res;
-    }
     const data = await res.json();
     return data;
   } catch (error) {
@@ -56,11 +46,6 @@ export async function get_all_order() {
       method: "get",
       credentials: "include",
     });
-    if (!res.ok) {
-      toast.error("Lỗi, vui lòng kiếm tra lại!", { autoClose: 500 });
-      console.log("Lỗi rồi đại vương ơi!");
-      return res;
-    }
     const data = await res.json();
     return data;
   } catch (error) {
@@ -82,27 +67,22 @@ export async function update_status_order(dataClient: {
       body: JSON.stringify(dataClient.item),
     });
     if (!res.ok) {
-      if (dataClient?.action === "admin") {
-        toast.error("Cập nhật không thành công!", { autoClose: 800 });
-        console.log("Lỗi rồi đại vương ơi!");
+      if (dataClient?.action !== "admin") {
+        return "Cập nhật đơn hàng không thành công!";
       } else {
-        toast.error("Hủy đơn không thành công!", { autoClose: 800 });
-        console.log("Lỗi rồi đại vương ơi!");
+        return "Hủy đơn hàng không thành công!";
       }
-      return res;
     } else {
       if (dataClient?.action === "admin") {
-        toast.success("Cập nhật trạng thái đơn hàng thành công!", {
-          autoClose: 500,
-        });
+        return "Cập nhật trạng thái đơn hàng thành công!";
       } else {
         if (+dataClient?.item?.status_item_order !== 7) {
-          toast.success("Hủy đơn hàng thành công!", { autoClose: 500 });
+          return "Hủy đơn hàng thành công!";
         }
       }
     }
-    await res.json();
-    return res;
+    const result = await res.json();
+    return result;
   } catch (error) {
     return error;
   }
@@ -118,15 +98,8 @@ export async function restore_buy_order(dataClient: any) {
       credentials: "include",
       body: JSON.stringify(dataClient),
     });
-    if (!res.ok) {
-      toast.error("Đặt lại đơn không thành công!", { autoClose: 500 });
-      console.log("Lỗi rồi đại vương ơi!");
-      return res;
-    } else {
-      toast.success("Đặt lại đơn thành công!", { autoClose: 500 });
-    }
-    await res.json();
-    return res;
+    const result = await res.json();
+    return result;
   } catch (error) {
     return error;
   }
@@ -137,8 +110,7 @@ export async function get_item_order(id_item: string | number) {
   try {
     const res = await fetch(`${apiURi}/order/feedback/${id_item}`);
     if (!res.ok) {
-      toast.error("Có lỗi xảy ra, vui lòng kiểm tra lại!", { autoClose: 500 });
-      return res;
+      return "Có lỗi xảy ra, vui lòng kiểm tra lại!";
     }
     const data = await res.json();
     return data;

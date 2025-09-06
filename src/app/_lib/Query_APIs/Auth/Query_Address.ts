@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { create_address, get_address, get_provinces, remove_address, update_default_address } from "../../Services/Services_Auth/Address";
 import { useForm } from "react-hook-form";
-import { schemaValidateAddress } from "@/src/app/(Auth)/validate";
+import { schemaValidateAddress } from "@/src/app/util/validate";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 

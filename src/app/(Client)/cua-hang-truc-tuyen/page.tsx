@@ -5,7 +5,6 @@ import { Button } from "../../_Components/ui/Shadcn/button";
 import List_Products from "../../_Components/Products/List_Products";
 import Loading_Dots from "../../_Components/Loadings/Loading_Dots";
 import Paginate_item from "../san-pham/_component/Paginate";
-import Link from "next/link";
 import Breadcrum from "../../_Components/breadcrum/breadcrum";
 import { list_product_client } from "../../_lib/Services/Services_Items/Product";
 import ReloadPage from "../../_Components/Pages/ReloadPage";
@@ -71,7 +70,7 @@ export default async function Page({ searchParams }: any) {
             </div>
             {data_item?.data?.docs ? (
               Array.isArray(data_item?.data?.docs) && (
-                <List_Products data={data_item?.data?.docs} />
+                <List_Products data={data_item?.data?.docs} cols={6}/>
               )
             ) : (
               <Loading_Dots />

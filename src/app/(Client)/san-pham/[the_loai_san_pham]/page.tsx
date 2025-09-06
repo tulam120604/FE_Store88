@@ -26,7 +26,7 @@ const Page = async ({ searchParams }: any) => {
         {/* product */}
         {data?.data?.docs ? (
           Array.isArray(data?.data?.docs) && (
-            <List_Products data={data?.data?.docs} />
+            <List_Products data={data?.data?.docs} cols={6}/>
           )
         ) : (
           <Loading_Dots />

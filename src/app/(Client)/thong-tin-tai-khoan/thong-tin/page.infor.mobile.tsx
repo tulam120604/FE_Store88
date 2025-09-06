@@ -6,17 +6,18 @@ import {
   FileCog,
   Gift,
   MessageCircleMore,
-  UserRound,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import { useToast } from "@/src/app/_Components/ui/use-toast";
-import { eventEmit } from "@/src/app/_Components/ui/Header/Event_emit";
 import { Mutation_Auth } from "@/src/app/_lib/Query_APIs/Auth/Auth_mutation";
 import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 import Image from "next/image";
 import { useStoreStatusItemOrder } from "@/src/app/_lib/Zustand/Store";
+import { eventEmit } from "@/src/app/_Components/ui/header/Event_emit";
+import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 
 export default function Page_infor_mobile({ data_user }: any) {
   const { setStatus } = useStoreStatusItemOrder();
@@ -58,14 +59,25 @@ export default function Page_infor_mobile({ data_user }: any) {
   return (
     <>
       {/* name account */}
-      {mutation_auth?.isLoading && <Loading_Overlay />}
-      <div className="flex gap-4 text-gray-800 items-center relative">
+      {mutation_auth?.isLoading && (
+        <div className="fixed top-0 left-0 w-screen h-screen *:!bg-gray-500/50 z-[10000]">
+          <Loading_Dots />
+        </div>
+      )}
+      <div className="flex gap-4 opacity-85 items-center relative">
         <div className="rounded-full *:rounded-full bg-slate-200 w-12 h-12 grid place-content-center">
-          <Image src={data_user?.data?.avatar} width={48} height={48} alt="" />
+          {!data_user?.avatar ? (
+            <User
+              strokeWidth={1.5}
+              className="relative mx-auto -translate-y-1/2 top-1/2"
+            />
+          ) : (
+            <Image src={data_user?.avatar} width={48} height={48} alt="" />
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <span>{data_user?.data?.user_name}</span>
-          <span className="text-xs bg-slate-100 rounded-lg py-0.5 text-center text-[#0A68FF]">
+          <span className="text-xs border rounded-lg py-0.5 text-center text-[#0A68FF]">
             {data_user?.data?.role === "seller"
               ? "Nhà phân phối"
               : data_user?.data?.role === "user"
@@ -75,7 +87,7 @@ export default function Page_infor_mobile({ data_user }: any) {
         </div>
         <button
           onClick={log_out}
-          className="duration-200 px-4 py-3 text-sm font-medium text-gray-700 flex items-center gap-x-1 
+          className="duration-200 px-4 py-3 text-sm font-medium opacity-80 flex items-center gap-x-1 
                 absolute right-[-5%] top-[-10%]"
         >
           <span>Đăng xuất</span>
@@ -88,13 +100,13 @@ export default function Page_infor_mobile({ data_user }: any) {
           <span className="text-sm">Đơn mua</span>
           <Link
             href={"/thong-tin-tai-khoan/don-hang"}
-            className="text-xs text-gray-600"
+            className="text-xs opacity-80"
           >
             Xem tất cả
           </Link>
         </div>
 
-        <div className="flex justify-between mt-5 *:flex *:flex-col *:gap-1 text-[10px] text-gray-600 *:items-center *:relative">
+        <div className="flex justify-between mt-5 *:flex *:flex-col *:gap-1 text-[10px] opacity-80 *:items-center *:relative">
           <button
             onClick={() =>
               handleRedirectPage(1, "/thong-tin-tai-khoan/don-hang")

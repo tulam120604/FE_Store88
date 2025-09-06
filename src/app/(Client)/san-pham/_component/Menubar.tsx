@@ -18,7 +18,7 @@ export default function Menu_bar() {
     function filter_item(action: string) {
         switch (action) {
             case 'all':
-                routing.push(`/products`);
+                routing.push(`/san-pham`);
                 return;
             case 'best_seller':
                 routing.push(`?_page=1&_bestseller=true`);

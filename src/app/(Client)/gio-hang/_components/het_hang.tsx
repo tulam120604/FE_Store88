@@ -4,14 +4,14 @@ import React from 'react'
 
 export default function Het_hang({ dataProps }: any) {
   let quantity_item: number = 0;
-  if (dataProps?.product_id?.attributes?.varriants) {
-    const color = dataProps?.product_id?.attributes?.varriants?.find((data: any) => data?.color_item === dataProps?.color_item);
-    const size = color?.size_item?.find((size: any) => (size?.name_size?.trim() ? size?.name_size : undefined) === dataProps?.size_attribute_item);
-    if (dataProps?.size_attribute_item && dataProps?.size_attribute_item !== size?.name_size) {
+  if (dataProps?.product_id?.variant?.variants) {
+    const name_attribute = dataProps?.product_id?.variant?.variants?.find((data: any) => data?.attribute === dataProps?.name_varriant);
+    const value : any  = name_attribute?.value_variants?.find((size: any) => (size?. name_variant?.trim() ? size?. name_variant : undefined) === dataProps?.value_varriant);
+    if (dataProps?.value_variants && dataProps?.value_variants !== value?.name_variant) {
       quantity_item = 0;
     }
     else {
-      quantity_item = size?.stock_item;
+      quantity_item = value?.stock_variant;
     }
   }
   else {

@@ -20,7 +20,7 @@ export default function List_address_user() {
           <Loading_Dots />
         </div>
       ) : (
-        <div className="text-gray-700">
+        <div className="opacity-85">
           {data?.data && data?.data.length > 0 ? (
             data?.data?.map((item: any) => (
               <div
@@ -28,14 +28,14 @@ export default function List_address_user() {
                 className="py-4 lg:flex justify-between px-4 gap-x-6 border-b"
               >
                 <div className="text-sm flex flex-col gap-y-2 mb-2">
-                  <span className="text-gray-900 sm:col-span-2">
+                  <span className="sm:col-span-2">
                     {item?.about_address?.user_name}
                   </span>
-                  <span className="text-gray-600 sm:col-span-2">
+                  <span className="sm:col-span-2">
                     (+84) &nbsp;
                     {item?.about_address?.phone?.slice(1, 9)}
                   </span>
-                  <span className="text-gray-600 sm:col-span-2">
+                  <span className="sm:col-span-2">
                     {item?.about_address?.address +
                       ", " +
                       item?.about_address?.provinces}

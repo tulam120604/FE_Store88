@@ -1,5 +1,3 @@
-'use client';
-
 const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 
 export async function get_list_Cart() {

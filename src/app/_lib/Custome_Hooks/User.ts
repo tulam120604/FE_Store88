@@ -1,4 +1,3 @@
-'use client';
 
 // import { useEffect, useState } from 'react'
 
@@ -18,14 +17,5 @@
 //         refeshToken
 //     }
 // }
-
-export function useCheck_user() {
-    if (typeof window !== 'undefined') {
-        if (localStorage.getItem("account")) {
-            return JSON.parse(localStorage.getItem("account") || '{}');
-        }
-        return;
-    }
-}
 
 // 

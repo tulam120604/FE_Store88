@@ -2,18 +2,20 @@
 "use client";
 
 import {
+  BaggageClaim,
+  Box,
   ChevronDown,
   Contact,
-  House,
+  Grid2x2Check,
+  LayoutGrid,
   LogOut,
-  Package,
   Settings,
-  ShoppingBag,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Loading_Dots from "../_Components/Loadings/Loading_Dots";
 import { useAuthStore } from "../_lib/Zustand/Store";
+import Image from "next/image";
 
 const SideBarDashboard = () => {
   const { data: data_user, isLoading: loading_user } = useAuthStore();
@@ -24,42 +26,34 @@ const SideBarDashboard = () => {
 
   let arr = [
     {
-      icon: <House strokeWidth={1.8} className="h-5" />,
+      icon: <LayoutGrid strokeWidth={1.8} className="h-5" />,
       name: "Bảng điều khiển",
       pathName: "/trung-tam-dieu-khien/bang-dieu-khien/tong-quan",
     },
     {
-      icon: <Package strokeWidth={1.8} className="h-5" />,
+      icon: <Box strokeWidth={1.8} className="h-5" />,
       name: "Sản phẩm",
       pathName: "/trung-tam-dieu-khien/san-pham",
-      child_uri: [
-        {
-          name: "Danh sách",
-          path: "/trung-tam-dieu-khien/san-pham/danh-sach",
-        },
-        {
-          name: "Tạo sản phẩm",
-          path: "/trung-tam-dieu-khien/san-pham/them-moi-san-pham",
-        },
-        {
-          name: "Thùng rác",
-          path: "/trung-tam-dieu-khien/san-pham/thung-rac",
-        },
-      ],
+    },
+    {
+      icon: <Grid2x2Check strokeWidth={1.8} className="h-5" />,
+      name: "Danh mục",
+      pathName: "/trung-tam-dieu-khien/danh-muc-san-pham",
+    },
+    {
+      icon: <BaggageClaim strokeWidth={1.8} className="h-5" />,
+      name: "Đơn hàng",
+      pathName: "/trung-tam-dieu-khien/danh-sach-don-hang",
     },
     {
       icon: <Contact strokeWidth={1.8} className="h-5" />,
       name: "Khách hàng",
       pathName: "/trung-tam-dieu-khien/danh-sach-tai-khoan",
     },
-    {
-      icon: <ShoppingBag strokeWidth={1.8} className="h-5" />,
-      name: "Đơn hàng",
-      pathName: "/trung-tam-dieu-khien/danh-sach-don-hang",
-    },
+
     {
       icon: <Settings strokeWidth={1.8} className="h-5" />,
-      name: "Settings",
+      name: "Cài đặt",
       pathName: "/trung-tam-dieu-khien/cai-dat",
     },
   ];
@@ -67,89 +61,51 @@ const SideBarDashboard = () => {
     arr = arr.filter((_: any, index: number) => ![2, 5].includes(index));
   }
   return (
-    <div>
-      <div className="grid place-items-center w-full mb-6 text-gray-100">
-        <img
-          className="rounded-[50%] border-2 border-gray-400 p-1"
-          width={100}
-          height={100}
-          src={data_user?.avatar}
-          alt="avatar"
+    <div className="fixed top-0 border-2 h-full w-[200px] z-40 ">
+      <Link
+        href={"/"}
+        className="!flex !items-center justify-center px-4 xl:h-14 h-10 border-b-2"
+      >
+        <Image
+          width={50}
+          height={50}
+          className="w-10"
+          src={
+            "https://res.cloudinary.com/tulam120604/image/upload/v1745568585/by1qzllthq4ypulyfrey.png"
+          }
+          alt="Store88"
         />
-      </div>
-      <div className="*:relative flex flex-col text-gray-700 gap-y-1 *:items-center *:whitespace-nowrap font-regular px-2">
+        <span className="mt-2 text-2xl font-semibold opacity-80 font-serif">
+          Store88
+        </span>
+      </Link>
+      <div
+        className="*:relative flex flex-col gap-y-1 *:items-center 
+      *:whitespace-nowrap font-regular mt-4 px-2"
+      >
         {arr?.map((item: any) => {
           const isActive = usePathName.startsWith(item?.pathName);
           return (
-            <details
+            <Link
               key={item?.pathName}
-              open={isActive ? true : false}
-              className="group [&_summary::-webkit-details-marker]:hidden"
+              href={item?.pathName}
+              className={`${
+                isActive ? "bg-white dark:bg-[#8440ED]" : "hover:bg-white dark:hover:bg-[#8440ED]"
+              }  px-4  py-2.5 p-1.5 rounded-xl flex gap-2 opacity-80`}
             >
-              <summary className="flex cursor-pointer *:duration-150 *:flex *:items-center *:gap-x-2 justify-between *:w-full">
-                {item?.child_uri ? (
-                  <div
-                    className={`${
-                      isActive && "bg-[#6F8BFC] text-gray-200"
-                    } lg:px-4 lg:py-2 p-1.5 hover:bg-[#6F8BFC] hover:text-gray-200 rounded justify-between`}
-                  >
-                    <section className="flex items-center gap-x-2">
-                      {item?.icon}
-                      <span className="hidden lg:block text-sm">
-                        {item?.name}
-                      </span>
-                    </section>
-                    <ChevronDown className="group-open:-rotate-180 duration-200" />
-                  </div>
-                ) : (
-                  <Link
-                    href={item?.pathName}
-                    className={`${
-                      isActive
-                        ? "bg-[#6F8BFC] text-gray-200"
-                        : "hover:bg-[#6F8BFC] hover:text-gray-200"
-                    } lg:px-4 lg:py-2.5 p-1.5 rounded`}
-                  >
-                    {item?.icon}
-                    <span className="hidden lg:block text-sm">
-                      {item?.name}
-                    </span>
-                  </Link>
-                )}
-              </summary>
-              <ul className="*:duration-300 *:w-full bg-gray-200 flex flex-col gap-y-1 items-end">
-                {item?.child_uri?.map((uri: any) => {
-                  const isChildActive = usePathName === uri.path;
-                  return (
-                    <Link
-                      key={uri?.path}
-                      href={uri?.path}
-                      className={`lg:pl-8 lg:py-2.5 p-1.5 rounded flex items-center gap-x-2`}
-                    >
-                      <div
-                        className={`${
-                          isChildActive && "bg-[#172850] border-black"
-                        } 
-                                                    w-3 h-3 border border-black rounded-full`}
-                      />
-                      <span className="hidden lg:block text-sm hover:text-gray-900">
-                        {uri?.name}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </ul>
-            </details>
+              {item?.icon}
+              <span className="text-sm">{item?.name}</span>
+            </Link>
           );
         })}
-        <Link
+        {/* <Link
           href={"/"}
           className="flex gap-x-2 lg:px-4 lg:py-2.5 p-1.5 rounded 
           hover:bg-[#6F8BFC] hover:text-gray-200"
         >
           <LogOut strokeWidth={1.8} className="h-5 rotate-180" />
-          <span className="hidden lg:block text-sm">Thoát</span>
-        </Link>
+          <span className="hidden  block text-sm">Thoát</span>
+        </Link> */}
       </div>
     </div>
   );

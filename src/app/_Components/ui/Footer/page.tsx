@@ -6,8 +6,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-white">
-      <div className="relative pt-5 max-w-[1440px] w-[95vw] mx-auto text-gray-700">
+    <footer className="w-full bg-white dark:bg-[#0F1629] border-t">
+      <div className="relative pt-5 max-w-[1440px] w-[95vw] mx-auto opacity-90">
         {/* ***** */}
         <div className="flex flex-col lg:flex-row lg:gap-x-16 lg:gap-y-0 gap-y-8 justify-between">
           <div className="lg:w-[385px]">
@@ -23,7 +23,7 @@ const Footer = () => {
               />
               <span className="text-2xl font-semibold">Store88</span>
             </Link>
-            <p className="text-gray-800 mt-4 font-normal lg:w-full w-[276px]">
+            <p className="mt-4 font-normal lg:w-full w-[276px]">
               Store88 - ứng dụng mua sắm trực tuyến thú vị, tin cậy, an toàn và
               miễn phí! Store88 là nền tảng giao dịch trực tuyến hàng đầu ở Đông
               Nam Á, có trụ sở chính ở Việt Nam, đã có mặt ở khắp các khu vực
@@ -66,12 +66,12 @@ const Footer = () => {
               </h2>
               <ul>
                 <li>
-                  <Link href="" className="text-gray-800 text-sm">
+                  <Link href="" className="text-sm">
                     info@store88.cc
                   </Link>
                 </li>
                 <li>
-                  <Link href="" className="text-gray-800 text-sm">
+                  <Link href="" className="text-sm">
                     tulam@store88.tulam
                   </Link>
                 </li>
@@ -119,17 +119,17 @@ const Footer = () => {
           <p className="order-2 lg:order-2">by Tú Lâm</p>
           <ul className="order-1 lg:order-2 flex items-center gap-x-8 -translate-y-[0.7px]">
             <li>
-              <Link href="" className="text-gray-800 text-sm">
+              <Link href="" className="text-sm">
                 Out Of Stock
               </Link>
             </li>
             <li>
-              <Link href="" className="text-gray-800 text-sm">
+              <Link href="" className="text-sm">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link href="" className="text-gray-800 text-sm">
+              <Link href="" className="text-sm">
                 Terms &amp; Conditions
               </Link>
             </li>

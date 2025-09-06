@@ -8,9 +8,7 @@ const Layout_Home = () => {
   return (
     <div className="max-w-[1440px] mx-auto w-[95vw] py-4">
       <Banner />
-      <section className="hidden lg:block mt-4">
-        <Category />
-      </section>
+      <Category />
       <Products_Home />
     </div>
   );

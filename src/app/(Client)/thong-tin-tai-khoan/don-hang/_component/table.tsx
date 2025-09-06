@@ -64,7 +64,7 @@ export default function Table_item({ dataProps }: any) {
                 })}
               </span>
               {/* 88 */}
-              <div className="*:text-gray-900 gap-x-1 *:md:text-base *:mb:text-xs">
+              <div className="gap-x-1 *:md:text-base *:mb:text-xs">
                 <span className="ml-8">x{item?.quantity}</span>
               </div>
               {/* 88 */}

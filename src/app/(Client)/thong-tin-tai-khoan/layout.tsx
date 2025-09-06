@@ -29,7 +29,7 @@ const Layout_Profile = ({ children }: { children: React.ReactNode }) => {
   }, []);
   return (
     <div className='max-w-[1440px] mx-auto w-[95vw] lg:grid lg:grid-cols-[250px_auto] grid-cols-[50px_auto] gap-x-8 *:rounded pt-2 lg:pt-6'>
-      <div className='hidden lg:block bg-white'>
+      <div className='hidden lg:block bg-gray-100 dark:bg-[#0F1629]'>
         <Side_bar />
       </div>
       <Suspense fallback={<Loading_Skeleton number_elements={1} />}>

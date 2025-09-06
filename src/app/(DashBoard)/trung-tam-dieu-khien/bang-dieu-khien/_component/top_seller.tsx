@@ -26,7 +26,7 @@ export default function Top_seller({ dataProps }: any) {
   return (
     <div className="rounded-lg bg-white shadow-lg h-full">
       <CardHeader>
-        <CardTitle className="text-base text-gray-700 tracking-[0.5]">
+        <CardTitle className="text-base opacity-80">
           Top doanh thu đối tác
         </CardTitle>
       </CardHeader>
@@ -40,7 +40,7 @@ export default function Top_seller({ dataProps }: any) {
         </div>
         {dataProps ? (
           Array.isArray(dataProps) &&
-          dataProps?.map((item: any, i: number) => (
+          dataProps?.slice(0, 10)?.map((item: any, i: number) => (
             <div key={item?._id} className="flex items-center gap-x-4 border-b py-3">
               <span className="text-xs">{i + 1}</span>
               <div className="h-9 w-9 grid place-items-center border rounded-full overflow-hidden">

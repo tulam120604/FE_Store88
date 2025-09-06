@@ -2,34 +2,29 @@
 
 import { Suspense } from "react";
 import {
-  DollarSign,
+  Container,
   List,
-  SquareGanttChart,
+  Receipt,
   UserCheck,
   UsersRound,
+  Box as Box_icon
 } from "lucide-react";
-import {
-  Query_Category,
-  Query_List_Items_Dashboard,
-} from "@/src/app/_lib/Query_APIs/Items/Query";
-import {
-  List_Account,
-} from "@/src/app/_lib/Query_APIs/Auth/Query_Auth";
 import Box from "../_component/box";
 import { ChartData } from "../_component/Chart";
 import Top_seller from "../_component/top_seller";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
-import { Query_caculate_revenue } from "@/src/app/_lib/Query_APIs/Analytics/Query";
+import {
+  Query_caculate_revenue,
+  Query_summary,
+} from "@/src/app/_lib/Query_APIs/Analytics/Query";
 import Best_selling_products from "./best_selling_products";
 import { useAuthStore } from "@/src/app/_lib/Zustand/Store";
 
 export default function Page() {
-  const { data, isLoading } = Query_List_Items_Dashboard(1, 1);
   const { data: data_caculate_revenue, isLoading: loading_caculate_revenue } =
     Query_caculate_revenue();
   const { data: infor_user, isLoading: loading_infor_user } = useAuthStore();
-  const { data: account, isLoading: loading_data_account } = List_Account();
-  const { data: category, isLoading: loading_data_category } = Query_Category();
+  const { data: data_summary, isLoading: loading_summary } = Query_summary();
   const total_revenue =
     data_caculate_revenue?.data?.reduce(
       (total: any, current: any) => total + current?.totalAmount,
@@ -43,7 +38,10 @@ export default function Page() {
         </div>
       }
     >
-      <div className="grid lg:grid-cols-4 grid-cols-3 *:p-6 *:rounded-xl *:shadow-lg gap-4 my-6 *:bg-white">
+      <div
+        className="grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 *:p-6 *:rounded-xl 
+      *:shadow-lg gap-4 my-6 *:bg-white *:dark:bg-[#0F1629]"
+      >
         <Box
           dataProps={{
             text: "Tổng doanh thu",
@@ -53,27 +51,34 @@ export default function Page() {
                   style: "currency",
                   currency: "VND",
                 })}`,
-            icon: <DollarSign strokeWidth="3" stroke="#2563EB" />,
+            icon: <Receipt strokeWidth="2" stroke="#2563EB" color="#F7FAFC" />,
           }}
         />
         <Box
           dataProps={{
-            text: "Tổng mặt hàng",
-            number: isLoading ? 0 : data?.data?.totalDocs,
-            icon: <SquareGanttChart strokeWidth="2" stroke="#2563EB" />,
+            text: "Tổng số mặt hàng",
+            number: loading_summary ? 0 : data_summary?.data?.productCount,
+            icon: <Box_icon strokeWidth="2" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
-            text: "Danh mục",
-            number: loading_data_category ? 0 : category?.data?.length,
+            text: "Tổng số danh mục",
+            number: loading_summary ? 0 : data_summary?.data?.categoryCount,
             icon: <List strokeWidth="2" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
-            text: "Tổng người dùng",
-            number: loading_data_account ? 0 : account?.data?.totalDocs,
+            text: "Tổng số đơn hàng",
+            number: loading_summary ? 0 : data_summary?.data?.orderCount,
+            icon: <Container strokeWidth="1.5" stroke="#2563EB" />,
+          }}
+        />
+        <Box
+          dataProps={{
+            text: "Tổng số người dùng",
+            number: loading_summary ? 0 : data_summary?.data?.userCount,
             icon: <UsersRound strokeWidth="2" stroke="#2563EB" />,
           }}
         />
@@ -81,10 +86,7 @@ export default function Page() {
           <Box
             dataProps={{
               text: "Đối tác bán hàng",
-              number: loading_data_account
-                ? 0
-                : Array.isArray(account?.account_seller) &&
-                  account?.account_seller?.length,
+              number: loading_summary ? 0 : data_summary?.data?.sellerCount,
               icon: <UserCheck strokeWidth="2" stroke="#2563EB" />,
             }}
           />
@@ -96,7 +98,7 @@ export default function Page() {
           <Loading_Dots />
         </div>
       ) : ["admin_global", "admin_local"].includes(infor_user?.role) ? (
-        <div className="grid lg:grid-cols-[60%_39%] justify-between *:border">
+        <div className="grid 2xl:grid-cols-[60%_39%] justify-between *:border *:bg-white *:dark:bg-[#0F1629]">
           <ChartData />
           <Top_seller dataProps={data_caculate_revenue?.data} />
         </div>
@@ -106,7 +108,7 @@ export default function Page() {
         </div>
       )}
       {/* best selling products */}
-      <Best_selling_products/>
+      <Best_selling_products />
     </Suspense>
   );
 }

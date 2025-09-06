@@ -1,64 +1,40 @@
-"use client";
-
 import {
-  delete_product_permanent,
   create_product,
   update_product_dashboard,
-  delete_product,
-  restore_product,
+  hidden_or_restore_product,
 } from "../../Services/Services_Items/Product";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaValidateFormProduct } from "@/src/app/util/validate";
 
-type Action = "ADD" | "EDIT" | "REMOVE" | "RESTORE_OR_DESTROY";
+type Action = "ADD" | "EDIT" | "HIDDEN_OR_RESTORE";
 
-export function Mutation_Items({
-  action,
-  onSuccess,
-  onError,
-}: {
-  action: Action;
-  onSuccess?: any;
-  onError?: any;
-}) {
-  const [loading, setLoading] = useState<string>("no_call");
+export function Mutation_Items({ action }: { action: Action }) {
   // create form
-  // const my_Form = useForm({
-  //     resolver: yupResolver(schemaValidateFormProduct)
-  // });
-  const my_Form = useForm();
+  const my_form = useForm({
+    resolver: yupResolver(schemaValidateFormProduct),
+  });
 
   const query_client = useQueryClient();
-  const { mutate, ...rest } = useMutation({
+  const { mutateAsync, ...rest } = useMutation({
     // retry: 3,
     mutationFn: async (dataClient: any) => {
-      setLoading("dang_call");
       switch (action) {
         case "ADD":
           return await create_product(dataClient);
         case "EDIT":
           return await update_product_dashboard(dataClient);
-        case "REMOVE":
-          return await delete_product(dataClient);
-        case "RESTORE_OR_DESTROY":
-          if (dataClient?.action_mutation === "restore") {
-            return await restore_product(dataClient);
-          }
-          return await delete_product_permanent(dataClient);
+        case "HIDDEN_OR_RESTORE":
+          return await hidden_or_restore_product(dataClient);
         default:
           return;
       }
     },
-    onSuccess: (res: any) => {
+    onSuccess: () => {
       query_client.invalidateQueries({
         queryKey: ["Product_Key"],
       });
-      if (res.status === 400 || res.status === 500) {
-        setLoading("call_error");
-      } else {
-        setLoading("call_ok");
-      }
     },
     onSettled: () => {
       query_client.invalidateQueries({
@@ -70,19 +46,9 @@ export function Mutation_Items({
     },
   });
 
-  // form
-  const on_Submit: SubmitHandler<any> = async (data) => {
-    mutate(data);
-  };
-
   return {
-    mutate,
-    my_Form,
-    on_Submit,
-    query_client,
-    onSuccess,
-    onError,
-    loading,
+    mutateAsync,
+    my_form,
     ...rest,
   };
 }
