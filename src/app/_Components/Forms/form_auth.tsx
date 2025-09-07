@@ -8,21 +8,29 @@ import { Button } from "../ui/Shadcn/button";
 import { useCustome_Hook_Auth } from "../../_lib/Custome_Hooks/Hook_auth";
 import Btn_auth_with_google from "../Btn/Btn_authen_with_google";
 import Field_Form from "./field_form";
+import { message } from "../ui/message";
+import { useRouter } from "next/navigation";
 
 const Form_auth = ({ mode, setMode }: any) => {
-  const { my_form, isLoading, onSubmit} =
-    useCustome_Hook_Auth({ mode });
-  // if (status_Loading === "call_ok") {
-  //   if (mode !== "Register") {
-  //     routing.push("/");
-  //   } else {
-  //     routing.push("/dang-nhap");
-  //   }
-  // }
+  const router = useRouter();
+  const { my_form, isLoading, mutateAsync } = useCustome_Hook_Auth({ mode });
+  const submit = async (data: any) => {
+    try {
+      const result = await mutateAsync(data);
+      if (result?.error) {
+        message.error(result?.message);
+        return;
+      }
+      message.success(result?.message);
+      router.push("/");
+    } catch (error) {
+      message.error("Đã xảy ra lỗi. Vui lòng thử lại!");
+    }
+  };
   return (
     <main className="w-full flex item-center bg-gray-100 dark:bg-[#0F1629] py-10">
       <form
-        onSubmit={my_form.handleSubmit(onSubmit)}
+        onSubmit={my_form.handleSubmit(submit)}
         className="w-[95vw] max-w-[550px] h-[600px] mx-auto flex flex-col p-6 lg:py-10 lg:px-16 gap-y-4 
         border rounded"
       >

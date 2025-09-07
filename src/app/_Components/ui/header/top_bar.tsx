@@ -1,11 +1,32 @@
 import Link from "next/link";
 import { ThemeToggle } from "../toggleTheme";
+import { Mutation_Auth } from "@/src/app/_lib/Query_APIs/Auth/Auth_mutation";
+import { message } from "../message";
+import { useRouter } from "next/navigation";
 
 export default function TopBar({ props }: any) {
+  const router = useRouter();
   const { data, isLoading, isFetching, isHydrated } = props;
+  const { mutateAsync, isLoading: logOutLoading } = Mutation_Auth({
+    action: "LOGOUT",
+  });
+
+  const handleLogout = async () => {
+    try {
+      const result = await mutateAsync("");
+      if (result?.error) {
+        message.error(result?.message);
+        return;
+      }
+      message.success(result?.message);
+      router.push("/");
+    } catch (error) {
+      message.error("Đăng xuất thất bại. Vui lòng thử lại!");
+    }
+  };
   return (
     <div
-      className="hidden z-[2000] lg:block bg-gray-100 dark:bg-gray-800 text-sm 
+      className="hidden z-[20000] lg:block bg-gray-100 dark:bg-gray-800 text-sm 
     text-gray-700 dark:text-gray-200 border-b px-4 relative"
     >
       <div className="max-w-[1440px] w-[95vw] mx-auto flex justify-between items-center py-2 px-3">
@@ -25,28 +46,48 @@ export default function TopBar({ props }: any) {
         </div>
         {/*  */}
         <div className="flex items-center space-x-4 *:duration-200">
-          {!(isLoading || isFetching || !isHydrated) && (
+          {!(isLoading || logOutLoading || isFetching || !isHydrated) && (
             <>
-              <Link className="hover:text-blue-500" href="/thong-tin-tai-khoan/don-hang">
+              <Link
+                className="hover:text-blue-500"
+                href="/thong-tin-tai-khoan/don-hang"
+              >
                 Đơn hàng
-              </Link>
-              <Link className="hover:text-blue-500" href="/thong-tin-tai-khoan/san-pham-yeu-thich">
-                Yêu thích
               </Link>
               <Link
                 className="hover:text-blue-500"
-                href={
-                  data?.user_name
-                    ? "/thong-tin-tai-khoan/thong-tin"
-                    : "/tai-khoan"
-                }
+                href="/thong-tin-tai-khoan/san-pham-yeu-thich"
               >
-                {data?.user_name
-                  ? data?.user_name.length > 15
-                    ? data?.user_name.slice(0, 15) + "..."
-                    : data?.user_name
-                  : "Đăng nhập"}
+                Yêu thích
               </Link>
+              <div className="group relative">
+                <Link
+                  className="hover:text-blue-500"
+                  href={
+                    data?.user_name
+                      ? "/thong-tin-tai-khoan/thong-tin"
+                      : "/tai-khoan"
+                  }
+                >
+                  {data?.user_name
+                    ? data?.user_name.length > 15
+                      ? data?.user_name.slice(0, 15) + "..."
+                      : data?.user_name
+                    : "Đăng nhập"}
+                </Link>
+
+                {/* log out */}
+                {data?.user_name && (
+                  <button
+                    onClick={handleLogout}
+                    className="absolute bg-white dark:bg-[#020817] scale-0 group-hover:scale-100
+                  whitespace-nowrap right-0 p-3 shadow rounded-lg hover:text-red-500 duration-200 
+                  group-hover:top-full top-0"
+                  >
+                    Đăng xuất
+                  </button>
+                )}
+              </div>
             </>
           )}
           {/* toggle theme */}

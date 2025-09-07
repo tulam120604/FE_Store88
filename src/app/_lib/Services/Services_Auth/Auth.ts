@@ -13,16 +13,8 @@ export async function sign_In(item: any) {
       credentials: "include",
       body: JSON.stringify(item),
     });
-    if (!res.ok) {
-      return res;
-    } else if (res.status === 200) {
-      const data = await res.json();
-      localStorage.setItem(
-        "account",
-        JSON.stringify(data?.check_email?.user_name)
-      );
-    }
-    return res;
+    const data = await res.json();
+    return data;
   } catch (error: any) {
     return error;
   }
@@ -38,15 +30,8 @@ export async function create_Account(item: any) {
       },
       body: JSON.stringify(item),
     });
-    console.log(res)
-    if (!res.ok) {
-      toast.error("Tạo tài khoản thất bại!", { autoClose: 500 });
-      return res;
-    }
-    if (res.status === 201) {
-      toast.success("Đăng kí tài khoản thành công!", { autoClose: 500 });
-    }
-    return res;
+    const data = await res.json();
+    return data;
   } catch (error: any) {
     return error;
   }
@@ -120,13 +105,8 @@ export async function set_role_user_to_seller(dataForm: {
       body: JSON.stringify(dataForm?.id_user),
       credentials: "include",
     });
-    if (!res.ok) {
-      toast.error("Cấp quyền thất bại!", { autoClose: 500 });
-      return res;
-    } else {
-      toast.success("Cấp quyền thành công!", { autoClose: 500 });
-    }
-    return res;
+     const data = await res.json();
+    return data;
   } catch (error: any) {
     return error;
   }
@@ -142,14 +122,11 @@ export async function logout() {
       },
       credentials: "include",
     });
-    if (!res.ok) {
-      toast.error("Đăng xuất thất bại, vui lòng thử lại sau!", {
-        autoClose: 500,
-      });
-      return res;
+    if (res.ok) {
+         localStorage.removeItem("account");
     }
-    localStorage.removeItem("account");
-    return res;
+    const data = await res.json();
+    return data;
   } catch (error: any) {
     return error;
   }
@@ -165,13 +142,6 @@ export async function refesh_token() {
       },
       credentials: "include",
     });
-    if (!res.ok) {
-      toast.error(
-        "Không thể xác minh danh tính, vui lòng đăng nhập và thử lại sau!",
-        { autoClose: 500 }
-      );
-      return res;
-    }
     const data = await res.json();
     return data;
   } catch (error: any) {

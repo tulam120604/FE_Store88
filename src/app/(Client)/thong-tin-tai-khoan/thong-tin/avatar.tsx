@@ -53,7 +53,7 @@ export default function Avatar_account({ data_user }: any) {
             Chọn ảnh
           </button>
           <input
-            {...form_data.register("new_avatar")}
+            {...form_data?.register("new_avatar")}
             type="file"
             accept="image/*"
             className="opacity-0 absolute w-20 border cursor-pointer"

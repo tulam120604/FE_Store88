@@ -19,6 +19,7 @@ type Actions =
   | "SET_ROLE_USER_TO_SELLER"
   | "LOGOUT"
   | "REFESH_TOKEN";
+
 export function Mutation_Auth({ action }: { action: Actions }) {
   let check_validate_register: any;
   if (action === "REGISTER") {
@@ -29,7 +30,7 @@ export function Mutation_Auth({ action }: { action: Actions }) {
   });
   const query_Client = useQueryClient();
 
-  const { mutate, ...rest } = useMutation({
+  const { mutate, mutateAsync, ...rest } = useMutation({
     mutationFn: async (dataClient: any) => {
       switch (action) {
         case "LOGIN":
@@ -58,7 +59,7 @@ export function Mutation_Auth({ action }: { action: Actions }) {
   const onSubmit: SubmitHandler<any> = (data: any) => {
     mutate(data);
   };
-  return {my_form, onSubmit, ...rest };
+  return { my_form, mutateAsync, onSubmit, ...rest };
 }
 
 export function Mutation_update_auth() {

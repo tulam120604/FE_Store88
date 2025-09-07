@@ -65,7 +65,7 @@ const Form_product: React.FC<any> = ({ props, type }: any) => {
     <>
       <section className="flex flex-col gap-y-6 py-6 rounded pr-4 overflow-x-hidden">
         {isLoading && (
-          <div className="grid place-items-center fixed z-[100] w-screen h-screen top-0 left-0 bg-[#10182488]">
+          <div className="grid place-items-center fixed z-[100] w-screen h-screen top-0 left-0 *:!bg-[#1018245a]">
             <Loading_Dots />
           </div>
         )}

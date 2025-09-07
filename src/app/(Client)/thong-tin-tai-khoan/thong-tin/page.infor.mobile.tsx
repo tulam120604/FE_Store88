@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React from "react";
@@ -13,8 +14,6 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import { useToast } from "@/src/app/_Components/ui/use-toast";
 import { Mutation_Auth } from "@/src/app/_lib/Query_APIs/Auth/Auth_mutation";
-import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
-import Image from "next/image";
 import { useStoreStatusItemOrder } from "@/src/app/_lib/Zustand/Store";
 import { eventEmit } from "@/src/app/_Components/ui/header/Event_emit";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
@@ -72,7 +71,7 @@ export default function Page_infor_mobile({ data_user }: any) {
               className="relative mx-auto -translate-y-1/2 top-1/2"
             />
           ) : (
-            <Image src={data_user?.avatar} width={48} height={48} alt="" />
+            <img src={data_user?.avatar} width={48} height={48} alt="" />
           )}
         </div>
         <div className="flex flex-col gap-2">
