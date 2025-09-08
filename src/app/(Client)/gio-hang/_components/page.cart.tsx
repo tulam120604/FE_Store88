@@ -20,17 +20,17 @@ import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 const Cart = () => {
   const { toast } = useToast();
   // socket
-  useEffect(() => {
-    const socket = io("http://localhost:8888");
-    socket.on("res_message_delete_item", (data: any) => {
-      toast({
-        title: "Thông báo!",
-        description: `Rất tiếc, sản phẩm ${data?.name_item} không còn tồn tại!`,
-        className: "border border-gray-800",
-        action: <ToastAction altText="Goto schedule to undo">Ok</ToastAction>,
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   const socket = io("http://localhost:8888");
+  //   socket.on("res_message_delete_item", (data: any) => {
+  //     toast({
+  //       title: "Thông báo!",
+  //       description: `Rất tiếc, sản phẩm ${data?.name_item} không còn tồn tại!`,
+  //       className: "border border-gray-800",
+  //       action: <ToastAction altText="Goto schedule to undo">Ok</ToastAction>,
+  //     });
+  //   });
+  // }, []);
 
   const router = useRouter();
   const {
@@ -168,19 +168,19 @@ const Cart = () => {
         ) : (
           <>
             {loading_mutation && (
-              <div className="w-screen h-screen fixed top-0 left-0 grid place-items-center bg-slate-400/50">
+              <div className="hidden xl:grid w-screen h-screen fixed top-0 z-[100] left-0 place-items-center *:!bg-slate-400/50">
                 <Loading_Dots />
               </div>
             )}
             <div className="max-w-[1440px] mx-auto w-[95vw] mb-4 pt-2">
               <Breadcrum textProps={{ bread_1: "Giỏ hàng" }} />
             </div>
-            <div className="bg-gray-100 dark:bg-[#0F1629] lg:pb-8 rounded-lg p-2">
+            <div className="lg:pb-8 rounded-lg">
               <Table_Cart dataProps={dataProps} />
               {dataProps?.data?.items?.length > 0 && (
                 <div
                   className="w-full rounded-lg flex flex-col lg:flex-row lg:items-end lg:justify-end justify-center 
-                gap-x-4 gap-y-1 sticky bottom-12 z-[10] mt-8"
+                gap-x-4 gap-y-1 sticky bottom-12 z-[10] mt-8 bg-gray-100 dark:bg-[#0F1629] p-3 xl:p-0"
                 >
                   <span className="whitespace-nowrap text-sm lg:text-base">
                     Số lượng ({data_item_checkked?.length} sản phẩm)

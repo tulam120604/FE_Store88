@@ -22,7 +22,7 @@ const Remove_Item_Cart = ({ id_props }: any) => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-gray-700 font-normal">Xác nhận xóa sản phẩm trong giỏ?</AlertDialogTitle>
+          <AlertDialogTitle className="opacity-80 font-normal">Xác nhận xóa sản phẩm trong giỏ?</AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Hủy</AlertDialogCancel>

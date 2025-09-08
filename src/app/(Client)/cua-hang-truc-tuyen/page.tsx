@@ -13,9 +13,8 @@ export default async function Page({ searchParams }: any) {
   let page = searchParams._page ?? 1;
   const data = await infor_shop(searchParams?.id);
   const data_item = await list_product_client(page, 30,"", data?.data?._id);
-  console.log(data_item)
   return (
-    <div className="max-w-[1440px] mx-auto mb:w-[342px] md:w-[90vw] py-2">
+    <div className="max-w-[1440px] w-[95vw] mx-auto py-2">
       {data?.status === 404 ? (
         <>
           <div className="min-h-[70vh] grid place-items-center">
@@ -24,7 +23,7 @@ export default async function Page({ searchParams }: any) {
         </>
       ) : (
         <>
-          <div className="flex items-center text-sm gap-x-2 font-medium capitalize text-gray-700 mb-4">
+          <div className="flex items-center text-sm gap-x-2 font-medium capitalize mb-4">
             <Breadcrum
               textProps={{
                 bread_1: `shop / ${data?.data?.user_name}`,
@@ -62,12 +61,7 @@ export default async function Page({ searchParams }: any) {
           </div>
           {/* items shop */}
           <div className="py-7">
-            <div className="mx-auto relative text-center mb-3 lg:mb-6">
-              <strong className="relative z-[2] font-medium bg-[#F5F5FA] lg:text-xl px-4 mb:text-lg">
-                SẢN PHẨM
-              </strong>
-              <div className="absolute w-full h-[1px] bg-gray-400 top-1/2 z-[1]"></div>
-            </div>
+              <div className="w-full h-[1px] bg-gray-400 top-1/2 z-[1] mb-6"/>
             {data_item?.data?.docs ? (
               Array.isArray(data_item?.data?.docs) && (
                 <List_Products data={data_item?.data?.docs} cols={6}/>

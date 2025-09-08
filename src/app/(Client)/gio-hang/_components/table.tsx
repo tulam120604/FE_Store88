@@ -30,7 +30,7 @@ export default function Table_Cart({ dataProps }: any) {
         <div className="min-w-[980px]">
           {/* Header */}
           <div
-            className="grid items-center py-4 px-2 opacity-90 font-semibold border-b"
+            className="grid items-center p-4 opacity-90 font-semibold border-b bg-gray-100 dark:bg-[#0F1629] rounded-t"
             style={{ gridTemplateColumns: COLS }}
           >
             <Checkbox checked={allChecked} />
@@ -75,7 +75,7 @@ export default function Table_Cart({ dataProps }: any) {
                       height={120}
                       src={product?.gallery?.[0]}
                       alt={product?.short_name || "product"}
-                      className="rounded bg-[#f2f2f2] w-[100px] h-[100px] object-cover"
+                      className="rounded w-[100px] h-[100px] object-cover"
                     />
                   </Link>
 
@@ -158,7 +158,7 @@ export default function Table_Cart({ dataProps }: any) {
       </div>
 
       {/* ====== Mobile (<lg) dạng card ====== */}
-      <div className="lg:hidden space-y-3">
+      <div className="lg:hidden space-y-3 *:bg-gray-100 *:dark:bg-[#0F1629]">
         {items.length > 0 ? (
           items.map((item) => {
             const product = item?.product_id;
@@ -167,13 +167,13 @@ export default function Table_Cart({ dataProps }: any) {
             return (
               <div
                 key={item?._id}
-                className="relative bg-white rounded-lg p-3 flex gap-3"
+                className="relative rounded-lg p-3 flex gap-3"
               >
                 <Het_hang dataProps={item} />
 
-                <div className="flex flex-col items-center gap-2">
                   <Checkbox
                     checked={!!item?.status_checked}
+                    className="translate-y-8 !bg-transparent !text-green-500 !font-bold !rounded-full !w-6 !h-6"
                     onClick={() =>
                       dataProps?.handle_Checkked(
                         product,
@@ -188,13 +188,12 @@ export default function Table_Cart({ dataProps }: any) {
                       height={84}
                       src={product?.gallery?.[0]}
                       alt={product?.short_name || "product"}
-                      className="rounded bg-[#f2f2f2] w-20 h-20 object-cover"
+                      className="rounded w-20 h-20 object-cover"
                     />
                   </Link>
-                </div>
 
                 <div className="flex-1 min-w-0 flex flex-col gap-2">
-                  <Link href={productUrl} className="font-medium line-clamp-2">
+                  <Link href={productUrl} className="font-medium line-clamp-1">
                     {product?.short_name}
                   </Link>
 
@@ -231,19 +230,16 @@ export default function Table_Cart({ dataProps }: any) {
                       </strong>
                       <Btn_up id_props={{ item }} />
                     </div>
+                  </div>
 
-                    <div className="text-right">
-                      <div className="text-[13px] text-gray-600">Tạm tính</div>
+                  <div className="pt-2 flex justify-between items-center">
+                      <div className="text-[13px] opacity-70">Tạm tính</div>
                       <div className="text-red-600 font-semibold">
                         {item?.total_price_item?.toLocaleString("vi", {
                           style: "currency",
                           currency: "VND",
                         })}
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 flex justify-end">
                     <Remove_Item_Cart id_props={{ item: item?._id }} />
                   </div>
                 </div>

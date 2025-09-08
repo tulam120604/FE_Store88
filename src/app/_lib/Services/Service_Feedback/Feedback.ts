@@ -5,9 +5,6 @@ import { toast } from 'react-toastify'
 export async function get_feedBack_in_item(id_item: string | number) {
     try {
         const res = await fetch (`${apiURi}/feedback/detail_item/${id_item}`);
-        if (!res.ok) {
-            return res;
-        }
         const data = await res.json();
         return data
     } catch (error) {

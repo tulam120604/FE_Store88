@@ -18,7 +18,7 @@ export default function Alert_dialog({ dataProps }: any) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle className='text-base font-light text-gray-800'>
+                    <AlertDialogTitle className='text-base font-light opacity-90'>
                         {
                             (dataProps?.action === 'remove') ?
                                 'Xác nhận xóa địa chỉ này?' :

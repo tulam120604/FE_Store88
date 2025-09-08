@@ -36,7 +36,7 @@ export const MessageContainer = () => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -50, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className={`fixed top-4 left-1/2 -translate-x-1/2 z-[999999] flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg text-white
+          className={`fixed top-4 left-1/2 -translate-x-1/2 z-[999999] flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg text-white text-sm xl:text-base
             ${
               message.type === "success"
                 ? "bg-green-500"

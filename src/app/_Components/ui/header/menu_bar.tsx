@@ -48,7 +48,7 @@ export default function Menu_bar_mobile({ dataProps }: any) {
           href={
             dataProps?.account
               ? "/thong-tin-tai-khoan/san-pham-yeu-thich"
-              : "/dang-nhap"
+              : "/tai-khoan"
           }
           className={
             pathName === "/thong-tin-tai-khoan/san-pham-yeu-thich" &&
@@ -64,7 +64,7 @@ export default function Menu_bar_mobile({ dataProps }: any) {
 
         <Link
           href={
-            dataProps?.account ? "/thong-tin-tai-khoan/thong-bao" : "/dang-nhap"
+            dataProps?.account ? "/thong-tin-tai-khoan/thong-bao" : "/tai-khoan"
           }
           className={
             pathName === "/thong-tin-tai-khoan/thong-bao" &&
@@ -80,7 +80,7 @@ export default function Menu_bar_mobile({ dataProps }: any) {
 
         <Link
           href={
-            dataProps?.account ? "/thong-tin-tai-khoan/thong-tin" : "/dang-nhap"
+            dataProps?.account ? "/thong-tin-tai-khoan/thong-tin" : "/tai-khoan"
           }
           className={
             pathName === "/thong-tin-tai-khoan/thong-tin" &&
