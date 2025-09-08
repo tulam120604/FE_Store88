@@ -58,10 +58,6 @@ export async function list_product_with_limit(countItem: number) {
 export async function view_detail_product(id: number | string) {
   try {
     const res = await fetch(`${apiURi}/products/${id}`);
-    if (!res.ok) {
-      console.warn("Call data failer!");
-      return res;
-    }
     const data = await res.json();
     return data.data;
   } catch (error) {
@@ -73,10 +69,6 @@ export async function view_detail_product(id: number | string) {
 export async function view_detail_product_dashboard(id: number | string) {
   try {
     const res = await fetch(`${apiURi}/products/dashboard/${id}`);
-    if (!res.ok) {
-      console.warn("Call data failer");
-      return res;
-    }
     const data = await res.json();
     return data.data;
   } catch (error) {
@@ -92,10 +84,6 @@ export async function list_product_dashboard(page: number, limit_item: number) {
       method: "get",
       credentials: "include",
     });
-    if (!res.ok) {
-      console.warn("Call api failer");
-      return res;
-    }
     const data = await res.json();
     return data;
   } catch (error) {
