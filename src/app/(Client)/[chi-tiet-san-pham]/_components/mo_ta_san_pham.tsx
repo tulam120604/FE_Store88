@@ -3,7 +3,8 @@ import React from 'react'
 import { Button } from '../../../_Components/ui/Shadcn/button'
 
 const Mo_ta_san_pham = ({ dataProps }: any) => {
-    const formattedDescription = dataProps?.data?.des_product.replace(/\n/g, '<br />');
+    const formattedDescription = 'aaaaa';
+    // const formattedDescription = dataProps?.data?.des_product.replace(/\n/g, '<br />');
     return (
         <>
             {/* description */}

@@ -26,11 +26,11 @@ const page = async ({ searchParams }: any) => {
   //  const isClient = typeof window !== 'undefined';
   // console.log(isClient);
   const data = await view_detail_product(searchParams?.p);
-  // const data_category = await view_detail_category(data?.category_id);
+  const data_category = await view_detail_category(data?.category_id);
   // revalidatePath("/products/[detail_product]", "page");
 
   // get feedback
-  // const data_feedback = await get_feedBack_in_item(data?._id);
+  const data_feedback = await get_feedBack_in_item(data?._id);
 
   return (
     <main className="max-w-[1440px] mx-auto w-[95vw] *:mx-auto *:h-full py-2">
@@ -51,7 +51,7 @@ const page = async ({ searchParams }: any) => {
           <section className="font-medium capitalize mb-4">
             <Breadcrum
               textProps={{
-                // bread_1: data_category?.category_name,
+                bread_1: data_category?.category_name,
                 bread_2: data?.short_name,
               }}
             />
@@ -64,19 +64,19 @@ const page = async ({ searchParams }: any) => {
               <Thong_tin_san_pham
                 dataProps={{
                   data,
-                  // data_feedback,
+                  data_feedback,
                 }}
               />
             </div>
           </section>
           <Thong_tin_cua_hang dataProps={data?.seller} />
           {/* related products */}
-          {/* <Mo_ta_san_pham
+          <Mo_ta_san_pham
             dataProps={{
               data,
-              // data_feedback,
+              data_feedback,
             }}
-          /> */}
+          />
           <div className="mt-6 rounded-lg">
           <span className="opacity-80 antialiased tracking-[0.3px] text-xl 
           font-semibold mt-6 lg:mt-0">Sản phẩm liên quan</span>
