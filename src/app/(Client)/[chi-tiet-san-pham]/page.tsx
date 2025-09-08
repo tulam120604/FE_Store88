@@ -71,21 +71,21 @@ const page = async ({ searchParams }: any) => {
           </section>
           <Thong_tin_cua_hang dataProps={data?.seller} />
           {/* related products */}
-          <Mo_ta_san_pham
+          {/* <Mo_ta_san_pham
             dataProps={{
               data,
               // data_feedback,
             }}
-          />
+          /> */}
           <div className="mt-6 rounded-lg">
           <span className="opacity-80 antialiased tracking-[0.3px] text-xl 
           font-semibold mt-6 lg:mt-0">Sản phẩm liên quan</span>
-            {/* <San_pham_lien_quan
+            <San_pham_lien_quan
               dataProps={{
                 id_category: data?.category_id,
                 id_current_product: searchParams?.p,
               }}
-            /> */}
+            />
           </div>
         </>
       )}
