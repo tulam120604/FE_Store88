@@ -7,10 +7,6 @@ const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
 export async function list_category() {
     try {
         const res = await fetch(`${apiURi}/category`);
-        if (!res.ok) {
-            console.warn('Call data failer!')
-            return res
-        }
         const data = await res.json();
         return data
     } catch (error) {
@@ -22,10 +18,6 @@ export async function list_category() {
 export async function view_detail_category(id: any) {
     try {
         const res = await fetch(`${apiURi}/category/${id}`);
-        if (!res.ok) {
-            console.warn('Call data failer!')
-            return res
-        }
         const { data } = await res.json();
         return data
     } catch (error) {
@@ -66,10 +58,6 @@ export async function PUT_category(item: any) {
             },
             body: JSON.stringify(item)
         });
-        if (!res.ok) {
-            console.warn('Call data failer!')
-            return res
-        }
         const data = await res.json();
         return data
     } catch (error) {
@@ -83,10 +71,6 @@ export async function DELETE_category(id: any) {
         const res = await fetch(`${apiURi}/category/${id}}`, {
             method: 'delete',
         });
-        if (!res.ok) {
-            console.warn('Call data failer!')
-            return res
-        }
         const { data } = await res.json();
         return data
     } catch (error) {
