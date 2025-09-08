@@ -26,7 +26,7 @@ const page = async ({ searchParams }: any) => {
   //  const isClient = typeof window !== 'undefined';
   // console.log(isClient);
   const data = await view_detail_product(searchParams?.p);
-  const data_category = await view_detail_category('68b543f67c0f41f784574544');
+  const data_category = await view_detail_category(data?.category_id);
   // revalidatePath("/products/[detail_product]", "page");
 
   // get feedback
