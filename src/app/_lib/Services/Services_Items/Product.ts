@@ -51,10 +51,10 @@ export async function view_detail_product(id: number | string) {
   try {
     const res = await fetch(`${apiURi}/products/${id}`);
     const data = await res.json();
-    console.log(data)
+    console.log(data);
     return data?.data;
   } catch (error) {
-    return error;
+    return { success: false, data: null, message: "Server error!" };
   }
 }
 
@@ -65,7 +65,7 @@ export async function view_detail_product_dashboard(id: number | string) {
     const data = await res.json();
     return data?.data;
   } catch (error) {
-    return error;
+    return { success: false, data: null, message: "Server error!" };
   }
 }
 
@@ -239,4 +239,3 @@ export async function list_product_search(item?: any) {
     return error;
   }
 }
-
