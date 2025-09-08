@@ -51,7 +51,7 @@ const page = async ({ searchParams }: any) => {
           <section className="font-medium capitalize mb-4">
             <Breadcrum
               textProps={{
-                bread_1: data_category,
+                bread_1: data_category?.category_name,
                 bread_2: data?.short_name,
               }}
             />
