@@ -1,7 +1,7 @@
 
 import { toast } from "react-toastify";
 
-const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
+const apiURi = process.env.NEXT_PUBLIC_API;
 
 // danh sach
 export async function list_category() {

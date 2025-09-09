@@ -1,4 +1,4 @@
-const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
+const apiURi = process.env.NEXT_PUBLIC_API;
 import { toast } from 'react-toastify'
 
 export async function create_seller(data_body: any) {

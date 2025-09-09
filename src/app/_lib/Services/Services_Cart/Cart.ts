@@ -1,4 +1,4 @@
-const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
+const apiURi = process.env.NEXT_PUBLIC_API;
 
 export async function get_list_Cart() {
     try {

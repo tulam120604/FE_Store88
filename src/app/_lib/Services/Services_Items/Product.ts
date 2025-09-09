@@ -1,5 +1,5 @@
 // PRODUCTS
-const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
+const apiURi = process.env.NEXT_PUBLIC_API;
 
 // list item client
 export async function list_product_client(

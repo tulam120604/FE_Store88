@@ -1,5 +1,5 @@
 
-const apiURi = process.env.NEXT_PUBLIC_DB_HOST;
+const apiURi = process.env.NEXT_PUBLIC_API;
 import { toast } from 'react-toastify'
 
 export async function get_feedBack_in_item(id_item: string | number) {
