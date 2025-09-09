@@ -51,7 +51,6 @@ export async function view_detail_product(id: number | string) {
   try {
     const res = await fetch(`${apiURi}/products/${id}`);
     const data = await res.json();
-    console.log(data);
     return data?.data;
   } catch (error) {
     return { success: false, data: null, message: "Server error!" };

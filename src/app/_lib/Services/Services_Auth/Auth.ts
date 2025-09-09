@@ -61,10 +61,8 @@ export async function infor_user() {
       method: "get",
       credentials: "include",
     });
-    if (!res.ok) {
-      return res;
-    }
     const response = await res.json();
+    console.log(response)
     const data = {
       ...response,
       status: res?.status,

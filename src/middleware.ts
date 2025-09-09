@@ -3,13 +3,14 @@ import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
 // verify jwt
-const secretJWT = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET);
+const secretJWT = new TextEncoder().encode(process.env.JWT_SECRET);
 const allowRole = ["admin_global", "admin_local", "seller"];
 const verifyToken = async (token: string) => {
   try {
     const secret = await jwtVerify(String(token), secretJWT);
     return secret;
   } catch (error) {
+        console.error("JWT verify error:", error);
     return null;
   }
 };
@@ -19,7 +20,7 @@ export async function middleware(request: NextRequest) {
   const pathname = url.pathname;
   const token = request.cookies.get("access_token")?.value || "";
 
-  const verifyTokenResult: any = await verifyToken(token);
+  const verifyTokenResult: any = await verifyToken(String(token));
   if (!verifyTokenResult) {
     if (pathname.startsWith("/thong-tin-tai-khoan")) {
       return NextResponse.redirect(new URL("/", request.url));
