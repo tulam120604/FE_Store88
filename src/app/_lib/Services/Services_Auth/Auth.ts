@@ -62,7 +62,6 @@ export async function infor_user() {
       credentials: "include",
     });
     const response = await res.json();
-    console.log(response)
     const data = {
       ...response,
       status: res?.status,

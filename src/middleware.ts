@@ -18,7 +18,8 @@ const verifyToken = async (token: string) => {
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const pathname = url.pathname;
-  console.log("Raw token:", request.cookies.get("access_token")?.value);
+  console.log("Cookies in middleware:", request.cookies.getAll());
+
   const token = request.cookies.get("access_token")?.value || "";
 
   const verifyTokenResult: any = await verifyToken(String(token));
