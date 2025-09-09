@@ -15,7 +15,8 @@ module.exports = {
       },
     ];
   },
-  async rewrite() {
+
+  async rewrites() {
     return [
       {
         source: "/api/:path*",
