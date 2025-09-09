@@ -3,14 +3,14 @@ import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
 // verify jwt
-const secretJWT = new TextEncoder().encode(process.env.JWT_SECRET);
+const secretJWT = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET);
 const allowRole = ["admin_global", "admin_local", "seller"];
 const verifyToken = async (token: string) => {
   try {
     const secret = await jwtVerify(String(token), secretJWT);
     return secret;
   } catch (error) {
-        console.error("JWT verify error:", error);
+    console.error("JWT verify error:", error);
     return null;
   }
 };
@@ -18,6 +18,7 @@ const verifyToken = async (token: string) => {
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const pathname = url.pathname;
+  console.log("Raw token:", request.cookies.get("access_token")?.value);
   const token = request.cookies.get("access_token")?.value || "";
 
   const verifyTokenResult: any = await verifyToken(String(token));
