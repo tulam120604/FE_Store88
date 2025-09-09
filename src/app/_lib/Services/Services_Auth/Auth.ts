@@ -1,5 +1,3 @@
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 const apiURi = process.env.NEXT_PUBLIC_API;
 
 // login
@@ -14,6 +12,12 @@ export async function sign_In(item: any) {
       body: JSON.stringify(item),
     });
     const data = await res.json();
+    const token = data?.accessToken
+
+    if (token) {
+      // lưu token vào cookie FE để middleware đọc
+      document.cookie = `access_token=${token}; path=/; Secure; SameSite=Lax; max-age=3600`;
+    }
     return data;
   } catch (error: any) {
     return error;
@@ -102,7 +106,7 @@ export async function set_role_user_to_seller(dataForm: {
       body: JSON.stringify(dataForm?.id_user),
       credentials: "include",
     });
-     const data = await res.json();
+    const data = await res.json();
     return data;
   } catch (error: any) {
     return error;
@@ -120,7 +124,7 @@ export async function logout() {
       credentials: "include",
     });
     if (res.ok) {
-         localStorage.removeItem("account");
+      localStorage.removeItem("account");
     }
     const data = await res.json();
     return data;

@@ -18,7 +18,6 @@ const verifyToken = async (token: string) => {
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const pathname = url.pathname;
-  console.log("Cookies in middleware:", request.cookies.getAll());
   const tokenCookie = request.cookies.getAll();
   console.log(tokenCookie);
 
