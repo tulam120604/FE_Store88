@@ -71,3 +71,9 @@
 //     "/trung-tam-dieu-khien/:path*",
 //   ],
 // };
+
+export async function middleware() {
+  // This function is required to make this file a middleware.
+  // The actual middleware logic has been commented out above.
+  return;
+}
