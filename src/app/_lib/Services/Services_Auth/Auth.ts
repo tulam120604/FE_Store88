@@ -13,6 +13,7 @@ export async function sign_In(item: any) {
     });
     const data = await res.json();
     const token = data?.accessToken
+    console.log(token)
 
     if (token) {
       // lưu token vào cookie FE để middleware đọc
