@@ -19,7 +19,7 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: "/api/:path*",
+        source: "/apiProxy/:path*",
         destination: "https://be-node-js.vercel.app/v1/:path*",
       },
     ];
