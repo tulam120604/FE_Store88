@@ -44,7 +44,7 @@ const Page = () => {
                 strokeWidth={1.5}
                 size={18}
               />
-              Thêm danh mục
+              Thêm
             </button>
             {category_form && (
               <div>

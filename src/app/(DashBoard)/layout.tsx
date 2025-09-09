@@ -78,7 +78,7 @@ const Layout_Admin = ({
             </div>
 
             <div className="flex justify-between w-full">
-              <div className="w-1/3 ml-10 xl:ml-0">
+              <div className="w-[50%] ml-10 xl:ml-0">
                 <Search_component type='dashboard' />
               </div>
 
@@ -106,7 +106,7 @@ const Layout_Admin = ({
           </header>
 
           {/* Main content */}
-          <main className="flex-1 px-6 py-4">{children}</main>
+          <main className="flex-1 px-6 py-4 w-screen xl:w-full">{children}</main>
 
           {/* Footer */}
           <footer className="text-center pt-5 pb-4 mt-4 z-10 text-sm text-gray-600">

@@ -1,4 +1,4 @@
-const apiURi = "http://localhost:2000/v1";
+const apiURi = process.env.NEXT_PUBLIC_API;
 
 export async function add_order(item: any) {
   try {

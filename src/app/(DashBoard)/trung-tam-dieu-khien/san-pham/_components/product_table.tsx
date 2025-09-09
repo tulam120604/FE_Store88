@@ -27,12 +27,12 @@ export default function ProductTable({ dataProps }: any) {
     <div className="overflow-x-auto rounded border bg-white dark:bg-[#0F1629]">
       {/* header */}
       <div
-        className={`grid grid-cols-9 md:grid-cols-10 opacity-85 font-semibold border-b 
+        className={`grid grid-cols-${dataProps?.operation ? '4' : '3'} lg:grid-cols-10 opacity-85 font-semibold border-b 
         gap-2 items-center p-3 text-xs md:text-sm`}
       >
-        {!dataProps?.operation && <span className="hidden md:block">#</span>}
-        <span className="text-start">Ảnh</span>
-        <span className="text-start col-span-2">Tên</span>
+        {!dataProps?.operation && <span className="hidden lg:block">#</span>}
+        <span className="text-start !w-[50px] lg:w-full">Ảnh</span>
+        <span className="text-start lg:col-span-2">Tên</span>
         <span className="hidden sm:block">Thể loại</span>
         <span className="hidden sm:block">Doanh số</span>
         <span className="hidden md:block">Giá</span>
@@ -50,11 +50,11 @@ export default function ProductTable({ dataProps }: any) {
         >
           {/* main row */}
           <div
-            className={`grid grid-cols-9 md:grid-cols-10 opacity-85 text-xs md:text-sm 
+            className={`grid grid-cols-${dataProps?.operation ? '4' : '3'} md:grid-cols-10 opacity-85 text-xs md:text-sm 
             gap-2 items-center p-3 transition`}
           >
             {!dataProps?.operation && (
-              <span className="hidden md:block">{i + 1}</span>
+              <span className="hidden lg:block">{i + 1}</span>
             )}
 
             {/* image */}
@@ -80,13 +80,13 @@ export default function ProductTable({ dataProps }: any) {
 
             {/* name */}
             {data?.deleted ? (
-              <span className="col-span-2 line-clamp-2 text-start">
+              <span className="lg:col-span-2 line-clamp-2 text-start">
                 {data?.short_name}
               </span>
             ) : (
               <Link
                 href={`/trung-tam-dieu-khien/san-pham/${data?._id}`}
-                className="col-span-2 line-clamp-2 text-start font-medium hover:text-blue-600"
+                className="lg:col-span-2 line-clamp-2 text-start font-medium hover:text-blue-600"
               >
                 {data?.short_name}
               </Link>
@@ -202,7 +202,7 @@ export default function ProductTable({ dataProps }: any) {
                 item?.value_variants?.map((value: any, idx: number) => (
                   <div
                     key={item?._id + idx}
-                    className="grid grid-cols-9 md:grid-cols-10 text-xs md:text-sm gap-2 
+                    className="grid grid-cols-4 md:grid-cols-10 text-xs md:text-sm gap-2 
                     items-center p-3 border-t"
                   >
                     {!dataProps?.operation && <div />} {/* cột index trống */}

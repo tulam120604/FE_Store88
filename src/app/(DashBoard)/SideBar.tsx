@@ -61,7 +61,7 @@ const SideBarDashboard = () => {
     arr = arr.filter((_: any, index: number) => ![2, 5].includes(index));
   }
   return (
-    <div className="fixed top-0 border-2 h-full w-[200px] z-40 ">
+    <div className="fixed top-0 border-2 h-full w-[200px] z-40 bg-[#ECF1F2] dark:bg-[#020517]">
       <Link
         href={"/"}
         className="!flex !items-center justify-center px-4 xl:h-14 h-10 border-b-2"

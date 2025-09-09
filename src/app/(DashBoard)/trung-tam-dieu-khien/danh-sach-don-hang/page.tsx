@@ -2,11 +2,10 @@
 
 import { List_Order_Dashboard } from "@/src/app/_lib/Query_APIs/Order/Query";
 import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
-import { DataTable } from "@/src/app/_Components/ui/Tables/data_table";
 import React, { Suspense } from "react";
 import Loading from "./loading";
-import { columns } from "./_components/colum";
 import Paginate_item from "@/src/app/(Client)/san-pham/_component/Paginate";
+import OrderTable from "./_components/Order_table";
 
 const Page = () => {
   const { data, isLoading } = List_Order_Dashboard();
@@ -34,7 +33,7 @@ const Page = () => {
           {data?.data_order ? (
             <>
               <div className="bg-white dark:bg-[#0F1629] rounded px-4 mb-4  *:dark:text-gray-300">
-                <DataTable data={data?.data_order?.docs} columns={columns} />
+                <OrderTable data={data?.data_order?.docs}/>
               </div>
               <Paginate_item
                 totalPages={data?.data_order?.totalPages}

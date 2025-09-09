@@ -65,14 +65,14 @@ export function Search_component(props: { type: string }) {
           type="text"
           name="key_search"
           className="border bg-white dark:bg-[#0F1629] rounded w-full px-3 text-sm !font-light outline-none opacity-90"
-          placeholder="Tìm kiếm sản phẩm..."
+          placeholder="Tìm kiếm..."
           onChange={(e) => {
             setKey_search(e.target.value);
           }}
         />
         <button
           type="submit"
-          className="absolute top-[12%] right-0 !h-3/4 duration-300 cursor-pointer text-gray-800 border-l border-gray-300 px-4"
+          className="hidden lg:block absolute top-[12%] right-0 !h-3/4 duration-300 cursor-pointer text-gray-800 border-l border-gray-300 px-4"
         >
           <Search color="#0A68FF" />
         </button>

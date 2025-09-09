@@ -20,12 +20,12 @@ export default function List_address_user() {
           <Loading_Dots />
         </div>
       ) : (
-        <div className="opacity-85">
+        <div className="*:border *:rounded *:text-gray-700 *:dark:text-gray-300 px-2 lg:px-6">
           {data?.data && data?.data.length > 0 ? (
             data?.data?.map((item: any) => (
               <div
                 key={item?._id}
-                className="py-4 lg:flex justify-between px-4 gap-x-6 border-b"
+                className="py-4 lg:flex justify-between px-4 gap-x-6 border-b my-2"
               >
                 <div className="text-sm flex flex-col gap-y-2 mb-2">
                   <span className="sm:col-span-2">

@@ -21,7 +21,6 @@ const Form_auth = ({ mode, setMode }: any) => {
         message.error(result?.message);
         return;
       }
-      message.success(result?.message);
       router.push("/");
     } catch (error) {
       message.error("Đã xảy ra lỗi. Vui lòng thử lại!");

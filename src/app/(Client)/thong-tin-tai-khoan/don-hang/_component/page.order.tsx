@@ -86,7 +86,7 @@ const Page_order = () => {
       cell: ({ row }) => (
         <div className="flex gap-x-4 lg:gap-x-8">
           <Link href={`/${convert_Slug(row?.original?.product_id?.short_name)}.html?p=${row?.original?.product_id?._id}`}>
-            <Image width={100} height={100} loading="lazy" className="lg:w-[100px] lg:h-[100px] h-16 border rounded" 
+            <Image width={100} height={100} loading="lazy" className="lg:w-[100px] lg:h-[100px]" 
             src={row?.original?.product_id?.gallery[0]} alt="Loading..." />
           </Link>
           <div className="w-full flex flex-col gap-y-3">
@@ -134,8 +134,9 @@ const Page_order = () => {
   }
   return (
     <div className='w-full relative'>
+      <button onClick={() => routing.back()} className='xl:hidden'>Quay lại</button>
       <div className='flex hidden_scroll z-[1] gap-x-10 overflow-x-auto absolute w-full *:w-full *:py-4 rounded-t
-      *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:whitespace-nowrap top-0 bg-gray-100 dark:bg-[#0F1629]'>
+      *:px-2 items-center *:bg-none *:text-sm *:border-b-2 *:whitespace-nowrap top-10 xl:top-0 bg-gray-100 dark:bg-[#0F1629]'>
         {
           Array.from({ length: 7 }, (_: any, i: number) =>
             <button key={i} onClick={() => handle_list_item_status(i)} className={status_item_order === i ? '!border-gray-900 dark:!border-gray-300' 
@@ -148,7 +149,7 @@ const Page_order = () => {
           )
         }
       </div>
-      <div className='bg-[#F5F5FA] dark:bg-black w-full h-4 pt-16' />
+      <div className='bg-[#F5F5FA] dark:bg-black w-full h-4 pt-20 xl:pt-16' />
       {
         isLoading || loading_user && <div className='mt-20'><Loading_Dots /></div>
       }
@@ -156,14 +157,14 @@ const Page_order = () => {
         data?.data_order &&
           data?.data_order?.docs.length > 0 ?
           data?.data_order?.docs?.map((item: any) =>
-            <div className='mb-4 px-2 lg:px-8 rounded bg-gray-100 dark:bg-[#0F1629] pb-4' key={item?._id}>
+            <div className='mb-4 px-2 lg:px-8 rounded *:text-gray-700 *:dark:text-gray-300 bg-gray-100 dark:bg-[#0F1629] pb-4' key={item?._id}>
               <span className='px-1 py-2 text-sm'>{status_order(item?.status_item_order)}</span>
-              <div className='*:text-gray-700 *:dark:text-gray-300 -mt-4'>
+              <div className='-mt-4'>
                 <Table_item dataProps={item?.items_order} />
               </div>
-              <div key={+item?._id + Math.random()} className='flex justify-between items-center text-gray-700'>
+              <div key={+item?._id + Math.random()} className='flex justify-between items-center'>
                 <div className='flex flex-col gap-y-1'>
-                <div className='text-sm text-gray-700'>Tổng tiền: 
+                <div className='text-sm'>Tổng tiền: 
                 <span className='text-red-500'>
                  {' ' + item?.total_price_order_amount?.toLocaleString("vi", {
                    style: "currency",

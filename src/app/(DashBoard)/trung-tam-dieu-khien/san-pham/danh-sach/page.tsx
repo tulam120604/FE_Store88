@@ -86,7 +86,7 @@ const Page = () => {
               strokeWidth={1.5}
               size={18}
             />
-            Tạo mới sản phẩm
+            Thêm
           </Link>
         </div>
 

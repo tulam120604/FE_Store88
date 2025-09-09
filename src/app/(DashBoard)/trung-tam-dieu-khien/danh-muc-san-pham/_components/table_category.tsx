@@ -21,7 +21,7 @@ export default function CategoryTable({ data }: any) {
           <TableHead>Tên danh mục</TableHead>
           <TableHead>Số sản phẩm</TableHead>
           {/* <TableHead>Trạng thái</TableHead> */}
-          <TableHead>Ngày tạo/cập nhật</TableHead>
+          <TableHead className="hidden lg:block">Ngày tạo/cập nhật</TableHead>
           <TableHead className="text-right">Thao tác</TableHead>
         </TableRow>
       </TableHeader>
@@ -52,7 +52,7 @@ export default function CategoryTable({ data }: any) {
                 {item.status}
               </span>
             </TableCell> */}
-            <TableCell>{item.updatedAt?.slice(0, 10)}</TableCell>
+            <TableCell className="hidden lg:block">{item.updatedAt?.slice(0, 10)}</TableCell>
             <TableCell className="flex justify-end gap-2 *:border-none">
               <Button size="icon" variant="outline">
                 <FilePenLine className="h-5 text-gray-700" />
@@ -67,23 +67,3 @@ export default function CategoryTable({ data }: any) {
     </Table>
   );
 }
-
-// Example data to test
-// const sampleData = [
-//   {
-//     image: "/images/fashion.jpg",
-//     name: "Thời trang",
-//     parent: null,
-//     productCount: 120,
-//     status: "Active",
-//     updatedAt: "2025-08-20",
-//   },
-//   {
-//     image: "/images/phone.jpg",
-//     name: "Điện thoại",
-//     parent: "Electronics",
-//     productCount: 85,
-//     status: "Inactive",
-//     updatedAt: "2025-08-19",
-//   },
-// ];

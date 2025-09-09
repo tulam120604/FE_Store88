@@ -39,7 +39,7 @@ export default function Page() {
       }
     >
       <div
-        className="grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 *:p-6 *:rounded-xl 
+        className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 *:p-6 *:rounded-xl 
       *:shadow-lg gap-4 my-6 *:bg-white *:dark:bg-[#0F1629]"
       >
         <Box
@@ -56,28 +56,28 @@ export default function Page() {
         />
         <Box
           dataProps={{
-            text: "Tổng số mặt hàng",
+            text: "Tổng mặt hàng",
             number: loading_summary ? 0 : data_summary?.data?.productCount,
             icon: <Box_icon strokeWidth="2" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
-            text: "Tổng số danh mục",
+            text: "Tổng danh mục",
             number: loading_summary ? 0 : data_summary?.data?.categoryCount,
             icon: <List strokeWidth="2" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
-            text: "Tổng số đơn hàng",
+            text: "Tổng đơn hàng",
             number: loading_summary ? 0 : data_summary?.data?.orderCount,
             icon: <Container strokeWidth="1.5" stroke="#2563EB" />,
           }}
         />
         <Box
           dataProps={{
-            text: "Tổng số người dùng",
+            text: "Tổng người dùng",
             number: loading_summary ? 0 : data_summary?.data?.userCount,
             icon: <UsersRound strokeWidth="2" stroke="#2563EB" />,
           }}
@@ -98,7 +98,7 @@ export default function Page() {
           <Loading_Dots />
         </div>
       ) : ["admin_global", "admin_local"].includes(infor_user?.role) ? (
-        <div className="grid 2xl:grid-cols-[60%_39%] justify-between *:border *:bg-white *:dark:bg-[#0F1629]">
+        <div className="2xl:grid grid-cols-[60%_39%] space-y-4 justify-between *:border *:bg-white *:dark:bg-[#0F1629]">
           <ChartData />
           <Top_seller dataProps={data_caculate_revenue?.data} />
         </div>
