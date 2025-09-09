@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Auth_actions = ({ props }: any) => {
-  const { data, isLoading, isFetching, isHydrated } = props;
+  const { data, isLoading } = props;
   const routing = useRouter();
   const { isVisible } = useStoreAddToCart();
   function CountCart() {
@@ -43,7 +43,7 @@ const Auth_actions = ({ props }: any) => {
     }
   }
 
-  if (isLoading || isFetching || !isHydrated)
+  if (isLoading)
     return (
       <div className="gap-x-3 flex items-center *:rounded-full *:w-10 *:h-10">
         <div className="hidden lg:block"/>
