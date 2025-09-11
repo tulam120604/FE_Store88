@@ -27,7 +27,7 @@ const Form_auth = ({ mode, setMode }: any) => {
     }
   };
   return (
-    <main className="w-full flex item-center bg-gray-100 dark:bg-[#0F1629] py-10">
+    <main className="w-full flex item-center bg-white dark:bg-[#0F1629] py-10">
       <form
         onSubmit={my_form.handleSubmit(submit)}
         className="w-[95vw] max-w-[550px] h-[600px] mx-auto flex flex-col p-6 lg:py-10 lg:px-16 gap-y-4 
