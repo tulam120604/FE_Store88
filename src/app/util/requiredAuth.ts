@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 export async function requiredAuth() {
   const token = cookies().get("access_token")?.value;
+  console.log(token)
   if (!token) {
     redirect("/");
   }
