@@ -7,7 +7,6 @@ import { jwtVerify } from "jose";
 import { redirect } from "next/navigation";
 
 const verifyToken = async (token: string) => {
-  console.log("Token nhận được:", token);
   try {
     const secret = await jwtVerify(
       String(token).trim(),
@@ -21,14 +20,14 @@ const verifyToken = async (token: string) => {
 };
 
 const MiddlewareAuth = async ({ children }: { children: React.ReactNode }) => {
-  const cookieStore = cookies();
-  const token = cookieStore?.get("access_token")?.value || "";
-  const user = await verifyToken(token);
-  const roleAccount = ["admin_global", "admin_local", "seller"];
+  // const cookieStore = cookies();
+  // const token = cookieStore?.get("access_token")?.value || "";
+  // const user = await verifyToken(token);
+  // const roleAccount = ["admin_global", "admin_local", "seller"];
 
-  if (!roleAccount.includes(String(user?.role))) {
-    redirect("/");
-  }
+  // if (!roleAccount.includes(String(user?.role))) {
+  //   redirect("/");
+  // }
   return <Layout_Admin>{children}</Layout_Admin>;
 };
 
