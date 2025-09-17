@@ -1,5 +1,6 @@
 "use client";
 
+import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import {
   CardContent,
   CardHeader,
@@ -9,9 +10,7 @@ import { UserRoundCheck } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-export default function Top_seller({ dataProps }: any) {
-  //   console.log(dataProps);
-
+export default function Top_seller({ dataProps, loading }: any) {
   //   sắp xếp giảm dần theo doanh thu
   for (let i = 0; i < dataProps?.length - 1; i++) {
     for (let j = 0; j < dataProps?.length - 1; j++) {
@@ -21,6 +20,14 @@ export default function Top_seller({ dataProps }: any) {
         dataProps[j + 1] = temp;
       }
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="w-full h-full min-h-[25vh] *:!bg-transparent flex items-center justify-center rounded-lg">
+        <Loading_Dots />
+      </div>
+    );
   }
   //   console.log(dataProps);
   return (
@@ -41,7 +48,10 @@ export default function Top_seller({ dataProps }: any) {
         {dataProps ? (
           Array.isArray(dataProps) &&
           dataProps?.slice(0, 10)?.map((item: any, i: number) => (
-            <div key={item?._id} className="flex items-center gap-x-4 border-b py-3">
+            <div
+              key={item?._id}
+              className="flex items-center gap-x-4 border-b py-3"
+            >
               <span className="text-xs">{i + 1}</span>
               <div className="h-9 w-9 grid place-items-center border rounded-full overflow-hidden">
                 {item?.avatarSeller ? (

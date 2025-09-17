@@ -7,9 +7,9 @@ import React, { useEffect, useState } from "react";
 import { useToast } from "../_Components/ui/use-toast";
 import { Logs, User } from "lucide-react";
 import { useAuthStore } from "../_lib/Zustand/Store";
-import { useTheme } from "next-themes";
 import { ThemeToggle } from "../_Components/ui/toggleTheme";
 import { Search_component } from "../_Components/Forms/search";
+import Btn_logout from "../_Components/Btn/Btn_logout";
 
 const Layout_Admin = ({
   children,
@@ -40,7 +40,6 @@ const Layout_Admin = ({
       }
     }
   }, [data, count_bell]);
-
 
   return (
     <>
@@ -79,7 +78,7 @@ const Layout_Admin = ({
 
             <div className="flex justify-between w-full">
               <div className="w-[50%] ml-10 xl:ml-0">
-                <Search_component type='dashboard' />
+                <Search_component type="dashboard" />
               </div>
 
               <div className="flex gap-x-4">
@@ -88,13 +87,20 @@ const Layout_Admin = ({
 
                 {/* avatar */}
                 {user?.avatar ? (
-                  <img
-                    width={50}
-                    height={50}
-                    src={user?.avatar}
-                    className="rounded-full w-10 h-10"
-                    alt="."
-                  />
+                  <div className="group relative cursor-pointer">
+                    <img
+                      width={50}
+                      height={50}
+                      src={user?.avatar}
+                      className="rounded-full w-10 h-10"
+                      alt="."
+                    />
+                    {user?.user_name && (
+                      <div className="*:border *:text-sm">
+                        <Btn_logout/>
+                      </div>
+                    )}
+                  </div>
                 ) : (
                   <User
                     strokeWidth={1.5}
@@ -106,7 +112,9 @@ const Layout_Admin = ({
           </header>
 
           {/* Main content */}
-          <main className="flex-1 px-6 py-4 w-screen xl:w-full">{children}</main>
+          <main className="flex-1 px-6 py-4 w-screen xl:w-full">
+            {children}
+          </main>
 
           {/* Footer */}
           <footer className="text-center pt-5 pb-4 mt-4 z-10 text-sm text-gray-600">

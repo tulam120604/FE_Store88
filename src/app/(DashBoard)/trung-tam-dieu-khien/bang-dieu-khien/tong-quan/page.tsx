@@ -7,18 +7,18 @@ import {
   Receipt,
   UserCheck,
   UsersRound,
-  Box as Box_icon
+  Box as Box_icon,
 } from "lucide-react";
 import Box from "../_component/box";
 import { ChartData } from "../_component/Chart";
 import Top_seller from "../_component/top_seller";
-import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import {
   Query_caculate_revenue,
   Query_summary,
 } from "@/src/app/_lib/Query_APIs/Analytics/Query";
 import Best_selling_products from "./best_selling_products";
 import { useAuthStore } from "@/src/app/_lib/Zustand/Store";
+import Loading_Overlay from "@/src/app/_Components/Loadings/Loading_Overlay";
 
 export default function Page() {
   const { data: data_caculate_revenue, isLoading: loading_caculate_revenue } =
@@ -34,7 +34,7 @@ export default function Page() {
     <Suspense
       fallback={
         <div className="w-screen h-screen fixed top-0 left-0 grid place-items-center">
-          <Loading_Dots />
+          <Loading_Overlay />
         </div>
       }
     >
@@ -94,16 +94,20 @@ export default function Page() {
       </div>
       {/* chart */}
       {loading_infor_user ? (
-        <div className="grid place-items-center">
-          <Loading_Dots />
+        <div className="grid place-items-center min-h-screen">
+          <Loading_Overlay />
         </div>
       ) : ["admin_global", "admin_local"].includes(infor_user?.role) ? (
-        <div className="2xl:grid grid-cols-[60%_39%] space-y-4 justify-between *:border *:bg-white *:dark:bg-[#0F1629]">
+        <div className="2xl:grid grid-cols-[60%_39%] min-h-[25vh] space-y-4 xl:space-y-0 
+        justify-between *:border *:bg-white *:dark:bg-[#0F1629]">
           <ChartData />
-          <Top_seller dataProps={data_caculate_revenue?.data} />
+          <Top_seller
+            dataProps={data_caculate_revenue?.data}
+            loading={loading_caculate_revenue}
+          />
         </div>
       ) : (
-        <div className=" *:border">
+        <div className="*:border">
           <ChartData />
         </div>
       )}

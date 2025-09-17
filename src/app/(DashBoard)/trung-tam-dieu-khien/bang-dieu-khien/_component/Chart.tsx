@@ -55,7 +55,11 @@ export function ChartData() {
   const { data, isLoading } = Query_analytic_order(year);
 
   if (isLoading) {
-    return <Loading_Dots />;
+    return (
+      <div className="w-full h-full min-h-[25vh] *:!bg-transparent flex items-center justify-center rounded-lg">
+        <Loading_Dots />
+      </div>
+    );
   }
 
   const chartData =

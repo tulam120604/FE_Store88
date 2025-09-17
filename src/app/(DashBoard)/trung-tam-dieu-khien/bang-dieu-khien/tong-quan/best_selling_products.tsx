@@ -1,9 +1,9 @@
 "use client";
 
-import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 import { Query_List_Items_Dashboard } from "@/src/app/_lib/Query_APIs/Items/Query";
 import React, { useState } from "react";
 import ProductTable from "../../san-pham/_components/product_table";
+import Loading_Dots from "@/src/app/_Components/Loadings/Loading_Dots";
 
 export default function Best_selling_products() {
   const [page, setPage] = useState<number>(1);
@@ -26,7 +26,9 @@ export default function Best_selling_products() {
   return (
     <div className="bg-white dark:bg-[#0F1629] border rounded-lg my-4">
       {isLoading ? (
+      <div className="w-full h-full min-h-[25vh] flex items-center justify-center rounded-lg">
         <Loading_Dots />
+      </div>
       ) : (
         <div className="space-y-4">
           <div className="p-4 ">Top sản phẩm bán chạy</div>

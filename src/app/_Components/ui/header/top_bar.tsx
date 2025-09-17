@@ -1,28 +1,10 @@
 import Link from "next/link";
 import { ThemeToggle } from "../toggleTheme";
-import { Mutation_Auth } from "@/src/app/_lib/Query_APIs/Auth/Auth_mutation";
-import { message } from "../message";
-import { useRouter } from "next/navigation";
+import Btn_logout from "../../Btn/Btn_logout";
 
 export default function TopBar({ props }: any) {
-  const router = useRouter();
   const { data, isLoading } = props;
-  const { mutateAsync, isLoading: logOutLoading } = Mutation_Auth({
-    action: "LOGOUT",
-  });
 
-  const handleLogout = async () => {
-    try {
-      const result = await mutateAsync("");
-      if (result?.error) {
-        message.error(result?.message);
-        return;
-      }
-      router.push("/");
-    } catch (error) {
-      message.error("Đăng xuất thất bại. Vui lòng thử lại!");
-    }
-  };
 
   return (
     <div
@@ -32,7 +14,7 @@ export default function TopBar({ props }: any) {
       <div className="max-w-[1440px] w-[95vw] mx-auto flex justify-between items-center py-2 px-3">
         {/* left */}
         <div className="flex space-x-4 items-center">
-          {!isLoading && !logOutLoading && data?._id && (
+          {!isLoading && data?._id && (
             <Link
               className="hover:text-blue-500 duration-200"
               href="/thong-tin-tai-khoan/dang-ki-ban-hang"
@@ -52,7 +34,7 @@ export default function TopBar({ props }: any) {
         {/* right */}
         <div className="flex items-center space-x-4 *:duration-200">
           {/* Nếu chưa loading thì mới render user info / đăng nhập */}
-          {!isLoading && !logOutLoading && (
+          {!isLoading && (
             <>
               {data?._id ? (
                 <>
@@ -82,16 +64,7 @@ export default function TopBar({ props }: any) {
                         : data?.user_name}
                     </Link>
 
-                    {data?.user_name && (
-                      <button
-                        onClick={handleLogout}
-                        className="absolute bg-white dark:bg-[#020817] scale-0 group-hover:scale-100
-                  whitespace-nowrap right-0 p-3 shadow rounded-lg hover:text-red-500 duration-200 
-                  group-hover:top-full top-0"
-                      >
-                        Đăng xuất
-                      </button>
-                    )}
+                    {data?.user_name && <Btn_logout />}
                   </div>
                 </>
               ) : (
