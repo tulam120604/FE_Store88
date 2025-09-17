@@ -7,9 +7,10 @@ import { jwtVerify } from "jose";
 import { redirect } from "next/navigation";
 
 const verifyToken = async (token: string) => {
+  console.log("Token nhận được:", token);
   try {
     const secret = await jwtVerify(
-      String(token),
+      String(token).trim(),
       new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET)
     );
     return secret?.payload;
